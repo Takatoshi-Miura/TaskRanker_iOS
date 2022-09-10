@@ -56,15 +56,71 @@
 		8D60F23928CC5E61003BB724 /* TaskRanker */ = {
 			isa = PBXGroup;
 			children = (
-				8D60F23A28CC5E61003BB724 /* AppDelegate.swift */,
-				8D60F23C28CC5E61003BB724 /* SceneDelegate.swift */,
+				8D60F24E28CC60C6003BB724 /* Application */,
+				8D60F25128CC612E003BB724 /* Model */,
+				8D60F25028CC6123003BB724 /* View */,
+				8D60F25228CC6137003BB724 /* Controller */,
+				8D60F25428CC6185003BB724 /* Coordinator */,
+				8D60F25328CC6155003BB724 /* Utils */,
+				8D60F24F28CC6106003BB724 /* Resource */,
 				8D60F23E28CC5E61003BB724 /* ViewController.swift */,
 				8D60F24028CC5E61003BB724 /* Main.storyboard */,
-				8D60F24328CC5E64003BB724 /* Assets.xcassets */,
-				8D60F24528CC5E64003BB724 /* LaunchScreen.storyboard */,
-				8D60F24828CC5E64003BB724 /* Info.plist */,
 			);
 			path = TaskRanker;
+			sourceTree = "<group>";
+		};
+		8D60F24E28CC60C6003BB724 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8D60F23A28CC5E61003BB724 /* AppDelegate.swift */,
+				8D60F23C28CC5E61003BB724 /* SceneDelegate.swift */,
+				8D60F24528CC5E64003BB724 /* LaunchScreen.storyboard */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		8D60F24F28CC6106003BB724 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				8D60F24328CC5E64003BB724 /* Assets.xcassets */,
+				8D60F24828CC5E64003BB724 /* Info.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		8D60F25028CC6123003BB724 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8D60F25128CC612E003BB724 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8D60F25228CC6137003BB724 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8D60F25328CC6155003BB724 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8D60F25428CC6185003BB724 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +351,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -323,6 +380,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

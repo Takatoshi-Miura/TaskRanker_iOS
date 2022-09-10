@@ -10,6 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="TaskRanker" customModuleProvider="target">
             <connections>
+                <outlet property="completedTaskButton" destination="mWw-xP-JvH" id="QeF-2Z-FeI"/>
+                <outlet property="segmentedControl" destination="LUb-ZZ-alp" id="161-T1-IIx"/>
+                <outlet property="taskListView" destination="ePC-Lh-GAO" id="9L5-Eq-Tiz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,6 +39,9 @@
                     <rect key="frame" x="244" y="397" width="56" height="56"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" image="Plus_Button"/>
+                    <connections>
+                        <action selector="tapAddButton:" destination="-1" eventType="touchUpInside" id="DbL-Nt-mgj"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zBM-CG-B1h">
                     <rect key="frame" x="0.0" y="518" width="320" height="50"/>

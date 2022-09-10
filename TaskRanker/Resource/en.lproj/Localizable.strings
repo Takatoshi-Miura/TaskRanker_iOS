@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  TaskRanker
+
+  Created by Takatoshi Miura on 2022/09/10.
+  
+*/
+
+// MARK: - Common
+"Cancel" = "Cancel";

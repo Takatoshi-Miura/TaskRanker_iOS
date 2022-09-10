@@ -12,6 +12,9 @@
 		8D60F24728CC5E64003BB724 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F24528CC5E64003BB724 /* LaunchScreen.storyboard */; };
 		8D60F25728CC63F5003BB724 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F25628CC63F5003BB724 /* Coordinator.swift */; };
 		8D60F25928CC644B003BB724 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F25828CC644B003BB724 /* AppCoordinator.swift */; };
+		8D60F25D28CC6761003BB724 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F25B28CC6760003BB724 /* HomeViewController.swift */; };
+		8D60F25E28CC6761003BB724 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F25C28CC6761003BB724 /* HomeViewController.xib */; };
+		8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26128CC67A5003BB724 /* HomeCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		8D60F24828CC5E64003BB724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D60F25628CC63F5003BB724 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8D60F25828CC644B003BB724 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		8D60F25B28CC6760003BB724 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8D60F25C28CC6761003BB724 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		8D60F26128CC67A5003BB724 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,7 @@
 		8D60F25028CC6123003BB724 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8D60F25A28CC66A0003BB724 /* Home */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -100,6 +107,7 @@
 		8D60F25228CC6137003BB724 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8D60F25F28CC6777003BB724 /* Home */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -115,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				8D60F25528CC63D1003BB724 /* Application */,
+				8D60F26028CC6790003BB724 /* Home */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -126,6 +135,30 @@
 				8D60F25828CC644B003BB724 /* AppCoordinator.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		8D60F25A28CC66A0003BB724 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8D60F25C28CC6761003BB724 /* HomeViewController.xib */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8D60F25F28CC6777003BB724 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8D60F25B28CC6760003BB724 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8D60F26028CC6790003BB724 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8D60F26128CC67A5003BB724 /* HomeCoordinator.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +221,7 @@
 			files = (
 				8D60F24728CC5E64003BB724 /* LaunchScreen.storyboard in Resources */,
 				8D60F24428CC5E64003BB724 /* Assets.xcassets in Resources */,
+				8D60F25E28CC6761003BB724 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +234,9 @@
 			files = (
 				8D60F25928CC644B003BB724 /* AppCoordinator.swift in Sources */,
 				8D60F23B28CC5E61003BB724 /* AppDelegate.swift in Sources */,
+				8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */,
 				8D60F25728CC63F5003BB724 /* Coordinator.swift in Sources */,
+				8D60F25D28CC6761003BB724 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

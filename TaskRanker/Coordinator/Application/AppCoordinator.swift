@@ -10,12 +10,12 @@ import UIKit
 class AppCoordinator: Coordinator {
     
     var window: UIWindow?
-//    var tabCoordinator: TabCoordinator?
+    var homeCoordinator: HomeCoordinator?
     
     func startFlow(in window: UIWindow?) {
         self.window = window
-//        tabCoordinator = TabCoordinator()
-//        tabCoordinator?.startFlow(in: window)
+        homeCoordinator = HomeCoordinator()
+        homeCoordinator?.startFlow(in: window)
     }
     
     func startFlow(in navigationController: UINavigationController) {

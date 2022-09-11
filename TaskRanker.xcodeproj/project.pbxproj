@@ -17,6 +17,8 @@
 		8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26128CC67A5003BB724 /* HomeCoordinator.swift */; };
 		8D60F26728CC76E1003BB724 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F26928CC76E1003BB724 /* Localizable.strings */; };
 		8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26B28CC78DB003BB724 /* LocalizableString.swift */; };
+		8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */; };
+		8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		8D60F26828CC76E1003BB724 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D60F26A28CC76E7003BB724 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D60F26B28CC78DB003BB724 /* LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableString.swift; sourceTree = "<group>"; };
+		8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
+		8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				8D60F25A28CC66A0003BB724 /* Home */,
+				8DB633B828CD6981001F2DB7 /* Task */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				8D60F25F28CC6777003BB724 /* Home */,
+				8DB633B928CD6995001F2DB7 /* Task */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -167,6 +173,22 @@
 				8D60F26128CC67A5003BB724 /* HomeCoordinator.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		8DB633B828CD6981001F2DB7 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		8DB633B928CD6995001F2DB7 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */,
+			);
+			path = Task;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */,
 				8D60F24728CC5E64003BB724 /* LaunchScreen.storyboard in Resources */,
 				8D60F26728CC76E1003BB724 /* Localizable.strings in Resources */,
 				8D60F24428CC5E64003BB724 /* Assets.xcassets in Resources */,
@@ -246,6 +269,7 @@
 				8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */,
 				8D60F23B28CC5E61003BB724 /* AppDelegate.swift in Sources */,
 				8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */,
+				8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */,
 				8D60F25728CC63F5003BB724 /* Coordinator.swift in Sources */,
 				8D60F25D28CC6761003BB724 /* HomeViewController.swift in Sources */,
 			);

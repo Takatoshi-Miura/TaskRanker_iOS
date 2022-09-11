@@ -34,7 +34,7 @@
                     </connections>
                 </segmentedControl>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePC-Lh-GAO">
-                    <rect key="frame" x="16" y="71" width="288" height="427"/>
+                    <rect key="frame" x="0.0" y="71" width="320" height="447"/>
                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETg-uT-aBy">
@@ -47,7 +47,6 @@
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zBM-CG-B1h">
                     <rect key="frame" x="0.0" y="518" width="320" height="50"/>
-                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="mVi-s4-kdT"/>
                     </constraints>
@@ -56,10 +55,10 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ePC-Lh-GAO" secondAttribute="trailing" constant="16" id="0wa-fq-o9W"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ePC-Lh-GAO" secondAttribute="trailing" id="0wa-fq-o9W"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ETg-uT-aBy" secondAttribute="trailing" constant="20" id="2fr-ZU-bdq"/>
                 <constraint firstItem="ePC-Lh-GAO" firstAttribute="top" secondItem="LUb-ZZ-alp" secondAttribute="bottom" constant="20" id="Cvi-a4-rlw"/>
-                <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="ePC-Lh-GAO" secondAttribute="bottom" constant="20" id="JGA-xG-UtF"/>
+                <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="ePC-Lh-GAO" secondAttribute="bottom" id="JGA-xG-UtF"/>
                 <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="ETg-uT-aBy" secondAttribute="bottom" constant="20" id="N4S-zS-WkM"/>
                 <constraint firstItem="zBM-CG-B1h" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="ROa-nm-AaA"/>
                 <constraint firstItem="zBM-CG-B1h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="X5o-94-3ww"/>
@@ -67,7 +66,7 @@
                 <constraint firstItem="LUb-ZZ-alp" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="eI2-ug-ujN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LUb-ZZ-alp" secondAttribute="trailing" constant="16" id="emC-4O-tJN"/>
                 <constraint firstItem="LUb-ZZ-alp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="vlW-cC-Jo3"/>
-                <constraint firstItem="ePC-Lh-GAO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="xPV-kG-Wjn"/>
+                <constraint firstItem="ePC-Lh-GAO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xPV-kG-Wjn"/>
             </constraints>
             <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
         </view>

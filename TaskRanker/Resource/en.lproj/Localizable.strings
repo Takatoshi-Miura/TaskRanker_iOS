@@ -8,3 +8,22 @@
 
 // MARK: - Common
 "Cancel" = "Cancel";
+"Save" = "Save";
+"Error" = "Error";
+"Delete" = "Delete";
+"Edit" = "Edit";
+"Menu" = "Menu";
+"DeleteInput" = "The entered content will be deleted.\nAre you sure?";
+"ServerCommunicationMessage" = "During server communication...";
+
+// MARK: - Color
+"Red" = "Red";
+"Pink" = "Pink";
+"Orange" = "Orange";
+"Yellow" = "Yellow";
+"Green" = "Green";
+"Blue" = "Blue";
+"Purple" = "Purple";
+"Gray" = "Gray";
+"White" = "White";
+"Black" = "Black";

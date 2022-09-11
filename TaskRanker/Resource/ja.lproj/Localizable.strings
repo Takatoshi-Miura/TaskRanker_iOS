@@ -8,3 +8,22 @@
 
 // MARK: - Common
 "Cancel" = "キャンセル";
+"Save" = "保存";
+"Error" = "エラー";
+"Delete" = "削除";
+"Edit" = "編集";
+"Menu" = "メニュー";
+"DeleteInput" = "入力した内容が削除されます。\nよろしいですか？";
+"ServerCommunicationMessage" = "通信中";
+
+// MARK: - Color
+"Red" = "レッド";
+"Pink" = "ピンク";
+"Orange" = "オレンジ";
+"Yellow" = "イエロー";
+"Green" = "グリーン";
+"Blue" = "ブルー";
+"Purple" = "パープル";
+"Gray" = "グレー";
+"White" = "白";
+"Black" = "黒";

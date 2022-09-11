@@ -23,6 +23,11 @@
 		8DB633C228CDA43C001F2DB7 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633C028CDA43C001F2DB7 /* AddTaskViewController.swift */; };
 		8DB633C328CDA43C001F2DB7 /* AddTaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB633C128CDA43C001F2DB7 /* AddTaskViewController.xib */; };
 		8DB633C628CDBD81001F2DB7 /* AddTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633C528CDBD81001F2DB7 /* AddTaskCoordinator.swift */; };
+		8DB633C828CDD38A001F2DB7 /* UIViewController+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */; };
+		8DB633CA28CDD3D7001F2DB7 /* UIViewController+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633C928CDD3D7001F2DB7 /* UIViewController+TextView.swift */; };
+		8DB633CC28CDD410001F2DB7 /* Definition+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633CB28CDD410001F2DB7 /* Definition+Device.swift */; };
+		8DB633CE28CDD462001F2DB7 /* UIViewController+ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */; };
+		8DB633D028CDD502001F2DB7 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +51,11 @@
 		8DB633C028CDA43C001F2DB7 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		8DB633C128CDA43C001F2DB7 /* AddTaskViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTaskViewController.xib; sourceTree = "<group>"; };
 		8DB633C528CDBD81001F2DB7 /* AddTaskCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskCoordinator.swift; sourceTree = "<group>"; };
+		8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TextField.swift"; sourceTree = "<group>"; };
+		8DB633C928CDD3D7001F2DB7 /* UIViewController+TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TextView.swift"; sourceTree = "<group>"; };
+		8DB633CB28CDD410001F2DB7 /* Definition+Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Device.swift"; sourceTree = "<group>"; };
+		8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ToolBar.swift"; sourceTree = "<group>"; };
+		8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +148,11 @@
 			isa = PBXGroup;
 			children = (
 				8DB633BE28CD9F8B001F2DB7 /* Definition+Segment.swift */,
+				8DB633CB28CDD410001F2DB7 /* Definition+Device.swift */,
+				8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */,
+				8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */,
+				8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */,
+				8DB633C928CDD3D7001F2DB7 /* UIViewController+TextView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -286,7 +301,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB633D028CDD502001F2DB7 /* UIViewController+Alert.swift in Sources */,
 				8D60F25928CC644B003BB724 /* AppCoordinator.swift in Sources */,
+				8DB633C828CDD38A001F2DB7 /* UIViewController+TextField.swift in Sources */,
+				8DB633CA28CDD3D7001F2DB7 /* UIViewController+TextView.swift in Sources */,
+				8DB633CC28CDD410001F2DB7 /* Definition+Device.swift in Sources */,
+				8DB633CE28CDD462001F2DB7 /* UIViewController+ToolBar.swift in Sources */,
 				8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */,
 				8DB633BF28CD9F8B001F2DB7 /* Definition+Segment.swift in Sources */,
 				8D60F23B28CC5E61003BB724 /* AppDelegate.swift in Sources */,

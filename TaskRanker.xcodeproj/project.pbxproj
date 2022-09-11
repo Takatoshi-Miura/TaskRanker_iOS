@@ -19,6 +19,7 @@
 		8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26B28CC78DB003BB724 /* LocalizableString.swift */; };
 		8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */; };
 		8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */; };
+		8DB633BF28CD9F8B001F2DB7 /* Definition+Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633BE28CD9F8B001F2DB7 /* Definition+Segment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		8D60F26B28CC78DB003BB724 /* LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableString.swift; sourceTree = "<group>"; };
 		8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
+		8DB633BE28CD9F8B001F2DB7 /* Definition+Segment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Segment.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		8D60F25328CC6155003BB724 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8DB633BE28CD9F8B001F2DB7 /* Definition+Segment.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			files = (
 				8D60F25928CC644B003BB724 /* AppCoordinator.swift in Sources */,
 				8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */,
+				8DB633BF28CD9F8B001F2DB7 /* Definition+Segment.swift in Sources */,
 				8D60F23B28CC5E61003BB724 /* AppDelegate.swift in Sources */,
 				8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */,
 				8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */,

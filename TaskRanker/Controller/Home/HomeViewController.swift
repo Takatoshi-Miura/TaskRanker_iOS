@@ -10,62 +10,23 @@ import UIKit
 class HomeViewController: UIViewController {
     
     // MARK: - UI,Variable
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var taskListView: UIView!
-    @IBOutlet weak var completedTaskButton: UIButton!
     private var isFilter: Bool = false
     private var taskListVC_A = TaskListViewController()
     private var taskListVC_B = TaskListViewController()
     private var taskListVC_C = TaskListViewController()
     private var taskListVC_D = TaskListViewController()
-    
-    private enum SegmentType: Int, CaseIterable {
-        case A
-        case B
-        case C
-        case D
-        
-        var title: String {
-            switch self {
-            // TODO: 多言語対応
-            case .A: return "重要度(高),緊急度(高)"
-            case .B: return "重要度(高),緊急度(低)"
-            case .C: return "重要度(低),緊急度(高)"
-            case .D: return "重要度(低),緊急度(低)"
-            }
-        }
-        
-        var importanceColor: UIColor {
-            switch self {
-            case .A: return UIColor.red
-            case .B: return UIColor.red
-            case .C: return UIColor.blue
-            case .D: return UIColor.blue
-            }
-        }
-        
-        var urgencyColor: UIColor {
-            switch self {
-            case .A: return UIColor.red
-            case .B: return UIColor.blue
-            case .C: return UIColor.red
-            case .D: return UIColor.blue
-            }
-        }
-    }
 
     // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initView()
-        addRightSwipeGesture()
-        addLeftSwipeGesture()
-    }
-    
-    /// 画面初期化
-    private func initView() {
         initNavigation()
         initSegmentedControl()
+        addRightSwipeGesture()
+        addLeftSwipeGesture()
     }
     
     /// NavigationController初期化
@@ -89,33 +50,19 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItems = [filterButton]
     }
     
-    /// タイトル文字列の設定
-    /// - Parameters:
-    ///    - segmentType: segmentedControlの選択番号
-    private func setNavigationTitle(segmentType: SegmentType) {
-        let titleLabel = UILabel()
-        titleLabel.text = segmentType.title
-        titleLabel.font = .boldSystemFont(ofSize: 18)
-        titleLabel.textColor = .label
-        
-        let attrText = NSMutableAttributedString(string: titleLabel.text!)
-        attrText.addAttribute(.foregroundColor, value: segmentType.importanceColor, range: NSMakeRange(4, 1))
-        attrText.addAttribute(.foregroundColor, value: segmentType.urgencyColor, range: NSMakeRange(11, 1))
-        titleLabel.attributedText = attrText
-        
-        self.navigationItem.titleView = titleLabel
-    }
-    
     /// SegmentedControl初期化
     private func initSegmentedControl() {
         segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         
-        self.taskListView.clipsToBounds = true
+        taskListVC_A.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
+        taskListVC_B.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
+        taskListVC_C.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
+        taskListVC_D.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
         
-        taskListVC_A.view.backgroundColor = UIColor.red
-        taskListVC_B.view.backgroundColor = UIColor.blue
-        taskListVC_C.view.backgroundColor = UIColor.green
-        taskListVC_D.view.backgroundColor = UIColor.purple
+        taskListVC_A.segmentType = SegmentType.A
+        taskListVC_B.segmentType = SegmentType.B
+        taskListVC_C.segmentType = SegmentType.C
+        taskListVC_D.segmentType = SegmentType.D
         
         self.taskListView.addSubview(taskListVC_D.view)
         self.taskListView.addSubview(taskListVC_C.view)
@@ -191,6 +138,23 @@ class HomeViewController: UIViewController {
         case .D:
             self.taskListView.bringSubviewToFront(taskListVC_D.view)
         }
+    }
+    
+    /// タイトル文字列の設定
+    /// - Parameters:
+    ///    - segmentType: segmentedControlの選択番号
+    private func setNavigationTitle(segmentType: SegmentType) {
+        let titleLabel = UILabel()
+        titleLabel.text = segmentType.title
+        titleLabel.font = .boldSystemFont(ofSize: 18)
+        titleLabel.textColor = .label
+        
+        let attrText = NSMutableAttributedString(string: titleLabel.text!)
+        attrText.addAttribute(.foregroundColor, value: segmentType.importanceColor, range: NSMakeRange(4, 1))
+        attrText.addAttribute(.foregroundColor, value: segmentType.urgencyColor, range: NSMakeRange(11, 1))
+        titleLabel.attributedText = attrText
+        
+        self.navigationItem.titleView = titleLabel
     }
     
     /// タスク追加

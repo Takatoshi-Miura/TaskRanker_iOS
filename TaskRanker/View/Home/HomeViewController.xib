@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="TaskRanker" customModuleProvider="target">
             <connections>
-                <outlet property="completedTaskButton" destination="mWw-xP-JvH" id="QeF-2Z-FeI"/>
                 <outlet property="segmentedControl" destination="LUb-ZZ-alp" id="161-T1-IIx"/>
                 <outlet property="taskListView" destination="ePC-Lh-GAO" id="9L5-Eq-Tiz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -35,11 +34,11 @@
                     </connections>
                 </segmentedControl>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePC-Lh-GAO">
-                    <rect key="frame" x="16" y="71" width="288" height="382"/>
+                    <rect key="frame" x="16" y="71" width="288" height="427"/>
                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETg-uT-aBy">
-                    <rect key="frame" x="244" y="397" width="56" height="56"/>
+                    <rect key="frame" x="244" y="442" width="56" height="56"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" image="Plus_Button"/>
                     <connections>
@@ -53,35 +52,22 @@
                         <constraint firstAttribute="height" constant="50" id="mVi-s4-kdT"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWw-xP-JvH">
-                    <rect key="frame" x="16" y="473" width="288" height="35"/>
-                    <color key="backgroundColor" systemColor="systemCyanColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="WQA-yJ-CCx"/>
-                    </constraints>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="完了済みのタスク"/>
-                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ePC-Lh-GAO" secondAttribute="trailing" constant="16" id="0wa-fq-o9W"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ETg-uT-aBy" secondAttribute="trailing" constant="20" id="2fr-ZU-bdq"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mWw-xP-JvH" secondAttribute="trailing" constant="16" id="A7b-T3-IPu"/>
                 <constraint firstItem="ePC-Lh-GAO" firstAttribute="top" secondItem="LUb-ZZ-alp" secondAttribute="bottom" constant="20" id="Cvi-a4-rlw"/>
-                <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="mWw-xP-JvH" secondAttribute="bottom" constant="10" id="JIA-mh-4N4"/>
-                <constraint firstItem="mWw-xP-JvH" firstAttribute="top" secondItem="ePC-Lh-GAO" secondAttribute="bottom" constant="20" id="NQy-LC-xaO"/>
+                <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="ePC-Lh-GAO" secondAttribute="bottom" constant="20" id="JGA-xG-UtF"/>
+                <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="ETg-uT-aBy" secondAttribute="bottom" constant="20" id="N4S-zS-WkM"/>
                 <constraint firstItem="zBM-CG-B1h" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="ROa-nm-AaA"/>
                 <constraint firstItem="zBM-CG-B1h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="X5o-94-3ww"/>
                 <constraint firstItem="zBM-CG-B1h" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="d4n-LU-MFy"/>
                 <constraint firstItem="LUb-ZZ-alp" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="eI2-ug-ujN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LUb-ZZ-alp" secondAttribute="trailing" constant="16" id="emC-4O-tJN"/>
-                <constraint firstItem="mWw-xP-JvH" firstAttribute="top" secondItem="ETg-uT-aBy" secondAttribute="bottom" constant="20" id="n4z-X2-jh8"/>
                 <constraint firstItem="LUb-ZZ-alp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="vlW-cC-Jo3"/>
                 <constraint firstItem="ePC-Lh-GAO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="xPV-kG-Wjn"/>
-                <constraint firstItem="mWw-xP-JvH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="zmZ-FJ-urF"/>
             </constraints>
             <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
         </view>

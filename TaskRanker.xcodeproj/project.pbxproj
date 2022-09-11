@@ -20,6 +20,9 @@
 		8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */; };
 		8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */; };
 		8DB633BF28CD9F8B001F2DB7 /* Definition+Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633BE28CD9F8B001F2DB7 /* Definition+Segment.swift */; };
+		8DB633C228CDA43C001F2DB7 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633C028CDA43C001F2DB7 /* AddTaskViewController.swift */; };
+		8DB633C328CDA43C001F2DB7 /* AddTaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB633C128CDA43C001F2DB7 /* AddTaskViewController.xib */; };
+		8DB633C628CDBD81001F2DB7 /* AddTaskCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633C528CDBD81001F2DB7 /* AddTaskCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
 		8DB633BE28CD9F8B001F2DB7 /* Definition+Segment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Segment.swift"; sourceTree = "<group>"; };
+		8DB633C028CDA43C001F2DB7 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		8DB633C128CDA43C001F2DB7 /* AddTaskViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTaskViewController.xib; sourceTree = "<group>"; };
+		8DB633C528CDBD81001F2DB7 /* AddTaskCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +147,7 @@
 			children = (
 				8D60F25528CC63D1003BB724 /* Application */,
 				8D60F26028CC6790003BB724 /* Home */,
+				8DB633C428CDBD46001F2DB7 /* Task */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -182,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */,
+				8DB633C128CDA43C001F2DB7 /* AddTaskViewController.xib */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -190,6 +198,15 @@
 			isa = PBXGroup;
 			children = (
 				8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */,
+				8DB633C028CDA43C001F2DB7 /* AddTaskViewController.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		8DB633C428CDBD46001F2DB7 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				8DB633C528CDBD81001F2DB7 /* AddTaskCoordinator.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -254,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */,
+				8DB633C328CDA43C001F2DB7 /* AddTaskViewController.xib in Resources */,
 				8D60F24728CC5E64003BB724 /* LaunchScreen.storyboard in Resources */,
 				8D60F26728CC76E1003BB724 /* Localizable.strings in Resources */,
 				8D60F24428CC5E64003BB724 /* Assets.xcassets in Resources */,
@@ -275,7 +293,9 @@
 				8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */,
 				8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */,
 				8D60F25728CC63F5003BB724 /* Coordinator.swift in Sources */,
+				8DB633C228CDA43C001F2DB7 /* AddTaskViewController.swift in Sources */,
 				8D60F25D28CC6761003BB724 /* HomeViewController.swift in Sources */,
+				8DB633C628CDBD81001F2DB7 /* AddTaskCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

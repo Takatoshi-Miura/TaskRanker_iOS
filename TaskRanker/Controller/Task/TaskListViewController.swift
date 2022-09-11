@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TaskListViewControllerDelegate: AnyObject {
+    
+}
+
 class TaskListViewController: UIViewController {
     
     // MARK: - UI,Variable

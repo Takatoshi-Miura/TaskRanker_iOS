@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol HomeViewControllerDelegate: AnyObject {
+    // 追加ボタンタップ時
+    func homeVCAddButtonDidTap(_ viewController: UIViewController)
+}
+
 class HomeViewController: UIViewController {
     
     // MARK: - UI,Variable
@@ -18,6 +23,7 @@ class HomeViewController: UIViewController {
     private var taskListVC_B = TaskListViewController()
     private var taskListVC_C = TaskListViewController()
     private var taskListVC_D = TaskListViewController()
+    var delegate: HomeViewControllerDelegate?
 
     // MARK: - LifeCycle
     
@@ -94,7 +100,7 @@ class HomeViewController: UIViewController {
 //        delegate?.taskVCSettingDidTap(self)
     }
     
-    /// 設定メニュー
+    /// フィルタメニュー
     @objc func openFilterMenu(_ sender: UIBarButtonItem) {
 //        delegate?.taskVCSettingDidTap(self)
     }
@@ -159,6 +165,7 @@ class HomeViewController: UIViewController {
     
     /// タスク追加
     @IBAction func tapAddButton(_ sender: Any) {
+        delegate?.homeVCAddButtonDidTap(self)
     }
     
 

@@ -14,6 +14,7 @@ class HomeCoordinator: Coordinator {
     func startFlow(in window: UIWindow?) {
         self.navigationController = createNavigationController()
         let homeViewController = HomeViewController()
+        homeViewController.delegate = self
         navigationController!.pushViewController(homeViewController, animated: true)
         window?.change(rootViewController: navigationController!, WithAnimation: true)
     }
@@ -38,5 +39,16 @@ class HomeCoordinator: Coordinator {
         }
         return navController
     }
+    
+}
+
+extension HomeCoordinator: HomeViewControllerDelegate {
+    
+    /// HomeVC → AddTaskVC
+    func homeVCAddButtonDidTap(_ viewController: UIViewController) {
+        let addTaskCoordinator = AddTaskCoordinator()
+        addTaskCoordinator.startFlow(in: viewController)
+    }
+    
     
 }

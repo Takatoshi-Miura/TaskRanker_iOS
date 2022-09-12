@@ -14,10 +14,13 @@ protocol TaskListViewControllerDelegate: AnyObject {
 class TaskListViewController: UIViewController {
     
     // MARK: - UI,Variable
+    
     @IBOutlet weak var tableView: UITableView!
     var segmentType = SegmentType.A
+    // var taskArray = [Task]()
     
     // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initTableView()
@@ -43,6 +46,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
+//        return taskArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

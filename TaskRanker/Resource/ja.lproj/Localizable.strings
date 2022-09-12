@@ -17,6 +17,7 @@
 "ServerCommunicationMessage" = "通信中";
 
 // MARK: - Color
+"Color" = "カラー";
 "Red" = "レッド";
 "Pink" = "ピンク";
 "Orange" = "オレンジ";
@@ -27,3 +28,12 @@
 "Gray" = "グレー";
 "White" = "白";
 "Black" = "黒";
+
+// MARK: - Task
+"Title" = "タイトル";
+"Detail" = "詳細";
+"Importance" = "重要度";
+"Urgency" = "緊急度";
+"1to8" = "(1〜8)";
+"DeadlineDate" = "期限日";
+"Repeat" = "繰り返し";

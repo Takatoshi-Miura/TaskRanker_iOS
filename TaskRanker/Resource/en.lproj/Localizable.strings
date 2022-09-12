@@ -17,6 +17,7 @@
 "ServerCommunicationMessage" = "During server communication...";
 
 // MARK: - Color
+"Color" = "Color";
 "Red" = "Red";
 "Pink" = "Pink";
 "Orange" = "Orange";
@@ -27,3 +28,12 @@
 "Gray" = "Gray";
 "White" = "White";
 "Black" = "Black";
+
+// MARK: - Task
+"Title" = "Title";
+"Detail" = "Detail";
+"Importance" = "Importance";
+"Urgency" = "Urgency";
+"1to8" = "(1〜8)";
+"DeadlineDate" = "Deadline Date";
+"Repeat" = "Repeat";

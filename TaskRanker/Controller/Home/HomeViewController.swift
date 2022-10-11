@@ -8,6 +8,10 @@
 import UIKit
 
 protocol HomeViewControllerDelegate: AnyObject {
+    // 設定ボタンタップ時
+    func homeVCSettingButtonDidTap(_ viewController: UIViewController)
+    // フィルタボタンタップ時
+    func homeVCFilterButtonDidTap(_ viewController: UIViewController)
     // 追加ボタンタップ時
     func homeVCAddButtonDidTap(_ viewController: UIViewController)
 }
@@ -38,9 +42,7 @@ class HomeViewController: UIViewController {
     /// NavigationController初期化
     private func initNavigation() {
         // 設定メニュー
-        let isDarkMode = UITraitCollection.current.userInterfaceStyle == .dark
-        let menuImage = isDarkMode ? UIImage(named: "humburger_menu_white")! : UIImage(named: "humburger_menu_black")!
-        let menuButton = UIBarButtonItem(image: menuImage.withRenderingMode(.alwaysOriginal),
+        let menuButton = UIBarButtonItem(image: UIImage(systemName: "gear"),
                                          style: .plain,
                                          target: self,
                                          action: #selector(openHumburgerMenu(_:)))
@@ -97,12 +99,12 @@ class HomeViewController: UIViewController {
     
     /// 設定メニュー
     @objc func openHumburgerMenu(_ sender: UIBarButtonItem) {
-//        delegate?.taskVCSettingDidTap(self)
+        delegate?.homeVCSettingButtonDidTap(self)
     }
     
     /// フィルタメニュー
     @objc func openFilterMenu(_ sender: UIBarButtonItem) {
-//        delegate?.taskVCSettingDidTap(self)
+        delegate?.homeVCFilterButtonDidTap(self)
     }
     
     /// segmentedControl選択

@@ -44,11 +44,22 @@ class HomeCoordinator: Coordinator {
 
 extension HomeCoordinator: HomeViewControllerDelegate {
     
+    /// HomeVC → SettingVC
+    func homeVCSettingButtonDidTap(_ viewController: UIViewController) {
+        let settingCoordinator = SettingCoordinator()
+        settingCoordinator.startFlow(in: viewController)
+    }
+    
+    /// HomeVC → FilterVC
+    func homeVCFilterButtonDidTap(_ viewController: UIViewController) {
+        let filterCoordinator = FilterCoordinator()
+        filterCoordinator.startFlow(in: viewController)
+    }
+    
     /// HomeVC → AddTaskVC
     func homeVCAddButtonDidTap(_ viewController: UIViewController) {
         let addTaskCoordinator = AddTaskCoordinator()
         addTaskCoordinator.startFlow(in: viewController)
     }
-    
     
 }

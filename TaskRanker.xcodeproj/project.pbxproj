@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F2F21BA28F51791005FFCC2 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21B828F51791005FFCC2 /* FilterViewController.swift */; };
+		2F2F21BB28F51791005FFCC2 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F21B928F51791005FFCC2 /* FilterViewController.xib */; };
+		2F2F21BE28F517F9005FFCC2 /* FilterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21BD28F517F9005FFCC2 /* FilterCoordinator.swift */; };
+		2F2F21C428F51A97005FFCC2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21C228F51A97005FFCC2 /* SettingViewController.swift */; };
+		2F2F21C528F51A97005FFCC2 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F21C328F51A97005FFCC2 /* SettingViewController.xib */; };
+		2F2F21C728F51AC5005FFCC2 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21C628F51AC5005FFCC2 /* SettingCoordinator.swift */; };
+		2F2F21CA28F5397B005FFCC2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21C828F5397B005FFCC2 /* LoginViewController.swift */; };
+		2F2F21CB28F5397B005FFCC2 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F21C928F5397B005FFCC2 /* LoginViewController.xib */; };
+		2F2F21CD28F53998005FFCC2 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21CC28F53998005FFCC2 /* LoginCoordinator.swift */; };
+		2F2F21D028F53C30005FFCC2 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21CE28F53C30005FFCC2 /* PageViewController.swift */; };
+		2F2F21D128F53C30005FFCC2 /* PageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F21CF28F53C30005FFCC2 /* PageViewController.xib */; };
+		2F2F21D328F53C47005FFCC2 /* PageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21D228F53C47005FFCC2 /* PageCoordinator.swift */; };
+		2F2F21D628F53D24005FFCC2 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21D428F53D24005FFCC2 /* TutorialViewController.swift */; };
+		2F2F21D728F53D24005FFCC2 /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F21D528F53D24005FFCC2 /* TutorialViewController.xib */; };
 		8D60F23B28CC5E61003BB724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F23A28CC5E61003BB724 /* AppDelegate.swift */; };
 		8D60F24428CC5E64003BB724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F24328CC5E64003BB724 /* Assets.xcassets */; };
 		8D60F24728CC5E64003BB724 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F24528CC5E64003BB724 /* LaunchScreen.storyboard */; };
@@ -31,6 +45,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F2F21B828F51791005FFCC2 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		2F2F21B928F51791005FFCC2 /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		2F2F21BD28F517F9005FFCC2 /* FilterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCoordinator.swift; sourceTree = "<group>"; };
+		2F2F21C228F51A97005FFCC2 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		2F2F21C328F51A97005FFCC2 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		2F2F21C628F51AC5005FFCC2 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
+		2F2F21C828F5397B005FFCC2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2F2F21C928F5397B005FFCC2 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		2F2F21CC28F53998005FFCC2 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		2F2F21CE28F53C30005FFCC2 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		2F2F21CF28F53C30005FFCC2 /* PageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageViewController.xib; sourceTree = "<group>"; };
+		2F2F21D228F53C47005FFCC2 /* PageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCoordinator.swift; sourceTree = "<group>"; };
+		2F2F21D428F53D24005FFCC2 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		2F2F21D528F53D24005FFCC2 /* TutorialViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
 		8D60F23728CC5E61003BB724 /* TaskRanker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskRanker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D60F23A28CC5E61003BB724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D60F24328CC5E64003BB724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,6 +97,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F2F21B628F51747005FFCC2 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				2F2F21B828F51791005FFCC2 /* FilterViewController.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		2F2F21B728F5175D005FFCC2 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				2F2F21B928F51791005FFCC2 /* FilterViewController.xib */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		2F2F21BC28F517D6005FFCC2 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				2F2F21BD28F517F9005FFCC2 /* FilterCoordinator.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		2F2F21BF28F51A4F005FFCC2 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				2F2F21C328F51A97005FFCC2 /* SettingViewController.xib */,
+				2F2F21C928F5397B005FFCC2 /* LoginViewController.xib */,
+				2F2F21CF28F53C30005FFCC2 /* PageViewController.xib */,
+				2F2F21D528F53D24005FFCC2 /* TutorialViewController.xib */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		2F2F21C028F51A5E005FFCC2 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				2F2F21C228F51A97005FFCC2 /* SettingViewController.swift */,
+				2F2F21C828F5397B005FFCC2 /* LoginViewController.swift */,
+				2F2F21CE28F53C30005FFCC2 /* PageViewController.swift */,
+				2F2F21D428F53D24005FFCC2 /* TutorialViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		2F2F21C128F51A67005FFCC2 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				2F2F21C628F51AC5005FFCC2 /* SettingCoordinator.swift */,
+				2F2F21CC28F53998005FFCC2 /* LoginCoordinator.swift */,
+				2F2F21D228F53C47005FFCC2 /* PageCoordinator.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		8D60F22E28CC5E60003BB724 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +208,8 @@
 			children = (
 				8D60F25A28CC66A0003BB724 /* Home */,
 				8DB633B828CD6981001F2DB7 /* Task */,
+				2F2F21B728F5175D005FFCC2 /* Filter */,
+				2F2F21BF28F51A4F005FFCC2 /* Setting */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -140,6 +226,8 @@
 			children = (
 				8D60F25F28CC6777003BB724 /* Home */,
 				8DB633B928CD6995001F2DB7 /* Task */,
+				2F2F21B628F51747005FFCC2 /* Filter */,
+				2F2F21C028F51A5E005FFCC2 /* Setting */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -163,6 +251,8 @@
 				8D60F25528CC63D1003BB724 /* Application */,
 				8D60F26028CC6790003BB724 /* Home */,
 				8DB633C428CDBD46001F2DB7 /* Task */,
+				2F2F21BC28F517D6005FFCC2 /* Filter */,
+				2F2F21C128F51A67005FFCC2 /* Setting */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -285,12 +375,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F2F21BB28F51791005FFCC2 /* FilterViewController.xib in Resources */,
 				8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */,
+				2F2F21D728F53D24005FFCC2 /* TutorialViewController.xib in Resources */,
 				8DB633C328CDA43C001F2DB7 /* AddTaskViewController.xib in Resources */,
 				8D60F24728CC5E64003BB724 /* LaunchScreen.storyboard in Resources */,
 				8D60F26728CC76E1003BB724 /* Localizable.strings in Resources */,
+				2F2F21D128F53C30005FFCC2 /* PageViewController.xib in Resources */,
 				8D60F24428CC5E64003BB724 /* Assets.xcassets in Resources */,
 				8D60F25E28CC6761003BB724 /* HomeViewController.xib in Resources */,
+				2F2F21C528F51A97005FFCC2 /* SettingViewController.xib in Resources */,
+				2F2F21CB28F5397B005FFCC2 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,15 +401,24 @@
 				8DB633C828CDD38A001F2DB7 /* UIViewController+TextField.swift in Sources */,
 				8DB633CA28CDD3D7001F2DB7 /* UIViewController+TextView.swift in Sources */,
 				8DB633CC28CDD410001F2DB7 /* Definition+Device.swift in Sources */,
+				2F2F21C428F51A97005FFCC2 /* SettingViewController.swift in Sources */,
 				8DB633CE28CDD462001F2DB7 /* UIViewController+ToolBar.swift in Sources */,
 				8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */,
+				2F2F21CA28F5397B005FFCC2 /* LoginViewController.swift in Sources */,
+				2F2F21CD28F53998005FFCC2 /* LoginCoordinator.swift in Sources */,
+				2F2F21D628F53D24005FFCC2 /* TutorialViewController.swift in Sources */,
+				2F2F21C728F51AC5005FFCC2 /* SettingCoordinator.swift in Sources */,
 				8DB633BF28CD9F8B001F2DB7 /* Definition+Segment.swift in Sources */,
 				8D60F23B28CC5E61003BB724 /* AppDelegate.swift in Sources */,
+				2F2F21D028F53C30005FFCC2 /* PageViewController.swift in Sources */,
 				8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */,
+				2F2F21BA28F51791005FFCC2 /* FilterViewController.swift in Sources */,
 				8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */,
 				8D60F25728CC63F5003BB724 /* Coordinator.swift in Sources */,
+				2F2F21BE28F517F9005FFCC2 /* FilterCoordinator.swift in Sources */,
 				8DB633C228CDA43C001F2DB7 /* AddTaskViewController.swift in Sources */,
 				8D60F25D28CC6761003BB724 /* HomeViewController.swift in Sources */,
+				2F2F21D328F53C47005FFCC2 /* PageCoordinator.swift in Sources */,
 				8DB633C628CDBD81001F2DB7 /* AddTaskCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

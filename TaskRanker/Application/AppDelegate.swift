@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,7 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var appCoordinator: AppCoordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // 初回起動判定
+        if !(UserDefaultsKey.firstLaunch.object() is Bool) {
+            UserDefaultsKey.firstLaunch.set(value: true)
+        }
+        
+        // ユーザーIDを作成
+        if !(UserDefaultsKey.userID.object() is String) {
+            let uuid = NSUUID().uuidString
+            UserDefaultsKey.userID.set(value: uuid)
+        }
+        // TODO: FirebaseID
+        
         
         // 初期画面を表示
         window = UIWindow(frame: UIScreen.main.bounds)

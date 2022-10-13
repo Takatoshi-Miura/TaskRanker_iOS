@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07150DD4D372518BCFECB26A /* Pods_TaskRanker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */; };
 		2F2F21BA28F51791005FFCC2 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21B828F51791005FFCC2 /* FilterViewController.swift */; };
 		2F2F21BB28F51791005FFCC2 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F21B928F51791005FFCC2 /* FilterViewController.xib */; };
 		2F2F21BE28F517F9005FFCC2 /* FilterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21BD28F517F9005FFCC2 /* FilterCoordinator.swift */; };
@@ -63,6 +64,8 @@
 		2F2F21D528F53D24005FFCC2 /* TutorialViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
 		2F415F3F28F7E85E0082D676 /* Definition+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Color.swift"; sourceTree = "<group>"; };
 		2F415F4128F7EAFF0082D676 /* UIViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PickerView.swift"; sourceTree = "<group>"; };
+		45D5099BC271E62A0AD40BE7 /* Pods-TaskRanker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.debug.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.debug.xcconfig"; sourceTree = "<group>"; };
+		4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskRanker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D60F23728CC5E61003BB724 /* TaskRanker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskRanker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D60F23A28CC5E61003BB724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D60F24328CC5E64003BB724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		8DB633CB28CDD410001F2DB7 /* Definition+Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Device.swift"; sourceTree = "<group>"; };
 		8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ToolBar.swift"; sourceTree = "<group>"; };
 		8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		FE9C64CC0C4EAF044EF1C0C6 /* Pods-TaskRanker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.release.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07150DD4D372518BCFECB26A /* Pods_TaskRanker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +167,8 @@
 			children = (
 				8D60F23928CC5E61003BB724 /* TaskRanker */,
 				8D60F23828CC5E61003BB724 /* Products */,
+				E156D7BEB59D071D276485BF /* Pods */,
+				BCA445DD93A8F23D3ABDB940 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -322,6 +329,24 @@
 			path = Task;
 			sourceTree = "<group>";
 		};
+		BCA445DD93A8F23D3ABDB940 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E156D7BEB59D071D276485BF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				45D5099BC271E62A0AD40BE7 /* Pods-TaskRanker.debug.xcconfig */,
+				FE9C64CC0C4EAF044EF1C0C6 /* Pods-TaskRanker.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -329,9 +354,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D60F24B28CC5E64003BB724 /* Build configuration list for PBXNativeTarget "TaskRanker" */;
 			buildPhases = (
+				CED5706D5A0FAB35528E82D2 /* [CP] Check Pods Manifest.lock */,
 				8D60F23328CC5E61003BB724 /* Sources */,
 				8D60F23428CC5E61003BB724 /* Frameworks */,
 				8D60F23528CC5E61003BB724 /* Resources */,
+				F962E79CA036685664240908 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -396,6 +423,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CED5706D5A0FAB35528E82D2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TaskRanker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F962E79CA036685664240908 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TaskRanker/Pods-TaskRanker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TaskRanker/Pods-TaskRanker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaskRanker/Pods-TaskRanker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D60F23328CC5E61003BB724 /* Sources */ = {
@@ -573,6 +642,7 @@
 		};
 		8D60F24C28CC5E64003BB724 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45D5099BC271E62A0AD40BE7 /* Pods-TaskRanker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -601,6 +671,7 @@
 		};
 		8D60F24D28CC5E64003BB724 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE9C64CC0C4EAF044EF1C0C6 /* Pods-TaskRanker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

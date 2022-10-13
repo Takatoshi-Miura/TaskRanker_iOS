@@ -51,13 +51,18 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        // TODO: Taskの完了状態で判断させる
+        let symbolName = false ? "circle.fill" : "circle"
+        let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
+        cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
+        cell.accessoryType = .detailButton
+        
         switch segmentType {
         case .A: cell.detailTextLabel?.text = "タスクAのタイトル"
         case .B: cell.detailTextLabel?.text = "タスクBのタイトル"
         case .C: cell.detailTextLabel?.text = "タスクCのタイトル"
         case .D: cell.detailTextLabel?.text = "タスクDのタイトル"
         }
-        cell.accessoryType = .disclosureIndicator
         return cell
     }
     

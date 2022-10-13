@@ -16,6 +16,7 @@ class AddTaskViewController: UIViewController {
     
     // MARK: - UI,Variable
     
+    @IBOutlet weak var naviItem: UINavigationItem!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var detailLabel: UILabel!
@@ -31,6 +32,11 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var repeatLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    private var pickerView = UIView()
+    private let colorPicker = UIPickerView()
+    private var datePicker = UIDatePicker()
+    private var colorIndex: Int = 0
+    private var selectedDate = Date()
     var delegate: AddTaskViewControllerDelegate?
 
     // MARK: - LifeCycle
@@ -38,10 +44,20 @@ class AddTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
+        initDatePicker()
+        initColorPicker()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // マルチタスクビュー対策
+        datePicker.frame.size.width = self.view.bounds.size.width
+        colorPicker.frame.size.width = self.view.bounds.size.width
     }
     
     /// 画面初期化
     private func initView() {
+        naviItem.title = TITLE_ADD_TASK
         titleLabel.text = TITLE_TITLE
         detailLabel.text = TITLE_DETAIL
         colorLabel.text = TITLE_COLOR
@@ -53,13 +69,24 @@ class AddTaskViewController: UIViewController {
         initTextField(textField: titleTextField, placeholder: "")
         initTextView(textView: detailTextView)
         
-        colorButton.setTitle("", for: .normal)
-        deadlineDateButton.setTitle("", for: .normal)
+        colorButton.backgroundColor = Color.allCases[colorIndex].color
+        colorButton.setTitle(Color.allCases[colorIndex].title, for: .normal)
+        deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
         cancelButton.setTitle(TITLE_CANCEL, for: .normal)
         saveButton.setTitle(TITLE_SAVE, for: .normal)
     }
     
     // MARK: - Action
+    
+    /// カラーボタン
+    @IBAction func tapColorButton(_ sender: Any) {
+        titleTextField.resignFirstResponder()
+        closePicker(pickerView)
+        pickerView = UIView(frame: colorPicker.bounds)
+        pickerView.addSubview(colorPicker)
+        pickerView.addSubview(createToolBar(#selector(colorPickerDoneAction), #selector(colorPickerCancelAction)))
+        openPicker(pickerView)
+    }
     
     /// 重要度スライダー
     @IBAction func slideImportanceSlider(_ sender: UISlider) {
@@ -71,5 +98,128 @@ class AddTaskViewController: UIViewController {
         urgencyValueLabel.text = String(Int(round(sender.value)))
     }
     
+    /// 期限日ボタン
+    @IBAction func tapDeadlineDateButton(_ sender: Any) {
+        closePicker(pickerView)
+        pickerView = UIView(frame: datePicker.bounds)
+        pickerView.addSubview(datePicker)
+        pickerView.addSubview(createToolBar(#selector(datePickerDoneAction), #selector(datePickerCancelAction)))
+        openPicker(pickerView)
+    }
+    
+    /// キャンセルボタン
+    @IBAction func tapCancelButton(_ sender: Any) {
+        // 入力済みの場合は確認アラート表示
+        if !titleTextField.text!.isEmpty || !detailTextView.text.isEmpty {
+            showOKCancelAlert(title: "", message: MESSAGE_DELETE_INPUT, OKAction: {
+                self.delegate?.addTaskVCDismiss(self)
+            })
+            return
+        }
+        delegate?.addTaskVCDismiss(self)
+    }
+    
+    /// 保存ボタン
+    @IBAction func tapSaveButton(_ sender: Any) {
+        // 入力チェック
+        if titleTextField.text!.isEmpty {
+            showErrorAlert(message: ERROR_MESSAGE_EMPTY_TITLE)
+            return
+        }
+        
+        // TODO: Taskを作成
+        
+        // TODO: Firebaseに送信(アカウント持ちの場合のみ)
+        
+        delegate?.addTaskVCDismiss(self)
+    }
+    
+}
+
+extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    private enum PickerType: Int, CaseIterable {
+        case color
+        case date
+    }
+    
+    /// 列数
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        switch PickerType.allCases[pickerView.tag] {
+        case .color:
+            return 1
+        case .date:
+            return 3
+        }
+    }
+    
+    /// 項目数
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch PickerType.allCases[pickerView.tag] {
+        case .color:
+            return Color.allCases.count
+        case .date:
+            return 1
+        }
+    }
+    
+    /// タイトル
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch PickerType.allCases[pickerView.tag] {
+        case .color:
+            return Color.allCases[row].title
+        case .date:
+            return nil
+        }
+    }
+    
+    /// DatePicker初期化
+    private func initDatePicker() {
+        datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "ja")
+        datePicker.tag = PickerType.date.rawValue
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        datePicker.backgroundColor = UIColor.systemGray5
+        datePicker.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height + 44)
+        datePicker.date = Date()
+    }
+    
+    /// DatePicker完了処理
+    @objc func datePickerDoneAction() {
+        selectedDate = datePicker.date
+        deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
+        closePicker(pickerView)
+    }
+    
+    /// DatePickerキャンセル処理
+    @objc func datePickerCancelAction() {
+        datePicker.date = selectedDate
+        closePicker(pickerView)
+    }
+    
+    /// ColorPicker初期化
+    private func initColorPicker() {
+        colorPicker.delegate = self
+        colorPicker.dataSource = self
+        colorPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: colorPicker.bounds.size.height + 44)
+        colorPicker.backgroundColor = UIColor.systemGray5
+    }
+    
+    /// ColorPicker完了処理
+    @objc func colorPickerDoneAction() {
+        colorIndex = colorPicker.selectedRow(inComponent: 0)
+        closePicker(pickerView)
+        colorButton.backgroundColor = Color.allCases[colorIndex].color
+        colorButton.setTitle(Color.allCases[colorIndex].title, for: .normal)
+    }
+    
+    /// ColorPickerキャンセル処理
+    @objc func colorPickerCancelAction() {
+        colorPicker.selectRow(colorIndex, inComponent: 0, animated: false)
+        closePicker(pickerView)
+    }
     
 }

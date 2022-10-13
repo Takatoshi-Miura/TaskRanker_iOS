@@ -38,6 +38,7 @@ let TITLE_URGENCY = NSLocalizedString("Urgency", comment: "")
 let TITLE_1to8 = NSLocalizedString("1to8", comment: "")
 let TITLE_DEADLINE_DATE = NSLocalizedString("DeadlineDate", comment: "")
 let TITLE_REPEAT = NSLocalizedString("Repeat", comment: "")
+let TITLE_ADD_TASK = NSLocalizedString("AddTaskTitle", comment: "")
 
 // MARK: - SettingViewController
 let TITLE_SETTING = NSLocalizedString("Setting", comment: "")
@@ -91,3 +92,6 @@ let MESSAGE_PLEASE_LOGIN = NSLocalizedString("PleaseLogin", comment: "")
 let MESSAGE_DURING_DELETE_ACCOUNT = NSLocalizedString("DuringDeleteAccount", comment: "")
 let MESSAGE_DELETE_ACCOUNT_SUCCESSFUL = NSLocalizedString("DeleteAccountSuccessful", comment: "")
 let MESSAGE_DELETE_ACCOUNT_ERROR = NSLocalizedString("DeleteAccountError", comment: "")
+
+// MARK: - ErrorMessage
+let ERROR_MESSAGE_EMPTY_TITLE = NSLocalizedString("EmptyTitle", comment: "")

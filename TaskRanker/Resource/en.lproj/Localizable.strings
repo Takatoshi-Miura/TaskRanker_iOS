@@ -37,6 +37,7 @@
 "1to8" = "(1〜8)";
 "DeadlineDate" = "Deadline Date";
 "Repeat" = "Repeat";
+"AddTaskTitle" = "Add task";
 
 // MARK: - Setting
 "Setting" = "Setting";
@@ -92,3 +93,6 @@
 "DuringDeleteAccount" = "Deleting account.";
 "DeleteAccountSuccessful" = "You have successfully deleted your account.";
 "DeleteAccountError" = "Failed to delete account. Please try again later.";
+
+// MARK: - ErrorMessage
+"EmptyTitle" = "Please input a title.";

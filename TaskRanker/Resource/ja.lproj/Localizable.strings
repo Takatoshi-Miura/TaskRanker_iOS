@@ -37,6 +37,7 @@
 "1to8" = "(1〜8)";
 "DeadlineDate" = "期限日";
 "Repeat" = "繰り返し";
+"AddTaskTitle" = "タスクの追加";
 
 // MARK: - Setting
 "Setting" = "設定";
@@ -92,3 +93,6 @@
 "DuringDeleteAccount" = "アカウントを削除しています";
 "DeleteAccountSuccessful" = "アカウントを削除しました。";
 "DeleteAccountError" = "アカウントの削除に失敗しました。時間をおいて再度お試し下さい。";
+
+// MARK: - ErrorMessage
+"EmptyTitle" = "タイトルを入力して下さい。";

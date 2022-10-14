@@ -23,8 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // ユーザーIDを作成
         if !(UserDefaultsKey.userID.object() is String) {
-            let uuid = NSUUID().uuidString
-            UserDefaultsKey.userID.set(value: uuid)
+            UserDefaultsKey.userID.set(value: NSUUID().uuidString)
         }
         // TODO: FirebaseID
         

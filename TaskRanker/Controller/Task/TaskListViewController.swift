@@ -16,24 +16,49 @@ class TaskListViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var tableView: UITableView!
-    var segmentType = SegmentType.A
-    // var taskArray = [Task]()
+    var segmentType: SegmentType
+    var taskArray = [Task]()
     
     // MARK: - LifeCycle
+    
+    init(segmentType: SegmentType) {
+        self.segmentType = segmentType
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initTableView()
+        refreshData()
     }
     
     /// TableView初期化
     private func initTableView() {
         tableView.tableFooterView = UIView()
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(syncData), for: .valueChanged)
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
+    }
+    
+    /// データの同期処理
+    @objc func syncData() {
+        refreshData()
+    }
+    
+    /// データを再取得
+    private func refreshData() {
+        let taskManager = TaskManager()
+        taskArray = taskManager.getTask(type: segmentType)
+        tableView.refreshControl?.endRefreshing()
+        tableView.reloadData()
     }
 
 }
@@ -45,24 +70,17 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
-//        return taskArray.count
+        return taskArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        // TODO: Taskの完了状態で判断させる
-        let symbolName = false ? "circle.fill" : "circle"
+        let task = taskArray[indexPath.row]
+        let symbolName = task.isComplete ? "circle.fill" : "circle"
         let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
         cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
+        cell.detailTextLabel?.text = task.title
         cell.accessoryType = .detailButton
-        
-        switch segmentType {
-        case .A: cell.detailTextLabel?.text = "タスクAのタイトル"
-        case .B: cell.detailTextLabel?.text = "タスクBのタイトル"
-        case .C: cell.detailTextLabel?.text = "タスクCのタイトル"
-        case .D: cell.detailTextLabel?.text = "タスクDのタイトル"
-        }
         return cell
     }
     

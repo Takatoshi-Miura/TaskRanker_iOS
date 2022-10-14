@@ -127,8 +127,20 @@ class AddTaskViewController: UIViewController {
             return
         }
         
-        // TODO: Taskを作成
+        // Taskを作成
+        let realmManager = RealmManager()
+        var task = RealmTask()
+        task.title = titleTextField.text!
+        task.memo = detailTextView.text!
+        task.color = colorIndex
+        task.importance = Int(importanceValueLabel.text!)!
+        task.urgency = Int(urgencyValueLabel.text!)!
+        // TODO: 期限日など
         
+        if !realmManager.createRealm(object: task) {
+            showErrorAlert(message: "エラー")
+            return
+        }
         // TODO: Firebaseに送信(アカウント持ちの場合のみ)
         
         delegate?.addTaskVCDismiss(self)

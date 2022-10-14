@@ -23,10 +23,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var taskListView: UIView!
     private var isFilter: Bool = false
-    private var taskListVC_A = TaskListViewController()
-    private var taskListVC_B = TaskListViewController()
-    private var taskListVC_C = TaskListViewController()
-    private var taskListVC_D = TaskListViewController()
+    private var taskListVC_A = TaskListViewController(segmentType: SegmentType.A)
+    private var taskListVC_B = TaskListViewController(segmentType: SegmentType.B)
+    private var taskListVC_C = TaskListViewController(segmentType: SegmentType.C)
+    private var taskListVC_D = TaskListViewController(segmentType: SegmentType.D)
     var delegate: HomeViewControllerDelegate?
 
     // MARK: - LifeCycle

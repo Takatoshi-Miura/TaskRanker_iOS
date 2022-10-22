@@ -10,6 +10,8 @@ import UIKit
 protocol AddTaskViewControllerDelegate: AnyObject {
     /// モーダルを閉じる
     func addTaskVCDismiss(_ viewController: UIViewController)
+    // 課題追加時の処理
+    func addTaskVCAddTask(_ viewController: UIViewController, task: Task)
 }
 
 class AddTaskViewController: UIViewController {
@@ -129,21 +131,24 @@ class AddTaskViewController: UIViewController {
         
         // Taskを作成
         let realmManager = RealmManager()
-        var task = RealmTask()
-        task.title = titleTextField.text!
-        task.memo = detailTextView.text!
-        task.color = colorIndex
-        task.importance = Int(importanceValueLabel.text!)!
-        task.urgency = Int(urgencyValueLabel.text!)!
+        let realmTask = RealmTask()
+        realmTask.title = titleTextField.text!
+        realmTask.memo = detailTextView.text!
+        realmTask.color = colorIndex
+        realmTask.importance = Int(importanceValueLabel.text!)!
+        realmTask.urgency = Int(urgencyValueLabel.text!)!
         // TODO: 期限日など
         
-        if !realmManager.createRealm(object: task) {
+        if !realmManager.createRealm(object: realmTask) {
             showErrorAlert(message: "エラー")
             return
         }
         // TODO: Firebaseに送信(アカウント持ちの場合のみ)
         
-        delegate?.addTaskVCDismiss(self)
+        // モーダルを閉じる
+        let taskManager = TaskManager()
+        let task = taskManager.getTask(taskID: realmTask.taskID)!
+        delegate?.addTaskVCAddTask(self, task: task)
     }
     
 }

@@ -60,6 +60,16 @@ class TaskListViewController: UIViewController {
         tableView.refreshControl?.endRefreshing()
         tableView.reloadData()
     }
+    
+    /// タスクを挿入
+    /// - Parameters:
+    ///   - task: 挿入する課題
+    func insertTask(task: Task) {
+        taskArray.append(task)
+        // TODO: 重要度が高い順に並び替える
+        let index: IndexPath = [0, taskArray.count - 1]
+        tableView.insertRows(at: [index], with: UITableView.RowAnimation.right)
+    }
 
 }
 

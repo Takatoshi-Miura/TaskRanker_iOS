@@ -67,11 +67,6 @@ class HomeViewController: UIViewController {
         taskListVC_C.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
         taskListVC_D.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
         
-        taskListVC_A.segmentType = SegmentType.A
-        taskListVC_B.segmentType = SegmentType.B
-        taskListVC_C.segmentType = SegmentType.C
-        taskListVC_D.segmentType = SegmentType.D
-        
         self.taskListView.addSubview(taskListVC_D.view)
         self.taskListView.addSubview(taskListVC_C.view)
         self.taskListView.addSubview(taskListVC_B.view)
@@ -169,5 +164,23 @@ class HomeViewController: UIViewController {
     @IBAction func tapAddButton(_ sender: Any) {
         delegate?.homeVCAddButtonDidTap(self)
     }
-
+    
+    /// タスクを挿入
+    /// - Parameters:
+    ///   - task: 挿入する課題
+    func insertTask(task: Task) {
+        selectSegment(number: task.type.rawValue)
+        
+        switch SegmentType.allCases[task.type.rawValue] {
+        case .A:
+            taskListVC_A.insertTask(task: task)
+        case .B:
+            taskListVC_B.insertTask(task: task)
+        case .C:
+            taskListVC_C.insertTask(task: task)
+        case .D:
+            taskListVC_D.insertTask(task: task)
+        }
+    }
+    
 }

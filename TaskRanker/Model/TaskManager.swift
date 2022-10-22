@@ -27,5 +27,16 @@ class TaskManager {
         return taskArray
     }
     
+    /// Taskを取得
+    /// - Parameters:
+    ///   - taskID: taskID
+    /// - Returns: Task
+    func getTask(taskID: String) -> Task? {
+        if let realmTask = realmManager.getTask(taskID: taskID) {
+            return Task(realmTask: realmTask)
+        } else {
+            return nil
+        }
+    }
     
 }

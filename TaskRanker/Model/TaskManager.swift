@@ -65,6 +65,15 @@ class TaskManager {
         if task.deadlineDate != oldTask.deadlineDate {
             realmManager.updateTaskDeadlineDate(taskID: task.taskID, deadlineDate: task.deadlineDate)
         }
+        if task.isRepeat != oldTask.isRepeat {
+            realmManager.updateTaskIsRepeat(taskID: task.taskID, isRepeat: task.isRepeat)
+        }
+        if task.isComplete != oldTask.isComplete {
+            realmManager.updateTaskIsComplete(taskID: task.taskID, isComplete: task.isComplete)
+        }
+        if task.isDeleted != oldTask.isDeleted {
+            realmManager.updateTaskIsDeleted(taskID: task.taskID, isDeleted: task.isDeleted)
+        }
     }
     
 }

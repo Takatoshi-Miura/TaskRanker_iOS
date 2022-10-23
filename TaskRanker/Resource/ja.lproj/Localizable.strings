@@ -38,6 +38,11 @@
 "DeadlineDate" = "期限日";
 "Repeat" = "繰り返し";
 "AddTaskTitle" = "タスクの追加";
+"DeleteTaskTitle" = "タスクの削除";
+"DeleteTaskMessage" = "タスクを削除しますか？\nタスクを削除すると復元できません。";
+"CompleteTaskTitle" = "タスクの進捗";
+"CompleteTaskMessage" = "タスクを完了にしますか？";
+"InCompleteTaskMessage" = "タスクを未完了にしますか？";
 
 // MARK: - Setting
 "Setting" = "設定";

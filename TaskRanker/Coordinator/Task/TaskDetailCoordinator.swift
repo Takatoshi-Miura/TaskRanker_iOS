@@ -19,6 +19,7 @@ class TaskDetailCoordinator: Coordinator {
     }
     
     func startFlow(in navigationController: UINavigationController, task: Task) {
+        self.navigationController = navigationController
         let taskDetailViewController = TaskDetailViewController(task: task)
         taskDetailViewController.delegate = self
         navigationController.pushViewController(taskDetailViewController, animated: true)
@@ -31,11 +32,17 @@ class TaskDetailCoordinator: Coordinator {
 
 extension TaskDetailCoordinator: TaskDetailViewControllerDelegate {
     
-    /// 画面を閉じる
-    func taskDetailVCDismiss(_ viewController: UIViewController, task: Task) {
+    /// HomeVC ← TaskDetailVC
+    func taskDetailVCDismiss(task: Task) {
         let taskManager = TaskManager()
         taskManager.updateTask(task: task)
     }
     
+    /// HomeVC ← TaskDetailVC
+    func taskDetailVCDeleteTask(task: Task) {
+        let taskManager = TaskManager()
+        taskManager.updateTask(task: task)
+        navigationController?.popViewController(animated: true)
+    }
     
 }

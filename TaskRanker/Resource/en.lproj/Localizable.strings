@@ -38,6 +38,11 @@
 "DeadlineDate" = "Deadline Date";
 "Repeat" = "Repeat";
 "AddTaskTitle" = "Add task";
+"DeleteTaskTitle" = "Delete task";
+"DeleteTaskMessage" = "Do you want to delete the task?\nIf you delete an task, you cannot restore it.";
+"CompleteTaskTitle" = "Progress of the task";
+"CompleteTaskMessage" = "Do you want to complete the task?";
+"InCompleteTaskMessage" = "Do you want to keep the task in progress?";
 
 // MARK: - Setting
 "Setting" = "Setting";

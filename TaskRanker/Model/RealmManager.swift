@@ -65,6 +65,7 @@ extension RealmManager {
         var taskArray = [RealmTask]()
         let realm = try! Realm()
         let realmArray = realm.objects(RealmTask.self)
+            .filter("(isDeleted == false)")
         for task in realmArray {
             taskArray.append(task)
         }

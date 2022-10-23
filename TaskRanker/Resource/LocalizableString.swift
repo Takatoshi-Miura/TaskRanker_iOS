@@ -39,6 +39,11 @@ let TITLE_1to8 = NSLocalizedString("1to8", comment: "")
 let TITLE_DEADLINE_DATE = NSLocalizedString("DeadlineDate", comment: "")
 let TITLE_REPEAT = NSLocalizedString("Repeat", comment: "")
 let TITLE_ADD_TASK = NSLocalizedString("AddTaskTitle", comment: "")
+let TITLE_DELETE_TASK = NSLocalizedString("DeleteTaskTitle", comment: "")
+let MESSAGE_DELETE_TASK = NSLocalizedString("DeleteTaskMessage", comment: "")
+let TITLE_COMPLETE_TASK = NSLocalizedString("CompleteTaskTitle", comment: "")
+let MESSAGE_COMPLETE_TASK = NSLocalizedString("CompleteTaskMessage", comment: "")
+let MESSAGE_INCOMPLETE_TASK = NSLocalizedString("InCompleteTaskMessage", comment: "")
 
 // MARK: - SettingViewController
 let TITLE_SETTING = NSLocalizedString("Setting", comment: "")

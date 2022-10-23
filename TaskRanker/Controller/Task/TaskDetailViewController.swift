@@ -9,7 +9,9 @@ import UIKit
 
 protocol TaskDetailViewControllerDelegate: AnyObject {
     /// 画面を閉じる
-    func taskDetailVCDismiss(_ viewController: UIViewController, task: Task)
+    func taskDetailVCDismiss(task: Task)
+    // 課題削除時の処理
+    func taskDetailVCDeleteTask(task: Task)
 }
 
 class TaskDetailViewController: UIViewController {
@@ -51,6 +53,7 @@ class TaskDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
+        initNavigationBar()
         initDatePicker()
         initColorPicker()
         inputTask()
@@ -65,12 +68,11 @@ class TaskDetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        delegate?.taskDetailVCDismiss(self, task: task)
+        delegate?.taskDetailVCDismiss(task: task)
     }
     
     /// 画面初期化
     private func initView() {
-        self.title = TITLE_EDIT
         titleLabel.text = TITLE_TITLE
         memoLabel.text = TITLE_DETAIL
         colorLabel.text = TITLE_COLOR
@@ -89,6 +91,18 @@ class TaskDetailViewController: UIViewController {
         deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
     }
     
+    /// NavigationBar初期化
+    private func initNavigationBar() {
+        self.title = TITLE_EDIT
+        var navigationItems: [UIBarButtonItem] = []
+        let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteTask))
+        let image = task.isComplete ? UIImage(systemName: "exclamationmark.circle") : UIImage(systemName: "checkmark.circle")
+        let completeButton = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(completeTask))
+        navigationItems.append(deleteButton)
+        navigationItems.append(completeButton)
+        navigationItem.rightBarButtonItems = navigationItems
+    }
+    
     /// Taskの中身を反映
     private func inputTask() {
         titleTextField.text = task.title
@@ -102,6 +116,23 @@ class TaskDetailViewController: UIViewController {
     }
     
     // MARK: - Action
+    
+    /// タスクを削除
+    @objc func deleteTask() {
+        showDeleteAlert(title: TITLE_DELETE_TASK, message: MESSAGE_DELETE_TASK, OKAction: { [self] in
+            self.task.isDeleted = true
+            self.delegate?.taskDetailVCDeleteTask(task: self.task)
+        })
+    }
+    
+    /// Taskを完了(未完了)にする
+    @objc func completeTask() {
+        let message = task.isComplete ? MESSAGE_INCOMPLETE_TASK : MESSAGE_COMPLETE_TASK
+        showOKCancelAlert(title: TITLE_COMPLETE_TASK, message: message, OKAction: {
+            self.task.isComplete = !self.task.isComplete
+            self.delegate?.taskDetailVCDeleteTask(task: self.task)
+        })
+    }
     
     /// カラーボタン
     @IBAction func tapColorButton(_ sender: Any) {

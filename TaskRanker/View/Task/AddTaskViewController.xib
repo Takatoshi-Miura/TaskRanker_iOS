@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -16,10 +14,10 @@
                 <outlet property="colorLabel" destination="nCz-Vk-QNZ" id="h3b-D6-w6e"/>
                 <outlet property="deadlineDateButton" destination="khK-wx-Y2g" id="Lk9-to-fct"/>
                 <outlet property="deadlineDateLabel" destination="u7e-YG-gR0" id="dgR-a9-dN8"/>
-                <outlet property="detailLabel" destination="63C-fA-EMY" id="1We-N4-9c0"/>
-                <outlet property="detailTextView" destination="vfp-hT-J0h" id="OY1-Ta-mZe"/>
                 <outlet property="importanceLabel" destination="0Iq-0g-573" id="ixH-bQ-MCB"/>
                 <outlet property="importanceValueLabel" destination="nG1-8U-g7W" id="oZc-GV-SXX"/>
+                <outlet property="memoLabel" destination="63C-fA-EMY" id="1We-N4-9c0"/>
+                <outlet property="memoTextView" destination="vfp-hT-J0h" id="OY1-Ta-mZe"/>
                 <outlet property="naviItem" destination="v6S-77-agL" id="vfR-LG-oVY"/>
                 <outlet property="repeatLabel" destination="Dxg-wv-N4I" id="5bc-w0-zSc"/>
                 <outlet property="saveButton" destination="uAe-VG-Rpe" id="ypa-AU-rqT"/>

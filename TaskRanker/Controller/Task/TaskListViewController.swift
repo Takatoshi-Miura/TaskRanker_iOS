@@ -8,7 +8,8 @@
 import UIKit
 
 protocol TaskListViewControllerDelegate: AnyObject {
-    
+    // infoボタンタップ時
+    func taskListVCInfoButtonDidTap(_ viewController: UIViewController, task: Task)
 }
 
 class TaskListViewController: UIViewController {
@@ -18,6 +19,7 @@ class TaskListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var segmentType: SegmentType
     var taskArray = [Task]()
+    var delegate: TaskListViewControllerDelegate?
     
     // MARK: - LifeCycle
     
@@ -54,7 +56,7 @@ class TaskListViewController: UIViewController {
     }
     
     /// データを再取得
-    private func refreshData() {
+    func refreshData() {
         let taskManager = TaskManager()
         taskArray = taskManager.getTask(type: segmentType)
         tableView.refreshControl?.endRefreshing()
@@ -76,7 +78,7 @@ class TaskListViewController: UIViewController {
 extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1    // セクションの個数
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,6 +94,12 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.text = task.title
         cell.accessoryType = .detailButton
         return cell
+    }
+    
+    /// infoボタンタップ時
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let task = taskArray[indexPath.row]
+        delegate?.taskListVCInfoButtonDidTap(self, task: task)
     }
     
 }

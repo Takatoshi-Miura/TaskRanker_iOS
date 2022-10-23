@@ -1,53 +1,59 @@
 //
-//  AddTaskViewController.swift
+//  TaskDetailViewController.swift
 //  TaskRanker
 //
-//  Created by Takatoshi Miura on 2022/09/11.
+//  Created by Takatoshi Miura on 2022/10/23.
 //
 
 import UIKit
 
-protocol AddTaskViewControllerDelegate: AnyObject {
-    /// モーダルを閉じる
-    func addTaskVCDismiss(_ viewController: UIViewController)
-    // 課題追加時の処理
-    func addTaskVCAddTask(_ viewController: UIViewController, task: Task)
+protocol TaskDetailViewControllerDelegate: AnyObject {
+    /// 画面を閉じる
+    func taskDetailVCDismiss(_ viewController: UIViewController, task: Task)
 }
 
-class AddTaskViewController: UIViewController {
+class TaskDetailViewController: UIViewController {
     
     // MARK: - UI,Variable
     
-    @IBOutlet weak var naviItem: UINavigationItem!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var memoLabel: UILabel!
-    @IBOutlet weak var memoTextView: UITextView!
     @IBOutlet weak var colorLabel: UILabel!
-    @IBOutlet weak var colorButton: UIButton!
     @IBOutlet weak var importanceLabel: UILabel!
     @IBOutlet weak var importanceValueLabel: UILabel!
     @IBOutlet weak var urgencyLabel: UILabel!
     @IBOutlet weak var urgencyValueLabel: UILabel!
     @IBOutlet weak var deadlineDateLabel: UILabel!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var memoTextView: UITextView!
+    @IBOutlet weak var colorButton: UIButton!
     @IBOutlet weak var deadlineDateButton: UIButton!
     @IBOutlet weak var repeatLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
     private var pickerView = UIView()
     private let colorPicker = UIPickerView()
     private var datePicker = UIDatePicker()
     private var colorIndex: Int = 0
     private var selectedDate = Date()
-    var delegate: AddTaskViewControllerDelegate?
-
+    var task = Task()
+    var delegate: TaskDetailViewControllerDelegate?
+    
     // MARK: - LifeCycle
+    
+    init(task: Task) {
+        self.task = task
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
         initDatePicker()
         initColorPicker()
+        inputTask()
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,9 +63,14 @@ class AddTaskViewController: UIViewController {
         colorPicker.frame.size.width = self.view.bounds.size.width
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.taskDetailVCDismiss(self, task: task)
+    }
+    
     /// 画面初期化
     private func initView() {
-        naviItem.title = TITLE_ADD_TASK
+        self.title = TITLE_EDIT
         titleLabel.text = TITLE_TITLE
         memoLabel.text = TITLE_DETAIL
         colorLabel.text = TITLE_COLOR
@@ -70,12 +81,24 @@ class AddTaskViewController: UIViewController {
         
         initTextField(textField: titleTextField, placeholder: "")
         initTextView(textView: memoTextView)
+        titleTextField.delegate = self
+        memoTextView.delegate = self
         
         colorButton.backgroundColor = Color.allCases[colorIndex].color
         colorButton.setTitle(Color.allCases[colorIndex].title, for: .normal)
         deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
-        cancelButton.setTitle(TITLE_CANCEL, for: .normal)
-        saveButton.setTitle(TITLE_SAVE, for: .normal)
+    }
+    
+    /// Taskの中身を反映
+    private func inputTask() {
+        titleTextField.text = task.title
+        memoTextView.text = task.memo
+        colorButton.backgroundColor = Color.allCases[task.color].color
+        colorButton.setTitle(Color.allCases[task.color].title, for: .normal)
+        // TODO: 緊急度反映
+        selectedDate = task.deadlineDate ?? Date()
+        datePicker.setDate(selectedDate, animated: false)
+        deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
     }
     
     // MARK: - Action
@@ -109,51 +132,9 @@ class AddTaskViewController: UIViewController {
         openPicker(pickerView)
     }
     
-    /// キャンセルボタン
-    @IBAction func tapCancelButton(_ sender: Any) {
-        // 入力済みの場合は確認アラート表示
-        if !titleTextField.text!.isEmpty || !memoTextView.text.isEmpty {
-            showOKCancelAlert(title: "", message: MESSAGE_DELETE_INPUT, OKAction: {
-                self.delegate?.addTaskVCDismiss(self)
-            })
-            return
-        }
-        delegate?.addTaskVCDismiss(self)
-    }
-    
-    /// 保存ボタン
-    @IBAction func tapSaveButton(_ sender: Any) {
-        // 入力チェック
-        if titleTextField.text!.isEmpty {
-            showErrorAlert(message: ERROR_MESSAGE_EMPTY_TITLE)
-            return
-        }
-        
-        // Taskを作成
-        let realmManager = RealmManager()
-        let realmTask = RealmTask()
-        realmTask.title = titleTextField.text!
-        realmTask.memo = memoTextView.text!
-        realmTask.color = colorIndex
-        realmTask.importance = Int(importanceValueLabel.text!)!
-        realmTask.urgency = Int(urgencyValueLabel.text!)!
-        // TODO: 期限日など
-        
-        if !realmManager.createRealm(object: realmTask) {
-            showErrorAlert(message: "エラー")
-            return
-        }
-        // TODO: Firebaseに送信(アカウント持ちの場合のみ)
-        
-        // モーダルを閉じる
-        let taskManager = TaskManager()
-        let task = taskManager.getTask(taskID: realmTask.taskID)!
-        delegate?.addTaskVCAddTask(self, task: task)
-    }
-    
 }
 
-extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension TaskDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     private enum PickerType: Int, CaseIterable {
         case color
@@ -208,6 +189,7 @@ extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     @objc func datePickerDoneAction() {
         selectedDate = datePicker.date
         deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
+        task.deadlineDate = selectedDate
         closePicker(pickerView)
     }
     
@@ -231,12 +213,38 @@ extension AddTaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         closePicker(pickerView)
         colorButton.backgroundColor = Color.allCases[colorIndex].color
         colorButton.setTitle(Color.allCases[colorIndex].title, for: .normal)
+        task.color = colorIndex
     }
     
     /// ColorPickerキャンセル処理
     @objc func colorPickerCancelAction() {
         colorPicker.selectRow(colorIndex, inComponent: 0, animated: false)
         closePicker(pickerView)
+    }
+    
+}
+
+extension TaskDetailViewController: UITextFieldDelegate {
+
+    /// フォーカスが外れる前
+    /// - Parameter textField: 対象のテキストフィールド
+    /// - Returns: trueでフォーカスを外す falseでフォーカスを外さない
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text == "" {
+            showErrorAlert(message: ERROR_MESSAGE_EMPTY_TITLE)
+            textField.text = task.title
+            return false
+        }
+        task.title = textField.text!
+        return true
+    }
+    
+}
+
+extension TaskDetailViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        task.memo = textView.text
     }
     
 }

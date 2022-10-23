@@ -22,6 +22,9 @@ class AddTaskCoordinator: Coordinator {
         previousViewController = viewController
         let addTaskViewController = AddTaskViewController()
         addTaskViewController.delegate = self
+        if #available(iOS 13.0, *) {
+            addTaskViewController.isModalInPresentation = true
+        }
         previousViewController!.present(addTaskViewController, animated: true)
     }
     

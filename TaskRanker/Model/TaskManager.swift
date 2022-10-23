@@ -39,4 +39,32 @@ class TaskManager {
         }
     }
     
+    /// Taskを更新
+    /// - Parameters:
+    ///   - task: Task
+    func updateTask(task: Task) {
+        guard let oldTask = getTask(taskID: task.taskID) else {
+            return
+        }
+        
+        if task.title != oldTask.title {
+            realmManager.updateTaskTitle(taskID: task.taskID, title: task.title)
+        }
+        if task.memo != oldTask.memo {
+            realmManager.updateTaskMemo(taskID: task.taskID, memo: task.memo)
+        }
+        if task.color != oldTask.color {
+            realmManager.updateTaskColor(taskID: task.taskID, color: task.color)
+        }
+        if task.importance != oldTask.importance {
+            realmManager.updateTaskImportance(taskID: task.taskID, importance: task.importance)
+        }
+        if task.urgency != oldTask.urgency {
+            realmManager.updateTaskUrgency(taskID: task.taskID, urgency: task.urgency)
+        }
+        if task.deadlineDate != oldTask.deadlineDate {
+            realmManager.updateTaskDeadlineDate(taskID: task.taskID, deadlineDate: task.deadlineDate)
+        }
+    }
+    
 }

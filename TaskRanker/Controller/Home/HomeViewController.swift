@@ -14,6 +14,8 @@ protocol HomeViewControllerDelegate: AnyObject {
     func homeVCFilterButtonDidTap(_ viewController: UIViewController)
     // 追加ボタンタップ時
     func homeVCAddButtonDidTap(_ viewController: UIViewController)
+    // infoボタンタップ時
+    func homeVCInfoButtonDidTap(_ viewController: UIViewController, task: Task)
 }
 
 class HomeViewController: UIViewController {
@@ -34,9 +36,15 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigation()
-        initSegmentedControl()
+        initTaskListView()
         addRightSwipeGesture()
         addLeftSwipeGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Task編集画面から戻る時に更新
+        reloadTaskList()
     }
     
     /// NavigationController初期化
@@ -58,9 +66,14 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItems = [filterButton]
     }
     
-    /// SegmentedControl初期化
-    private func initSegmentedControl() {
+    /// TaskListView初期化
+    private func initTaskListView() {
         segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        
+        taskListVC_A.delegate = self
+        taskListVC_B.delegate = self
+        taskListVC_C.delegate = self
+        taskListVC_D.delegate = self
         
         taskListVC_A.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
         taskListVC_B.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
@@ -73,6 +86,14 @@ class HomeViewController: UIViewController {
         self.taskListView.addSubview(taskListVC_A.view)
         
         selectSegment(number: SegmentType.A.rawValue)
+    }
+    
+    /// TaskListをリロード
+    func reloadTaskList() {
+        taskListVC_A.refreshData()
+        taskListVC_B.refreshData()
+        taskListVC_C.refreshData()
+        taskListVC_D.refreshData()
     }
     
     /// 右スワイプでABCD切り替え
@@ -181,6 +202,15 @@ class HomeViewController: UIViewController {
         case .D:
             taskListVC_D.insertTask(task: task)
         }
+    }
+    
+}
+
+extension HomeViewController: TaskListViewControllerDelegate {
+    
+    /// infoボタンタップ時
+    func taskListVCInfoButtonDidTap(_ viewController: UIViewController, task: Task) {
+        delegate?.homeVCInfoButtonDidTap(self, task: task)
     }
     
 }

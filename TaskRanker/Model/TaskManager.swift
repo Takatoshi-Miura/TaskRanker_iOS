@@ -29,6 +29,19 @@ class TaskManager {
     
     /// Taskを取得
     /// - Parameters:
+    ///   - isComplete: true:完了済み, false:未完了
+    /// - Returns: Task配列
+    func getTask(isComplete: Bool) -> [Task] {
+        var taskArray = [Task]()
+        let realmTaskArray = realmManager.getCompleteTask()
+        for realmTask in realmTaskArray {
+            taskArray.append(Task(realmTask: realmTask))
+        }
+        return taskArray
+    }
+    
+    /// Taskを取得
+    /// - Parameters:
     ///   - taskID: taskID
     /// - Returns: Task
     func getTask(taskID: String) -> Task? {

@@ -24,6 +24,7 @@ class ComletedTaskListCoordinator: Coordinator {
         completedTaskListViewController.delegate = self
         if #available(iOS 13.0, *) {
             completedTaskListViewController.isModalInPresentation = true
+            completedTaskListViewController.modalPresentationStyle = .fullScreen
         }
         previousViewController!.present(completedTaskListViewController, animated: true)
     }
@@ -33,7 +34,7 @@ class ComletedTaskListCoordinator: Coordinator {
 extension ComletedTaskListCoordinator: CompletedTaskListViewControllerDelegate {
     
     /// HomeVC ← CompletedTaskListVC
-    func CompletedTaskListVCDismiss(_ viewController: UIViewController) {
+    func completedTaskListVCDismiss(_ viewController: UIViewController) {
         viewController.dismiss(animated: true, completion: nil)
     }
     

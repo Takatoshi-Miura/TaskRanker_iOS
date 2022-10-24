@@ -50,6 +50,12 @@ extension HomeCoordinator: HomeViewControllerDelegate {
         settingCoordinator.startFlow(in: viewController)
     }
     
+    /// HomeVC → completedTaskListVC
+    func homeVCCompletedTaskListButtonDidTap(_ viewController: UIViewController) {
+        let comletedTaskListCoordinator = ComletedTaskListCoordinator()
+        comletedTaskListCoordinator.startFlow(in: viewController)
+    }
+    
     /// HomeVC → FilterVC
     func homeVCFilterButtonDidTap(_ viewController: UIViewController) {
         let filterCoordinator = FilterCoordinator()

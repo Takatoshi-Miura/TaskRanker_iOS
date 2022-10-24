@@ -17,7 +17,7 @@ class TaskManager {
     /// - Returns: Task配列
     func getTask(type: SegmentType) -> [Task] {
         var taskArray = [Task]()
-        let realmTaskArray = realmManager.getAllTask()
+        let realmTaskArray = realmManager.getIncompleteTask()
         for realmTask in realmTaskArray {
             let task = Task(realmTask: realmTask)
             if task.type == type {

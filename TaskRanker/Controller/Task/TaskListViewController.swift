@@ -9,7 +9,7 @@ import UIKit
 
 protocol TaskListViewControllerDelegate: AnyObject {
     // infoボタンタップ時
-    func taskListVCInfoButtonDidTap(_ viewController: UIViewController, task: Task)
+    func taskListVCInfoButtonDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath)
 }
 
 class TaskListViewController: UIViewController {
@@ -17,8 +17,8 @@ class TaskListViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var tableView: UITableView!
-    var segmentType: SegmentType
-    var taskArray = [Task]()
+    private var segmentType: SegmentType
+    private var taskArray = [Task]()
     var delegate: TaskListViewControllerDelegate?
     
     // MARK: - LifeCycle
@@ -65,12 +65,28 @@ class TaskListViewController: UIViewController {
     
     /// タスクを挿入
     /// - Parameters:
-    ///   - task: 挿入する課題
+    ///   - task: 挿入するタスク
     func insertTask(task: Task) {
         taskArray.append(task)
         // TODO: 重要度が高い順に並び替える
         let index: IndexPath = [0, taskArray.count - 1]
         tableView.insertRows(at: [index], with: UITableView.RowAnimation.right)
+    }
+    
+    /// タスクを更新
+    /// - Parameters:
+    ///   - indexPath: 選択したタスクのIndexPath
+    func updateTask(indexPath: IndexPath) {
+        // 完了、削除されたタスクを取り除く
+        let taskManager = TaskManager()
+        if let selectedTask = taskManager.getTask(taskID: taskArray[indexPath.row].taskID) {
+            if selectedTask.isComplete || selectedTask.isDeleted {
+                taskArray.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
+                return
+            }
+        }
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
 
 }
@@ -99,7 +115,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     /// infoボタンタップ時
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let task = taskArray[indexPath.row]
-        delegate?.taskListVCInfoButtonDidTap(self, task: task)
+        delegate?.taskListVCInfoButtonDidTap(self, task: task ,indexPath: indexPath)
     }
     
 }

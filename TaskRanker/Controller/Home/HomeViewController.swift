@@ -10,6 +10,8 @@ import UIKit
 protocol HomeViewControllerDelegate: AnyObject {
     // 設定ボタンタップ時
     func homeVCSettingButtonDidTap(_ viewController: UIViewController)
+    // 完了タスクボタンタップ時
+    func homeVCCompletedTaskListButtonDidTap(_ viewController: UIViewController)
     // フィルタボタンタップ時
     func homeVCFilterButtonDidTap(_ viewController: UIViewController)
     // 追加ボタンタップ時
@@ -29,6 +31,8 @@ class HomeViewController: UIViewController {
     private var taskListVC_B = TaskListViewController(segmentType: SegmentType.B)
     private var taskListVC_C = TaskListViewController(segmentType: SegmentType.C)
     private var taskListVC_D = TaskListViewController(segmentType: SegmentType.D)
+    private var selectedTask: Task?
+    private var selectedIndex: IndexPath?
     var delegate: HomeViewControllerDelegate?
 
     // MARK: - LifeCycle
@@ -41,10 +45,24 @@ class HomeViewController: UIViewController {
         addLeftSwipeGesture()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Task編集画面から戻る時に更新
-        reloadTaskList()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if selectedTask == nil || selectedIndex == nil {
+            return
+        }
+        switch SegmentType.allCases[selectedTask!.type.rawValue] {
+        case .A:
+            taskListVC_A.updateTask(indexPath: selectedIndex!)
+        case .B:
+            taskListVC_B.updateTask(indexPath: selectedIndex!)
+        case .C:
+            taskListVC_C.updateTask(indexPath: selectedIndex!)
+        case .D:
+            taskListVC_D.updateTask(indexPath: selectedIndex!)
+        }
+        selectedTask = nil
+        selectedIndex = nil
     }
     
     /// NavigationController初期化
@@ -55,6 +73,12 @@ class HomeViewController: UIViewController {
                                          target: self,
                                          action: #selector(openHumburgerMenu(_:)))
         
+        // 完了タスク
+        let completeButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(openCompletedTaskList(_:)))
+        
         // フィルタ
         let filterImage = isFilter ? UIImage(named: "icon_filter_fill")! : UIImage(named: "icon_filter_empty")!
         let filterButton = UIBarButtonItem(image: filterImage,
@@ -63,7 +87,7 @@ class HomeViewController: UIViewController {
                                            action: #selector(openFilterMenu))
         
         navigationItem.leftBarButtonItems = [menuButton]
-        navigationItem.rightBarButtonItems = [filterButton]
+        navigationItem.rightBarButtonItems = [filterButton, completeButton]
     }
     
     /// TaskListView初期化
@@ -110,12 +134,16 @@ class HomeViewController: UIViewController {
         self.taskListView.addGestureRecognizer(leftSwipe)
     }
     
-    
     // MARK: - Action
     
     /// 設定メニュー
     @objc func openHumburgerMenu(_ sender: UIBarButtonItem) {
         delegate?.homeVCSettingButtonDidTap(self)
+    }
+    
+    /// 完了タスク
+    @objc func openCompletedTaskList(_ sender: UIBarButtonItem) {
+        delegate?.homeVCCompletedTaskListButtonDidTap(self)
     }
     
     /// フィルタメニュー
@@ -209,7 +237,9 @@ class HomeViewController: UIViewController {
 extension HomeViewController: TaskListViewControllerDelegate {
     
     /// infoボタンタップ時
-    func taskListVCInfoButtonDidTap(_ viewController: UIViewController, task: Task) {
+    func taskListVCInfoButtonDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath) {
+        selectedTask = task
+        selectedIndex = indexPath
         delegate?.homeVCInfoButtonDidTap(self, task: task)
     }
     

@@ -72,6 +72,20 @@ extension RealmManager {
         return taskArray
     }
     
+    /// 未完了のRealmTaskを全取得
+    /// - Returns: 未完了のRealmTaskデータ
+    func getIncompleteTask() -> [RealmTask] {
+        var taskArray = [RealmTask]()
+        let realm = try! Realm()
+        let realmArray = realm.objects(RealmTask.self)
+            .filter("(isDeleted == false)")
+            .filter("(isComplete == false)")
+        for task in realmArray {
+            taskArray.append(task)
+        }
+        return taskArray
+    }
+    
     /// RealmTaskを取得
     /// - Parameters:
     ///   - taskID: taskID

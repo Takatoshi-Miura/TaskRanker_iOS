@@ -104,12 +104,18 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         let task = taskArray[indexPath.row]
-        let symbolName = task.isComplete ? "circle.fill" : "circle"
+        let symbolName = task.isComplete ? "checkmark.circle" : "circle"
         let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
         cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
         cell.detailTextLabel?.text = task.title
         cell.accessoryType = .detailButton
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: 完了にする
+        var task = taskArray[indexPath.row]
+        task.isComplete.toggle()
     }
     
     /// infoボタンタップ時

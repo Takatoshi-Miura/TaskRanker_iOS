@@ -87,13 +87,17 @@ extension RealmManager {
     }
     
     /// 完了済みのRealmTaskを全取得
-    /// - Returns: 完了済みのRealmTaskデータ
+    /// - Returns: 完了済みのRealmTaskデータ(完了日順)
     func getCompleteTask() -> [RealmTask] {
         var taskArray = [RealmTask]()
         let realm = try! Realm()
+        let sortProperties = [
+            SortDescriptor(keyPath: "completedDate", ascending: false),
+        ]
         let realmArray = realm.objects(RealmTask.self)
             .filter("(isDeleted == false)")
             .filter("(isComplete == true)")
+            .sorted(by: sortProperties)
         for task in realmArray {
             taskArray.append(task)
         }
@@ -275,6 +279,7 @@ extension RealmManager {
             .filter("taskID == '\(taskID)'").first
         try! realm.write {
             result?.isComplete = isComplete
+            result?.completedDate = Date()
             result?.updated_at = Date()
         }
     }

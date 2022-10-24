@@ -73,7 +73,7 @@ extension CompletedTaskListViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         let task = taskArray[indexPath.row]
-        let symbolName = task.isComplete ? "circle.fill" : "circle"
+        let symbolName = task.isComplete ? "checkmark.circle" : "circle"
         let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
         cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
         cell.detailTextLabel?.text = task.title

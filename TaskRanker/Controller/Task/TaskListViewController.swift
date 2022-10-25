@@ -106,20 +106,37 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         let task = taskArray[indexPath.row]
         let symbolName = task.isComplete ? "checkmark.circle" : "circle"
         let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
+        cell.imageView?.isUserInteractionEnabled = true
         cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
-        cell.detailTextLabel?.text = task.title
-        cell.accessoryType = .detailButton
+        cell.imageView!.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(completeTask(_:))))
+        cell.textLabel?.text = task.title
+        cell.detailTextLabel?.text = task.memo
+        cell.detailTextLabel?.textColor = UIColor.lightGray
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: 完了にする
-        var task = taskArray[indexPath.row]
-        task.isComplete.toggle()
+    /// タスクを完了にする
+    @objc func completeTask(_ sender : UITapGestureRecognizer)  {
+        let tappedLocation = sender.location(in: tableView)
+        let tappedIndexPath = tableView.indexPathForRow(at: tappedLocation)
+        var task = taskArray[tappedIndexPath!.row]
+        task.isComplete = true
+        
+        let cell = tableView.cellForRow(at: tappedIndexPath!)
+        let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
+        cell?.imageView?.image = UIImage(systemName: "checkmark.circle", withConfiguration: symbolConfiguration)
+        
+        let taskManager = TaskManager()
+        taskManager.updateTask(task: task)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.updateTask(indexPath: tappedIndexPath!)
+        }
     }
     
-    /// infoボタンタップ時
-    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // タスク編集画面へ遷移
         let task = taskArray[indexPath.row]
         delegate?.taskListVCInfoButtonDidTap(self, task: task ,indexPath: indexPath)
     }

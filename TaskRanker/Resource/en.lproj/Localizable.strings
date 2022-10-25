@@ -31,7 +31,7 @@
 
 // MARK: - Task
 "Title" = "Title";
-"Detail" = "Detail";
+"Memo" = "Memo";
 "Importance" = "Importance";
 "Urgency" = "Urgency";
 "1to8" = "(1〜8)";

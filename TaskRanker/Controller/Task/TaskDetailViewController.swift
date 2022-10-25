@@ -74,7 +74,7 @@ class TaskDetailViewController: UIViewController {
     /// 画面初期化
     private func initView() {
         titleLabel.text = TITLE_TITLE
-        memoLabel.text = TITLE_DETAIL
+        memoLabel.text = TITLE_MEMO
         colorLabel.text = TITLE_COLOR
         importanceLabel.text = TITLE_IMPORTANCE + TITLE_1to8
         urgencyLabel.text = TITLE_URGENCY + TITLE_1to8

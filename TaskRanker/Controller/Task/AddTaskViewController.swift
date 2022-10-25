@@ -48,6 +48,7 @@ class AddTaskViewController: UIViewController {
         initView()
         initDatePicker()
         initColorPicker()
+        titleTextField.becomeFirstResponder()
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,7 +62,7 @@ class AddTaskViewController: UIViewController {
     private func initView() {
         naviItem.title = TITLE_ADD_TASK
         titleLabel.text = TITLE_TITLE
-        memoLabel.text = TITLE_DETAIL
+        memoLabel.text = TITLE_MEMO
         colorLabel.text = TITLE_COLOR
         importanceLabel.text = TITLE_IMPORTANCE + TITLE_1to8
         urgencyLabel.text = TITLE_URGENCY + TITLE_1to8

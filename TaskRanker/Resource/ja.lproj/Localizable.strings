@@ -31,7 +31,7 @@
 
 // MARK: - Task
 "Title" = "タイトル";
-"Detail" = "詳細";
+"Memo" = "メモ";
 "Importance" = "重要度";
 "Urgency" = "緊急度";
 "1to8" = "(1〜8)";

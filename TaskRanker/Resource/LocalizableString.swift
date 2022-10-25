@@ -32,7 +32,7 @@ let TITLE_BLACK = NSLocalizedString("Black", comment: "")
 
 // MARK: - Task
 let TITLE_TITLE = NSLocalizedString("Title", comment: "")
-let TITLE_DETAIL = NSLocalizedString("Detail", comment: "")
+let TITLE_MEMO = NSLocalizedString("Memo", comment: "")
 let TITLE_IMPORTANCE = NSLocalizedString("Importance", comment: "")
 let TITLE_URGENCY = NSLocalizedString("Urgency", comment: "")
 let TITLE_1to8 = NSLocalizedString("1to8", comment: "")

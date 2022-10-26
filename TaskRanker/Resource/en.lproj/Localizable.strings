@@ -43,6 +43,8 @@
 "CompleteTaskTitle" = "Progress of the task";
 "CompleteTaskMessage" = "Do you want to complete the task?";
 "InCompleteTaskMessage" = "Do you want to keep the task in progress?";
+"ZeroTaskMessage" = "No tasks.";
+"CompleteTaskListTitle" = "Completed tasks";
 
 // MARK: - Setting
 "Setting" = "Setting";

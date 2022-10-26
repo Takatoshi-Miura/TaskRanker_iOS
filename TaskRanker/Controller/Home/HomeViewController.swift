@@ -16,8 +16,8 @@ protocol HomeViewControllerDelegate: AnyObject {
     func homeVCFilterButtonDidTap(_ viewController: UIViewController)
     // 追加ボタンタップ時
     func homeVCAddButtonDidTap(_ viewController: UIViewController)
-    // infoボタンタップ時
-    func homeVCInfoButtonDidTap(_ viewController: UIViewController, task: Task)
+    // Taskタップ時
+    func homeVCTaskDidTap(_ viewController: UIViewController, task: Task)
 }
 
 class HomeViewController: UIViewController {
@@ -218,17 +218,21 @@ class HomeViewController: UIViewController {
     /// - Parameters:
     ///   - task: 挿入する課題
     func insertTask(task: Task) {
+        // 挿入するタスクのタイプへ移動
         selectSegment(number: task.type.rawValue)
         
-        switch SegmentType.allCases[task.type.rawValue] {
-        case .A:
-            taskListVC_A.insertTask(task: task)
-        case .B:
-            taskListVC_B.insertTask(task: task)
-        case .C:
-            taskListVC_C.insertTask(task: task)
-        case .D:
-            taskListVC_D.insertTask(task: task)
+        // タスクを挿入
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            switch SegmentType.allCases[task.type.rawValue] {
+            case .A:
+                self.taskListVC_A.insertTask(task: task)
+            case .B:
+                self.taskListVC_B.insertTask(task: task)
+            case .C:
+                self.taskListVC_C.insertTask(task: task)
+            case .D:
+                self.taskListVC_D.insertTask(task: task)
+            }
         }
     }
     
@@ -236,11 +240,11 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: TaskListViewControllerDelegate {
     
-    /// infoボタンタップ時
-    func taskListVCInfoButtonDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath) {
+    /// Taskタップ時
+    func taskListVCTaskDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath) {
         selectedTask = task
         selectedIndex = indexPath
-        delegate?.homeVCInfoButtonDidTap(self, task: task)
+        delegate?.homeVCTaskDidTap(self, task: task)
     }
     
 }

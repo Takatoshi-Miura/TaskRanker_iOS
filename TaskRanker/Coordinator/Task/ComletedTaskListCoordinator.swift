@@ -38,4 +38,10 @@ extension ComletedTaskListCoordinator: CompletedTaskListViewControllerDelegate {
         viewController.dismiss(animated: true, completion: nil)
     }
     
+    /// HomeVC ← CompletedTaskListVC
+    func completedTaskListVCTaskInComplete(_ viewController: UIViewController, task: Task) {
+        viewController.dismiss(animated: true, completion: nil)
+        (previousViewController! as! HomeViewController).insertTask(task: task)
+    }
+    
 }

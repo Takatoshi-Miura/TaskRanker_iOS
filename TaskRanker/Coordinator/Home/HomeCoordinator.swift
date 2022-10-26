@@ -69,7 +69,7 @@ extension HomeCoordinator: HomeViewControllerDelegate {
     }
     
     /// HomeVC → TaskDetailVC
-    func homeVCInfoButtonDidTap(_ viewController: UIViewController, task: Task) {
+    func homeVCTaskDidTap(_ viewController: UIViewController, task: Task) {
         let taskDetailCoordinator = TaskDetailCoordinator()
         taskDetailCoordinator.startFlow(in: navigationController!, task: task)
     }

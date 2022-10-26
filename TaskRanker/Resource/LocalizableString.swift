@@ -44,6 +44,8 @@ let MESSAGE_DELETE_TASK = NSLocalizedString("DeleteTaskMessage", comment: "")
 let TITLE_COMPLETE_TASK = NSLocalizedString("CompleteTaskTitle", comment: "")
 let MESSAGE_COMPLETE_TASK = NSLocalizedString("CompleteTaskMessage", comment: "")
 let MESSAGE_INCOMPLETE_TASK = NSLocalizedString("InCompleteTaskMessage", comment: "")
+let MESSAGE_ZERO_TASK = NSLocalizedString("ZeroTaskMessage", comment: "")
+let TITLE_COMPLETE_TASK_LIST = NSLocalizedString("CompleteTaskListTitle", comment: "")
 
 // MARK: - SettingViewController
 let TITLE_SETTING = NSLocalizedString("Setting", comment: "")

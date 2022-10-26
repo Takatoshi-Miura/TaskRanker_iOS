@@ -8,8 +8,8 @@
 import UIKit
 
 protocol TaskListViewControllerDelegate: AnyObject {
-    // infoボタンタップ時
-    func taskListVCInfoButtonDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath)
+    /// Taskタップ時
+    func taskListVCTaskDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath)
 }
 
 class TaskListViewController: UIViewController {
@@ -34,20 +34,8 @@ class TaskListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initTableView()
         refreshData()
-    }
-    
-    /// TableView初期化
-    private func initTableView() {
-        tableView.tableFooterView = UIView()
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(syncData), for: .valueChanged)
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0
-        }
+        initTableView()
     }
     
     /// データの同期処理
@@ -71,6 +59,7 @@ class TaskListViewController: UIViewController {
         // TODO: 重要度が高い順に並び替える
         let index: IndexPath = [0, taskArray.count - 1]
         tableView.insertRows(at: [index], with: UITableView.RowAnimation.right)
+        updateTableFooterView()
     }
     
     /// タスクを更新
@@ -83,15 +72,52 @@ class TaskListViewController: UIViewController {
             if selectedTask.isComplete || selectedTask.isDeleted {
                 taskArray.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
+                updateTableFooterView()
                 return
             }
+            taskArray[indexPath.row] = selectedTask
         }
+        // タスクを更新
         tableView.reloadRows(at: [indexPath], with: .none)
     }
 
 }
 
 extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    /// TableView初期化
+    private func initTableView() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(syncData), for: .valueChanged)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        updateTableFooterView()
+    }
+    
+    /// 0件表示切替用
+    private func updateTableFooterView() {
+        tableView.tableFooterView = taskArray.count == 0 ? createZeroTaskView() : UIView()
+    }
+    
+    /// タスクの0件表示View作成
+    /// - Returns: 0件表示UIView
+    private func createZeroTaskView() -> UIView {
+        let label = UILabel()
+        label.text = MESSAGE_ZERO_TASK
+        label.textColor = .systemGray
+        label.textAlignment = NSTextAlignment.center
+        label.sizeToFit()
+        label.frame = CGRect(x: UIScreen.main.bounds.size.width/2 - label.frame.width/2,
+                             y: 100,
+                             width: label.frame.width,
+                             height: label.frame.height)
+        let view = UIView()
+        view.addSubview(label)
+        return view
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -118,19 +144,21 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     
     /// タスクを完了にする
     @objc func completeTask(_ sender : UITapGestureRecognizer)  {
+        // IndexPathを取得
         let tappedLocation = sender.location(in: tableView)
         let tappedIndexPath = tableView.indexPathForRow(at: tappedLocation)
-        var task = taskArray[tappedIndexPath!.row]
-        task.isComplete = true
         
+        // チェックをつける
         let cell = tableView.cellForRow(at: tappedIndexPath!)
         let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
         cell?.imageView?.image = UIImage(systemName: "checkmark.circle", withConfiguration: symbolConfiguration)
         
+        // タスクを完了にする
+        var task = taskArray[tappedIndexPath!.row]
+        task.isComplete = true
         let taskManager = TaskManager()
         taskManager.updateTask(task: task)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.updateTask(indexPath: tappedIndexPath!)
         }
     }
@@ -138,7 +166,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // タスク編集画面へ遷移
         let task = taskArray[indexPath.row]
-        delegate?.taskListVCInfoButtonDidTap(self, task: task ,indexPath: indexPath)
+        delegate?.taskListVCTaskDidTap(self, task: task ,indexPath: indexPath)
     }
     
 }

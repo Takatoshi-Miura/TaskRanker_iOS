@@ -43,6 +43,8 @@
 "CompleteTaskTitle" = "タスクの進捗";
 "CompleteTaskMessage" = "タスクを完了にしますか？";
 "InCompleteTaskMessage" = "タスクを未完了にしますか？";
+"ZeroTaskMessage" = "タスクがありません。";
+"CompleteTaskListTitle" = "完了済みタスク";
 
 // MARK: - Setting
 "Setting" = "設定";

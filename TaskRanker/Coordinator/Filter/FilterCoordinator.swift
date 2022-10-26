@@ -20,9 +20,11 @@ class FilterCoordinator: Coordinator {
     
     func startFlow(in viewController: UIViewController) {
         previousViewController = viewController
+        navigationController = createNavigationController()
         let filterViewController = FilterViewController()
         filterViewController.delegate = self
-        previousViewController!.present(filterViewController, animated: true)
+        navigationController!.pushViewController(filterViewController, animated: true)
+        previousViewController!.present(navigationController!, animated: true)
     }
     
 }

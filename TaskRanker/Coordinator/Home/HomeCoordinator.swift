@@ -25,21 +25,6 @@ class HomeCoordinator: Coordinator {
     func startFlow(in viewController: UIViewController) {
     }
     
-    /// NavigationController生成
-    private func createNavigationController() -> UINavigationController {
-        let navController = UINavigationController()
-        navController.setNavigationBarHidden(false, animated: false)
-        if #available(iOS 15.0, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .systemBackground
-            appearance.backgroundEffect = UIBlurEffect(style: .light)
-            navController.navigationBar.standardAppearance = appearance
-            navController.navigationBar.scrollEdgeAppearance = appearance
-        }
-        return navController
-    }
-    
 }
 
 extension HomeCoordinator: HomeViewControllerDelegate {

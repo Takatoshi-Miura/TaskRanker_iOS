@@ -46,6 +46,9 @@
 "ZeroTaskMessage" = "No tasks.";
 "CompleteTaskListTitle" = "Completed tasks";
 
+// MARK: - Filter
+"Filter" = "Filter";
+
 // MARK: - Setting
 "Setting" = "Setting";
 "Basic configuration" = "Basic Configuration";

@@ -46,6 +46,9 @@
 "ZeroTaskMessage" = "タスクがありません。";
 "CompleteTaskListTitle" = "完了済みタスク";
 
+// MARK: - Filter
+"Filter" = "フィルタ";
+
 // MARK: - Setting
 "Setting" = "設定";
 "Basic configuration" = "基本設定";

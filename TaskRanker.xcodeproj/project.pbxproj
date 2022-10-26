@@ -34,6 +34,7 @@
 		8D55A4A0290745F7005E573A /* CompletedTaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55A49F290745F7005E573A /* CompletedTaskListViewController.swift */; };
 		8D55A4A22907460F005E573A /* CompletedTaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D55A4A12907460F005E573A /* CompletedTaskListViewController.xib */; };
 		8D55A4A429074621005E573A /* ComletedTaskListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55A4A329074621005E573A /* ComletedTaskListCoordinator.swift */; };
+		8D55A4A62909EE86005E573A /* Definition+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55A4A52909EE85005E573A /* Definition+Navigation.swift */; };
 		8D60F23B28CC5E61003BB724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F23A28CC5E61003BB724 /* AppDelegate.swift */; };
 		8D60F24428CC5E64003BB724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F24328CC5E64003BB724 /* Assets.xcassets */; };
 		8D60F24728CC5E64003BB724 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F24528CC5E64003BB724 /* LaunchScreen.storyboard */; };
@@ -86,6 +87,7 @@
 		8D55A49F290745F7005E573A /* CompletedTaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletedTaskListViewController.swift; sourceTree = "<group>"; };
 		8D55A4A12907460F005E573A /* CompletedTaskListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompletedTaskListViewController.xib; sourceTree = "<group>"; };
 		8D55A4A329074621005E573A /* ComletedTaskListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComletedTaskListCoordinator.swift; sourceTree = "<group>"; };
+		8D55A4A52909EE85005E573A /* Definition+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Navigation.swift"; sourceTree = "<group>"; };
 		8D60F23728CC5E61003BB724 /* TaskRanker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskRanker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D60F23A28CC5E61003BB724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D60F24328CC5E64003BB724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				8DB633BE28CD9F8B001F2DB7 /* Definition+Segment.swift */,
 				8DB633CB28CDD410001F2DB7 /* Definition+Device.swift */,
 				2F415F3F28F7E85E0082D676 /* Definition+Color.swift */,
+				8D55A4A52909EE85005E573A /* Definition+Navigation.swift */,
 				8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */,
 				8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */,
 				8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */,
@@ -512,6 +515,7 @@
 				8DB633CC28CDD410001F2DB7 /* Definition+Device.swift in Sources */,
 				2F2F21C428F51A97005FFCC2 /* SettingViewController.swift in Sources */,
 				8DB633CE28CDD462001F2DB7 /* UIViewController+ToolBar.swift in Sources */,
+				8D55A4A62909EE86005E573A /* Definition+Navigation.swift in Sources */,
 				8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */,
 				2F2F21CA28F5397B005FFCC2 /* LoginViewController.swift in Sources */,
 				2F2F21CD28F53998005FFCC2 /* LoginCoordinator.swift in Sources */,

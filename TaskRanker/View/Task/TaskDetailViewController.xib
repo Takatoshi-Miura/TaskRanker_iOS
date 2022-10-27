@@ -16,6 +16,7 @@
                 <outlet property="deadlineDateButton" destination="hSe-6E-c5P" id="AXL-9E-ivN"/>
                 <outlet property="deadlineDateLabel" destination="gjC-mK-3JJ" id="VcX-pl-vVi"/>
                 <outlet property="importanceLabel" destination="mCU-Xi-sOI" id="4vu-nw-Dzc"/>
+                <outlet property="importanceSlider" destination="xOT-es-ANS" id="AVh-Uk-oBE"/>
                 <outlet property="importanceValueLabel" destination="6vt-Tw-8cM" id="K5W-qt-fp3"/>
                 <outlet property="memoLabel" destination="KG0-PP-Pi4" id="32R-LP-9Kw"/>
                 <outlet property="memoTextView" destination="JLZ-6j-E3P" id="D9q-IW-cFb"/>
@@ -23,6 +24,7 @@
                 <outlet property="titleLabel" destination="lEY-1N-9fL" id="UGA-Fv-YkE"/>
                 <outlet property="titleTextField" destination="qAj-yi-RmJ" id="68n-ja-vJl"/>
                 <outlet property="urgencyLabel" destination="L67-Qo-HWd" id="6yp-cx-XRi"/>
+                <outlet property="urgencySlider" destination="6TS-hX-wp8" id="uxw-lK-4he"/>
                 <outlet property="urgencyValueLabel" destination="bd5-8z-cp2" id="lZc-kB-QFy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

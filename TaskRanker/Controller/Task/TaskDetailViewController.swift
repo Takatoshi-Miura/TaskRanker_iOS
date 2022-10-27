@@ -22,8 +22,10 @@ class TaskDetailViewController: UIViewController {
     @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var importanceLabel: UILabel!
+    @IBOutlet weak var importanceSlider: UISlider!
     @IBOutlet weak var importanceValueLabel: UILabel!
     @IBOutlet weak var urgencyLabel: UILabel!
+    @IBOutlet weak var urgencySlider: UISlider!
     @IBOutlet weak var urgencyValueLabel: UILabel!
     @IBOutlet weak var deadlineDateLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
@@ -110,7 +112,10 @@ class TaskDetailViewController: UIViewController {
         memoTextView.text = task.memo
         colorButton.backgroundColor = Color.allCases[task.color].color
         colorButton.setTitle(Color.allCases[task.color].title, for: .normal)
-        // TODO: 緊急度反映
+        importanceSlider.value = Float(task.importance)
+        importanceValueLabel.text = String(task.importance)
+        urgencySlider.value = Float(task.urgency)
+        urgencyValueLabel.text = String(task.urgency)
         selectedDate = task.deadlineDate ?? Date()
         datePicker.setDate(selectedDate, animated: false)
         deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)

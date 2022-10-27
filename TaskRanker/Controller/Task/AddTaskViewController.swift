@@ -18,7 +18,6 @@ class AddTaskViewController: UIViewController {
     
     // MARK: - UI,Variable
     
-    @IBOutlet weak var naviItem: UINavigationItem!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var memoLabel: UILabel!
@@ -32,8 +31,6 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var deadlineDateLabel: UILabel!
     @IBOutlet weak var deadlineDateButton: UIButton!
     @IBOutlet weak var repeatLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
     private var pickerView = UIView()
     private let colorPicker = UIPickerView()
     private var datePicker = UIDatePicker()
@@ -46,6 +43,7 @@ class AddTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
+        initNavigation()
         initDatePicker()
         initColorPicker()
         titleTextField.becomeFirstResponder()
@@ -60,7 +58,6 @@ class AddTaskViewController: UIViewController {
     
     /// 画面初期化
     private func initView() {
-        naviItem.title = TITLE_ADD_TASK
         titleLabel.text = TITLE_TITLE
         memoLabel.text = TITLE_MEMO
         colorLabel.text = TITLE_COLOR
@@ -75,8 +72,24 @@ class AddTaskViewController: UIViewController {
         colorButton.backgroundColor = Color.allCases[colorIndex].color
         colorButton.setTitle(Color.allCases[colorIndex].title, for: .normal)
         deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
-        cancelButton.setTitle(TITLE_CANCEL, for: .normal)
-        saveButton.setTitle(TITLE_SAVE, for: .normal)
+    }
+    
+    /// NavigationController初期化
+    private func initNavigation() {
+        self.title = TITLE_ADD_TASK
+        
+        // 閉じるボタン
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .close,
+                                          target: self,
+                                          action: #selector(tapCloseButton(_:)))
+        
+        // 保存ボタン
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
+                                         target: self,
+                                         action: #selector(tapSaveButton(_:)))
+        
+        navigationItem.leftBarButtonItems = [closeButton]
+        navigationItem.rightBarButtonItems = [saveButton]
     }
     
     // MARK: - Action
@@ -110,8 +123,8 @@ class AddTaskViewController: UIViewController {
         openPicker(pickerView)
     }
     
-    /// キャンセルボタン
-    @IBAction func tapCancelButton(_ sender: Any) {
+    /// 閉じるボタン
+    @objc func tapCloseButton(_ sender: UIBarButtonItem) {
         // 入力済みの場合は確認アラート表示
         if !titleTextField.text!.isEmpty || !memoTextView.text.isEmpty {
             showOKCancelAlert(title: "", message: MESSAGE_DELETE_INPUT, OKAction: {
@@ -123,7 +136,7 @@ class AddTaskViewController: UIViewController {
     }
     
     /// 保存ボタン
-    @IBAction func tapSaveButton(_ sender: Any) {
+    @objc func tapSaveButton(_ sender: UIBarButtonItem) {
         // 入力チェック
         if titleTextField.text!.isEmpty {
             showErrorAlert(message: ERROR_MESSAGE_EMPTY_TITLE)

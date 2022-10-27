@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingViewController" customModule="TaskRanker" customModuleProvider="target">
             <connections>
-                <outlet property="naviItem" destination="kaw-e8-01L" id="iAb-fd-iln"/>
                 <outlet property="tableView" destination="JOx-Oy-fMr" id="Fw3-Tj-nVb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,20 +20,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNt-sJ-uzB">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <items>
-                        <navigationItem title="Title" id="kaw-e8-01L">
-                            <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="oJ8-fU-tiB">
-                                <connections>
-                                    <action selector="tapCancelButton:" destination="-1" id="UIs-eh-qE6"/>
-                                </connections>
-                            </barButtonItem>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JOx-Oy-fMr">
-                    <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="33y-nW-dEE"/>
@@ -47,11 +34,8 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="JOx-Oy-fMr" secondAttribute="bottom" id="49q-UD-CDN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JOx-Oy-fMr" secondAttribute="trailing" id="Nk6-hC-N7O"/>
-                <constraint firstItem="DNt-sJ-uzB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Wh9-6x-2XY"/>
-                <constraint firstItem="DNt-sJ-uzB" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="ctN-u7-gAW"/>
-                <constraint firstItem="JOx-Oy-fMr" firstAttribute="top" secondItem="DNt-sJ-uzB" secondAttribute="bottom" id="kOF-JR-qPE"/>
+                <constraint firstItem="JOx-Oy-fMr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dHX-ar-QgH"/>
                 <constraint firstItem="JOx-Oy-fMr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="w6o-1E-TyM"/>
-                <constraint firstItem="DNt-sJ-uzB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="x2S-e5-IUf"/>
             </constraints>
             <point key="canvasLocation" x="139" y="140"/>
         </view>

@@ -20,9 +20,11 @@ class SettingCoordinator: Coordinator {
     
     func startFlow(in viewController: UIViewController) {
         previousViewController = viewController
+        navigationController = createNavigationController()
         let settingViewController = SettingViewController()
         settingViewController.delegate = self
-        previousViewController!.present(settingViewController, animated: true)
+        navigationController!.pushViewController(settingViewController, animated: true)
+        previousViewController!.present(navigationController!, animated: true)
     }
     
 }

@@ -96,6 +96,7 @@ class TaskDetailViewController: UIViewController {
         self.title = TITLE_EDIT
         var navigationItems: [UIBarButtonItem] = []
         let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteTask))
+        deleteButton.tintColor = UIColor.red
         let image = task.isComplete ? UIImage(systemName: "exclamationmark.circle") : UIImage(systemName: "checkmark.circle")
         let completeButton = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(completeTask))
         navigationItems.append(deleteButton)

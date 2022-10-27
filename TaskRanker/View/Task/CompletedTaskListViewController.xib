@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompletedTaskListViewController" customModule="TaskRanker" customModuleProvider="target">
             <connections>
-                <outlet property="naviItem" destination="tYt-rN-PUy" id="BxR-9V-XTT"/>
                 <outlet property="tableView" destination="zK0-HH-FKW" id="S5a-OX-UJC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,20 +20,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jyd-GN-DsN">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                    <items>
-                        <navigationItem title="Title" id="tYt-rN-PUy">
-                            <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="fLa-nP-Oh4">
-                                <connections>
-                                    <action selector="tapCancelButton:" destination="-1" id="CSE-Hu-X5b"/>
-                                </connections>
-                            </barButtonItem>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zK0-HH-FKW">
-                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="yeY-qz-igq"/>
@@ -45,13 +32,10 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="zK0-HH-FKW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="7PT-OS-5F9"/>
                 <constraint firstItem="zK0-HH-FKW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Dpr-zd-JNO"/>
                 <constraint firstItem="zK0-HH-FKW" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Fxp-Hy-8Rw"/>
-                <constraint firstItem="zK0-HH-FKW" firstAttribute="top" secondItem="jyd-GN-DsN" secondAttribute="bottom" id="IbG-mg-GsE"/>
                 <constraint firstItem="zK0-HH-FKW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="WmQ-Vm-9Do"/>
-                <constraint firstItem="jyd-GN-DsN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="YTz-0R-fMq"/>
-                <constraint firstItem="jyd-GN-DsN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="gHd-nm-FkN"/>
-                <constraint firstItem="jyd-GN-DsN" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="iQW-32-C1i"/>
             </constraints>
             <point key="canvasLocation" x="136.80000000000001" y="20.239880059970016"/>
         </view>

@@ -32,10 +32,14 @@ class FilterViewController: UIViewController {
         self.title = TITLE_FILTER
         
         // 閉じるボタン
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(tapCloseButton(_:)))
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .close,
+                                          target: self,
+                                          action: #selector(tapCloseButton(_:)))
         
         // クリアボタン
-        let clearButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(tapClearButton(_:)))
+        let clearButton = UIBarButtonItem(barButtonSystemItem: .refresh,
+                                          target: self,
+                                          action: #selector(tapClearButton(_:)))
         
         navigationItem.leftBarButtonItems = [closeButton]
         navigationItem.rightBarButtonItems = [clearButton]

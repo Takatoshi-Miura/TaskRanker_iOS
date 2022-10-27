@@ -20,13 +20,11 @@ class ComletedTaskListCoordinator: Coordinator {
     
     func startFlow(in viewController: UIViewController) {
         previousViewController = viewController
+        navigationController = createNavigationController()
         let completedTaskListViewController = CompletedTaskListViewController()
         completedTaskListViewController.delegate = self
-        if #available(iOS 13.0, *) {
-            completedTaskListViewController.isModalInPresentation = true
-            completedTaskListViewController.modalPresentationStyle = .fullScreen
-        }
-        previousViewController!.present(completedTaskListViewController, animated: true)
+        navigationController!.pushViewController(completedTaskListViewController, animated: true)
+        previousViewController!.present(navigationController!, animated: true)
     }
     
 }

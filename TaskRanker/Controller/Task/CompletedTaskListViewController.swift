@@ -18,7 +18,6 @@ class CompletedTaskListViewController: UIViewController {
 
     // MARK: - UI,Variable
     
-    @IBOutlet weak var naviItem: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
     private var taskArray = [Task]()
     var delegate: CompletedTaskListViewControllerDelegate?
@@ -28,7 +27,7 @@ class CompletedTaskListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshData()
-        initView()
+        initNavigation()
         initTableView()
     }
     
@@ -38,15 +37,22 @@ class CompletedTaskListViewController: UIViewController {
         taskArray = taskManager.getTask(isComplete: true)
     }
     
-    /// 画面初期化
-    private func initView() {
-        naviItem.title = TITLE_COMPLETE_TASK_LIST
+    /// NavigationController初期化
+    private func initNavigation() {
+        self.title = TITLE_COMPLETE_TASK_LIST
+        
+        // 閉じるボタン
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .close,
+                                          target: self,
+                                          action: #selector(tapCloseButton(_:)))
+        
+        navigationItem.leftBarButtonItems = [closeButton]
     }
     
     // MARK: - Action
     
-    /// キャンセルボタンタップ時
-    @IBAction func tapCancelButton(_ sender: Any) {
+    /// 閉じる
+    @objc func tapCloseButton(_ sender: UIBarButtonItem) {
         delegate?.completedTaskListVCDismiss(self)
     }
 

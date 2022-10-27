@@ -21,7 +21,6 @@ class SettingViewController: UIViewController {
 
     // MARK: - UI,Variable
     
-    @IBOutlet weak var naviItem: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
     private var cells: [[Cell]] = [[Cell.dataTransfer], [Cell.help, Cell.inquiry]]
     var delegate: SettingViewControllerDelegate?
@@ -30,19 +29,26 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initView()
+        initNavigation()
         initTableView()
     }
     
-    /// 画面初期化
-    private func initView() {
-        naviItem.title = TITLE_SETTING
+    /// NavigationController初期化
+    private func initNavigation() {
+        self.title = TITLE_SETTING
+        
+        // 閉じるボタン
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .close,
+                                          target: self,
+                                          action: #selector(tapCloseButton(_:)))
+        
+        navigationItem.leftBarButtonItems = [closeButton]
     }
     
     // MARK: - Action
     
-    /// Cancelボタンの処理
-    @IBAction func tapCancelButton(_ sender: Any) {
+    /// 閉じる
+    @objc func tapCloseButton(_ sender: UIBarButtonItem) {
         delegate?.settingVCDismiss(self)
     }
     

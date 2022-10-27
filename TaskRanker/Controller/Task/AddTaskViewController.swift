@@ -25,9 +25,13 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var colorButton: UIButton!
     @IBOutlet weak var importanceLabel: UILabel!
+    @IBOutlet weak var importanceSlider: UISlider!
     @IBOutlet weak var importanceValueLabel: UILabel!
     @IBOutlet weak var urgencyLabel: UILabel!
+    @IBOutlet weak var urgencySlider: UISlider!
     @IBOutlet weak var urgencyValueLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var typeValueLabel: UILabel!
     @IBOutlet weak var deadlineDateLabel: UILabel!
     @IBOutlet weak var deadlineDateButton: UIButton!
     @IBOutlet weak var repeatLabel: UILabel!
@@ -37,6 +41,18 @@ class AddTaskViewController: UIViewController {
     private var colorIndex: Int = 0
     private var selectedDate = Date()
     var delegate: AddTaskViewControllerDelegate?
+    
+    var type: SegmentType {
+        if importanceSlider.value > 4 && urgencySlider.value > 4 {
+            return SegmentType.A
+        } else if importanceSlider.value > 4 && urgencySlider.value <= 4 {
+            return SegmentType.B
+        } else if importanceSlider.value <= 4 && urgencySlider.value > 4 {
+            return SegmentType.C
+        } else {
+            return SegmentType.D
+        }
+    }
 
     // MARK: - LifeCycle
     
@@ -63,6 +79,7 @@ class AddTaskViewController: UIViewController {
         colorLabel.text = TITLE_COLOR
         importanceLabel.text = TITLE_IMPORTANCE + TITLE_1to8
         urgencyLabel.text = TITLE_URGENCY + TITLE_1to8
+        typeLabel.text = "タスクの分類"
         deadlineDateLabel.text = TITLE_DEADLINE_DATE
         repeatLabel.text = TITLE_REPEAT
         
@@ -107,11 +124,13 @@ class AddTaskViewController: UIViewController {
     /// 重要度スライダー
     @IBAction func slideImportanceSlider(_ sender: UISlider) {
         importanceValueLabel.text = String(Int(round(sender.value)))
+        typeValueLabel.text = type.typeTitle
     }
     
     /// 緊急度スライダー
     @IBAction func slideUrgencySlider(_ sender: UISlider) {
         urgencyValueLabel.text = String(Int(round(sender.value)))
+        typeValueLabel.text = type.typeTitle
     }
     
     /// 期限日ボタン

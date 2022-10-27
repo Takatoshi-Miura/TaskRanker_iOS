@@ -13,6 +13,15 @@ enum SegmentType: Int, CaseIterable {
     case C
     case D
     
+    var typeTitle: String {
+        switch self {
+        case .A: return "A"
+        case .B: return "B"
+        case .C: return "C"
+        case .D: return "D"
+        }
+    }
+    
     var title: String {
         switch self {
         // TODO: 多言語対応

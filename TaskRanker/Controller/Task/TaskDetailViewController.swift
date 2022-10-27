@@ -27,6 +27,8 @@ class TaskDetailViewController: UIViewController {
     @IBOutlet weak var urgencyLabel: UILabel!
     @IBOutlet weak var urgencySlider: UISlider!
     @IBOutlet weak var urgencyValueLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var typeValueLabel: UILabel!
     @IBOutlet weak var deadlineDateLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var memoTextView: UITextView!
@@ -40,6 +42,18 @@ class TaskDetailViewController: UIViewController {
     private var selectedDate = Date()
     var task = Task()
     var delegate: TaskDetailViewControllerDelegate?
+    
+    var type: SegmentType {
+        if importanceSlider.value > 4 && urgencySlider.value > 4 {
+            return SegmentType.A
+        } else if importanceSlider.value > 4 && urgencySlider.value <= 4 {
+            return SegmentType.B
+        } else if importanceSlider.value <= 4 && urgencySlider.value > 4 {
+            return SegmentType.C
+        } else {
+            return SegmentType.D
+        }
+    }
     
     // MARK: - LifeCycle
     
@@ -80,6 +94,7 @@ class TaskDetailViewController: UIViewController {
         colorLabel.text = TITLE_COLOR
         importanceLabel.text = TITLE_IMPORTANCE + TITLE_1to8
         urgencyLabel.text = TITLE_URGENCY + TITLE_1to8
+        typeLabel.text = "タスクの分類"
         deadlineDateLabel.text = TITLE_DEADLINE_DATE
         repeatLabel.text = TITLE_REPEAT
         
@@ -116,6 +131,7 @@ class TaskDetailViewController: UIViewController {
         importanceValueLabel.text = String(task.importance)
         urgencySlider.value = Float(task.urgency)
         urgencyValueLabel.text = String(task.urgency)
+        typeValueLabel.text = type.typeTitle
         selectedDate = task.deadlineDate ?? Date()
         datePicker.setDate(selectedDate, animated: false)
         deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
@@ -153,11 +169,15 @@ class TaskDetailViewController: UIViewController {
     /// 重要度スライダー
     @IBAction func slideImportanceSlider(_ sender: UISlider) {
         importanceValueLabel.text = String(Int(round(sender.value)))
+        task.importance = Int(round(sender.value))
+        typeValueLabel.text = type.typeTitle
     }
     
     /// 緊急度スライダー
     @IBAction func slideUrgencySlider(_ sender: UISlider) {
         urgencyValueLabel.text = String(Int(round(sender.value)))
+        task.urgency = Int(round(sender.value))
+        typeValueLabel.text = type.typeTitle
     }
     
     /// 期限日ボタン

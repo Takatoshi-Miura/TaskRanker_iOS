@@ -35,6 +35,7 @@
 "Importance" = "Importance";
 "Urgency" = "Urgency";
 "1to8" = "(1〜8)";
+"taskType" = "Task Type";
 "DeadlineDate" = "Deadline Date";
 "Repeat" = "Repeat";
 "AddTaskTitle" = "Add task";

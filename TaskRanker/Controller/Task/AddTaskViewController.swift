@@ -79,7 +79,7 @@ class AddTaskViewController: UIViewController {
         colorLabel.text = TITLE_COLOR
         importanceLabel.text = TITLE_IMPORTANCE + TITLE_1to8
         urgencyLabel.text = TITLE_URGENCY + TITLE_1to8
-        typeLabel.text = "タスクの分類"
+        typeLabel.text = TITLE_TASK_TYPE
         deadlineDateLabel.text = TITLE_DEADLINE_DATE
         repeatLabel.text = TITLE_REPEAT
         

@@ -35,6 +35,7 @@
 "Importance" = "重要度";
 "Urgency" = "緊急度";
 "1to8" = "(1〜8)";
+"taskType" = "タスクの分類";
 "DeadlineDate" = "期限日";
 "Repeat" = "繰り返し";
 "AddTaskTitle" = "タスクの追加";

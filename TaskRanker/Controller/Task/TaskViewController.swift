@@ -1,5 +1,5 @@
 //
-//  TaskDetailViewController.swift
+//  TaskViewController.swift
 //  TaskRanker
 //
 //  Created by Takatoshi Miura on 2022/10/23.
@@ -7,14 +7,18 @@
 
 import UIKit
 
-protocol TaskDetailViewControllerDelegate: AnyObject {
-    /// 画面を閉じる
-    func taskDetailVCDismiss(task: Task)
-    // 課題削除時の処理
-    func taskDetailVCDeleteTask(task: Task)
+protocol TaskViewControllerDelegate: AnyObject {
+    /// 画面を閉じる(タスク新規作成用)
+    func taskVCDismiss(_ viewController: UIViewController)
+    /// 画面を閉じる()
+    func taskVCDismiss(task: Task)
+    /// タスク削除時の処理
+    func taskVCDeleteTask(task: Task)
+    /// タスク追加時の処理
+    func taskVCAddTask(_ viewController: UIViewController, task: Task)
 }
 
-class TaskDetailViewController: UIViewController {
+class TaskViewController: UIViewController {
     
     // MARK: - UI,Variable
     
@@ -41,9 +45,10 @@ class TaskDetailViewController: UIViewController {
     private var colorIndex: Int = 0
     private var selectedDate = Date()
     var task = Task()
-    var delegate: TaskDetailViewControllerDelegate?
+    var isViewer = false
+    var delegate: TaskViewControllerDelegate?
     
-    var type: SegmentType {
+    private var type: SegmentType {
         if importanceSlider.value > 4 && urgencySlider.value > 4 {
             return SegmentType.A
         } else if importanceSlider.value > 4 && urgencySlider.value <= 4 {
@@ -57,8 +62,13 @@ class TaskDetailViewController: UIViewController {
     
     // MARK: - LifeCycle
     
-    init(task: Task) {
-        self.task = task
+    /// イニシャライザ
+    /// - Parameter task: nilの場合は新規作成
+    init(task: Task?) {
+        if let task = task {
+            self.task = task
+            self.isViewer = true
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -72,7 +82,9 @@ class TaskDetailViewController: UIViewController {
         initNavigationBar()
         initDatePicker()
         initColorPicker()
-        inputTask()
+        if isViewer {
+            inputTask()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -84,7 +96,9 @@ class TaskDetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        delegate?.taskDetailVCDismiss(task: task)
+        if isViewer {
+            delegate?.taskVCDismiss(task: task)
+        }
     }
     
     /// 画面初期化
@@ -111,14 +125,36 @@ class TaskDetailViewController: UIViewController {
     /// NavigationBar初期化
     private func initNavigationBar() {
         self.title = TITLE_EDIT
-        var navigationItems: [UIBarButtonItem] = []
-        let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteTask))
+        
+        // 閉じる
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .close,
+                                          target: self,
+                                          action: #selector(tapCloseButton(_:)))
+        
+        // ゴミ箱
+        let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash,
+                                           target: self,
+                                           action: #selector(deleteTask))
         deleteButton.tintColor = UIColor.red
+        
+        // 完了,未完了
         let image = task.isComplete ? UIImage(systemName: "exclamationmark.circle") : UIImage(systemName: "checkmark.circle")
-        let completeButton = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(completeTask))
-        navigationItems.append(deleteButton)
-        navigationItems.append(completeButton)
-        navigationItem.rightBarButtonItems = navigationItems
+        let completeButton = UIBarButtonItem(image: image,
+                                             style: .done,
+                                             target: self,
+                                             action: #selector(completeTask))
+        
+        // 保存
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
+                                         target: self,
+                                         action: #selector(tapSaveButton(_:)))
+        
+        if isViewer {
+            navigationItem.rightBarButtonItems = [deleteButton, completeButton]
+        } else {
+            navigationItem.rightBarButtonItems = [saveButton]
+            navigationItem.leftBarButtonItems = [closeButton]
+        }
     }
     
     /// Taskの中身を反映
@@ -139,11 +175,23 @@ class TaskDetailViewController: UIViewController {
     
     // MARK: - Action
     
+    /// 閉じるボタン
+    @objc func tapCloseButton(_ sender: UIBarButtonItem) {
+        // 入力済みの場合は確認アラート表示
+        if !titleTextField.text!.isEmpty || !memoTextView.text.isEmpty {
+            showOKCancelAlert(title: "", message: MESSAGE_DELETE_INPUT, OKAction: {
+                self.delegate?.taskVCDismiss(self)
+            })
+            return
+        }
+        delegate?.taskVCDismiss(self)
+    }
+    
     /// タスクを削除
     @objc func deleteTask() {
         showDeleteAlert(title: TITLE_DELETE_TASK, message: MESSAGE_DELETE_TASK, OKAction: { [self] in
             self.task.isDeleted = true
-            self.delegate?.taskDetailVCDeleteTask(task: self.task)
+            self.delegate?.taskVCDeleteTask(task: self.task)
         })
     }
     
@@ -152,8 +200,38 @@ class TaskDetailViewController: UIViewController {
         let message = task.isComplete ? MESSAGE_INCOMPLETE_TASK : MESSAGE_COMPLETE_TASK
         showOKCancelAlert(title: TITLE_COMPLETE_TASK, message: message, OKAction: {
             self.task.isComplete = !self.task.isComplete
-            self.delegate?.taskDetailVCDeleteTask(task: self.task)
+            self.delegate?.taskVCDeleteTask(task: self.task)
         })
+    }
+    
+    /// 保存ボタン
+    @objc func tapSaveButton(_ sender: UIBarButtonItem) {
+        // 入力チェック
+        if titleTextField.text!.isEmpty {
+            showErrorAlert(message: ERROR_MESSAGE_EMPTY_TITLE)
+            return
+        }
+        
+        // Taskを作成
+        let realmManager = RealmManager()
+        let realmTask = RealmTask()
+        realmTask.title = titleTextField.text!
+        realmTask.memo = memoTextView.text!
+        realmTask.color = colorIndex
+        realmTask.importance = Int(importanceValueLabel.text!)!
+        realmTask.urgency = Int(urgencyValueLabel.text!)!
+        // TODO: 期限日など
+        
+        if !realmManager.createRealm(object: realmTask) {
+            showErrorAlert(message: "エラー")
+            return
+        }
+        // TODO: Firebaseに送信(アカウント持ちの場合のみ)
+        
+        // モーダルを閉じる
+        let taskManager = TaskManager()
+        let task = taskManager.getTask(taskID: realmTask.taskID)!
+        delegate?.taskVCAddTask(self, task: task)
     }
     
     /// カラーボタン
@@ -191,7 +269,7 @@ class TaskDetailViewController: UIViewController {
     
 }
 
-extension TaskDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     private enum PickerType: Int, CaseIterable {
         case color
@@ -281,12 +359,15 @@ extension TaskDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource
     
 }
 
-extension TaskDetailViewController: UITextFieldDelegate {
+extension TaskViewController: UITextFieldDelegate {
 
     /// フォーカスが外れる前
     /// - Parameter textField: 対象のテキストフィールド
     /// - Returns: trueでフォーカスを外す falseでフォーカスを外さない
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if !isViewer {
+            return true
+        }
         if textField.text == "" {
             showErrorAlert(message: ERROR_MESSAGE_EMPTY_TITLE)
             textField.text = task.title
@@ -298,9 +379,12 @@ extension TaskDetailViewController: UITextFieldDelegate {
     
 }
 
-extension TaskDetailViewController: UITextViewDelegate {
+extension TaskViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
+        if !isViewer {
+            return
+        }
         task.memo = textView.text
     }
     

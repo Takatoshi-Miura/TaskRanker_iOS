@@ -105,6 +105,7 @@ extension CompletedTaskListViewController: UITableViewDataSource, UITableViewDel
         // IndexPathを取得
         let tappedLocation = sender.location(in: self.tableView)
         let tappedIndexPath = self.tableView.indexPathForRow(at: tappedLocation)
+        tableView.selectRow(at: tappedIndexPath, animated: false, scrollPosition: .none)
         
         showOKCancelAlert(title: TITLE_COMPLETE_TASK, message: MESSAGE_INCOMPLETE_TASK, OKAction: {
             // チェックを外す

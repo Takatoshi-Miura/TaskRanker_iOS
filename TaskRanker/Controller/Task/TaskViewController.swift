@@ -84,6 +84,8 @@ class TaskViewController: UIViewController {
         initColorPicker()
         if isViewer {
             inputTask()
+        } else {
+            titleTextField.becomeFirstResponder()
         }
     }
     
@@ -124,8 +126,6 @@ class TaskViewController: UIViewController {
     
     /// NavigationBar初期化
     private func initNavigationBar() {
-        self.title = TITLE_EDIT
-        
         // 閉じる
         let closeButton = UIBarButtonItem(barButtonSystemItem: .close,
                                           target: self,
@@ -150,8 +150,10 @@ class TaskViewController: UIViewController {
                                          action: #selector(tapSaveButton(_:)))
         
         if isViewer {
+            self.title = TITLE_EDIT
             navigationItem.rightBarButtonItems = [deleteButton, completeButton]
         } else {
+            self.title = TITLE_ADD_TASK
             navigationItem.rightBarButtonItems = [saveButton]
             navigationItem.leftBarButtonItems = [closeButton]
         }

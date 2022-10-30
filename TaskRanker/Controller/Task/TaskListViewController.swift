@@ -72,9 +72,13 @@ class TaskListViewController: UIViewController {
     /// - Parameters:
     ///   - task: 挿入するタスク
     func insertTask(task: Task) {
+        // リロード時に追加されるため削除
+        let index: IndexPath = [0, taskArray.count - 1]
+        taskArray.remove(at: index.row)
+        tableView.deleteRows(at: [index], with: UITableView.RowAnimation.none)
+        
         taskArray.append(task)
         // TODO: 重要度が高い順に並び替える
-        let index: IndexPath = [0, taskArray.count - 1]
         tableView.insertRows(at: [index], with: UITableView.RowAnimation.right)
         updateTableFooterView()
     }

@@ -217,8 +217,8 @@ class HomeViewController: UIViewController {
     /// - Parameters:
     ///   - task: 挿入する課題
     func insertTask(task: Task) {
-        // TODO: フィルタの扱いをどうするか
-//        applyFilter(filterArray: [true])
+        // フィルタを外す
+        applyFilter(filterArray: [true])
         
         // 挿入するタスクのタイプへ移動
         selectSegment(number: task.type.rawValue)

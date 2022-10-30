@@ -21,7 +21,16 @@ class FilterCoordinator: Coordinator {
     func startFlow(in viewController: UIViewController) {
         previousViewController = viewController
         navigationController = createNavigationController()
-        let filterViewController = FilterViewController()
+        let filterViewController = FilterViewController(filterArray: nil)
+        filterViewController.delegate = self
+        navigationController!.pushViewController(filterViewController, animated: true)
+        previousViewController!.present(navigationController!, animated: true)
+    }
+    
+    func startFlow(in viewController: UIViewController, filterArray: [Bool]) {
+        previousViewController = viewController
+        navigationController = createNavigationController()
+        let filterViewController = FilterViewController(filterArray: filterArray)
         filterViewController.delegate = self
         navigationController!.pushViewController(filterViewController, animated: true)
         previousViewController!.present(navigationController!, animated: true)
@@ -32,7 +41,8 @@ class FilterCoordinator: Coordinator {
 extension FilterCoordinator: FilterViewControllerDelegate {
     
     /// HomeVC ← FilterVC
-    func filterVCDismiss(_ viewController: UIViewController) {
+    func filterVCDismiss(_ viewController: UIViewController, filterArray: [Bool]) {
+        (previousViewController as! HomeViewController).applyFilter(filterArray: filterArray)
         viewController.dismiss(animated: true, completion: nil)
     }
     

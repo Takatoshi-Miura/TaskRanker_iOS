@@ -86,6 +86,36 @@ extension RealmManager {
         return taskArray
     }
     
+    /// 未完了のRealmTaskを全取得
+    /// - Parameters:
+    ///   - filterArray: カラーBool配列
+    /// - Returns: 未完了のRealmTaskデータ
+    func getIncompleteTask(filterArray: [Bool]) -> [RealmTask] {
+        var taskArray = [RealmTask]()
+        let realm = try! Realm()
+        let realmArray = realm.objects(RealmTask.self)
+            .filter("(isDeleted == false)")
+            .filter("(isComplete == false)")
+        
+        // カラー番号を取得
+        var colorArray = [Int]()
+        var index = 0
+        for filter in filterArray {
+            if filter {
+                colorArray.append(index)
+            }
+            index += 1
+        }
+        
+        // フィルタカラーに合致するTaskのみ取得
+        for task in realmArray {
+            if colorArray.contains(task.color) {
+                taskArray.append(task)
+            }
+        }
+        return taskArray
+    }
+    
     /// 完了済みのRealmTaskを全取得
     /// - Returns: 完了済みのRealmTaskデータ(完了日順)
     func getCompleteTask() -> [RealmTask] {

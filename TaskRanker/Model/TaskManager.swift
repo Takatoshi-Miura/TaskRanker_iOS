@@ -29,6 +29,23 @@ class TaskManager {
     
     /// Taskを取得
     /// - Parameters:
+    ///   - type: A,B,C,D
+    ///   - filterArray: カラーBool配列
+    /// - Returns: Task配列
+    func getTask(type: SegmentType, filterArray: [Bool]) -> [Task] {
+        var taskArray = [Task]()
+        let realmTaskArray = realmManager.getIncompleteTask(filterArray: filterArray)
+        for realmTask in realmTaskArray {
+            let task = Task(realmTask: realmTask)
+            if task.type == type {
+                taskArray.append(task)
+            }
+        }
+        return taskArray
+    }
+    
+    /// Taskを取得
+    /// - Parameters:
     ///   - isComplete: true:完了済み, false:未完了
     /// - Returns: Task配列
     func getTask(isComplete: Bool) -> [Task] {

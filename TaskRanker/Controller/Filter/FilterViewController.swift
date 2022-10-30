@@ -9,7 +9,7 @@ import UIKit
 
 protocol FilterViewControllerDelegate: AnyObject {
     /// モーダルを閉じる
-    func filterVCDismiss(_ viewController: UIViewController)
+    func filterVCDismiss(_ viewController: UIViewController, filterArray: [Bool])
 }
 
 class FilterViewController: UIViewController {
@@ -17,14 +17,35 @@ class FilterViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var tableView: UITableView!
+    private var checkArray: [Bool]
     var delegate: FilterViewControllerDelegate?
 
     // MARK: - LifeCycle
+    
+    /// イニシャライザ
+    /// - Parameter task: nilの場合は新規作成
+    init(filterArray: [Bool]?) {
+        if let filterArray = filterArray {
+            checkArray = filterArray
+        } else {
+            checkArray = Array(repeating: true, count: Color.allCases.count)
+        }
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigation()
         initTableView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.filterVCDismiss(self, filterArray: checkArray)
     }
     
     /// NavigationController初期化
@@ -49,12 +70,13 @@ class FilterViewController: UIViewController {
     
     /// 閉じる
     @objc func tapCloseButton(_ sender: UIBarButtonItem) {
-        delegate?.filterVCDismiss(self)
+        delegate?.filterVCDismiss(self, filterArray: checkArray)
     }
     
     /// クリア
     @objc func tapClearButton(_ sender: UIBarButtonItem) {
-        
+        checkArray = Array(repeating: true, count: Color.allCases.count)
+        tableView.reloadData()
     }
 
 }
@@ -78,12 +100,17 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         cell.textLabel?.text = Color.allCases[indexPath.row].title
-        cell.accessoryType = .checkmark
+        cell.accessoryType = checkArray[indexPath.row] ? .checkmark : .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        checkArray[indexPath.row].toggle()
+        // 最低1つはチェックが必要
+        if checkArray.firstIndex(of: true) == nil {
+            checkArray[indexPath.row].toggle()
+        }
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
 }

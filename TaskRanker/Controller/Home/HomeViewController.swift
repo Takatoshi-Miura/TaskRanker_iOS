@@ -14,6 +14,8 @@ protocol HomeViewControllerDelegate: AnyObject {
     func homeVCCompletedTaskListButtonDidTap(_ viewController: UIViewController)
     // フィルタボタンタップ時
     func homeVCFilterButtonDidTap(_ viewController: UIViewController)
+    // フィルタボタンタップ時(既にフィルタが適用されている場合)
+    func homeVCFilterButtonDidTap(_ viewController: UIViewController, filterArray: [Bool])
     // 追加ボタンタップ時
     func homeVCAddButtonDidTap(_ viewController: UIViewController)
     // Taskタップ時
@@ -27,6 +29,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var taskListView: UIView!
     private var isFilter: Bool = false
+    private var filterArray: [Bool]?
     private var taskListVC_A = TaskListViewController(segmentType: SegmentType.A)
     private var taskListVC_B = TaskListViewController(segmentType: SegmentType.B)
     private var taskListVC_C = TaskListViewController(segmentType: SegmentType.C)
@@ -112,14 +115,6 @@ class HomeViewController: UIViewController {
         selectSegment(number: SegmentType.A.rawValue)
     }
     
-    /// TaskListをリロード
-    func reloadTaskList() {
-        taskListVC_A.refreshData()
-        taskListVC_B.refreshData()
-        taskListVC_C.refreshData()
-        taskListVC_D.refreshData()
-    }
-    
     /// 右スワイプでABCD切り替え
     private func addRightSwipeGesture() {
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeTaskList))
@@ -148,7 +143,11 @@ class HomeViewController: UIViewController {
     
     /// フィルタメニュー
     @objc func openFilterMenu(_ sender: UIBarButtonItem) {
-        delegate?.homeVCFilterButtonDidTap(self)
+        if isFilter {
+            delegate?.homeVCFilterButtonDidTap(self, filterArray: filterArray!)
+        } else {
+            delegate?.homeVCFilterButtonDidTap(self)
+        }
     }
     
     /// segmentedControl選択
@@ -214,10 +213,13 @@ class HomeViewController: UIViewController {
         delegate?.homeVCAddButtonDidTap(self)
     }
     
-    /// タスクを挿入
+    /// タスクを挿入(新規追加、未完了に戻す)
     /// - Parameters:
     ///   - task: 挿入する課題
     func insertTask(task: Task) {
+        // TODO: フィルタの扱いをどうするか
+//        applyFilter(filterArray: [true])
+        
         // 挿入するタスクのタイプへ移動
         selectSegment(number: task.type.rawValue)
         
@@ -234,6 +236,37 @@ class HomeViewController: UIViewController {
                 self.taskListVC_D.insertTask(task: task)
             }
         }
+    }
+    
+    /// フィルタを適用
+    /// - Parameters:
+    ///   - filterArray: チェック配列
+    func applyFilter(filterArray: [Bool]) {
+        isFilter = (filterArray.firstIndex(of: false) != nil) ? true : false
+        if isFilter {
+            self.filterArray = filterArray
+            applyFilterTaskList()
+        } else {
+            self.filterArray = nil
+            reloadTaskList()
+        }
+        initNavigation()
+    }
+    
+    /// TaskListをリロード
+    private func reloadTaskList() {
+        taskListVC_A.refreshData()
+        taskListVC_B.refreshData()
+        taskListVC_C.refreshData()
+        taskListVC_D.refreshData()
+    }
+    
+    /// TaskListにフィルタを適用
+    private func applyFilterTaskList() {
+        taskListVC_A.applyFilter(filterArray: filterArray!)
+        taskListVC_B.applyFilter(filterArray: filterArray!)
+        taskListVC_C.applyFilter(filterArray: filterArray!)
+        taskListVC_D.applyFilter(filterArray: filterArray!)
     }
     
 }

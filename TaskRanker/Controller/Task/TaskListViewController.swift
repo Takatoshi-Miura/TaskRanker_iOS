@@ -19,6 +19,7 @@ class TaskListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private var segmentType: SegmentType
     private var taskArray = [Task]()
+    private var filterArray: [Bool]?
     var delegate: TaskListViewControllerDelegate?
     
     // MARK: - LifeCycle
@@ -40,15 +41,31 @@ class TaskListViewController: UIViewController {
     
     /// データの同期処理
     @objc func syncData() {
-        refreshData()
+        if filterArray != nil {
+            applyFilter(filterArray: filterArray!)
+        } else {
+            refreshData()
+        }
     }
     
     /// データを再取得
     func refreshData() {
+        self.filterArray = nil
         let taskManager = TaskManager()
         taskArray = taskManager.getTask(type: segmentType)
         tableView.refreshControl?.endRefreshing()
         tableView.reloadData()
+        updateTableFooterView()
+    }
+    
+    /// フィルタを適用
+    func applyFilter(filterArray: [Bool]) {
+        self.filterArray = filterArray
+        let taskManager = TaskManager()
+        taskArray = taskManager.getTask(type: segmentType, filterArray: filterArray)
+        tableView.refreshControl?.endRefreshing()
+        tableView.reloadData()
+        updateTableFooterView()
     }
     
     /// タスクを挿入

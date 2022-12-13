@@ -60,7 +60,6 @@
 "Data transfer" = "Data transfer";
 "How to use this App?" = "How to use this App?";
 "Inquiry" = "Inquiry";
-"Error" = "Error";
 "Success" = "Success";
 "Internet Error" = "Internet connection is offline.";
 "Mailer Error" = "The email account has not been set.Set up an account with Apple's mail app.";
@@ -107,3 +106,4 @@
 
 // MARK: - ErrorMessage
 "EmptyTitle" = "Please input a title.";
+"SaveFailed" = "Failed to save.";

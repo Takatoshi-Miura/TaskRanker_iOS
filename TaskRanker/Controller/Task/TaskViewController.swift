@@ -10,7 +10,7 @@ import UIKit
 protocol TaskViewControllerDelegate: AnyObject {
     /// 画面を閉じる(タスク新規作成用)
     func taskVCDismiss(_ viewController: UIViewController)
-    /// 画面を閉じる()
+    /// 画面を閉じる
     func taskVCDismiss(task: Task)
     /// タスク削除時の処理
     func taskVCDeleteTask(task: Task)
@@ -37,8 +37,10 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var memoTextView: UITextView!
     @IBOutlet weak var colorButton: UIButton!
+    @IBOutlet weak var deadlineSwitch: UISwitch!
     @IBOutlet weak var deadlineDateButton: UIButton!
     @IBOutlet weak var repeatLabel: UILabel!
+    
     private var pickerView = UIView()
     private let colorPicker = UIPickerView()
     private var datePicker = UIDatePicker()
@@ -48,19 +50,7 @@ class TaskViewController: UIViewController {
     var isViewer = false
     var delegate: TaskViewControllerDelegate?
     
-    private var type: SegmentType {
-        if importanceSlider.value > 4 && urgencySlider.value > 4 {
-            return SegmentType.A
-        } else if importanceSlider.value > 4 && urgencySlider.value <= 4 {
-            return SegmentType.B
-        } else if importanceSlider.value <= 4 && urgencySlider.value > 4 {
-            return SegmentType.C
-        } else {
-            return SegmentType.D
-        }
-    }
-    
-    // MARK: - LifeCycle
+    // MARK: - Initializer
     
     /// イニシャライザ
     /// - Parameter task: nilの場合は新規作成
@@ -75,6 +65,8 @@ class TaskViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,8 +111,8 @@ class TaskViewController: UIViewController {
         titleTextField.delegate = self
         memoTextView.delegate = self
         
-        colorButton.backgroundColor = Color.allCases[colorIndex].color
-        colorButton.setTitle(Color.allCases[colorIndex].title, for: .normal)
+        colorButton.backgroundColor = TaskColor.allCases[colorIndex].color
+        colorButton.setTitle(TaskColor.allCases[colorIndex].title, for: .normal)
         deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
     }
     
@@ -163,14 +155,19 @@ class TaskViewController: UIViewController {
     private func inputTask() {
         titleTextField.text = task.title
         memoTextView.text = task.memo
-        colorButton.backgroundColor = Color.allCases[task.color].color
-        colorButton.setTitle(Color.allCases[task.color].title, for: .normal)
+        colorButton.backgroundColor = task.color.color
+        colorButton.setTitle(task.color.title, for: .normal)
         importanceSlider.value = Float(task.importance)
         importanceValueLabel.text = String(task.importance)
         urgencySlider.value = Float(task.urgency)
         urgencyValueLabel.text = String(task.urgency)
-        typeValueLabel.text = type.typeTitle
-        selectedDate = task.deadlineDate ?? Date()
+        typeValueLabel.text = task.type.typeTitle
+        if let date = task.deadlineDate {
+            selectedDate = date
+            setDeadlineSwitch(isOn: true)
+        } else {
+            setDeadlineSwitch(isOn: false)
+        }
         datePicker.setDate(selectedDate, animated: false)
         deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
     }
@@ -215,24 +212,22 @@ class TaskViewController: UIViewController {
         }
         
         // Taskを作成
-        let realmManager = RealmManager()
-        let realmTask = RealmTask()
-        realmTask.title = titleTextField.text!
-        realmTask.memo = memoTextView.text!
-        realmTask.color = colorIndex
-        realmTask.importance = Int(importanceValueLabel.text!)!
-        realmTask.urgency = Int(urgencyValueLabel.text!)!
-        // TODO: 期限日など
+        var task = Task()
+        task.title = titleTextField.text!
+        task.memo = memoTextView.text!
+        task.color = TaskColor.allCases[colorIndex]
+        task.importance = Int(importanceValueLabel.text!)!
+        task.urgency = Int(urgencyValueLabel.text!)!
+        task.deadlineDate = deadlineSwitch.isOn ? selectedDate : nil
         
-        if !realmManager.createRealm(object: realmTask) {
-            showErrorAlert(message: "エラー")
+        let taskManager = TaskManager()
+        if !taskManager.saveTask(task: task) {
+            showErrorAlert(message: ERROR_MESSAGE_SAVE_FAILED)
             return
         }
         // TODO: Firebaseに送信(アカウント持ちの場合のみ)
         
         // モーダルを閉じる
-        let taskManager = TaskManager()
-        let task = taskManager.getTask(taskID: realmTask.taskID)!
         delegate?.taskVCAddTask(self, task: task)
     }
     
@@ -248,16 +243,31 @@ class TaskViewController: UIViewController {
     
     /// 重要度スライダー
     @IBAction func slideImportanceSlider(_ sender: UISlider) {
-        importanceValueLabel.text = String(Int(round(sender.value)))
-        task.importance = Int(round(sender.value))
-        typeValueLabel.text = type.typeTitle
+        let value = Int(round(sender.value))
+        importanceValueLabel.text = String(value)
+        task.importance = value
+        typeValueLabel.text = task.type.typeTitle
     }
     
     /// 緊急度スライダー
     @IBAction func slideUrgencySlider(_ sender: UISlider) {
-        urgencyValueLabel.text = String(Int(round(sender.value)))
-        task.urgency = Int(round(sender.value))
-        typeValueLabel.text = type.typeTitle
+        let value = Int(round(sender.value))
+        urgencyValueLabel.text = String(value)
+        task.urgency = value
+        typeValueLabel.text = task.type.typeTitle
+    }
+    
+    /// 期限日スイッチ
+    @IBAction func tapDeadlineSwitch(_ sender: UISwitch) {
+        setDeadlineSwitch(isOn: sender.isOn)
+    }
+    
+    /// 期限日スイッチの切替
+    /// - Parameter isOn: ON or OFF
+    private func setDeadlineSwitch(isOn :Bool) {
+        deadlineSwitch.isOn = isOn
+        deadlineDateButton.isHidden = deadlineSwitch.isOn ? false : true
+        task.deadlineDate = deadlineSwitch.isOn ? selectedDate : nil
     }
     
     /// 期限日ボタン
@@ -292,7 +302,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch PickerType.allCases[pickerView.tag] {
         case .color:
-            return Color.allCases.count
+            return TaskColor.allCases.count
         case .date:
             return 1
         }
@@ -302,7 +312,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch PickerType.allCases[pickerView.tag] {
         case .color:
-            return Color.allCases[row].title
+            return TaskColor.allCases[row].title
         case .date:
             return nil
         }
@@ -348,9 +358,9 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     @objc func colorPickerDoneAction() {
         colorIndex = colorPicker.selectedRow(inComponent: 0)
         closePicker(pickerView)
-        colorButton.backgroundColor = Color.allCases[colorIndex].color
-        colorButton.setTitle(Color.allCases[colorIndex].title, for: .normal)
-        task.color = colorIndex
+        colorButton.backgroundColor = TaskColor.allCases[colorIndex].color
+        colorButton.setTitle(TaskColor.allCases[colorIndex].title, for: .normal)
+        task.color = TaskColor.allCases[colorIndex]
     }
     
     /// ColorPickerキャンセル処理

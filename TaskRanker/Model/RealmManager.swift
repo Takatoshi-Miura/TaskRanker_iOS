@@ -12,8 +12,7 @@ import RealmSwift
 class RealmManager {
     
     /// Realmにデータを作成
-    /// - Parameters:
-    ///    - object: Realmオブジェクト
+    /// - Parameter object: Realmオブジェクト
     /// - Returns: 成功失敗
     func createRealm(object: Object) -> Bool {
         do {
@@ -28,8 +27,7 @@ class RealmManager {
     }
     
     /// Realmにデータを作成(既に存在するオブジェクトはUpdate)
-    /// - Parameters:
-    ///    - object: Realmオブジェクト
+    /// - Parameter object: Realmオブジェクト
     /// - Returns: 成功失敗
     func createRealmWithUpdate(objects: [Object]) -> Bool {
         do {
@@ -44,8 +42,7 @@ class RealmManager {
     }
     
     /// RealmのデータのUserIDを一括変更
-    /// - Parameters:
-    ///    - userID: ユーザーID
+    /// - Parameter userID: ユーザーID
     func updateAllRealmUserID(userID: String) {
     }
     
@@ -87,8 +84,7 @@ extension RealmManager {
     }
     
     /// 未完了のRealmTaskを全取得
-    /// - Parameters:
-    ///   - filterArray: カラーBool配列
+    /// - Parameter filterArray: カラーBool配列
     /// - Returns: 未完了のRealmTaskデータ
     func getIncompleteTask(filterArray: [Bool]) -> [RealmTask] {
         var taskArray = [RealmTask]()
@@ -135,8 +131,7 @@ extension RealmManager {
     }
     
     /// RealmTaskを取得
-    /// - Parameters:
-    ///   - taskID: taskID
+    /// - Parameter taskID: taskID
     /// - Returns: RealmTaskデータ(存在しなければnil)
     func getTask(taskID: String) -> RealmTask? {
         let realm = try! Realm()
@@ -147,8 +142,7 @@ extension RealmManager {
     }
     
     /// 全RealmTaskのユーザーIDを更新
-    /// - Parameters:
-    ///   - userID: ユーザーID
+    /// - Parameter userID: ユーザーID
     func updateTaskUserID(userID: String) {
         let realm = try! Realm()
         let result = realm.objects(RealmTask.self)

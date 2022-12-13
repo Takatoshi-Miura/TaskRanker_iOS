@@ -60,7 +60,6 @@
 "Data transfer" = "データの引継ぎ";
 "How to use this App?" = "アプリの使い方";
 "Inquiry" = "お問い合わせ";
-"Error" = "エラー";
 "Success" = "成功";
 "Internet Error" = "インターネット接続がオフラインです。";
 "Mailer Error" = "メールアカウントが未設定です。\nApple社の「メール」アプリでアカウントを設定して下さい。";
@@ -107,3 +106,4 @@
 
 // MARK: - ErrorMessage
 "EmptyTitle" = "タイトルを入力して下さい。";
+"SaveFailed" = "保存に失敗しました。";

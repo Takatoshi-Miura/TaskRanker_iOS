@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
         if selectedTask == nil || selectedIndex == nil {
             return
         }
-        switch SegmentType.allCases[selectedTask!.type.rawValue] {
+        switch selectedTask!.type {
         case .A:
             taskListVC_A.updateTask(indexPath: selectedIndex!)
         case .B:
@@ -78,9 +78,9 @@ class HomeViewController: UIViewController {
         
         // 完了タスク
         let completeButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"),
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(openCompletedTaskList(_:)))
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(openCompletedTaskList(_:)))
         
         // フィルタ
         let filterImage = isFilter ? UIImage(named: "icon_filter_fill")! : UIImage(named: "icon_filter_empty")!
@@ -91,6 +91,22 @@ class HomeViewController: UIViewController {
         
         navigationItem.leftBarButtonItems = [menuButton]
         navigationItem.rightBarButtonItems = [filterButton, completeButton]
+    }
+    
+    /// タイトル文字列の設定
+    /// - Parameter segmentType: segmentedControlの選択番号
+    private func setNavigationTitle(segmentType: SegmentType) {
+        let titleLabel = UILabel()
+        titleLabel.text = segmentType.naviTitle
+        titleLabel.font = .boldSystemFont(ofSize: 18)
+        titleLabel.textColor = .label
+        
+        let attrText = NSMutableAttributedString(string: titleLabel.text!)
+        attrText.addAttribute(.foregroundColor, value: segmentType.importanceColor, range: NSMakeRange(4, 1))
+        attrText.addAttribute(.foregroundColor, value: segmentType.urgencyColor, range: NSMakeRange(11, 1))
+        titleLabel.attributedText = attrText
+        
+        self.navigationItem.titleView = titleLabel
     }
     
     /// TaskListView初期化
@@ -191,41 +207,20 @@ class HomeViewController: UIViewController {
         }
     }
     
-    /// タイトル文字列の設定
-    /// - Parameters:
-    ///    - segmentType: segmentedControlの選択番号
-    private func setNavigationTitle(segmentType: SegmentType) {
-        let titleLabel = UILabel()
-        titleLabel.text = segmentType.title
-        titleLabel.font = .boldSystemFont(ofSize: 18)
-        titleLabel.textColor = .label
-        
-        let attrText = NSMutableAttributedString(string: titleLabel.text!)
-        attrText.addAttribute(.foregroundColor, value: segmentType.importanceColor, range: NSMakeRange(4, 1))
-        attrText.addAttribute(.foregroundColor, value: segmentType.urgencyColor, range: NSMakeRange(11, 1))
-        titleLabel.attributedText = attrText
-        
-        self.navigationItem.titleView = titleLabel
-    }
-    
     /// タスク追加
     @IBAction func tapAddButton(_ sender: Any) {
         delegate?.homeVCAddButtonDidTap(self)
     }
     
-    /// タスクを挿入(新規追加、未完了に戻す)
-    /// - Parameters:
-    ///   - task: 挿入する課題
+    /// タスクを挿入(新規追加,未完了に戻す,タイプ更新)
+    /// - Parameter task: 挿入する課題
     func insertTask(task: Task) {
-        // フィルタを外す
-        applyFilter(filterArray: [true])
-        
         // 挿入するタスクのタイプへ移動
         selectSegment(number: task.type.rawValue)
         
         // タスクを挿入
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            switch SegmentType.allCases[task.type.rawValue] {
+            switch task.type {
             case .A:
                 self.taskListVC_A.insertTask(task: task)
             case .B:
@@ -239,8 +234,7 @@ class HomeViewController: UIViewController {
     }
     
     /// フィルタを適用
-    /// - Parameters:
-    ///   - filterArray: チェック配列
+    /// - Parameter filterArray: チェック配列
     func applyFilter(filterArray: [Bool]) {
         isFilter = (filterArray.firstIndex(of: false) != nil) ? true : false
         if isFilter {
@@ -278,6 +272,11 @@ extension HomeViewController: TaskListViewControllerDelegate {
         selectedTask = task
         selectedIndex = indexPath
         delegate?.homeVCTaskDidTap(self, task: task)
+    }
+    
+    /// TaskTypeアップデート時
+    func taskListVCTaskTypeUpdate(task: Task) {
+        insertTask(task: task)
     }
     
 }

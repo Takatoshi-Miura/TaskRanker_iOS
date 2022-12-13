@@ -10,6 +10,8 @@ import UIKit
 protocol TaskListViewControllerDelegate: AnyObject {
     /// Taskタップ時
     func taskListVCTaskDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath)
+    /// TaskTypeアップデート時
+    func taskListVCTaskTypeUpdate(task: Task)
 }
 
 class TaskListViewController: UIViewController {
@@ -22,8 +24,10 @@ class TaskListViewController: UIViewController {
     private var filterArray: [Bool]?
     var delegate: TaskListViewControllerDelegate?
     
-    // MARK: - LifeCycle
+    // MARK: - Initializer
     
+    /// イニシャライザ
+    /// - Parameter segmentType: タスクタイプ(ABCD)
     init(segmentType: SegmentType) {
         self.segmentType = segmentType
         super.init(nibName: nil, bundle: nil)
@@ -32,6 +36,8 @@ class TaskListViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,47 +59,50 @@ class TaskListViewController: UIViewController {
         self.filterArray = nil
         let taskManager = TaskManager()
         taskArray = taskManager.getTask(type: segmentType)
-        tableView.refreshControl?.endRefreshing()
-        tableView.reloadData()
-        updateTableFooterView()
+        reloadTableView()
     }
     
     /// フィルタを適用
+    /// - Parameter filterArray: フィルタ配列
     func applyFilter(filterArray: [Bool]) {
         self.filterArray = filterArray
         let taskManager = TaskManager()
         taskArray = taskManager.getTask(type: segmentType, filterArray: filterArray)
-        tableView.refreshControl?.endRefreshing()
-        tableView.reloadData()
-        updateTableFooterView()
+        reloadTableView()
     }
     
     /// タスクを挿入
-    /// - Parameters:
-    ///   - task: 挿入するタスク
+    /// - Parameter task: 挿入するタスク
     func insertTask(task: Task) {
-        // リロード時に追加されるため削除
-        let index: IndexPath = [0, taskArray.count - 1]
-        taskArray.remove(at: index.row)
-        tableView.deleteRows(at: [index], with: UITableView.RowAnimation.none)
-        
+        // 重要度が高い順に並び替え
         taskArray.append(task)
-        // TODO: 重要度が高い順に並び替える
-        tableView.insertRows(at: [index], with: UITableView.RowAnimation.right)
-        updateTableFooterView()
+        taskArray = taskArray.sorted(by: {
+            $0.importance > $1.importance
+        })
+        if let index = taskArray.firstIndex(where: {$0.taskID == task.taskID}) {
+            let indexPath: IndexPath = [0, index]
+            tableView.insertRows(at: [indexPath], with: UITableView.RowAnimation.right)
+            updateTableFooterView()
+        }
+        
     }
     
     /// タスクを更新
-    /// - Parameters:
-    ///   - indexPath: 選択したタスクのIndexPath
+    /// - Parameter indexPath: 選択したタスクのIndexPath
     func updateTask(indexPath: IndexPath) {
-        // 完了、削除されたタスクを取り除く
+        // 完了,削除,タスクタイプ変更されたタスクを取り除く
         let taskManager = TaskManager()
         if let selectedTask = taskManager.getTask(taskID: taskArray[indexPath.row].taskID) {
-            if selectedTask.isComplete || selectedTask.isDeleted {
+            if selectedTask.isComplete || selectedTask.isDeleted || selectedTask.type != segmentType {
                 taskArray.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
                 updateTableFooterView()
+                // type変更時は当該タイプにTaskを移動
+                if selectedTask.type != segmentType {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.delegate?.taskListVCTaskTypeUpdate(task: selectedTask)
+                    }
+                }
                 return
             }
             taskArray[indexPath.row] = selectedTask
@@ -115,6 +124,13 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
+        reloadTableView()
+    }
+    
+    /// TableViewのリロード
+    private func reloadTableView() {
+        tableView.refreshControl?.endRefreshing()
+        tableView.reloadData()
         updateTableFooterView()
     }
     

@@ -9,11 +9,8 @@ import UIKit
 
 public extension UIViewController {
     
-    /**
-     PickerViewを画面下から出現
-     - Parameters:
-        - pickerView: PickerVIewを載せたUIView
-     */
+    /// PickerViewを画面下から表示
+    /// - Parameter pickerView: PickerVIewを載せたUIView
     func openPicker(_ pickerView:UIView) {
         view.addSubview(pickerView)
         pickerView.frame.origin.y = UIScreen.main.bounds.size.height
@@ -22,32 +19,14 @@ public extension UIViewController {
         }
     }
     
-    /**
-     PickerViewを閉じる
-     - Parameters:
-        - pickerView: PickerVIewを載せたUIView
-     */
+    /// PickerViewを閉じる
+    /// - Parameter pickerView: PickerVIewを載せたUIView
     func closePicker(_ pickerView:UIView) {
         UIView.animate(withDuration: 0.3) {
             pickerView.frame.origin.y += pickerView.bounds.size.height
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
             pickerView.removeFromSuperview()
-        }
-    }
-    
-    /**
-     PickerViewを画面下から出現(スクロール有)
-     - Parameters:
-        - pickerView: PickerVIewを載せたUIView
-        - scrollPosition: 現在のスクロール位置
-        - bottomPadding: SafeArea外の余白
-     */
-    func openPicker(_ pickerView:UIView, _ scrollPosition:CGFloat, _ bottomPadding:CGFloat) {
-        let toolbarHeight:CGFloat = 44
-        pickerView.frame.origin.y = scrollPosition
-        UIView.animate(withDuration: 0.3) {
-            pickerView.frame.origin.y = scrollPosition - pickerView.bounds.size.height - toolbarHeight - bottomPadding
         }
     }
     

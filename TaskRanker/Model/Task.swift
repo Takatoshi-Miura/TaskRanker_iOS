@@ -13,7 +13,7 @@ struct Task {
     let userID: String
     var title: String
     var memo: String
-    var color: Int
+    var color: TaskColor
     var importance: Int
     var urgency: Int
     var deadlineDate: Date?
@@ -27,11 +27,11 @@ struct Task {
     var updated_at: Date
     
     var type: SegmentType {
-        if importance > 4 && urgency > 4 {
+        if importance > 5 && urgency > 5 {
             return SegmentType.A
-        } else if importance > 4 && urgency <= 4 {
+        } else if importance > 5 && urgency <= 5 {
             return SegmentType.B
-        } else if importance <= 4 && urgency > 4 {
+        } else if importance <= 5 && urgency > 5 {
             return SegmentType.C
         } else {
             return SegmentType.D
@@ -43,9 +43,9 @@ struct Task {
         self.userID = UserDefaultsKey.userID.string()
         self.title = ""
         self.memo = ""
-        self.color = Color.red.hashValue
-        self.importance = 4
-        self.urgency = 4
+        self.color = TaskColor.red
+        self.importance = 5
+        self.urgency = 5
         self.deadlineDate = nil
         self.isUpdateUrgency = false
         self.daysBeforeUpdateUrgency = 0
@@ -62,7 +62,7 @@ struct Task {
         self.userID = realmTask.userID
         self.title = realmTask.title
         self.memo = realmTask.memo
-        self.color = realmTask.color
+        self.color = TaskColor.allCases[realmTask.color]
         self.importance = realmTask.importance
         self.urgency = realmTask.urgency
         self.deadlineDate = realmTask.deadlineDate
@@ -85,9 +85,9 @@ class RealmTask: Object {
     @objc dynamic var userID: String = UserDefaultsKey.userID.string()
     @objc dynamic var title: String = ""                // タイトル
     @objc dynamic var memo: String = ""                 // メモ
-    @objc dynamic var color: Int = Color.red.hashValue  // カラー
-    @objc dynamic var importance: Int = 4               // 重要度
-    @objc dynamic var urgency: Int = 4                  // 緊急度
+    @objc dynamic var color: Int = TaskColor.red.hashValue  // カラー
+    @objc dynamic var importance: Int = 5               // 重要度
+    @objc dynamic var urgency: Int = 5                  // 緊急度
     @objc dynamic var deadlineDate: Date?               // 期限日
     @objc dynamic var isUpdateUrgency: Bool = false     // 緊急度自動引き上げフラグ
     @objc dynamic var daysBeforeUpdateUrgency: Int = 0  // 緊急度引き上げ日

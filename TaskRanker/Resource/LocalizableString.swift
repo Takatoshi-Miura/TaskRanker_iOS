@@ -106,3 +106,4 @@ let MESSAGE_DELETE_ACCOUNT_ERROR = NSLocalizedString("DeleteAccountError", comme
 
 // MARK: - ErrorMessage
 let ERROR_MESSAGE_EMPTY_TITLE = NSLocalizedString("EmptyTitle", comment: "")
+let ERROR_MESSAGE_SAVE_FAILED = NSLocalizedString("SaveFailed", comment: "")

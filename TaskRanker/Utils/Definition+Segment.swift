@@ -22,13 +22,12 @@ enum SegmentType: Int, CaseIterable {
         }
     }
     
-    var title: String {
+    var naviTitle: String {
         switch self {
-        // TODO: 多言語対応
-        case .A: return "重要度(高),緊急度(高)"
-        case .B: return "重要度(高),緊急度(低)"
-        case .C: return "重要度(低),緊急度(高)"
-        case .D: return "重要度(低),緊急度(低)"
+        case .A: return "重要度(↑),緊急度(↑)"
+        case .B: return "重要度(↑),緊急度(↓)"
+        case .C: return "重要度(↓),緊急度(↑)"
+        case .D: return "重要度(↓),緊急度(↓)"
         }
     }
     

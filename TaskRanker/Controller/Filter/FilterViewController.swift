@@ -20,7 +20,7 @@ class FilterViewController: UIViewController {
     private var checkArray: [Bool]
     var delegate: FilterViewControllerDelegate?
 
-    // MARK: - LifeCycle
+    // MARK: - Initializer
     
     /// イニシャライザ
     /// - Parameter task: nilの場合は新規作成
@@ -28,7 +28,7 @@ class FilterViewController: UIViewController {
         if let filterArray = filterArray {
             checkArray = filterArray
         } else {
-            checkArray = Array(repeating: true, count: Color.allCases.count)
+            checkArray = Array(repeating: true, count: TaskColor.allCases.count)
         }
         super.init(nibName: nil, bundle: nil)
     }
@@ -36,6 +36,8 @@ class FilterViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +77,7 @@ class FilterViewController: UIViewController {
     
     /// クリア
     @objc func tapClearButton(_ sender: UIBarButtonItem) {
-        checkArray = Array(repeating: true, count: Color.allCases.count)
+        checkArray = Array(repeating: true, count: TaskColor.allCases.count)
         tableView.reloadData()
     }
 
@@ -94,12 +96,12 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Color.allCases.count
+        return TaskColor.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = Color.allCases[indexPath.row].title
+        cell.textLabel?.text = TaskColor.allCases[indexPath.row].title
         cell.accessoryType = checkArray[indexPath.row] ? .checkmark : .none
         return cell
     }

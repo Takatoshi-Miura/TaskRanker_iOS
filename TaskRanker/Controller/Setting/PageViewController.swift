@@ -29,21 +29,21 @@ class PageViewController: UIPageViewController {
     private func initPageView() {
         // チュートリアル画面を追加
         // TODO: リファクタリング、文言、画像修正
-        let titleArray:[String]  = ["TaskRankerとは","課題の管理①","課題の管理②","ノートを作成","振り返り","課題を完了にする"]
+        let titleArray = ["TaskRankerとは","タスクの作成","タスクの分類","タスク管理","フィルタ","タスクの完了"]
         
-        let detailArray:[String] = ["課題解決に特化したノートアプリです。\n原因と対策を考えて実践し、反省を通して、\n解決を目指すことができます。",
-                                    "課題を一覧で管理できます。\nグループを作成することで課題を分類して\n管理することができます。",
-                                    "課題毎に原因と対策を登録できます。\n優先度が最も高い対策が\nノートに読み込まれるようになります。",
-                                    "練習ノートを作成できます。\nノートには登録した課題が読み込まれ、\n課題への取り組みを記録しておくことができます。",
-                                    "記録した内容はノートで振り返ることができます。\n課題＞対策へと進めば、その課題への取り組み内容を\nまとめて振り返ることもできます。",
-                                    "解決した課題は完了にすることで\nノートへ読み込まれなくなります。完了にしても\n完了した課題からいつでも振り返ることができます。"]
+        let detailArray = ["タスクの優先順位付けを行ってくれるタスク管理アプリです。\nタスクの重要度と緊急度から優先順位を判定し、タスクを分類します。",
+                           "＋ボタンからタスクを作成できます。\n重要度と緊急度を10段階で設定できます。\n期限日を設定すると期限日の　日前に自動的に緊急度を引き上げます。",
+                           "重要度と緊急度によって、4つのタイプに分類します。\nA：重要度6〜10, 緊急度6~10\nB：重要度6〜10, 緊急度1~5\nC：重要度1〜5, 緊急度6~10\nD：重要度1〜5, 緊急度1~5",
+                           "作成したタスクは一覧で管理できます。\nタスクは重要度が高い順に表示されます。",
+                           "一覧に表示するタスクは、フィルタからカラーで絞り込むことができます。",
+                           "タスクの◯をタップすると完了にできます。\n完了したタスクは完了済みタスク画面で確認できます。"]
         
-        let imageArray:[UIImage?] = [UIImage(systemName: "gear"),
-                                     UIImage(systemName: "gear"),
-                                     UIImage(systemName: "gear"),
-                                     UIImage(systemName: "gear"),
-                                     UIImage(systemName: "gear"),
-                                     UIImage(systemName: "gear")]
+        let imageArray = [UIImage(systemName: "gear"),
+                          UIImage(systemName: "gear"),
+                          UIImage(systemName: "gear"),
+                          UIImage(systemName: "gear"),
+                          UIImage(systemName: "gear"),
+                          UIImage(systemName: "gear")]
         
         for index in 0...titleArray.count - 1 {
             let tutorialVC = TutorialViewController()

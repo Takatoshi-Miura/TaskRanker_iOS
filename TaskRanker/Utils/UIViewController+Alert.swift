@@ -9,71 +9,58 @@ import UIKit
 
 public extension UIViewController {
     
-    /**
-     アラートを表示
-     - Parameters:
-       - title: タイトル
-       - message: 説明文
-       - actions: [okAction、cancelAction]等
-     */
+    /// アラートを表示
+    /// - Parameters:
+    ///   - title: タイトル
+    ///   - message: メッセージ
+    ///   - actions: [okAction、cancelAction]等
     func showAlert(title: String, message: String, actions: [UIAlertAction]) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         actions.forEach { alert.addAction($0) }
         present(alert, animated: true)
     }
     
-    /**
-     OKアラートを表示
-     - Parameters:
-       - title: タイトル
-       - message: 説明文
-     */
+    /// OKアラートを表示
+    /// - Parameters:
+    ///   - title: タイトル
+    ///   - message: メッセージ
     func showOKAlert(title: String, message: String) {
         let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
         showAlert(title: title, message: message, actions: [OKAction])
     }
     
-    /**
-     OK,Cancelアラートを表示
-     - Parameters:
-       - title: タイトル
-       - message: 説明文
-       - OKAction: OKをタップした時の処理
-     */
+    /// OK,Cancelアラートを表示
+    /// - Parameters:
+    ///   - title: タイトル
+    ///   - message: メッセージ
+    ///   - OKAction: OKタップ時のアクション
     func showOKCancelAlert(title: String, message: String, OKAction: @escaping () -> ()) {
         let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction) in OKAction()})
         let cancelAction = UIAlertAction(title: TITLE_CANCEL, style: UIAlertAction.Style.default, handler: nil)
         showAlert(title: title, message: message, actions: [cancelAction, OKAction])
     }
     
-    /**
-     OKアラートを表示(アクション付き)
-     - Parameters:
-       - title: タイトル
-       - message: 説明文
-       - OKAction: OKをタップした時の処理
-     */
+    /// OKアラートを表示
+    /// - Parameters:
+    ///   - title: タイトル
+    ///   - message: メッセージ
+    ///   - OKAction: OKタップ時のアクション
     func showOKAlert(title: String, message: String, OKAction: @escaping () -> ()) {
         let OKAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction) in OKAction()})
         showAlert(title: title, message: message, actions: [OKAction])
     }
     
-    /**
-     エラーアラートを表示
-     - Parameters:
-       - message: 説明文
-     */
+    /// エラーアラートを表示
+    /// - Parameter message: メッセージ
     func showErrorAlert(message: String) {
         showOKAlert(title: TITLE_ERROR, message: message)
     }
     
-    /**
-     削除アラートを表示
-     - Parameters:
-        - title: タイトル
-        - message: 説明文
-        - OKAction: OKをタップした時の処理
-     */
+    /// 削除アラートを表示
+    /// - Parameters:
+    ///   - title: タイトル
+    ///   - message: メッセージ
+    ///   - OKAction: OKタップ時のアクション
     func showDeleteAlert(title: String, message: String, OKAction: @escaping () -> ()) {
         let OKAction = UIAlertAction(title: TITLE_DELETE,
                                      style: UIAlertAction.Style.destructive, handler: {(action: UIAlertAction) in OKAction()})
@@ -82,14 +69,12 @@ public extension UIViewController {
         showAlert(title: title, message: message, actions: [OKAction, cancelAction])
     }
     
-    /**
-     アクションシートを表示
-     - Parameters:
-       - title: タイトル
-       - message: 説明文
-       - actions: [UIAlertAction]
-       - frame: フレーム(iPadの場合のみ必要)
-     */
+    /// アクションシートを表示
+    /// - Parameters:
+    ///   - title: タイトル
+    ///   - message: メッセージ
+    ///   - actions: [UIAlertAction]
+    ///   - frame: フレーム(iPadの場合のみ必要)
     func showActionSheet(title: String, message: String, actions: [UIAlertAction], frame: CGRect?) {
         let actionSheet = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         actions.forEach { actionSheet.addAction($0) }
@@ -101,13 +86,11 @@ public extension UIViewController {
         present(actionSheet, animated: true)
     }
     
-    /**
-     テキストエリア付きアラートを表示
-     - Parameters:
-      - title: タイトル
-      - message: 説明文
-      - actions: [okAction、cancelAction]等
-     */
+    /// テキストエリア付きアラートを表示
+    /// - Parameters:
+    ///   - title: タイトル
+    ///   - message: メッセージ
+    ///   - actions: [okAction、cancelAction]等
     func showTextAlert(title: String, message: String, actions: [UIAlertAction]) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addTextField(configurationHandler: nil)
@@ -115,13 +98,11 @@ public extension UIViewController {
         present(alert, animated: true)
     }
     
-    /**
-     利用規約アラートを表示
-     */
-    func displayAgreement(_ completion: @escaping () -> ()) {
+    /// 利用規約アラートを表示
+    /// - Parameter completion: 完了処理
+    func showAgreementAlert(_ completion: @escaping () -> ()) {
         // 同意ボタン
         let agreeAction = UIAlertAction(title:"同意する",style:UIAlertAction.Style.default){(action:UIAlertAction)in
-            // 完了処理
             completion()
         }
         // 利用規約ボタン
@@ -130,7 +111,7 @@ public extension UIViewController {
             let url = URL(string: "https://sportnote-b2c92.firebaseapp.com/")
             UIApplication.shared.open(url!)
             // アラートが消えるため再度表示
-            self.displayAgreement({
+            self.showAgreementAlert({
                 completion()
             })
         }

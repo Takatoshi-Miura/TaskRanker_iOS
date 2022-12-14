@@ -53,6 +53,11 @@
 		8DB633CC28CDD410001F2DB7 /* Definition+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633CB28CDD410001F2DB7 /* Definition+Device.swift */; };
 		8DB633CE28CDD462001F2DB7 /* UIViewController+ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */; };
 		8DB633D028CDD502001F2DB7 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */; };
+		8DCB72D82949E98500935972 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72D72949E98500935972 /* MapViewController.swift */; };
+		8DCB72DA2949E99D00935972 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72D92949E99D00935972 /* MapCoordinator.swift */; };
+		8DCB72DC2949E9A700935972 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72DB2949E9A700935972 /* TabCoordinator.swift */; };
+		8DCB72DE2949E9C400935972 /* Definition+TabPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72DD2949E9C400935972 /* Definition+TabPage.swift */; };
+		8DCB72E02949E9D600935972 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DCB72DF2949E9D600935972 /* MapViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +112,11 @@
 		8DB633CB28CDD410001F2DB7 /* Definition+Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Device.swift"; sourceTree = "<group>"; };
 		8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ToolBar.swift"; sourceTree = "<group>"; };
 		8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		8DCB72D72949E98500935972 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		8DCB72D92949E99D00935972 /* MapCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
+		8DCB72DB2949E9A700935972 /* TabCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		8DCB72DD2949E9C400935972 /* Definition+TabPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Definition+TabPage.swift"; sourceTree = "<group>"; };
+		8DCB72DF2949E9D600935972 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		FE9C64CC0C4EAF044EF1C0C6 /* Pods-TaskRanker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.release.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -266,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1D392328F84CA80078F3CB /* Definition+UserDefaults.swift */,
+				8DCB72DD2949E9C400935972 /* Definition+TabPage.swift */,
 				8DB633BE28CD9F8B001F2DB7 /* Definition+Segment.swift */,
 				8DB633CB28CDD410001F2DB7 /* Definition+Device.swift */,
 				8DAA1133294934000083F444 /* Definition+TaskColor.swift */,
@@ -296,6 +307,7 @@
 			children = (
 				8D60F25628CC63F5003BB724 /* Coordinator.swift */,
 				8D60F25828CC644B003BB724 /* AppCoordinator.swift */,
+				8DCB72DB2949E9A700935972 /* TabCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -304,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				8D60F25C28CC6761003BB724 /* HomeViewController.xib */,
+				8DCB72DF2949E9D600935972 /* MapViewController.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -312,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				8D60F25B28CC6760003BB724 /* HomeViewController.swift */,
+				8DCB72D72949E98500935972 /* MapViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -320,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				8D60F26128CC67A5003BB724 /* HomeCoordinator.swift */,
+				8DCB72D92949E99D00935972 /* MapCoordinator.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -432,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F2F21BB28F51791005FFCC2 /* FilterViewController.xib in Resources */,
+				8DCB72E02949E9D600935972 /* MapViewController.xib in Resources */,
 				8D55A4A22907460F005E573A /* CompletedTaskListViewController.xib in Resources */,
 				8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */,
 				8D55A49C2904A7B4005E573A /* TaskViewController.xib in Resources */,
@@ -505,11 +521,13 @@
 				8DB633CC28CDD410001F2DB7 /* Definition+Device.swift in Sources */,
 				2F2F21C428F51A97005FFCC2 /* SettingViewController.swift in Sources */,
 				8DB633CE28CDD462001F2DB7 /* UIViewController+ToolBar.swift in Sources */,
+				8DCB72DC2949E9A700935972 /* TabCoordinator.swift in Sources */,
 				8D55A4A62909EE86005E573A /* Definition+Navigation.swift in Sources */,
 				8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */,
 				2F2F21CA28F5397B005FFCC2 /* LoginViewController.swift in Sources */,
 				8DAA1134294934000083F444 /* Definition+TaskColor.swift in Sources */,
 				2F2F21CD28F53998005FFCC2 /* LoginCoordinator.swift in Sources */,
+				8DCB72DE2949E9C400935972 /* Definition+TabPage.swift in Sources */,
 				2F2F21D628F53D24005FFCC2 /* TutorialViewController.swift in Sources */,
 				2F2F21C728F51AC5005FFCC2 /* SettingCoordinator.swift in Sources */,
 				8DB633BF28CD9F8B001F2DB7 /* Definition+Segment.swift in Sources */,
@@ -518,6 +536,7 @@
 				8D1D392428F84CA80078F3CB /* Definition+UserDefaults.swift in Sources */,
 				2F2F21D028F53C30005FFCC2 /* PageViewController.swift in Sources */,
 				8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */,
+				8DCB72DA2949E99D00935972 /* MapCoordinator.swift in Sources */,
 				8D55A49B2904A7B4005E573A /* TaskViewController.swift in Sources */,
 				2F2F21BA28F51791005FFCC2 /* FilterViewController.swift in Sources */,
 				8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */,
@@ -528,6 +547,7 @@
 				8D1D392A28F984B20078F3CB /* TaskManager.swift in Sources */,
 				8D60F25D28CC6761003BB724 /* HomeViewController.swift in Sources */,
 				2F2F21D328F53C47005FFCC2 /* PageCoordinator.swift in Sources */,
+				8DCB72D82949E98500935972 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

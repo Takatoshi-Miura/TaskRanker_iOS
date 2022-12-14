@@ -16,6 +16,10 @@
 "DeleteInput" = "The entered content will be deleted.\nAre you sure?";
 "ServerCommunicationMessage" = "During server communication...";
 
+// MARK: - TabPage
+"List" = "List";
+"Map" = "Map";
+
 // MARK: - Color
 "Color" = "Color";
 "Red" = "Red";

@@ -12,14 +12,13 @@ class HomeCoordinator: Coordinator {
     var navigationController: UINavigationController?
     
     func startFlow(in window: UIWindow?) {
-        self.navigationController = createNavigationController()
-        let homeViewController = HomeViewController()
-        homeViewController.delegate = self
-        navigationController!.pushViewController(homeViewController, animated: true)
-        window?.change(rootViewController: navigationController!, WithAnimation: true)
     }
     
     func startFlow(in navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        let homeViewController = HomeViewController()
+        homeViewController.delegate = self
+        navigationController.pushViewController(homeViewController, animated: true)
     }
     
     func startFlow(in viewController: UIViewController) {

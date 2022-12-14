@@ -16,6 +16,10 @@
 "DeleteInput" = "入力した内容が削除されます。\nよろしいですか？";
 "ServerCommunicationMessage" = "通信中";
 
+// MARK: - TabPage
+"List" = "リスト";
+"Map" = "マップ";
+
 // MARK: - Color
 "Color" = "カラー";
 "Red" = "レッド";

@@ -17,6 +17,10 @@ let TITLE_MENU = NSLocalizedString("Menu", comment: "")
 let MESSAGE_DELETE_INPUT = NSLocalizedString("DeleteInput", comment: "")
 let MESSAGE_SERVER_COMMUNICATION = NSLocalizedString("ServerCommunicationMessage", comment: "")
 
+// MARK: - TabPage
+let TITLE_LIST = NSLocalizedString("List", comment: "")
+let TITLE_MAP = NSLocalizedString("Map", comment: "")
+
 // MARK: - Color
 let TITLE_COLOR = NSLocalizedString("Color", comment: "")
 let TITLE_RED = NSLocalizedString("Red", comment: "")

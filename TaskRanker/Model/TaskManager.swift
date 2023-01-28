@@ -26,6 +26,18 @@ class TaskManager {
         return realmManager.createRealm(object: realmTask) ? true : false
     }
     
+    /// 未完了Taskを全取得
+    /// - Returns: Task配列
+    func getTask() -> [Task] {
+        var taskArray = [Task]()
+        let realmTaskArray = realmManager.getIncompleteTask()
+        for realmTask in realmTaskArray {
+            let task = Task(realmTask: realmTask)
+            taskArray.append(task)
+        }
+        return taskArray
+    }
+    
     /// Taskを取得
     /// - Parameter type: A,B,C,D
     /// - Returns: Task配列(重要度が高い順)

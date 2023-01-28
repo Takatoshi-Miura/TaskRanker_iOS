@@ -14,5 +14,6 @@ target 'TaskRanker' do
   pod 'PKHUD'
   pod 'RealmSwift'
   pod 'ReachabilitySwift'
+  pod 'Charts'
 
 end

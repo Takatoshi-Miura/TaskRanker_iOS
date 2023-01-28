@@ -27,11 +27,11 @@ struct Task {
     var updated_at: Date
     
     var type: SegmentType {
-        if importance > 5 && urgency > 5 {
+        if importance > 4 && urgency > 4 {
             return SegmentType.A
-        } else if importance > 5 && urgency <= 5 {
+        } else if importance > 4 && urgency <= 4 {
             return SegmentType.B
-        } else if importance <= 5 && urgency > 5 {
+        } else if importance <= 4 && urgency > 4 {
             return SegmentType.C
         } else {
             return SegmentType.D
@@ -44,8 +44,8 @@ struct Task {
         self.title = ""
         self.memo = ""
         self.color = TaskColor.red
-        self.importance = 5
-        self.urgency = 5
+        self.importance = 4
+        self.urgency = 4
         self.deadlineDate = nil
         self.isUpdateUrgency = false
         self.daysBeforeUpdateUrgency = 0

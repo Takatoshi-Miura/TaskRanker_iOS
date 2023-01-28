@@ -602,6 +602,10 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - Firebase/Analytics (10.0.0):
     - Firebase/Core
   - Firebase/Auth (10.0.0):
@@ -773,8 +777,10 @@ PODS:
   - Realm/Headers (10.32.0)
   - RealmSwift (10.32.0):
     - Realm (= 10.32.0)
+  - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
+  - Charts
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -787,6 +793,7 @@ SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
+    - Charts
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -807,10 +814,12 @@ SPEC REPOS:
     - ReachabilitySwift
     - Realm
     - RealmSwift
+    - SwiftAlgorithms
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
+  Charts: 354f86803d11d9c35de280587fef50d1af063978
   Firebase: 1b810f3d0c0532e27a48f1961f8c0400a668a2cf
   FirebaseAnalytics: 9921a52739f4ab66099da31b6e0243db78a3ac0a
   FirebaseAuth: 493382cf533cc45e2862b00e9aa4cfe4c98daf71
@@ -831,7 +840,8 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   Realm: a00e93347b8d26d372c7a82f6c0b08d6536a21c8
   RealmSwift: fe09c29ca409f8f905fe4086f2a52936193f2e3d
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: 4a755da4b71feb98b9dc3d306b28f80921a0f53d
+PODFILE CHECKSUM: 03f1e17e041fc2bcff671c47d071f0b239a90aa9
 
 COCOAPODS: 1.10.2

@@ -8,22 +8,34 @@
 import UIKit
 import Charts
 
+protocol MapViewControllerDelegate: AnyObject {
+    /// Taskタップ時
+    func mapVCTaskDidTap(_ viewController: UIViewController, task: Task)
+}
+
 class MapViewController: UIViewController {
     
     // MARK: - UI,Variable
     
     @IBOutlet weak var scatterChartView: ScatterChartView!
+    var delegate: MapViewControllerDelegate?
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initNavigationBar()
         configureChartView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         displayChart()
+    }
+    
+    /// NavigationBar初期化
+    private func initNavigationBar() {
+        self.navigationItem.title = TITLE_TASK_LIST
     }
     
     // MARK: - ScatterChartView
@@ -47,7 +59,7 @@ class MapViewController: UIViewController {
         scatterChartView.leftAxis.axisMaximum = 10
         scatterChartView.leftAxis.axisMinimum = 0
         scatterChartView.leftAxis.labelCount = 1
-        // TODO: データ色変更、データラベルにタイトル表示
+        // TODO: データラベルにタイトル表示
     }
     
     /// 散布図に描画
@@ -60,6 +72,7 @@ class MapViewController: UIViewController {
             let dataSet = ScatterChartDataSet(entries: [entry], label: task.taskID)
             dataSet.setScatterShape(.circle)
             dataSet.scatterShapeSize = 15.0
+            dataSet.setColor(task.color.color)
             data.append(dataSet)
         }
         scatterChartView.data = data
@@ -75,6 +88,7 @@ extension MapViewController: ChartViewDelegate {
             if let taskID = dataSet.label {
                 let taskManager = TaskManager()
                 let task = taskManager.getTask(taskID: taskID)
+                self.delegate?.mapVCTaskDidTap(self, task: task!)
             }
         }
     }

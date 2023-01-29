@@ -51,6 +51,7 @@ let MESSAGE_COMPLETE_TASK = NSLocalizedString("CompleteTaskMessage", comment: ""
 let MESSAGE_INCOMPLETE_TASK = NSLocalizedString("InCompleteTaskMessage", comment: "")
 let MESSAGE_ZERO_TASK = NSLocalizedString("ZeroTaskMessage", comment: "")
 let TITLE_COMPLETE_TASK_LIST = NSLocalizedString("CompleteTaskListTitle", comment: "")
+let TITLE_TASK_LIST = NSLocalizedString("TaskList", comment: "")
 
 // MARK: - Filter
 let TITLE_FILTER = NSLocalizedString("Filter", comment: "")

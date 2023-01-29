@@ -50,6 +50,7 @@
 "InCompleteTaskMessage" = "タスクを未完了にしますか？";
 "ZeroTaskMessage" = "タスクがありません。";
 "CompleteTaskListTitle" = "完了済みタスク";
+"TaskList" = "タスク一覧";
 
 // MARK: - Filter
 "Filter" = "フィルタ";

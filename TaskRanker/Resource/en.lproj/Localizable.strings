@@ -50,6 +50,7 @@
 "InCompleteTaskMessage" = "Do you want to keep the task in progress?";
 "ZeroTaskMessage" = "No tasks.";
 "CompleteTaskListTitle" = "Completed tasks";
+"TaskList" = "Task List";
 
 // MARK: - Filter
 "Filter" = "Filter";

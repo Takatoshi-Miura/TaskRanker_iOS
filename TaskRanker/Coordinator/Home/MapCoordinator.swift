@@ -17,11 +17,21 @@ class MapCoordinator: Coordinator {
     func startFlow(in navigationController: UINavigationController) {
         self.navigationController = navigationController
         let mapViewController = MapViewController()
-//        homeViewController.delegate = self
+        mapViewController.delegate = self
         navigationController.pushViewController(mapViewController, animated: true)
     }
     
     func startFlow(in viewController: UIViewController) {
+    }
+    
+}
+
+extension MapCoordinator: MapViewControllerDelegate {
+    
+    /// MapVC → TaskDetail
+    func mapVCTaskDidTap(_ viewController: UIViewController, task: Task) {
+        let taskDetailCoordinator = TaskViewCoordinator()
+        taskDetailCoordinator.startFlow(in: navigationController!, task: task)
     }
     
 }

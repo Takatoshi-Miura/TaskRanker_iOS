@@ -10,8 +10,9 @@ import Charts
 
 class MapViewController: UIViewController {
     
+    // MARK: - UI,Variable
+    
     @IBOutlet weak var scatterChartView: ScatterChartView!
-    private var taskArray = [Task]()
     
     // MARK: - LifeCycle
     
@@ -29,6 +30,7 @@ class MapViewController: UIViewController {
     
     /// ChartViewの設定
     private func configureChartView () {
+        scatterChartView.delegate = self
         // ズーム禁止
         scatterChartView.pinchZoomEnabled = false
         scatterChartView.doubleTapToZoomEnabled = false
@@ -45,20 +47,36 @@ class MapViewController: UIViewController {
         scatterChartView.leftAxis.axisMaximum = 10
         scatterChartView.leftAxis.axisMinimum = 0
         scatterChartView.leftAxis.labelCount = 1
+        // TODO: データ色変更、データラベルにタイトル表示
     }
     
     /// 散布図に描画
     private func displayChart() {
+        var data = ScatterChartData()
         let taskManager = TaskManager()
-        taskArray = taskManager.getTask()
-        
-        var entries = [BarChartDataEntry]()
+        let taskArray = taskManager.getTask()
         for task in taskArray {
-            let entry = BarChartDataEntry(x: Double(task.urgency), y: Double(task.importance))
-            entries.append(entry)
+            let entry = ChartDataEntry(x: Double(task.urgency), y: Double(task.importance))
+            let dataSet = ScatterChartDataSet(entries: [entry], label: task.taskID)
+            dataSet.setScatterShape(.circle)
+            dataSet.scatterShapeSize = 15.0
+            data.append(dataSet)
         }
-        let set = ScatterChartDataSet(entries: entries, label: "Data")
-        scatterChartView.data = ScatterChartData(dataSet: set)
+        scatterChartView.data = data
     }
 
+}
+
+extension MapViewController: ChartViewDelegate {
+    
+    /// データタップ時の処理
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        if let dataSet = scatterChartView.data?.dataSets[highlight.dataSetIndex] {
+            if let taskID = dataSet.label {
+                let taskManager = TaskManager()
+                let task = taskManager.getTask(taskID: taskID)
+            }
+        }
+    }
+    
 }

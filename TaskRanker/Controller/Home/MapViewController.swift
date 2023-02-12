@@ -59,12 +59,11 @@ class MapViewController: UIViewController {
         scatterChartView.leftAxis.axisMaximum = 10
         scatterChartView.leftAxis.axisMinimum = 0
         scatterChartView.leftAxis.labelCount = 1
-        // TODO: データラベルにタイトル表示
     }
     
     /// 散布図に描画
     private func displayChart() {
-        var data = ScatterChartData()
+        let data = ScatterChartData()
         let taskManager = TaskManager()
         let taskArray = taskManager.getTask()
         for task in taskArray {
@@ -86,6 +85,7 @@ extension MapViewController: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         if let dataSet = scatterChartView.data?.dataSets[highlight.dataSetIndex] {
             if let taskID = dataSet.label {
+                // Task詳細へ遷移
                 let taskManager = TaskManager()
                 let task = taskManager.getTask(taskID: taskID)
                 self.delegate?.mapVCTaskDidTap(self, task: task!)

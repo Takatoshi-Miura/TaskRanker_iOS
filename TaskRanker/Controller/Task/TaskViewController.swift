@@ -111,7 +111,9 @@ class TaskViewController: UIViewController {
         
         colorButton.backgroundColor = TaskColor.allCases[colorIndex].color
         colorButton.setTitle(TaskColor.allCases[colorIndex].title, for: .normal)
-        setDeadlineSwitch(isOn: false)
+        if !isViewer {
+            setDeadlineSwitch(isOn: false)
+        }
     }
     
     /// NavigationBar初期化

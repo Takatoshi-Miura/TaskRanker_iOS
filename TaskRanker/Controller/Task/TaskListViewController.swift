@@ -171,6 +171,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
         cell.imageView?.isUserInteractionEnabled = true
         cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
+        cell.imageView?.tintColor = task.color.color
         cell.imageView!.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(completeTask(_:))))
         cell.textLabel?.text = task.title
         cell.detailTextLabel?.text = task.memo

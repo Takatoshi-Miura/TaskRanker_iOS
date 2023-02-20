@@ -174,7 +174,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.imageView?.tintColor = task.color.color
         cell.imageView!.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(completeTask(_:))))
         cell.textLabel?.text = task.title
-        cell.detailTextLabel?.text = task.memo
+        cell.detailTextLabel?.text = (task.deadlineDate != nil) ? getDeadlineDateString(date: task.deadlineDate!) : ""
         cell.detailTextLabel?.textColor = UIColor.lightGray
         cell.accessoryType = .disclosureIndicator
         return cell

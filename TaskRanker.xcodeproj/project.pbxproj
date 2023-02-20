@@ -44,6 +44,7 @@
 		8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26128CC67A5003BB724 /* HomeCoordinator.swift */; };
 		8D60F26728CC76E1003BB724 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F26928CC76E1003BB724 /* Localizable.strings */; };
 		8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26B28CC78DB003BB724 /* LocalizableString.swift */; };
+		8D97697A29A3A1A40000DD8D /* Definition+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97697929A3A1A40000DD8D /* Definition+Date.swift */; };
 		8DAA1134294934000083F444 /* Definition+TaskColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAA1133294934000083F444 /* Definition+TaskColor.swift */; };
 		8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */; };
 		8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */; };
@@ -103,6 +104,7 @@
 		8D60F26828CC76E1003BB724 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D60F26A28CC76E7003BB724 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D60F26B28CC78DB003BB724 /* LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableString.swift; sourceTree = "<group>"; };
+		8D97697929A3A1A40000DD8D /* Definition+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Date.swift"; sourceTree = "<group>"; };
 		8DAA1133294934000083F444 /* Definition+TaskColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Definition+TaskColor.swift"; sourceTree = "<group>"; };
 		8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				8DB633CB28CDD410001F2DB7 /* Definition+Device.swift */,
 				8DAA1133294934000083F444 /* Definition+TaskColor.swift */,
 				8D55A4A52909EE85005E573A /* Definition+Navigation.swift */,
+				8D97697929A3A1A40000DD8D /* Definition+Date.swift */,
 				8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */,
 				8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */,
 				8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */,
@@ -547,6 +550,7 @@
 				8D1D392A28F984B20078F3CB /* TaskManager.swift in Sources */,
 				8D60F25D28CC6761003BB724 /* HomeViewController.swift in Sources */,
 				2F2F21D328F53C47005FFCC2 /* PageCoordinator.swift in Sources */,
+				8D97697A29A3A1A40000DD8D /* Definition+Date.swift in Sources */,
 				8DCB72D82949E98500935972 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

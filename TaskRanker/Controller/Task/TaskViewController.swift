@@ -39,7 +39,6 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var colorButton: UIButton!
     @IBOutlet weak var deadlineSwitch: UISwitch!
     @IBOutlet weak var deadlineDateButton: UIButton!
-    @IBOutlet weak var repeatLabel: UILabel!
     
     private var pickerView = UIView()
     private let colorPicker = UIPickerView()
@@ -104,7 +103,6 @@ class TaskViewController: UIViewController {
         urgencyLabel.text = TITLE_URGENCY + TITLE_1to8
         typeLabel.text = TITLE_TASK_TYPE
         deadlineDateLabel.text = TITLE_DEADLINE_DATE
-        repeatLabel.text = TITLE_REPEAT
         
         initTextField(textField: titleTextField, placeholder: "")
         initTextView(textView: memoTextView)
@@ -113,7 +111,7 @@ class TaskViewController: UIViewController {
         
         colorButton.backgroundColor = TaskColor.allCases[colorIndex].color
         colorButton.setTitle(TaskColor.allCases[colorIndex].title, for: .normal)
-        deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
+        setDeadlineSwitch(isOn: false)
     }
     
     /// NavigationBar初期化
@@ -169,7 +167,7 @@ class TaskViewController: UIViewController {
             setDeadlineSwitch(isOn: false)
         }
         datePicker.setDate(selectedDate, animated: false)
-        deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
+        deadlineDateButton.setTitle(getDateString(date: selectedDate), for: .normal)
     }
     
     // MARK: - Action
@@ -335,7 +333,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     /// DatePicker完了処理
     @objc func datePickerDoneAction() {
         selectedDate = datePicker.date
-        deadlineDateButton.setTitle(getDatePickerDate(datePicker: datePicker, format: "yyyy/M/d (E)"), for: .normal)
+        deadlineDateButton.setTitle(getDateString(date: selectedDate), for: .normal)
         task.deadlineDate = selectedDate
         closePicker(pickerView)
     }

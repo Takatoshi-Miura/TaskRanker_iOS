@@ -88,7 +88,7 @@ extension CompletedTaskListViewController: UITableViewDataSource, UITableViewDel
         cell.imageView?.tintColor = task.color.color
         cell.imageView!.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(inCompleteTask(_:))))
         cell.textLabel?.text = task.title
-        cell.detailTextLabel?.text = task.memo
+        cell.detailTextLabel?.text = (task.deadlineDate != nil) ? getDeadlineDateString(date: task.deadlineDate!) : ""
         cell.detailTextLabel?.textColor = UIColor.lightGray
         
         let deleteImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))

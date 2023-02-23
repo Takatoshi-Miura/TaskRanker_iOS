@@ -279,20 +279,6 @@ extension RealmManager {
         }
     }
     
-    /// RealmTaskの繰り返しフラグを更新
-    /// - Parameters:
-    ///    - taskID: taskID
-    ///    - isRepeat: 繰り返しフラグ
-    func updateTaskIsRepeat(taskID: String, isRepeat: Bool) {
-        let realm = try! Realm()
-        let result = realm.objects(RealmTask.self)
-            .filter("taskID == '\(taskID)'").first
-        try! realm.write {
-            result?.isRepeat = isRepeat
-            result?.updated_at = Date()
-        }
-    }
-    
     /// RealmTaskの完了フラグを更新
     /// - Parameters:
     ///    - taskID: taskID

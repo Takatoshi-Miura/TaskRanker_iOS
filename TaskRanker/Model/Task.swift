@@ -20,7 +20,6 @@ struct Task {
     var isUpdateUrgency: Bool
     var daysBeforeUpdateUrgency: Int
     var completedDate: Date?
-    var isRepeat: Bool
     var isComplete: Bool
     var isDeleted: Bool
     let created_at: Date
@@ -50,7 +49,6 @@ struct Task {
         self.isUpdateUrgency = false
         self.daysBeforeUpdateUrgency = 0
         self.completedDate = nil
-        self.isRepeat = false
         self.isComplete = false
         self.isDeleted = false
         self.created_at = Date()
@@ -69,7 +67,6 @@ struct Task {
         self.isUpdateUrgency = realmTask.isUpdateUrgency
         self.daysBeforeUpdateUrgency = realmTask.daysBeforeUpdateUrgency
         self.completedDate = realmTask.completedDate
-        self.isRepeat = realmTask.isRepeat
         self.isComplete = realmTask.isComplete
         self.isDeleted = realmTask.isDeleted
         self.created_at = realmTask.created_at
@@ -92,7 +89,6 @@ class RealmTask: Object {
     @objc dynamic var isUpdateUrgency: Bool = false     // 緊急度自動引き上げフラグ
     @objc dynamic var daysBeforeUpdateUrgency: Int = 0  // 緊急度引き上げ日
     @objc dynamic var completedDate: Date?              // 完了日
-    @objc dynamic var isRepeat: Bool = false            // 繰り返し
     @objc dynamic var isComplete: Bool = false          // 完了フラグ
     @objc dynamic var isDeleted: Bool = false           // 削除フラグ
     @objc dynamic var created_at: Date = Date()         // 作成日

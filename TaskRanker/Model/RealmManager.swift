@@ -237,20 +237,6 @@ extension RealmManager {
         }
     }
     
-    /// RealmTaskの緊急度自動引き上げフラグを更新
-    /// - Parameters:
-    ///    - taskID: taskID
-    ///    - isUpdateUrgency: 緊急度自動引き上げフラグ
-    func updateTaskIsUpdateUrgency(taskID: String, isUpdateUrgency: Bool) {
-        let realm = try! Realm()
-        let result = realm.objects(RealmTask.self)
-            .filter("taskID == '\(taskID)'").first
-        try! realm.write {
-            result?.isUpdateUrgency = isUpdateUrgency
-            result?.updated_at = Date()
-        }
-    }
-    
     /// RealmTaskの緊急度引き上げ日を更新
     /// - Parameters:
     ///    - taskID: taskID

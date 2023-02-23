@@ -17,7 +17,6 @@ struct Task {
     var importance: Int
     var urgency: Int
     var deadlineDate: Date?
-    var isUpdateUrgency: Bool
     var daysBeforeUpdateUrgency: Int
     var completedDate: Date?
     var isComplete: Bool
@@ -46,7 +45,6 @@ struct Task {
         self.importance = 4
         self.urgency = 4
         self.deadlineDate = nil
-        self.isUpdateUrgency = false
         self.daysBeforeUpdateUrgency = 0
         self.completedDate = nil
         self.isComplete = false
@@ -64,7 +62,6 @@ struct Task {
         self.importance = realmTask.importance
         self.urgency = realmTask.urgency
         self.deadlineDate = realmTask.deadlineDate
-        self.isUpdateUrgency = realmTask.isUpdateUrgency
         self.daysBeforeUpdateUrgency = realmTask.daysBeforeUpdateUrgency
         self.completedDate = realmTask.completedDate
         self.isComplete = realmTask.isComplete
@@ -86,7 +83,6 @@ class RealmTask: Object {
     @objc dynamic var importance: Int = 5               // 重要度
     @objc dynamic var urgency: Int = 5                  // 緊急度
     @objc dynamic var deadlineDate: Date?               // 期限日
-    @objc dynamic var isUpdateUrgency: Bool = false     // 緊急度自動引き上げフラグ
     @objc dynamic var daysBeforeUpdateUrgency: Int = 0  // 緊急度引き上げ日
     @objc dynamic var completedDate: Date?              // 完了日
     @objc dynamic var isComplete: Bool = false          // 完了フラグ

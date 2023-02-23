@@ -11,6 +11,7 @@ target 'TaskRanker' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Google-Mobile-Ads-SDK'
   pod 'PKHUD'
   pod 'RealmSwift'
   pod 'ReachabilitySwift'

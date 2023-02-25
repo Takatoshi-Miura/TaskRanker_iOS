@@ -45,6 +45,8 @@
 		8D60F26728CC76E1003BB724 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F26928CC76E1003BB724 /* Localizable.strings */; };
 		8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26B28CC78DB003BB724 /* LocalizableString.swift */; };
 		8D97697A29A3A1A40000DD8D /* Definition+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97697929A3A1A40000DD8D /* Definition+Date.swift */; };
+		8D97697C29A722BF0000DD8D /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97697B29A722BF0000DD8D /* FirebaseManager.swift */; };
+		8D97697E29AAC6D90000DD8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */; };
 		8DAA1134294934000083F444 /* Definition+TaskColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAA1133294934000083F444 /* Definition+TaskColor.swift */; };
 		8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */; };
 		8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */; };
@@ -105,6 +107,8 @@
 		8D60F26A28CC76E7003BB724 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D60F26B28CC78DB003BB724 /* LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableString.swift; sourceTree = "<group>"; };
 		8D97697929A3A1A40000DD8D /* Definition+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Date.swift"; sourceTree = "<group>"; };
+		8D97697B29A722BF0000DD8D /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8DAA1133294934000083F444 /* Definition+TaskColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Definition+TaskColor.swift"; sourceTree = "<group>"; };
 		8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1D392628F984B20078F3CB /* RealmManager.swift */,
+				8D97697B29A722BF0000DD8D /* FirebaseManager.swift */,
 				8D1D392728F984B20078F3CB /* TaskManager.swift */,
 				8D1D392828F984B20078F3CB /* Task.swift */,
 			);
@@ -247,6 +252,7 @@
 				8D60F24328CC5E64003BB724 /* Assets.xcassets */,
 				8D60F26B28CC78DB003BB724 /* LocalizableString.swift */,
 				8D60F26928CC76E1003BB724 /* Localizable.strings */,
+				8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */,
 				8D60F24828CC5E64003BB724 /* Info.plist */,
 			);
 			path = Resource;
@@ -462,6 +468,7 @@
 				8D60F25E28CC6761003BB724 /* HomeViewController.xib in Resources */,
 				2F2F21C528F51A97005FFCC2 /* SettingViewController.xib in Resources */,
 				2F2F21CB28F5397B005FFCC2 /* LoginViewController.xib in Resources */,
+				8D97697E29AAC6D90000DD8D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D97697C29A722BF0000DD8D /* FirebaseManager.swift in Sources */,
 				8D55A49E2904B368005E573A /* TaskViewCoordinator.swift in Sources */,
 				8DB633D028CDD502001F2DB7 /* UIViewController+Alert.swift in Sources */,
 				8D60F25928CC644B003BB724 /* AppCoordinator.swift in Sources */,

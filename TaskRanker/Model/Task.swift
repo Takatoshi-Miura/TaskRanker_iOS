@@ -9,8 +9,8 @@ import RealmSwift
 
 struct Task {
     
-    let taskID: String
-    let userID: String
+    var taskID: String
+    var userID: String
     var title: String
     var memo: String
     var color: TaskColor
@@ -21,7 +21,7 @@ struct Task {
     var completedDate: Date?
     var isComplete: Bool
     var isDeleted: Bool
-    let created_at: Date
+    var created_at: Date
     var updated_at: Date
     
     var type: SegmentType {

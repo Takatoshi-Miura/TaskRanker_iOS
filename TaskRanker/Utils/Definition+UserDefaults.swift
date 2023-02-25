@@ -67,6 +67,7 @@ enum UserDefaultsKey: String {
         UserDefaults.standard.synchronize()
     }
     
+    // 存在判定用
     func object() -> Any? {
         return UserDefaults.standard.object(forKey: self.rawValue)
     }

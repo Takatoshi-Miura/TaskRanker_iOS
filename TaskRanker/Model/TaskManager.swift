@@ -10,20 +10,98 @@ import Foundation
 class TaskManager {
     
     private let realmManager = RealmManager()
+    private let firebaseManager = FirebaseManager()
     
-    /// Taskを保存
-    /// - Parameter task: Task
-    /// - Returns: 成功(true), 失敗(false)
-    func saveTask(task: Task) -> Bool {
-        let realmTask = RealmTask()
-        realmTask.taskID = task.taskID
-        realmTask.title = task.title
-        realmTask.memo = task.memo
-        realmTask.color = task.color.rawValue
-        realmTask.importance = task.importance
-        realmTask.urgency = task.urgency
-        realmTask.deadlineDate = task.deadlineDate
-        return realmManager.createRealm(object: realmTask) ? true : false
+    // MARK: - Realm-Firebase同期用
+    
+    /// RaalmとFirebaseのデータを同期
+    /// - Parameter completion: 完了処理
+    func syncDatabase(completion: @escaping () -> ()) {
+        // Realmはスレッドを超えてはいけないため同期的に処理を行う
+        // 各データ毎に専用のスレッドを作成して処理を行う
+        DispatchQueue.global(qos: .default).sync {
+            syncTask(completion: completion)
+        }
+    }
+    
+    /// Taskを同期
+    /// - Parameters:
+    ///   - completion: 完了処理
+    private func syncTask(completion: @escaping () -> ()) {
+        // RealmのTaskを全取得
+        let realmTaskArray = self.getAllTask()
+        
+        // FirebaseのTaskを全取得
+        firebaseManager.getAllTask(completion: {
+            // FirebaseもしくはRealmにしか存在しないデータを抽出
+            let firebaseTaskIDArray = self.getTaskIDArray(array: self.firebaseManager.taskArray)
+            let realmTaskIDArray = self.getTaskIDArray(array: realmTaskArray)
+            let onlyRealmID = realmTaskIDArray.subtracting(firebaseTaskIDArray)
+            let onlyFirebaseID = firebaseTaskIDArray.subtracting(realmTaskIDArray)
+            
+            // Realmにしか存在しないデータをFirebaseに保存
+            for taskID in onlyRealmID {
+                let task = self.getTaskWithID(array: realmTaskArray, ID: taskID)
+                self.firebaseManager.saveTask(task: task, completion: {})
+            }
+            
+            // Firebaseにしか存在しないデータをRealmに保存
+            for taskID in onlyFirebaseID {
+                let task = self.getTaskWithID(array: self.firebaseManager.taskArray, ID: taskID)
+                if !self.saveTask(task: task) {
+                    return
+                }
+            }
+            
+            // どちらにも存在するデータの更新日時を比較し新しい方に更新する
+            let commonID = realmTaskIDArray.subtracting(onlyRealmID)
+            for taskID in commonID {
+                let realmTask = self.getTaskWithID(array: realmTaskArray, ID: taskID)
+                let firebaseTask = self.getTaskWithID(array: self.firebaseManager.taskArray, ID: taskID)
+                
+                if realmTask.updated_at > firebaseTask.updated_at {
+                    // Realmデータの方が新しい
+                    self.firebaseManager.updateTask(task: realmTask)
+                } else if firebaseTask.updated_at > realmTask.updated_at  {
+                    // Firebaseデータの方が新しい
+                    self.updateTask(task: firebaseTask)
+                }
+            }
+            completion()
+        })
+    }
+    
+    /// Task配列からtaskID配列を作成
+    /// - Parameter array: Task配列
+    /// - Returns: taskID配列
+    private func getTaskIDArray(array: [Task]) -> [String] {
+        var taskIDArray: [String] = []
+        for task in array {
+            taskIDArray.append(task.taskID)
+        }
+        return taskIDArray
+    }
+    
+    /// Task配列からTaskを取得(taskID指定)
+    /// - Parameters:
+    ///   - array: 検索対象のTask配列
+    ///   - ID: 取得したいTaskのID
+    /// - Returns: Task
+    private func getTaskWithID(array :[Task], ID: String) -> Task {
+        return array.filter{ $0.taskID.contains(ID) }.first!
+    }
+    
+    // MARK: - Select
+    
+    /// Taskを全取得
+    /// - Returns: 全Taskデータ
+    func getAllTask() -> [Task] {
+        var taskArray = [Task]()
+        let realmTaskArray = realmManager.getAllTask()
+        for realmTask in realmTaskArray {
+            taskArray.append(Task(realmTask: realmTask))
+        }
+        return taskArray
     }
     
     /// 未完了Taskを全取得
@@ -101,6 +179,25 @@ class TaskManager {
         }
     }
     
+    // MARK: - Insert
+    
+    /// Taskを保存
+    /// - Parameter task: Task
+    /// - Returns: 成功(true), 失敗(false)
+    func saveTask(task: Task) -> Bool {
+        let realmTask = RealmTask()
+        realmTask.taskID = task.taskID
+        realmTask.title = task.title
+        realmTask.memo = task.memo
+        realmTask.color = task.color.rawValue
+        realmTask.importance = task.importance
+        realmTask.urgency = task.urgency
+        realmTask.deadlineDate = task.deadlineDate
+        return realmManager.createRealm(object: realmTask) ? true : false
+    }
+    
+    // MARK: - Update
+    
     /// Taskを更新
     /// - Parameter task: Task
     func updateTask(task: Task) {
@@ -133,4 +230,22 @@ class TaskManager {
         }
     }
     
+}
+
+extension Array where Element: Equatable {
+    typealias E = Element
+
+    func subtracting(_ other: [E]) -> [E] {
+        return self.compactMap { element in
+            if (other.filter { $0 == element }).count == 0 {
+                return element
+            } else {
+                return nil
+            }
+        }
+    }
+
+    mutating func subtract(_ other: [E]) {
+        self = subtracting(other)
+    }
 }

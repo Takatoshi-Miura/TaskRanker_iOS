@@ -40,8 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if error == nil {
                     // ログイン成功時、FirebaseのユーザーIDを使用
                     UserDefaultsKey.userID.set(value: Auth.auth().currentUser!.uid)
+                    UserDefaultsKey.useFirebase.set(value: true)
                 }
             }
+        } else {
+            UserDefaultsKey.useFirebase.set(value: false)
         }
         
         // 初期画面を表示

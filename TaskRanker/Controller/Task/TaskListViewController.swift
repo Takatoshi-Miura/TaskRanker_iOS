@@ -41,14 +41,17 @@ class TaskListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refreshData()
+        syncData()
         initTableView()
     }
     
     /// データの同期処理
     @objc func syncData() {
-        if filterArray != nil {
-            applyFilter(filterArray: filterArray!)
+        if UserDefaultsKey.useFirebase.bool() {
+            let taskManager = TaskManager()
+            taskManager.syncDatabase(completion: {
+                self.refreshData()
+            })
         } else {
             refreshData()
         }
@@ -56,10 +59,13 @@ class TaskListViewController: UIViewController {
     
     /// データを再取得
     func refreshData() {
-        self.filterArray = nil
-        let taskManager = TaskManager()
-        taskArray = taskManager.getTask(type: segmentType)
-        reloadTableView()
+        if filterArray != nil {
+            applyFilter(filterArray: filterArray!)
+        } else {
+            let taskManager = TaskManager()
+            taskArray = taskManager.getTask(type: segmentType)
+            reloadTableView()
+        }
     }
     
     /// フィルタを適用

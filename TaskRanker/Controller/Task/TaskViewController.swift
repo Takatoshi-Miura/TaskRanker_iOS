@@ -225,7 +225,6 @@ class TaskViewController: UIViewController {
             showErrorAlert(message: ERROR_MESSAGE_SAVE_FAILED)
             return
         }
-        // TODO: Firebaseに送信(アカウント持ちの場合のみ)
         
         // モーダルを閉じる
         delegate?.taskVCAddTask(self, task: task)

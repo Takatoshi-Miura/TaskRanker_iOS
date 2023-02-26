@@ -193,7 +193,13 @@ class TaskManager {
         realmTask.importance = task.importance
         realmTask.urgency = task.urgency
         realmTask.deadlineDate = task.deadlineDate
-        return realmManager.createRealm(object: realmTask) ? true : false
+        var result = realmManager.createRealm(object: realmTask) ? true : false
+        if !result  { return result }
+        
+        if UserDefaultsKey.useFirebase.bool() && Network.isOnline() {
+            firebaseManager.saveTask(task: task, completion: {})
+        }
+        return result
     }
     
     // MARK: - Update
@@ -227,6 +233,11 @@ class TaskManager {
         }
         if task.isDeleted != oldTask.isDeleted {
             realmManager.updateTaskIsDeleted(taskID: task.taskID, isDeleted: task.isDeleted)
+        }
+        
+        // Firebase更新
+        if UserDefaultsKey.useFirebase.bool() && Network.isOnline() {
+            firebaseManager.updateTask(task: task)
         }
     }
     

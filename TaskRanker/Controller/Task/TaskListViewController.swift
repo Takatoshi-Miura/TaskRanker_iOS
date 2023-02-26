@@ -90,7 +90,6 @@ class TaskListViewController: UIViewController {
             tableView.insertRows(at: [indexPath], with: UITableView.RowAnimation.right)
             updateTableFooterView()
         }
-        
     }
     
     /// タスクを更新

@@ -20,23 +20,28 @@ class FirebaseManager {
     ///   - task: Task
     ///   - completion: 完了処理
     func saveTask(task: Task, completion: @escaping () -> ()) {
+        var taskDic = [String : Any]()
+        taskDic["userID"] = task.userID
+        taskDic["taskID"] = task.taskID
+        taskDic["title"] = task.title
+        taskDic["memo"] = task.memo
+        taskDic["color"] = task.color
+        taskDic["importance"] = task.importance
+        taskDic["urgency"] = task.urgency
+        taskDic["daysBeforeUpdateUrgency"] = task.daysBeforeUpdateUrgency
+        taskDic["isComplete"] = task.isComplete
+        taskDic["isDeleted"] = task.isDeleted
+        taskDic["created_at"] = task.created_at
+        taskDic["updated_at"] = task.updated_at
+        if let deadlineDate = task.deadlineDate {
+            taskDic["deadlineDate"] = deadlineDate
+        }
+        if let completedDate = task.completedDate {
+            taskDic["completedDate"] = completedDate
+        }
+        
         let db = Firestore.firestore()
-        db.collection("Task").document("\(task.userID)_\(task.taskID)").setData([
-            "userID"                    : task.userID,
-            "taskID"                    : task.taskID,
-            "title"                     : task.title,
-            "memo"                      : task.memo,
-            "color"                     : task.color,
-            "importance"                : task.importance,
-            "urgency"                   : task.urgency,
-            "deadlineDate"              : task.deadlineDate ?? "",
-            "daysBeforeUpdateUrgency"   : task.daysBeforeUpdateUrgency,
-            "completedDate"             : task.completedDate ?? "",
-            "isComplete"                : task.isComplete,
-            "isDeleted"                 : task.isDeleted,
-            "created_at"                : task.created_at,
-            "updated_at"                : task.updated_at
-        ]) { err in
+        db.collection("Task").document("\(task.userID)_\(task.taskID)").setData(taskDic) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
@@ -68,9 +73,13 @@ class FirebaseManager {
                     task.color = collection["color"] as! Int
                     task.importance = collection["importance"] as! Int
                     task.urgency = collection["urgency"] as! Int
-                    task.deadlineDate = (collection["deadlineDate"] as! Timestamp).dateValue()
+                    if let deadlineDate = collection["deadlineDate"] {
+                        task.deadlineDate = (deadlineDate as! Timestamp).dateValue()
+                    }
                     task.daysBeforeUpdateUrgency = collection["daysBeforeUpdateUrgency"] as! Int
-                    task.completedDate = (collection["completedDate"] as! Timestamp).dateValue()
+                    if let completedDate = collection["completedDate"] {
+                        task.completedDate = (completedDate as! Timestamp).dateValue()
+                    }
                     task.isComplete = collection["isComplete"] as! Bool
                     task.isDeleted = collection["isDeleted"] as! Bool
                     task.created_at = (collection["created_at"] as! Timestamp).dateValue()
@@ -88,21 +97,26 @@ class FirebaseManager {
     /// - Parameters:
     ///   - task: Task
     func updateTask(task: Task) {
+        var taskDic = [String : Any]()
+        taskDic["title"] = task.title
+        taskDic["memo"] = task.memo
+        taskDic["color"] = task.color
+        taskDic["importance"] = task.importance
+        taskDic["urgency"] = task.urgency
+        taskDic["daysBeforeUpdateUrgency"] = task.daysBeforeUpdateUrgency
+        taskDic["isComplete"] = task.isComplete
+        taskDic["isDeleted"] = task.isDeleted
+        taskDic["updated_at"] = task.updated_at
+        if let deadlineDate = task.deadlineDate {
+            taskDic["deadlineDate"] = deadlineDate
+        }
+        if let completedDate = task.completedDate {
+            taskDic["completedDate"] = completedDate
+        }
+        
         let db = Firestore.firestore()
         let database = db.collection("Task").document("\(task.userID)_\(task.taskID)")
-        database.updateData([
-            "title"                     : task.title,
-            "memo"                      : task.memo,
-            "color"                     : task.color,
-            "importance"                : task.importance,
-            "urgency"                   : task.urgency,
-            "deadlineDate"              : task.deadlineDate ?? "",
-            "daysBeforeUpdateUrgency"   : task.daysBeforeUpdateUrgency,
-            "completedDate"             : task.completedDate ?? "",
-            "isComplete"                : task.isComplete,
-            "isDeleted"                 : task.isDeleted,
-            "updated_at"                : task.updated_at
-        ]) { err in
+        database.updateData(taskDic) { err in
             if let err = err {
                 print("Error updating document: \(err)")
             }

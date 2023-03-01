@@ -230,8 +230,11 @@ class LoginViewController: UIViewController {
                 let taskManager = TaskManager()
                 taskManager.syncDatabase(completion: {
                     HUD.hide()
-                    self.delegate?.loginVCUserDidLogin(self)
                     HUD.show(.labeledSuccess(title: "", subtitle: MESSAGE_DATA_TRANSFER_SUCCESSFUL))
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                        HUD.hide()
+                        self.delegate?.loginVCUserDidLogin(self)
+                    }
                 })
             }
         }

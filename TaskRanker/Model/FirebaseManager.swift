@@ -65,7 +65,7 @@ class FirebaseManager {
                     task.taskID = collection["taskID"] as! String
                     task.title = collection["title"] as! String
                     task.memo = collection["memo"] as! String
-                    task.color = collection["color"] as! TaskColor
+                    task.color = collection["color"] as! Int
                     task.importance = collection["importance"] as! Int
                     task.urgency = collection["urgency"] as! Int
                     task.deadlineDate = (collection["deadlineDate"] as! Timestamp).dateValue()

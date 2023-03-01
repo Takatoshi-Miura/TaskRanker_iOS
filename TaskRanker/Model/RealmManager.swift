@@ -44,10 +44,12 @@ class RealmManager {
     /// RealmのデータのUserIDを一括変更
     /// - Parameter userID: ユーザーID
     func updateAllRealmUserID(userID: String) {
+        updateTaskUserID(userID: userID)
     }
     
     /// Realmのデータを全削除
     func deleteAllRealmData() {
+        deleteAllTask()
     }
     
 }

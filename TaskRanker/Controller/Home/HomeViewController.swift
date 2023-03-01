@@ -44,6 +44,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         initNavigation()
         initTaskListView()
+        initNotification()
         addRightSwipeGesture()
         addLeftSwipeGesture()
     }
@@ -129,6 +130,28 @@ class HomeViewController: UIViewController {
         self.taskListView.addSubview(taskListVC_A.view)
         
         selectSegment(number: SegmentType.A.rawValue)
+    }
+    
+    /// 通知設定
+    private func initNotification() {
+        // ログイン時のリロード用
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.syncTaskList),
+                                               name: NSNotification.Name(rawValue: "afterLogin"),
+                                               object: nil)
+        // ログアウト時のリロード用
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.syncTaskList),
+                                               name: NSNotification.Name(rawValue: "afterLogout"),
+                                               object: nil)
+    }
+    
+    /// TaskListを初期化
+    @objc func syncTaskList() {
+        self.taskListVC_A.syncData()
+        self.taskListVC_B.syncData()
+        self.taskListVC_C.syncData()
+        self.taskListVC_D.syncData()
     }
     
     /// 右スワイプでABCD切り替え

@@ -13,7 +13,7 @@ struct Task {
     var userID: String
     var title: String
     var memo: String
-    var color: TaskColor
+    var color: Int
     var importance: Int
     var urgency: Int
     var deadlineDate: Date?
@@ -41,7 +41,7 @@ struct Task {
         self.userID = UserDefaultsKey.userID.string()
         self.title = ""
         self.memo = ""
-        self.color = TaskColor.red
+        self.color = TaskColor.red.rawValue
         self.importance = 4
         self.urgency = 4
         self.deadlineDate = nil
@@ -58,7 +58,7 @@ struct Task {
         self.userID = realmTask.userID
         self.title = realmTask.title
         self.memo = realmTask.memo
-        self.color = TaskColor.allCases[realmTask.color]
+        self.color = TaskColor.allCases[realmTask.color].rawValue
         self.importance = realmTask.importance
         self.urgency = realmTask.urgency
         self.deadlineDate = realmTask.deadlineDate

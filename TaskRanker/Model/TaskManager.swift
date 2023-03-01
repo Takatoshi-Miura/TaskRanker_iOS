@@ -189,11 +189,11 @@ class TaskManager {
         realmTask.taskID = task.taskID
         realmTask.title = task.title
         realmTask.memo = task.memo
-        realmTask.color = task.color.rawValue
+        realmTask.color = task.color
         realmTask.importance = task.importance
         realmTask.urgency = task.urgency
         realmTask.deadlineDate = task.deadlineDate
-        var result = realmManager.createRealm(object: realmTask) ? true : false
+        let result = realmManager.createRealm(object: realmTask)
         if !result  { return result }
         
         if UserDefaultsKey.useFirebase.bool() && Network.isOnline() {
@@ -217,7 +217,7 @@ class TaskManager {
             realmManager.updateTaskMemo(taskID: task.taskID, memo: task.memo)
         }
         if task.color != oldTask.color {
-            realmManager.updateTaskColor(taskID: task.taskID, color: task.color.rawValue)
+            realmManager.updateTaskColor(taskID: task.taskID, color: task.color)
         }
         if task.importance != oldTask.importance {
             realmManager.updateTaskImportance(taskID: task.taskID, importance: task.importance)

@@ -155,8 +155,8 @@ class TaskViewController: UIViewController {
     private func inputTask() {
         titleTextField.text = task.title
         memoTextView.text = task.memo
-        colorButton.backgroundColor = task.color.color
-        colorButton.setTitle(task.color.title, for: .normal)
+        colorButton.backgroundColor = TaskColor.allCases[task.color].color
+        colorButton.setTitle(TaskColor.allCases[task.color].title, for: .normal)
         importanceSlider.value = Float(task.importance)
         importanceValueLabel.text = String(task.importance)
         urgencySlider.value = Float(task.urgency)
@@ -215,7 +215,7 @@ class TaskViewController: UIViewController {
         var task = Task()
         task.title = titleTextField.text!
         task.memo = memoTextView.text!
-        task.color = TaskColor.allCases[colorIndex]
+        task.color = TaskColor.allCases[colorIndex].rawValue
         task.importance = Int(importanceValueLabel.text!)!
         task.urgency = Int(urgencyValueLabel.text!)!
         task.deadlineDate = deadlineSwitch.isOn ? selectedDate : nil
@@ -359,7 +359,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         closePicker(pickerView)
         colorButton.backgroundColor = TaskColor.allCases[colorIndex].color
         colorButton.setTitle(TaskColor.allCases[colorIndex].title, for: .normal)
-        task.color = TaskColor.allCases[colorIndex]
+        task.color = TaskColor.allCases[colorIndex].rawValue
     }
     
     /// ColorPickerキャンセル処理

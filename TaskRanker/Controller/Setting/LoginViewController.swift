@@ -6,8 +6,8 @@
 //
 
 import UIKit
-//import PKHUD
-//import Firebase
+import PKHUD
+import Firebase
 
 protocol LoginViewControllerDelegate: AnyObject {
     // ログイン時の処理
@@ -36,11 +36,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // ログイン状態の判定
-//        if let _ = UserDefaults.standard.object(forKey: "address") as? String,
-//           let _ = UserDefaults.standard.object(forKey: "password") as? String
-//        {
-//            isLogin = true
-//        }
+        if UserDefaultsKey.useFirebase.bool() {
+            isLogin = true
+        }
         initView()
     }
     
@@ -52,12 +50,8 @@ class LoginViewController: UIViewController {
             detailLabel.text = TITLE_ALREADY_LOGIN
             loginButton.backgroundColor = UIColor.systemRed
             loginButton.setTitle(TITLE_LOGOUT, for: .normal)
-            if let address = UserDefaults.standard.object(forKey: "address") as? String {
-                loginTextField.text = address
-            }
-            if let password = UserDefaults.standard.object(forKey: "password") as? String {
-                passwordTextField.text = password
-            }
+            loginTextField.text = UserDefaultsKey.address.string()
+            passwordTextField.text = UserDefaultsKey.password.string()
         } else {
             detailLabel.text = TITLE_LOGIN_HELP
             loginButton.backgroundColor = UIColor.systemBlue
@@ -73,23 +67,211 @@ class LoginViewController: UIViewController {
     
     /// ログインボタン
     @IBAction func tapLoginButton(_ sender: Any) {
+        if isLogin {
+            logout()
+        } else {
+            login(mail: loginTextField.text!, password: passwordTextField.text!)
+        }
     }
     
     /// パスワード変更ボタン
     @IBAction func tapPasswordChangeButton(_ sender: Any) {
+        if loginTextField.text == "" {
+            showErrorAlert(message: MESSAGE_EMPTY_TEXT_ERROR_PASSWORD_RESET)
+            return
+        }
+        showOKCancelAlert(title: TITLE_PASSWORD_RESET, message:MESSAGE_PASSWORD_RESET, OKAction: {
+            self.sendPasswordResetMail(mail: self.loginTextField.text!)
+        })
     }
     
     /// アカウント作成ボタン
     @IBAction func tapCreateAccountButton(_ sender: Any) {
+        if loginTextField.text == "" || passwordTextField.text == "" {
+            showErrorAlert(message: MESSAGE_EMPTY_TEXT_ERROR)
+            return
+        }
+        showOKCancelAlert(title: TITLE_CREATE_ACCOUNT, message: MESSAGE_CREATE_ACCOUNT, OKAction: {
+            self.createAccount(mail: self.loginTextField.text!, password: self.passwordTextField.text!)
+        })
     }
     
     /// アカウント削除ボタン
     @IBAction func tapDeleteAccountButton(_ sender: Any) {
+        if !isLogin {
+            showErrorAlert(message: MESSAGE_PLEASE_LOGIN)
+            return
+        }
+        showOKCancelAlert(title: TITLE_DELETE_ACCOUNT, message: MESSAGE_DELETE_ACCOUNT, OKAction: {
+            self.deleteAccount()
+        })
     }
     
     /// キャンセルボタン
     @IBAction func tapCancelButton(_ sender: Any) {
         delegate?.loginVCCancelDidTap(self)
+    }
+    
+    // MARK: - Private
+    
+    /// ログイン処理
+    /// - Parameters:
+    ///   - mail: メールアドレス
+    ///   - password: パスワード
+    private func login(mail address: String, password pass: String) {
+        HUD.show(.labeledProgress(title: "", subtitle: MESSAGE_DURING_LOGIN_PROCESS))
+        
+        Auth.auth().signIn(withEmail: address, password: pass) { authResult, error in
+            if error != nil {
+                if let errorCode = AuthErrorCode.Code(rawValue: error!._code) {
+                    switch errorCode {
+                    case .invalidEmail:
+                        HUD.show(.labeledError(title: "", subtitle: MESSAGE_INVALID_EMAIL))
+                    case .wrongPassword:
+                        HUD.show(.labeledError(title: "", subtitle: MESSAGE_WRONG_PASSWORD))
+                    default:
+                        HUD.show(.labeledError(title: "", subtitle: MESSAGE_LOGIN_ERROR))
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0) {
+                        HUD.hide()
+                        return
+                    }
+                }
+            } else {
+                // UserDefaultsにユーザー情報を保存
+                UserDefaultsKey.userID.set(value: Auth.auth().currentUser!.uid)
+                UserDefaultsKey.address.set(value: address)
+                UserDefaultsKey.password.set(value: pass)
+                UserDefaultsKey.useFirebase.set(value: true)
+                
+                // Realmデータを全削除
+                let realmManager = RealmManager()
+                realmManager.deleteAllRealmData()
+                
+                // メッセージが隠れてしまうため、遅延処理を行ってから画面遷移
+                HUD.show(.labeledSuccess(title: "", subtitle: MESSAGE_LOGIN_SUCCESSFUL))
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                    self.delegate?.loginVCUserDidLogin(self)
+                }
+            }
+        }
+    }
+    
+    /// ログアウト処理
+    private func logout() {
+        do {
+            try Auth.auth().signOut()
+            self.actionAfterLogout()
+            // メッセージが隠れてしまうため、遅延処理を行う
+            HUD.show(.labeledSuccess(title: "", subtitle: MESSAGE_LOGOUT_SUCCESSFUL))
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                self.delegate?.loginVCUserDidLogout(self)
+            }
+        } catch _ as NSError {
+            HUD.hide()
+            showErrorAlert(message: MESSAGE_LOGOUT_ERROR)
+        }
+    }
+    
+    /// パスワードリセットメールを送信
+    /// - Parameters:
+    ///   - mail: メールアドレス
+    private func sendPasswordResetMail(mail address: String) {
+        Auth.auth().sendPasswordReset(withEmail: address) { (error) in
+            if error != nil {
+                self.showErrorAlert(message: MESSAGE_MAIL_SEND_ERROR)
+                return
+            }
+            HUD.show(.labeledSuccess(title: "", subtitle: MESSAGE_MAIL_SEND_SUCCESSFUL))
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                self.delegate?.loginVCUserDidLogin(self)
+            }
+        }
+    }
+    
+    /// アカウント作成処理
+    /// - Parameters:
+    ///   - mail: メールアドレス
+    ///   - password: パスワード
+    private func createAccount(mail address: String, password pass: String) {
+        HUD.show(.labeledProgress(title: "", subtitle: MESSAGE_DURING_CREATE_ACCOUNT_PROCESS))
+        
+        Auth.auth().createUser(withEmail: address, password: pass) { authResult, error in
+            if error != nil {
+                HUD.hide()
+                if let errorCode = AuthErrorCode.Code(rawValue: error!._code) {
+                    switch errorCode {
+                        case .invalidEmail:
+                            HUD.show(.labeledError(title: "", subtitle: MESSAGE_INVALID_EMAIL))
+                        case .emailAlreadyInUse:
+                            HUD.show(.labeledError(title: "", subtitle: MESSAGE_EMAIL_ALREADY_INUSE))
+                        case .weakPassword:
+                            HUD.show(.labeledError(title: "", subtitle: MESSAGE_WEAK_PASSWORD))
+                        default:
+                            HUD.show(.labeledError(title: "", subtitle: MESSAGE_CREATE_ACCOUNT_ERROR))
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0) {
+                        HUD.hide()
+                        return
+                    }
+                }
+            } else {
+                // FirebaseのユーザーIDとログイン情報を保存
+                UserDefaultsKey.userID.set(value: Auth.auth().currentUser!.uid)
+                UserDefaultsKey.address.set(value: address)
+                UserDefaultsKey.password.set(value: pass)
+                UserDefaultsKey.useFirebase.set(value: true)
+                
+                // RealmデータのuserIDを新しいIDに更新
+                let realmManager = RealmManager()
+                realmManager.updateAllRealmUserID(userID: Auth.auth().currentUser!.uid)
+                
+                // Firebaseと同期
+                let taskManager = TaskManager()
+                taskManager.syncDatabase(completion: {
+                    HUD.hide()
+                    self.delegate?.loginVCUserDidLogin(self)
+                    HUD.show(.labeledSuccess(title: "", subtitle: MESSAGE_DATA_TRANSFER_SUCCESSFUL))
+                })
+            }
+        }
+    }
+    
+    /// アカウント削除処理
+    private func deleteAccount() {
+        HUD.show(.labeledProgress(title: "", subtitle: MESSAGE_DURING_DELETE_ACCOUNT))
+        Auth.auth().currentUser?.delete { (error) in
+            if error == nil {
+                self.actionAfterLogout()
+                
+                // メッセージが隠れてしまうため、遅延処理を行う
+                HUD.show(.labeledSuccess(title: "", subtitle: MESSAGE_DELETE_ACCOUNT_SUCCESSFUL))
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                    self.delegate?.loginVCUserDidLogout(self)
+                }
+            } else {
+                HUD.hide()
+                self.showErrorAlert(message: MESSAGE_DELETE_ACCOUNT_ERROR)
+            }
+        }
+    }
+    
+    /// ログアウト時の共通処理
+    private func actionAfterLogout() {
+        // テキストフィールドをクリア
+        self.loginTextField.text = ""
+        self.passwordTextField.text = ""
+        
+        // Realmデータを全削除
+        let realmManager = RealmManager()
+        realmManager.deleteAllRealmData()
+        
+        // UserDefaultsのユーザー情報を削除&新規作成
+        UserDefaultsKey.userID.remove()
+        UserDefaultsKey.address.remove()
+        UserDefaultsKey.password.remove()
+        UserDefaultsKey.userID.set(value: NSUUID().uuidString)
+        UserDefaultsKey.useFirebase.set(value: false)
     }
     
 }

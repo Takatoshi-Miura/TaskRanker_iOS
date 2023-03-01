@@ -8,7 +8,9 @@
 import Reachability
 
 final class Network {
-
+    
+    /// インターネット接続判定
+    /// - Returns: true:オンライン、false:オフライン
     static func isOnline() -> Bool {
         let reachability = try! Reachability()
         if reachability.connection == .unavailable {
@@ -17,5 +19,5 @@ final class Network {
             return true
         }
     }
-
+    
 }

@@ -71,7 +71,7 @@ class MapViewController: UIViewController {
             let dataSet = ScatterChartDataSet(entries: [entry], label: task.taskID)
             dataSet.setScatterShape(.circle)
             dataSet.scatterShapeSize = 15.0
-            dataSet.setColor(task.color.color)
+            dataSet.setColor(TaskColor.allCases[task.color].color)
             data.append(dataSet)
         }
         scatterChartView.data = data

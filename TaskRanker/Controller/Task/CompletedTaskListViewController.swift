@@ -37,6 +37,8 @@ class CompletedTaskListViewController: UIViewController {
         taskArray = taskManager.getTask(isComplete: true)
     }
     
+    // MARK: - Viewer
+    
     /// NavigationController初期化
     private func initNavigation() {
         self.title = TITLE_COMPLETE_TASK_LIST
@@ -54,50 +56,6 @@ class CompletedTaskListViewController: UIViewController {
     /// 閉じる
     @objc func tapCloseButton(_ sender: UIBarButtonItem) {
         delegate?.completedTaskListVCDismiss(self)
-    }
-
-}
-
-extension CompletedTaskListViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    /// TableView初期化
-    private func initTableView() {
-        tableView.tableFooterView = UIView()
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0
-        }
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let task = taskArray[indexPath.row]
-        let symbolName = task.isComplete ? "checkmark.circle" : "circle"
-        let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
-        cell.imageView?.isUserInteractionEnabled = true
-        cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
-        cell.imageView?.tintColor = TaskColor.allCases[task.color].color
-        cell.imageView!.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(inCompleteTask(_:))))
-        cell.textLabel?.text = task.title
-        cell.detailTextLabel?.text = (task.deadlineDate != nil) ? getDeadlineDateString(date: task.deadlineDate!) : ""
-        cell.detailTextLabel?.textColor = UIColor.lightGray
-        
-        let deleteImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        deleteImage.image = UIImage(systemName: "trash")
-        deleteImage.tintColor = UIColor.red
-        deleteImage.isUserInteractionEnabled = true
-        deleteImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteTask(_:))))
-        cell.accessoryView = deleteImage
-        return cell
     }
     
     /// タスクを未完了にする
@@ -144,6 +102,50 @@ extension CompletedTaskListViewController: UITableViewDataSource, UITableViewDel
             self.taskArray.remove(at: tappedIndexPath.row)
             self.tableView.deleteRows(at: [tappedIndexPath], with: UITableView.RowAnimation.left)
         })
+    }
+
+}
+
+extension CompletedTaskListViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    /// TableView初期化
+    private func initTableView() {
+        tableView.tableFooterView = UIView()
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return taskArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        let task = taskArray[indexPath.row]
+        let symbolName = task.isComplete ? "checkmark.circle" : "circle"
+        let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
+        cell.imageView?.isUserInteractionEnabled = true
+        cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
+        cell.imageView?.tintColor = TaskColor.allCases[task.color].color
+        cell.imageView!.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(inCompleteTask(_:))))
+        cell.textLabel?.text = task.title
+        cell.detailTextLabel?.text = (task.deadlineDate != nil) ? getDeadlineDateString(date: task.deadlineDate!) : ""
+        cell.detailTextLabel?.textColor = UIColor.lightGray
+        
+        let deleteImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        deleteImage.image = UIImage(systemName: "trash")
+        deleteImage.tintColor = UIColor.red
+        deleteImage.isUserInteractionEnabled = true
+        deleteImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteTask(_:))))
+        cell.accessoryView = deleteImage
+        return cell
     }
     
 }

@@ -33,6 +33,8 @@ class SettingViewController: UIViewController {
         initTableView()
     }
     
+    // MARK: - Viewer
+    
     /// NavigationController初期化
     private func initNavigation() {
         self.title = TITLE_SETTING

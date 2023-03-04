@@ -33,6 +33,8 @@ class MapViewController: UIViewController {
         displayChart()
     }
     
+    // MARK: - Viewer
+    
     /// NavigationBar初期化
     private func initNavigationBar() {
         self.navigationItem.title = TITLE_TASK_LIST

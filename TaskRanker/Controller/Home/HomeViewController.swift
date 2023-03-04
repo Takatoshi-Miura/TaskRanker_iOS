@@ -44,9 +44,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         initNavigation()
         initTaskListView()
+        initGestureRecognizer()
         initNotification()
-        addRightSwipeGesture()
-        addLeftSwipeGesture()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,6 +68,8 @@ class HomeViewController: UIViewController {
         selectedIndex = nil
     }
     
+    // MARK: - Viewer
+    
     /// NavigationController初期化
     private func initNavigation() {
         // 設定メニュー
@@ -76,13 +77,11 @@ class HomeViewController: UIViewController {
                                          style: .plain,
                                          target: self,
                                          action: #selector(openHumburgerMenu(_:)))
-        
         // 完了タスク
         let completeButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"),
                                              style: .plain,
                                              target: self,
                                              action: #selector(openCompletedTaskList(_:)))
-        
         // フィルタ
         let filterImage = isFilter ? UIImage(named: "icon_filter_fill")! : UIImage(named: "icon_filter_empty")!
         let filterButton = UIBarButtonItem(image: filterImage,
@@ -132,42 +131,6 @@ class HomeViewController: UIViewController {
         selectSegment(number: SegmentType.A.rawValue)
     }
     
-    /// 通知設定
-    private func initNotification() {
-        // ログイン時のリロード用
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.syncTaskList),
-                                               name: NSNotification.Name(rawValue: "afterLogin"),
-                                               object: nil)
-        // ログアウト時のリロード用
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.syncTaskList),
-                                               name: NSNotification.Name(rawValue: "afterLogout"),
-                                               object: nil)
-    }
-    
-    /// TaskListを初期化
-    @objc func syncTaskList() {
-        self.taskListVC_A.syncData()
-        self.taskListVC_B.syncData()
-        self.taskListVC_C.syncData()
-        self.taskListVC_D.syncData()
-    }
-    
-    /// 右スワイプでABCD切り替え
-    private func addRightSwipeGesture() {
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeTaskList))
-        rightSwipe.direction = .right
-        self.taskListView.addGestureRecognizer(rightSwipe)
-    }
-    
-    /// 左スワイプでABCD切り替え
-    private func addLeftSwipeGesture() {
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeTaskList))
-        leftSwipe.direction = .left
-        self.taskListView.addGestureRecognizer(leftSwipe)
-    }
-    
     // MARK: - Action
     
     /// 設定メニュー
@@ -194,24 +157,6 @@ class HomeViewController: UIViewController {
         selectSegment(number: sender.selectedSegmentIndex)
     }
     
-    /// 右スワイプ
-    @objc func rightSwipeTaskList() {
-        var selectNo = segmentedControl.selectedSegmentIndex - 1
-        if selectNo < SegmentType.A.rawValue {
-            selectNo = SegmentType.A.rawValue
-        }
-        selectSegment(number: selectNo)
-    }
-    
-    /// 左スワイプ
-    @objc func leftSwipeTaskList() {
-        var selectNo = segmentedControl.selectedSegmentIndex + 1
-        if selectNo > SegmentType.D.rawValue {
-            selectNo = SegmentType.D.rawValue
-        }
-        selectSegment(number: selectNo)
-    }
-    
     /// SegmentControl選択時の処理
     private func selectSegment(number: Int) {
         segmentedControl.selectedSegmentIndex = number
@@ -235,26 +180,7 @@ class HomeViewController: UIViewController {
         delegate?.homeVCAddButtonDidTap(self)
     }
     
-    /// タスクを挿入(新規追加,未完了に戻す,タイプ更新)
-    /// - Parameter task: 挿入する課題
-    func insertTask(task: Task) {
-        // 挿入するタスクのタイプへ移動
-        selectSegment(number: task.type.rawValue)
-        
-        // タスクを挿入
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            switch task.type {
-            case .A:
-                self.taskListVC_A.insertTask(task: task)
-            case .B:
-                self.taskListVC_B.insertTask(task: task)
-            case .C:
-                self.taskListVC_C.insertTask(task: task)
-            case .D:
-                self.taskListVC_D.insertTask(task: task)
-            }
-        }
-    }
+    // MARK: - Filter
     
     /// フィルタを適用
     /// - Parameter filterArray: チェック配列
@@ -286,6 +212,70 @@ class HomeViewController: UIViewController {
         taskListVC_D.applyFilter(filterArray: filterArray!)
     }
     
+    // MARK: - UIGestureRecognizer
+    
+    /// ジャスチャ設定
+    private func initGestureRecognizer() {
+        addRightSwipeGesture()
+        addLeftSwipeGesture()
+    }
+    
+    /// 右スワイプでABCD切り替え
+    private func addRightSwipeGesture() {
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeTaskList))
+        rightSwipe.direction = .right
+        self.taskListView.addGestureRecognizer(rightSwipe)
+    }
+    
+    /// 左スワイプでABCD切り替え
+    private func addLeftSwipeGesture() {
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeTaskList))
+        leftSwipe.direction = .left
+        self.taskListView.addGestureRecognizer(leftSwipe)
+    }
+    
+    /// 右スワイプ
+    @objc func rightSwipeTaskList() {
+        var selectNo = segmentedControl.selectedSegmentIndex - 1
+        if selectNo < SegmentType.A.rawValue {
+            selectNo = SegmentType.A.rawValue
+        }
+        selectSegment(number: selectNo)
+    }
+    
+    /// 左スワイプ
+    @objc func leftSwipeTaskList() {
+        var selectNo = segmentedControl.selectedSegmentIndex + 1
+        if selectNo > SegmentType.D.rawValue {
+            selectNo = SegmentType.D.rawValue
+        }
+        selectSegment(number: selectNo)
+    }
+    
+    // MARK: - Notification
+    
+    /// 通知設定
+    private func initNotification() {
+        // ログイン時のリロード用
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.syncTaskList),
+                                               name: NSNotification.Name(rawValue: "afterLogin"),
+                                               object: nil)
+        // ログアウト時のリロード用
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.syncTaskList),
+                                               name: NSNotification.Name(rawValue: "afterLogout"),
+                                               object: nil)
+    }
+    
+    /// TaskListを初期化
+    @objc func syncTaskList() {
+        self.taskListVC_A.syncData()
+        self.taskListVC_B.syncData()
+        self.taskListVC_C.syncData()
+        self.taskListVC_D.syncData()
+    }
+    
 }
 
 extension HomeViewController: TaskListViewControllerDelegate {
@@ -300,6 +290,27 @@ extension HomeViewController: TaskListViewControllerDelegate {
     /// TaskTypeアップデート時
     func taskListVCTaskTypeUpdate(task: Task) {
         insertTask(task: task)
+    }
+    
+    /// タスクを挿入(新規追加,未完了に戻す,タイプ更新)
+    /// - Parameter task: 挿入する課題
+    func insertTask(task: Task) {
+        // 挿入するタスクのタイプへ移動
+        selectSegment(number: task.type.rawValue)
+        
+        // タスクを挿入
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            switch task.type {
+            case .A:
+                self.taskListVC_A.insertTask(task: task)
+            case .B:
+                self.taskListVC_B.insertTask(task: task)
+            case .C:
+                self.taskListVC_C.insertTask(task: task)
+            case .D:
+                self.taskListVC_D.insertTask(task: task)
+            }
+        }
     }
     
 }

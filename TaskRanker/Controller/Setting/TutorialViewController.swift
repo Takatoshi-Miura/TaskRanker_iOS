@@ -10,30 +10,32 @@ import UIKit
 class TutorialViewController: UIViewController {
     
     // MARK: - UI,Variable
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    var titleText: String  = ""
-    var detailText: String = ""
-    var image: UIImage = UIImage(systemName: "gear")!// UIImage(named: "①SportsNoteとは")!
+    var helpItem: HelpItem
     
-    // MARK: - LifeCycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        titleLabel.text = titleText
-        detailLabel.text = detailText
-        imageView.image = image
+    // MARK: - Initializer
+    
+    /// イニシャライザ
+    /// - Parameter helpItem: ヘルプアイテム
+    init(helpItem: HelpItem) {
+        self.helpItem = helpItem
+        super.init(nibName: nil, bundle: nil)
     }
     
-    /// 画面初期化
-    /// - Parameters:
-    ///    - title: タイトル
-    ///    - detail: 説明
-    ///    - image: 画像
-    func initView(title: String, detail: String, image: UIImage) {
-        self.titleText = title
-        self.detailText = detail
-        self.image = image
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - LifeCycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        titleLabel.text  = helpItem.title
+        detailLabel.text = helpItem.detail
+        imageView.image  = helpItem.image
     }
     
 }

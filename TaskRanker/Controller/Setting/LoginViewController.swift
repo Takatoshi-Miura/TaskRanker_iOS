@@ -33,6 +33,8 @@ class LoginViewController: UIViewController {
     private var isLogin: Bool = false
     var delegate: LoginViewControllerDelegate?
 
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // ログイン状態の判定
@@ -41,6 +43,8 @@ class LoginViewController: UIViewController {
         }
         initView()
     }
+    
+    // MARK: - Viewer
     
     ///画面初期化
     private func initView() {

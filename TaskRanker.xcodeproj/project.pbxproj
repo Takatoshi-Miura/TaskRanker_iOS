@@ -48,6 +48,7 @@
 		8D97697C29A722BF0000DD8D /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97697B29A722BF0000DD8D /* FirebaseManager.swift */; };
 		8D97697E29AAC6D90000DD8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */; };
 		8D97698229AAE86A0000DD8D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97698129AAE86A0000DD8D /* Network.swift */; };
+		8D97698429B2FEFD0000DD8D /* Definition+Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97698329B2FEFD0000DD8D /* Definition+Help.swift */; };
 		8DAA1134294934000083F444 /* Definition+TaskColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAA1133294934000083F444 /* Definition+TaskColor.swift */; };
 		8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */; };
 		8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */; };
@@ -111,6 +112,7 @@
 		8D97697B29A722BF0000DD8D /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D97698129AAE86A0000DD8D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		8D97698329B2FEFD0000DD8D /* Definition+Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Definition+Help.swift"; path = "TaskRanker/Utils/Definition+Help.swift"; sourceTree = SOURCE_ROOT; };
 		8DAA1133294934000083F444 /* Definition+TaskColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Definition+TaskColor.swift"; sourceTree = "<group>"; };
 		8DB633BA28CD7F8B001F2DB7 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		8DB633BB28CD7F8B001F2DB7 /* TaskListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				8DAA1133294934000083F444 /* Definition+TaskColor.swift */,
 				8D55A4A52909EE85005E573A /* Definition+Navigation.swift */,
 				8D97697929A3A1A40000DD8D /* Definition+Date.swift */,
+				8D97698329B2FEFD0000DD8D /* Definition+Help.swift */,
 				8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */,
 				8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */,
 				8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */,
@@ -551,6 +554,7 @@
 				2F2F21D028F53C30005FFCC2 /* PageViewController.swift in Sources */,
 				8D97698229AAE86A0000DD8D /* Network.swift in Sources */,
 				8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */,
+				8D97698429B2FEFD0000DD8D /* Definition+Help.swift in Sources */,
 				8DCB72DA2949E99D00935972 /* MapCoordinator.swift in Sources */,
 				8D55A49B2904A7B4005E573A /* TaskViewController.swift in Sources */,
 				2F2F21BA28F51791005FFCC2 /* FilterViewController.swift in Sources */,

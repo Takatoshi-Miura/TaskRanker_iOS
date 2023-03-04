@@ -50,6 +50,8 @@ class FilterViewController: UIViewController {
         delegate?.filterVCDismiss(self, filterArray: checkArray)
     }
     
+    // MARK: - Viewer
+    
     /// NavigationController初期化
     private func initNavigation() {
         self.title = TITLE_FILTER

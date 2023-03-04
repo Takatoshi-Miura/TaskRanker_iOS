@@ -22,44 +22,34 @@ class PageViewController: UIPageViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initPageView()
+        addTutorialView()
+        addPageView()
+        addPageControl()
+        addCancelButton()
     }
     
-    /// PageView初期化
-    private func initPageView() {
-        // チュートリアル画面を追加
-        // TODO: リファクタリング、文言、画像修正
-        let titleArray = ["TaskRankerとは","タスクの作成","タスクの分類","タスク管理","フィルタ","タスクの完了"]
-        
-        let detailArray = ["タスクの優先順位付けを行ってくれるタスク管理アプリです。\nタスクの重要度と緊急度から優先順位を判定し、タスクを分類します。",
-                           "＋ボタンからタスクを作成できます。\n重要度と緊急度を10段階で設定できます。\n期限日を設定すると期限日の　日前に自動的に緊急度を引き上げます。",
-                           "重要度と緊急度によって、4つのタイプに分類します。\nA：重要度6〜10, 緊急度6~10\nB：重要度6〜10, 緊急度1~5\nC：重要度1〜5, 緊急度6~10\nD：重要度1〜5, 緊急度1~5",
-                           "作成したタスクは一覧で管理できます。\nタスクは重要度が高い順に表示されます。",
-                           "一覧に表示するタスクは、フィルタからカラーで絞り込むことができます。",
-                           "タスクの◯をタップすると完了にできます。\n完了したタスクは完了済みタスク画面で確認できます。"]
-        
-        let imageArray = [UIImage(systemName: "gear"),
-                          UIImage(systemName: "gear"),
-                          UIImage(systemName: "gear"),
-                          UIImage(systemName: "gear"),
-                          UIImage(systemName: "gear"),
-                          UIImage(systemName: "gear")]
-        
-        for index in 0...titleArray.count - 1 {
-            let tutorialVC = TutorialViewController()
-            tutorialVC.initView(title: titleArray[index], detail: detailArray[index], image: imageArray[index]!)
+    // MARK: - Viewer
+    
+    /// チュートリアル画面を追加
+    private func addTutorialView() {
+        for helpItem in HelpItem.allCases {
+            let tutorialVC = TutorialViewController(helpItem: helpItem)
             self.controllers.append(tutorialVC)
         }
-        
-        // pageViewController追加
+    }
+    
+    /// PageViewControllerを追加
+    private func addPageView() {
         let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.setViewControllers([self.controllers[0]], direction: .forward, animated: true, completion: nil)
         pageViewController.dataSource = self
         pageViewController.delegate = self
         self.addChild(pageViewController)
         self.view.addSubview(pageViewController.view!)
-        
-        // pageControl追加
+    }
+    
+    /// PageControlを追加
+    private func addPageControl() {
         pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 60, width: UIScreen.main.bounds.width,height: 60))
         pageControl.numberOfPages = self.controllers.count
         pageControl.currentPage = 0
@@ -67,8 +57,10 @@ class PageViewController: UIPageViewController {
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.isUserInteractionEnabled = false
         self.view.addSubview(self.pageControl)
-        
-        // キャンセルボタン追加
+    }
+    
+    /// キャンセルボタンを追加
+    private func addCancelButton() {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapCloseButton(_:)), for: UIControl.Event.touchUpInside)
         button.setTitle(TITLE_CANCEL, for: UIControl.State.normal)

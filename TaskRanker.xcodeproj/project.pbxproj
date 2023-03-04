@@ -56,7 +56,7 @@
 		8DB633C828CDD38A001F2DB7 /* UIViewController+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */; };
 		8DB633CA28CDD3D7001F2DB7 /* UIViewController+TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633C928CDD3D7001F2DB7 /* UIViewController+TextView.swift */; };
 		8DB633CE28CDD462001F2DB7 /* UIViewController+ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */; };
-		8DB633D028CDD502001F2DB7 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */; };
+		8DB633D028CDD502001F2DB7 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB633CF28CDD502001F2DB7 /* Alert.swift */; };
 		8DCB72D82949E98500935972 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72D72949E98500935972 /* MapViewController.swift */; };
 		8DCB72DA2949E99D00935972 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72D92949E99D00935972 /* MapCoordinator.swift */; };
 		8DCB72DC2949E9A700935972 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72DB2949E9A700935972 /* TabCoordinator.swift */; };
@@ -119,7 +119,7 @@
 		8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TextField.swift"; sourceTree = "<group>"; };
 		8DB633C928CDD3D7001F2DB7 /* UIViewController+TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TextView.swift"; sourceTree = "<group>"; };
 		8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ToolBar.swift"; sourceTree = "<group>"; };
-		8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		8DB633CF28CDD502001F2DB7 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8DCB72D72949E98500935972 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8DCB72D92949E99D00935972 /* MapCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		8DCB72DB2949E9A700935972 /* TabCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
@@ -285,9 +285,9 @@
 			isa = PBXGroup;
 			children = (
 				8D97698829B31FF90000DD8D /* Device.swift */,
+				8DB633CF28CDD502001F2DB7 /* Alert.swift */,
 				8D55A4A52909EE85005E573A /* Definition+Navigation.swift */,
 				8D97697929A3A1A40000DD8D /* Definition+Date.swift */,
-				8DB633CF28CDD502001F2DB7 /* UIViewController+Alert.swift */,
 				8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */,
 				8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */,
 				8DB633C928CDD3D7001F2DB7 /* UIViewController+TextView.swift */,
@@ -550,7 +550,7 @@
 			files = (
 				8D97697C29A722BF0000DD8D /* FirebaseManager.swift in Sources */,
 				8D55A49E2904B368005E573A /* TaskViewCoordinator.swift in Sources */,
-				8DB633D028CDD502001F2DB7 /* UIViewController+Alert.swift in Sources */,
+				8DB633D028CDD502001F2DB7 /* Alert.swift in Sources */,
 				8D60F25928CC644B003BB724 /* AppCoordinator.swift in Sources */,
 				8DB633C828CDD38A001F2DB7 /* UIViewController+TextField.swift in Sources */,
 				2F415F4228F7EAFF0082D676 /* UIViewController+PickerView.swift in Sources */,

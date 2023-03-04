@@ -65,7 +65,7 @@ class CompletedTaskListViewController: UIViewController {
         let tappedIndexPath = self.tableView.indexPathForRow(at: tappedLocation)
         tableView.selectRow(at: tappedIndexPath, animated: false, scrollPosition: .none)
         
-        showOKCancelAlert(title: TITLE_COMPLETE_TASK, message: MESSAGE_INCOMPLETE_TASK, OKAction: {
+        let alert = Alert.OKCancel(title: TITLE_COMPLETE_TASK, message: MESSAGE_INCOMPLETE_TASK, OKAction: {
             // チェックを外す
             let cell = self.tableView.cellForRow(at: tappedIndexPath!)
             let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
@@ -84,6 +84,7 @@ class CompletedTaskListViewController: UIViewController {
                 self.delegate?.completedTaskListVCTaskInComplete(self, task: task)
             }
         })
+        present(alert, animated: true)
     }
     
     /// タスクを削除
@@ -94,7 +95,7 @@ class CompletedTaskListViewController: UIViewController {
         tableView.selectRow(at: tappedIndexPath, animated: false, scrollPosition: .none)
         
         // タスクを削除
-        showDeleteAlert(title: TITLE_DELETE_TASK, message: MESSAGE_DELETE_TASK, OKAction: {
+        let alert = Alert.Delete(title: TITLE_DELETE_TASK, message: MESSAGE_DELETE_TASK, OKAction: {
             var task = self.taskArray[tappedIndexPath.row]
             task.isComplete = false
             let taskManager = TaskManager()
@@ -102,6 +103,7 @@ class CompletedTaskListViewController: UIViewController {
             self.taskArray.remove(at: tappedIndexPath.row)
             self.tableView.deleteRows(at: [tappedIndexPath], with: UITableView.RowAnimation.left)
         })
+        present(alert, animated: true)
     }
 
 }

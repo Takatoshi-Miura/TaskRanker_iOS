@@ -180,9 +180,10 @@ class TaskViewController: UIViewController {
     @objc func tapCloseButton(_ sender: UIBarButtonItem) {
         // 入力済みの場合は確認アラート表示
         if !titleTextField.text!.isEmpty || !memoTextView.text.isEmpty {
-            showOKCancelAlert(title: "", message: MESSAGE_DELETE_INPUT, OKAction: {
+            let alert = Alert.OKCancel(title: "", message: MESSAGE_DELETE_INPUT, OKAction: {
                 self.delegate?.taskVCDismiss(self)
             })
+            present(alert, animated: true)
             return
         }
         delegate?.taskVCDismiss(self)
@@ -190,26 +191,29 @@ class TaskViewController: UIViewController {
     
     /// タスクを削除
     @objc func deleteTask() {
-        showDeleteAlert(title: TITLE_DELETE_TASK, message: MESSAGE_DELETE_TASK, OKAction: { [self] in
+        let alert = Alert.Delete(title: TITLE_DELETE_TASK, message: MESSAGE_DELETE_TASK, OKAction: { [self] in
             self.task.isDeleted = true
             self.delegate?.taskVCDeleteTask(task: self.task)
         })
+        present(alert, animated: true)
     }
     
     /// Taskを完了(未完了)にする
     @objc func completeTask() {
         let message = task.isComplete ? MESSAGE_INCOMPLETE_TASK : MESSAGE_COMPLETE_TASK
-        showOKCancelAlert(title: TITLE_COMPLETE_TASK, message: message, OKAction: {
+        let alert = Alert.OKCancel(title: TITLE_COMPLETE_TASK, message: message, OKAction: {
             self.task.isComplete = !self.task.isComplete
             self.delegate?.taskVCDeleteTask(task: self.task)
         })
+        present(alert, animated: true)
     }
     
     /// 保存ボタン
     @objc func tapSaveButton(_ sender: UIBarButtonItem) {
         // 入力チェック
         if titleTextField.text!.isEmpty {
-            showErrorAlert(message: ERROR_MESSAGE_EMPTY_TITLE)
+            let alert = Alert.Error(message: ERROR_MESSAGE_EMPTY_TITLE)
+            present(alert, animated: true)
             return
         }
         
@@ -224,7 +228,8 @@ class TaskViewController: UIViewController {
         
         let taskManager = TaskManager()
         if !taskManager.saveTask(task: task) {
-            showErrorAlert(message: ERROR_MESSAGE_SAVE_FAILED)
+            let alert = Alert.Error(message: ERROR_MESSAGE_SAVE_FAILED)
+            present(alert, animated: true)
             return
         }
         
@@ -382,8 +387,9 @@ extension TaskViewController: UITextFieldDelegate {
             return true
         }
         if textField.text == "" {
-            showErrorAlert(message: ERROR_MESSAGE_EMPTY_TITLE)
             textField.text = task.title
+            let alert = Alert.Error(message: ERROR_MESSAGE_EMPTY_TITLE)
+            present(alert, animated: true)
             return false
         }
         task.title = textField.text!

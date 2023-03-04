@@ -145,7 +145,8 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
     /// メーラーを起動
     private func startMailer() {
         if MFMailComposeViewController.canSendMail() == false {
-            showErrorAlert(message: MESSAGE_MAILER_ERROR)
+            let alert = Alert.Error(message: MESSAGE_MAILER_ERROR)
+            present(alert, animated: true)
             return
         }
         let mailViewController = MFMailComposeViewController()
@@ -166,10 +167,12 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
         case .saved:
             break
         case .sent:
-            showOKAlert(title: TITLE_SUCCESS, message: MESSAGE_MAIL_SEND_SUCCESS)
+            let alert = Alert.OK(title: TITLE_SUCCESS, message: MESSAGE_MAIL_SEND_SUCCESS)
+            present(alert, animated: true)
             break
         case .failed:
-            showErrorAlert(message: MESSAGE_MAIL_SEND_FAILED)
+            let alert = Alert.Error(message: MESSAGE_MAIL_SEND_FAILED)
+            present(alert, animated: true)
             break
         default:
             break

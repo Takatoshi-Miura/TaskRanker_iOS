@@ -81,34 +81,40 @@ class LoginViewController: UIViewController {
     /// パスワード変更ボタン
     @IBAction func tapPasswordChangeButton(_ sender: Any) {
         if loginTextField.text == "" {
-            showErrorAlert(message: MESSAGE_EMPTY_TEXT_ERROR_PASSWORD_RESET)
+            let alert = Alert.Error(message: MESSAGE_EMPTY_TEXT_ERROR_PASSWORD_RESET)
+            present(alert, animated: true)
             return
         }
-        showOKCancelAlert(title: TITLE_PASSWORD_RESET, message:MESSAGE_PASSWORD_RESET, OKAction: {
+        let alert = Alert.OKCancel(title: TITLE_PASSWORD_RESET, message:MESSAGE_PASSWORD_RESET, OKAction: {
             self.sendPasswordResetMail(mail: self.loginTextField.text!)
         })
+        present(alert, animated: true)
     }
     
     /// アカウント作成ボタン
     @IBAction func tapCreateAccountButton(_ sender: Any) {
         if loginTextField.text == "" || passwordTextField.text == "" {
-            showErrorAlert(message: MESSAGE_EMPTY_TEXT_ERROR)
+            let alert = Alert.Error(message: MESSAGE_EMPTY_TEXT_ERROR)
+            present(alert, animated: true)
             return
         }
-        showOKCancelAlert(title: TITLE_CREATE_ACCOUNT, message: MESSAGE_CREATE_ACCOUNT, OKAction: {
+        let alert = Alert.OKCancel(title: TITLE_CREATE_ACCOUNT, message: MESSAGE_CREATE_ACCOUNT, OKAction: {
             self.createAccount(mail: self.loginTextField.text!, password: self.passwordTextField.text!)
         })
+        present(alert, animated: true)
     }
     
     /// アカウント削除ボタン
     @IBAction func tapDeleteAccountButton(_ sender: Any) {
         if !isLogin {
-            showErrorAlert(message: MESSAGE_PLEASE_LOGIN)
+            let alert = Alert.Error(message: MESSAGE_PLEASE_LOGIN)
+            present(alert, animated: true)
             return
         }
-        showOKCancelAlert(title: TITLE_DELETE_ACCOUNT, message: MESSAGE_DELETE_ACCOUNT, OKAction: {
+        let alert = Alert.OKCancel(title: TITLE_DELETE_ACCOUNT, message: MESSAGE_DELETE_ACCOUNT, OKAction: {
             self.deleteAccount()
         })
+        present(alert, animated: true)
     }
     
     /// キャンセルボタン
@@ -173,7 +179,8 @@ class LoginViewController: UIViewController {
             }
         } catch _ as NSError {
             HUD.hide()
-            showErrorAlert(message: MESSAGE_LOGOUT_ERROR)
+            let alert = Alert.Error(message: MESSAGE_LOGOUT_ERROR)
+            present(alert, animated: true)
         }
     }
     
@@ -183,7 +190,8 @@ class LoginViewController: UIViewController {
     private func sendPasswordResetMail(mail address: String) {
         Auth.auth().sendPasswordReset(withEmail: address) { (error) in
             if error != nil {
-                self.showErrorAlert(message: MESSAGE_MAIL_SEND_ERROR)
+                let alert = Alert.Error(message: MESSAGE_MAIL_SEND_ERROR)
+                self.present(alert, animated: true)
                 return
             }
             HUD.show(.labeledSuccess(title: "", subtitle: MESSAGE_MAIL_SEND_SUCCESSFUL))
@@ -258,7 +266,8 @@ class LoginViewController: UIViewController {
                 }
             } else {
                 HUD.hide()
-                self.showErrorAlert(message: MESSAGE_DELETE_ACCOUNT_ERROR)
+                let alert = Alert.Error(message: MESSAGE_DELETE_ACCOUNT_ERROR)
+                self.present(alert, animated: true)
             }
         }
     }

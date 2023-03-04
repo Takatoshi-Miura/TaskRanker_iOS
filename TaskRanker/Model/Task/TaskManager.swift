@@ -119,7 +119,7 @@ class TaskManager {
     /// Taskを取得
     /// - Parameter type: A,B,C,D
     /// - Returns: Task配列(重要度が高い順)
-    func getTask(type: SegmentType) -> [Task] {
+    func getTask(type: TaskType) -> [Task] {
         var taskArray = [Task]()
         let realmTaskArray = realmManager.getIncompleteTask()
         for realmTask in realmTaskArray {
@@ -140,7 +140,7 @@ class TaskManager {
     ///   - type: A,B,C,D
     ///   - filterArray: カラーBool配列
     /// - Returns: Task配列(重要度が高い順)
-    func getTask(type: SegmentType, filterArray: [Bool]) -> [Task] {
+    func getTask(type: TaskType, filterArray: [Bool]) -> [Task] {
         var taskArray = [Task]()
         let realmTaskArray = realmManager.getIncompleteTask(filterArray: filterArray)
         for realmTask in realmTaskArray {
@@ -196,7 +196,7 @@ class TaskManager {
         let result = realmManager.createRealm(object: realmTask)
         if !result  { return result }
         
-        if UserDefaultsKey.useFirebase.bool() && Network.isOnline() {
+        if UserDefaultsKey.useFirebase.bool() && Device.isOnline() {
             firebaseManager.saveTask(task: task, completion: {})
         }
         return result
@@ -236,7 +236,7 @@ class TaskManager {
         }
         
         // Firebase更新
-        if UserDefaultsKey.useFirebase.bool() && Network.isOnline() {
+        if UserDefaultsKey.useFirebase.bool() && Device.isOnline() {
             firebaseManager.updateTask(task: task)
         }
     }

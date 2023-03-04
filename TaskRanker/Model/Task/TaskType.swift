@@ -1,5 +1,5 @@
 //
-//  Definition+Segment.swift
+//  TaskType.swift
 //  TaskRanker
 //
 //  Created by Takatoshi Miura on 2022/09/11.
@@ -7,7 +7,8 @@
 
 import UIKit
 
-enum SegmentType: Int, CaseIterable {
+enum TaskType: Int, CaseIterable {
+    
     case A
     case B
     case C

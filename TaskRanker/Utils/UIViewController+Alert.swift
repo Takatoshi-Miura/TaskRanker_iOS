@@ -79,7 +79,7 @@ public extension UIViewController {
         let actionSheet = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         actions.forEach { actionSheet.addAction($0) }
         actionSheet.addAction(UIAlertAction(title: TITLE_CANCEL, style: .cancel, handler: nil))
-        if isiPad() {
+        if Device.isiPad() {
             actionSheet.popoverPresentationController?.sourceView = self.view
             actionSheet.popoverPresentationController?.sourceRect = frame!
         }

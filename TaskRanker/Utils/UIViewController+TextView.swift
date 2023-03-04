@@ -43,7 +43,7 @@ public extension UIViewController {
         textView.layer.borderWidth = 1.0
         textView.layer.cornerRadius = 5.0
         textView.layer.masksToBounds = true
-        if !isiPad() {
+        if !Device.isiPad() {
             textView.inputAccessoryView = createToolBar(doneAction)
         }
     }

@@ -19,7 +19,7 @@ class TaskListViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var tableView: UITableView!
-    private var segmentType: SegmentType
+    private var segmentType: TaskType
     private var taskArray = [Task]()
     private var filterArray: [Bool]?
     var delegate: TaskListViewControllerDelegate?
@@ -28,7 +28,7 @@ class TaskListViewController: UIViewController {
     
     /// イニシャライザ
     /// - Parameter segmentType: タスクタイプ(ABCD)
-    init(segmentType: SegmentType) {
+    init(segmentType: TaskType) {
         self.segmentType = segmentType
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,7 +47,7 @@ class TaskListViewController: UIViewController {
     
     /// データの同期処理
     @objc func syncData() {
-        if UserDefaultsKey.useFirebase.bool() && Network.isOnline() {
+        if UserDefaultsKey.useFirebase.bool() && Device.isOnline() {
             let taskManager = TaskManager()
             taskManager.syncDatabase(completion: {
                 self.refreshData()

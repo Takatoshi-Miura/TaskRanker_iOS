@@ -1,5 +1,5 @@
 //
-//  Definition+Help.swift
+//  HelpItem.swift
 //  TaskRanker
 //
 //  Created by Takatoshi Miura on 2023/03/04.
@@ -9,6 +9,7 @@ import UIKit
 
 /// ヘルプ
 enum HelpItem: Int, CaseIterable {
+    
     case outline
     case addTask
     case taskType

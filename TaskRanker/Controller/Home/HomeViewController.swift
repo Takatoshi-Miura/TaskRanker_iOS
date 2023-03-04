@@ -30,10 +30,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var taskListView: UIView!
     private var isFilter: Bool = false
     private var filterArray: [Bool]?
-    private var taskListVC_A = TaskListViewController(segmentType: SegmentType.A)
-    private var taskListVC_B = TaskListViewController(segmentType: SegmentType.B)
-    private var taskListVC_C = TaskListViewController(segmentType: SegmentType.C)
-    private var taskListVC_D = TaskListViewController(segmentType: SegmentType.D)
+    private var taskListVC_A = TaskListViewController(segmentType: TaskType.A)
+    private var taskListVC_B = TaskListViewController(segmentType: TaskType.B)
+    private var taskListVC_C = TaskListViewController(segmentType: TaskType.C)
+    private var taskListVC_D = TaskListViewController(segmentType: TaskType.D)
     private var selectedTask: Task?
     private var selectedIndex: IndexPath?
     var delegate: HomeViewControllerDelegate?
@@ -95,7 +95,7 @@ class HomeViewController: UIViewController {
     
     /// タイトル文字列の設定
     /// - Parameter segmentType: segmentedControlの選択番号
-    private func setNavigationTitle(segmentType: SegmentType) {
+    private func setNavigationTitle(segmentType: TaskType) {
         let titleLabel = UILabel()
         titleLabel.text = segmentType.naviTitle
         titleLabel.font = .boldSystemFont(ofSize: 18)
@@ -128,7 +128,7 @@ class HomeViewController: UIViewController {
         self.taskListView.addSubview(taskListVC_B.view)
         self.taskListView.addSubview(taskListVC_A.view)
         
-        selectSegment(number: SegmentType.A.rawValue)
+        selectSegment(number: TaskType.A.rawValue)
     }
     
     // MARK: - Action
@@ -161,9 +161,9 @@ class HomeViewController: UIViewController {
     private func selectSegment(number: Int) {
         segmentedControl.selectedSegmentIndex = number
         
-        setNavigationTitle(segmentType: SegmentType.allCases[number])
+        setNavigationTitle(segmentType: TaskType.allCases[number])
         
-        switch SegmentType.allCases[number] {
+        switch TaskType.allCases[number] {
         case .A:
             self.taskListView.bringSubviewToFront(taskListVC_A.view)
         case .B:
@@ -237,8 +237,8 @@ class HomeViewController: UIViewController {
     /// 右スワイプ
     @objc func rightSwipeTaskList() {
         var selectNo = segmentedControl.selectedSegmentIndex - 1
-        if selectNo < SegmentType.A.rawValue {
-            selectNo = SegmentType.A.rawValue
+        if selectNo < TaskType.A.rawValue {
+            selectNo = TaskType.A.rawValue
         }
         selectSegment(number: selectNo)
     }
@@ -246,8 +246,8 @@ class HomeViewController: UIViewController {
     /// 左スワイプ
     @objc func leftSwipeTaskList() {
         var selectNo = segmentedControl.selectedSegmentIndex + 1
-        if selectNo > SegmentType.D.rawValue {
-            selectNo = SegmentType.D.rawValue
+        if selectNo > TaskType.D.rawValue {
+            selectNo = TaskType.D.rawValue
         }
         selectSegment(number: selectNo)
     }

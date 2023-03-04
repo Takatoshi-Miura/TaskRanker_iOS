@@ -24,15 +24,15 @@ struct Task {
     var created_at: Date
     var updated_at: Date
     
-    var type: SegmentType {
+    var type: TaskType {
         if importance > 4 && urgency > 4 {
-            return SegmentType.A
+            return TaskType.A
         } else if importance > 4 && urgency <= 4 {
-            return SegmentType.B
+            return TaskType.B
         } else if importance <= 4 && urgency > 4 {
-            return SegmentType.C
+            return TaskType.C
         } else {
-            return SegmentType.D
+            return TaskType.D
         }
     }
     

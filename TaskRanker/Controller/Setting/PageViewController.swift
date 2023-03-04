@@ -15,11 +15,13 @@ protocol PageViewControllerDelegate: AnyObject {
 class PageViewController: UIPageViewController {
     
     // MARK: - UI,Variable
+    
     private var controllers: [UIViewController] = []
     private var pageControl: UIPageControl!
     var pageVCDelegate: PageViewControllerDelegate?
     
     // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTutorialView()
@@ -34,14 +36,14 @@ class PageViewController: UIPageViewController {
     private func addTutorialView() {
         for helpItem in HelpItem.allCases {
             let tutorialVC = TutorialViewController(helpItem: helpItem)
-            self.controllers.append(tutorialVC)
+            controllers.append(tutorialVC)
         }
     }
     
     /// PageViewControllerを追加
     private func addPageView() {
         let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        pageViewController.setViewControllers([self.controllers[0]], direction: .forward, animated: true, completion: nil)
+        pageViewController.setViewControllers([controllers[0]], direction: .forward, animated: true, completion: nil)
         pageViewController.dataSource = self
         pageViewController.delegate = self
         self.addChild(pageViewController)
@@ -51,12 +53,12 @@ class PageViewController: UIPageViewController {
     /// PageControlを追加
     private func addPageControl() {
         pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 60, width: UIScreen.main.bounds.width,height: 60))
-        pageControl.numberOfPages = self.controllers.count
+        pageControl.numberOfPages = controllers.count
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.isUserInteractionEnabled = false
-        self.view.addSubview(self.pageControl)
+        self.view.addSubview(pageControl)
     }
     
     /// キャンセルボタンを追加

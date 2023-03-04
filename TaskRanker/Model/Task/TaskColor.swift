@@ -1,5 +1,5 @@
 //
-//  Definition+TaskColor.swift
+//  TaskColor.swift
 //  TaskRanker
 //
 //  Created by Takatoshi Miura on 2022/10/13.
@@ -9,6 +9,7 @@ import UIKit
 
 /// カラー
 enum TaskColor: Int, CaseIterable {
+    
     case red
     case pink
     case orange

@@ -1,5 +1,5 @@
 //
-//  Definition+TabPage.swift
+//  TabBarPage.swift
 //  TaskRanker
 //
 //  Created by Takatoshi Miura on 2022/12/14.
@@ -15,21 +15,21 @@ enum TabBarPage: Int {
     var title: String {
         switch self {
         case .list: return TITLE_LIST
-        case .map: return TITLE_MAP
+        case .map:  return TITLE_MAP
         }
     }
     
     var order: Int {
         switch self {
         case .list: return 0
-        case .map: return 1
+        case .map:  return 1
         }
     }
     
     var image: UIImage {
         switch self {
         case .list: return UIImage(systemName: "checklist")!
-        case .map: return UIImage(systemName: "square.split.2x2.fill")!
+        case .map:  return UIImage(systemName: "square.split.2x2.fill")!
         }
     }
     

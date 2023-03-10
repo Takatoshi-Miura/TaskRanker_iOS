@@ -44,7 +44,7 @@
 		8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26128CC67A5003BB724 /* HomeCoordinator.swift */; };
 		8D60F26728CC76E1003BB724 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F26928CC76E1003BB724 /* Localizable.strings */; };
 		8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26B28CC78DB003BB724 /* LocalizableString.swift */; };
-		8D97697A29A3A1A40000DD8D /* Definition+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97697929A3A1A40000DD8D /* Definition+Date.swift */; };
+		8D75CDEB29BB6548003C93AD /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDEA29BB6548003C93AD /* Converter.swift */; };
 		8D97697C29A722BF0000DD8D /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97697B29A722BF0000DD8D /* FirebaseManager.swift */; };
 		8D97697E29AAC6D90000DD8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */; };
 		8D97698429B2FEFD0000DD8D /* HelpItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97698329B2FEFD0000DD8D /* HelpItem.swift */; };
@@ -107,7 +107,7 @@
 		8D60F26828CC76E1003BB724 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D60F26A28CC76E7003BB724 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D60F26B28CC78DB003BB724 /* LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableString.swift; sourceTree = "<group>"; };
-		8D97697929A3A1A40000DD8D /* Definition+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Definition+Date.swift"; sourceTree = "<group>"; };
+		8D75CDEA29BB6548003C93AD /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		8D97697B29A722BF0000DD8D /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D97698329B2FEFD0000DD8D /* HelpItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HelpItem.swift; path = TaskRanker/Model/Setting/HelpItem.swift; sourceTree = SOURCE_ROOT; };
@@ -286,8 +286,8 @@
 			children = (
 				8D97698829B31FF90000DD8D /* Device.swift */,
 				8DB633CF28CDD502001F2DB7 /* Alert.swift */,
+				8D75CDEA29BB6548003C93AD /* Converter.swift */,
 				8D55A4A52909EE85005E573A /* Definition+Navigation.swift */,
-				8D97697929A3A1A40000DD8D /* Definition+Date.swift */,
 				8DB633CD28CDD462001F2DB7 /* UIViewController+ToolBar.swift */,
 				8DB633C728CDD38A001F2DB7 /* UIViewController+TextField.swift */,
 				8DB633C928CDD3D7001F2DB7 /* UIViewController+TextView.swift */,
@@ -563,6 +563,7 @@
 				8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */,
 				2F2F21CA28F5397B005FFCC2 /* LoginViewController.swift in Sources */,
 				8DAA1134294934000083F444 /* TaskColor.swift in Sources */,
+				8D75CDEB29BB6548003C93AD /* Converter.swift in Sources */,
 				2F2F21CD28F53998005FFCC2 /* LoginCoordinator.swift in Sources */,
 				8D97698929B31FF90000DD8D /* Device.swift in Sources */,
 				8DCB72DE2949E9C400935972 /* TabBarPage.swift in Sources */,
@@ -586,7 +587,6 @@
 				8D1D392A28F984B20078F3CB /* TaskManager.swift in Sources */,
 				8D60F25D28CC6761003BB724 /* HomeViewController.swift in Sources */,
 				2F2F21D328F53C47005FFCC2 /* PageCoordinator.swift in Sources */,
-				8D97697A29A3A1A40000DD8D /* Definition+Date.swift in Sources */,
 				8DCB72D82949E98500935972 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

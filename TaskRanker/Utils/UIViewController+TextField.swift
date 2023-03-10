@@ -32,7 +32,7 @@ public extension UIViewController {
     ///    - placeholder: 入力するplaceholder文字列
     ///    - text: 入力する文字列
     ///    - doneAction: 完了ボタンのアクション
-    func initTextField(textField: UITextField, placeholder: String, text: String, doneAction: Selector) {
+    private func initTextField(textField: UITextField, placeholder: String, text: String, doneAction: Selector) {
         textField.text = text
         textField.placeholder = placeholder
         textField.layer.borderColor = UIColor.systemGray.cgColor

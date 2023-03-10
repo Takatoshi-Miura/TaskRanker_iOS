@@ -171,7 +171,7 @@ class TaskViewController: UIViewController {
             setDeadlineSwitch(isOn: false)
         }
         datePicker.setDate(selectedDate, animated: false)
-        deadlineDateButton.setTitle(getDateString(date: selectedDate), for: .normal)
+        deadlineDateButton.setTitle(Converter.dateToString(date: selectedDate), for: .normal)
     }
     
     // MARK: - Action
@@ -341,7 +341,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     /// DatePicker完了処理
     @objc func datePickerDoneAction() {
         selectedDate = datePicker.date
-        deadlineDateButton.setTitle(getDateString(date: selectedDate), for: .normal)
+        deadlineDateButton.setTitle(Converter.dateToString(date: selectedDate), for: .normal)
         task.deadlineDate = selectedDate
         closePicker(pickerView)
     }

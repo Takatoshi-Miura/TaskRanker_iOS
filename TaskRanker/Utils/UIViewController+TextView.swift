@@ -37,14 +37,14 @@ public extension UIViewController {
     ///    - textView: 初期化したいtextView
     ///    - text: 入力する文字列
     ///    - doneAction: 完了ボタンのアクション
-    func initTextView(textView: UITextView, text: String, doneAction: Selector) {
+    private func initTextView(textView: UITextView, text: String, doneAction: Selector) {
         textView.text = text
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.borderWidth = 1.0
         textView.layer.cornerRadius = 5.0
         textView.layer.masksToBounds = true
         if !Device.isiPad() {
-            textView.inputAccessoryView = createToolBar(doneAction)
+            textView.inputAccessoryView = createToolBar(doneAction, nil)
         }
     }
     

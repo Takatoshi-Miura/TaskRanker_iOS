@@ -38,4 +38,11 @@ class Converter {
         return dateFormatter.string(from: date)
     }
     
+    /// 緊急度自動引き上げ日のStringを取得(ラベル表示用)
+    /// - Parameter day: 引き上げ日
+    /// - Returns: 緊急度自動引き上げ日の文字列
+    static func updateUrgencyString(day: Int) -> String {
+        return "\(TITLE_DEADLINE_DATE)\(day)日前"
+    }
+    
 }

@@ -51,6 +51,7 @@
 "ZeroTaskMessage" = "タスクがありません。";
 "CompleteTaskListTitle" = "完了済みタスク";
 "TaskList" = "タスク一覧";
+"UpdateUrgency" = "緊急度自動引き上げ日";
 
 // MARK: - Filter
 "Filter" = "フィルタ";

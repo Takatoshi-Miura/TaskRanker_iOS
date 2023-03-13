@@ -193,6 +193,7 @@ class TaskManager {
         realmTask.importance = task.importance
         realmTask.urgency = task.urgency
         realmTask.deadlineDate = task.deadlineDate
+        realmTask.daysBeforeUpdateUrgency = task.daysBeforeUpdateUrgency
         let result = realmManager.createRealm(object: realmTask)
         if !result  { return result }
         
@@ -227,6 +228,9 @@ class TaskManager {
         }
         if task.deadlineDate != oldTask.deadlineDate {
             realmManager.updateTaskDeadlineDate(taskID: task.taskID, deadlineDate: task.deadlineDate)
+        }
+        if task.daysBeforeUpdateUrgency != oldTask.daysBeforeUpdateUrgency {
+            realmManager.updateTaskDaysBeforeUpdateUrgency(taskID: task.taskID, daysBeforeUpdateUrgency: task.daysBeforeUpdateUrgency)
         }
         if task.isComplete != oldTask.isComplete {
             realmManager.updateTaskIsComplete(taskID: task.taskID, isComplete: task.isComplete)

@@ -39,12 +39,17 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var colorButton: UIButton!
     @IBOutlet weak var deadlineSwitch: UISwitch!
     @IBOutlet weak var deadlineDateButton: UIButton!
+    @IBOutlet weak var updateUrgencyLabel: UILabel!
+    @IBOutlet weak var updateUrgencyButton: UIButton!
     
     private var pickerView = UIView()
     private let colorPicker = UIPickerView()
+    private let dayPicker = UIPickerView()
     private var datePicker = UIDatePicker()
-    private var colorIndex: Int = 0
+    private var selectedColor = 0
+    private var selectedDay = 0
     private var selectedDate = Date()
+    private var dayArray = [Int](1...99)
     var task = Task()
     var isViewer = false
     var delegate: TaskViewControllerDelegate?
@@ -73,6 +78,7 @@ class TaskViewController: UIViewController {
         initNavigationBar()
         initDatePicker()
         initColorPicker()
+        initDayPicker()
         if isViewer {
             inputTask()
         } else {
@@ -85,6 +91,7 @@ class TaskViewController: UIViewController {
         // マルチタスクビュー対策
         datePicker.frame.size.width = self.view.bounds.size.width
         colorPicker.frame.size.width = self.view.bounds.size.width
+        dayPicker.frame.size.width = self.view.bounds.size.width
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -105,14 +112,15 @@ class TaskViewController: UIViewController {
         urgencyLabel.text = TITLE_URGENCY + TITLE_1to8
         typeLabel.text = TITLE_TASK_TYPE
         deadlineDateLabel.text = TITLE_DEADLINE_DATE
+        updateUrgencyLabel.text = TITLE_UPDATE_URGENCY
         
         initTextField(textField: titleTextField, placeholder: "")
         initTextView(textView: memoTextView)
         titleTextField.delegate = self
         memoTextView.delegate = self
         
-        colorButton.backgroundColor = TaskColor.allCases[colorIndex].color
-        colorButton.setTitle(TaskColor.allCases[colorIndex].title, for: .normal)
+        colorButton.backgroundColor = TaskColor.allCases[selectedColor].color
+        colorButton.setTitle(TaskColor.allCases[selectedColor].title, for: .normal)
         if !isViewer {
             setDeadlineSwitch(isOn: false)
         }
@@ -172,6 +180,7 @@ class TaskViewController: UIViewController {
         }
         datePicker.setDate(selectedDate, animated: false)
         deadlineDateButton.setTitle(Converter.dateToString(date: selectedDate), for: .normal)
+        updateUrgencyButton.setTitle(Converter.updateUrgencyString(day: task.daysBeforeUpdateUrgency), for: .normal)
     }
     
     // MARK: - Action
@@ -221,10 +230,11 @@ class TaskViewController: UIViewController {
         var task = Task()
         task.title = titleTextField.text!
         task.memo = memoTextView.text!
-        task.color = TaskColor.allCases[colorIndex].rawValue
+        task.color = TaskColor.allCases[selectedColor].rawValue
         task.importance = Int(importanceValueLabel.text!)!
         task.urgency = Int(urgencyValueLabel.text!)!
         task.deadlineDate = deadlineSwitch.isOn ? selectedDate : nil
+        task.daysBeforeUpdateUrgency = deadlineSwitch.isOn ? dayArray[selectedDay] : 0
         
         let taskManager = TaskManager()
         if !taskManager.saveTask(task: task) {
@@ -273,6 +283,8 @@ class TaskViewController: UIViewController {
     private func setDeadlineSwitch(isOn :Bool) {
         deadlineSwitch.isOn = isOn
         deadlineDateButton.isHidden = deadlineSwitch.isOn ? false : true
+        updateUrgencyLabel.isHidden = deadlineSwitch.isOn ? false : true
+        updateUrgencyButton.isHidden = deadlineSwitch.isOn ? false : true
         task.deadlineDate = deadlineSwitch.isOn ? selectedDate : nil
     }
     
@@ -285,6 +297,15 @@ class TaskViewController: UIViewController {
         openPicker(pickerView)
     }
     
+    /// 緊急度自動引き上げ日ボタン
+    @IBAction func tapUpdateUrgencyButton(_ sender: Any) {
+        closePicker(pickerView)
+        pickerView = UIView(frame: dayPicker.bounds)
+        pickerView.addSubview(dayPicker)
+        pickerView.addSubview(createToolBar(#selector(dayPickerDoneAction), #selector(dayPickerCancelAction)))
+        openPicker(pickerView)
+    }
+    
 }
 
 extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -292,6 +313,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     private enum PickerType: Int, CaseIterable {
         case color
         case date
+        case day
     }
     
     /// 列数
@@ -301,6 +323,8 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             return 1
         case .date:
             return 3
+        case .day:
+            return 1
         }
     }
     
@@ -311,6 +335,8 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             return TaskColor.allCases.count
         case .date:
             return 1
+        case .day:
+            return dayArray.count
         }
     }
     
@@ -321,6 +347,8 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             return TaskColor.allCases[row].title
         case .date:
             return nil
+        case .day:
+            return Converter.updateUrgencyString(day: dayArray[row])
         }
     }
     
@@ -358,20 +386,44 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         colorPicker.dataSource = self
         colorPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: colorPicker.bounds.size.height + 44)
         colorPicker.backgroundColor = UIColor.systemGray5
+        colorPicker.tag = PickerType.color.rawValue
     }
     
     /// ColorPicker完了処理
     @objc func colorPickerDoneAction() {
-        colorIndex = colorPicker.selectedRow(inComponent: 0)
+        selectedColor = colorPicker.selectedRow(inComponent: 0)
         closePicker(pickerView)
-        colorButton.backgroundColor = TaskColor.allCases[colorIndex].color
-        colorButton.setTitle(TaskColor.allCases[colorIndex].title, for: .normal)
-        task.color = TaskColor.allCases[colorIndex].rawValue
+        colorButton.backgroundColor = TaskColor.allCases[selectedColor].color
+        colorButton.setTitle(TaskColor.allCases[selectedColor].title, for: .normal)
+        task.color = TaskColor.allCases[selectedColor].rawValue
     }
     
     /// ColorPickerキャンセル処理
     @objc func colorPickerCancelAction() {
-        colorPicker.selectRow(colorIndex, inComponent: 0, animated: false)
+        colorPicker.selectRow(selectedColor, inComponent: 0, animated: false)
+        closePicker(pickerView)
+    }
+    
+    /// DayPicker初期化
+    private func initDayPicker() {
+        dayPicker.delegate = self
+        dayPicker.dataSource = self
+        dayPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: dayPicker.bounds.size.height + 44)
+        dayPicker.backgroundColor = UIColor.systemGray5
+        dayPicker.tag = PickerType.day.rawValue
+    }
+    
+    /// DayPicker完了処理
+    @objc func dayPickerDoneAction() {
+        selectedDay = dayPicker.selectedRow(inComponent: 0)
+        closePicker(pickerView)
+        updateUrgencyButton.setTitle(Converter.updateUrgencyString(day: dayArray[selectedDay]), for: .normal)
+        task.daysBeforeUpdateUrgency = dayArray[selectedDay]
+    }
+    
+    /// DayPickerキャンセル処理
+    @objc func dayPickerCancelAction() {
+        dayPicker.selectRow(selectedDay, inComponent: 0, animated: false)
         closePicker(pickerView)
     }
     

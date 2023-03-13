@@ -51,6 +51,7 @@
 "ZeroTaskMessage" = "No tasks.";
 "CompleteTaskListTitle" = "Completed tasks";
 "TaskList" = "Task List";
+"UpdateUrgency" = "Urgency automatic raise date";
 
 // MARK: - Filter
 "Filter" = "Filter";

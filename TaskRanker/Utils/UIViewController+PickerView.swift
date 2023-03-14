@@ -11,7 +11,7 @@ public extension UIViewController {
     
     /// PickerViewを画面下から表示
     /// - Parameter pickerView: PickerVIewを載せたUIView
-    func openPicker(_ pickerView:UIView) {
+    func openPicker(_ pickerView: UIView) {
         view.addSubview(pickerView)
         pickerView.frame.origin.y = UIScreen.main.bounds.size.height
         UIView.animate(withDuration: 0.3) {
@@ -21,7 +21,7 @@ public extension UIViewController {
     
     /// PickerViewを閉じる
     /// - Parameter pickerView: PickerVIewを載せたUIView
-    func closePicker(_ pickerView:UIView) {
+    func closePicker(_ pickerView: UIView) {
         UIView.animate(withDuration: 0.3) {
             pickerView.frame.origin.y += pickerView.bounds.size.height
         }

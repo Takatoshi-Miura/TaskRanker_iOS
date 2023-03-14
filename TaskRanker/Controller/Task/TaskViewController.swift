@@ -128,34 +128,17 @@ class TaskViewController: UIViewController {
     
     /// NavigationBar初期化
     private func initNavigationBar() {
-        // 閉じる
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .close,
-                                          target: self,
-                                          action: #selector(tapCloseButton(_:)))
-        
-        // ゴミ箱
-        let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash,
-                                           target: self,
-                                           action: #selector(deleteTask))
-        deleteButton.tintColor = UIColor.red
-        
-        // 完了,未完了
-        let image = task.isComplete ? UIImage(systemName: "exclamationmark.circle") : UIImage(systemName: "checkmark.circle")
-        let completeButton = UIBarButtonItem(image: image,
-                                             style: .done,
-                                             target: self,
-                                             action: #selector(completeTask))
-        
-        // 保存
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
-                                         target: self,
-                                         action: #selector(tapSaveButton(_:)))
-        
         if isViewer {
             self.title = TITLE_EDIT
+            let image = task.isComplete ? UIImage(systemName: "exclamationmark.circle") : UIImage(systemName: "checkmark.circle")
+            let completeButton = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(completeTask))
+            let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteTask))
+            deleteButton.tintColor = UIColor.red
             navigationItem.rightBarButtonItems = [deleteButton, completeButton]
         } else {
             self.title = TITLE_ADD_TASK
+            let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(tapSaveButton(_:)))
+            let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(tapCloseButton(_:)))
             navigationItem.rightBarButtonItems = [saveButton]
             navigationItem.leftBarButtonItems = [closeButton]
         }
@@ -251,9 +234,11 @@ class TaskViewController: UIViewController {
     @IBAction func tapColorButton(_ sender: Any) {
         titleTextField.resignFirstResponder()
         closePicker(pickerView)
-        pickerView = UIView(frame: colorPicker.bounds)
+        let toolbar = createToolBar(#selector(colorPickerDoneAction), #selector(colorPickerCancelAction))
+        pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: colorPicker.bounds.size.height + toolbar.bounds.size.height + view.safeAreaInsets.bottom))
+        pickerView.backgroundColor = UIColor.systemGray5
         pickerView.addSubview(colorPicker)
-        pickerView.addSubview(createToolBar(#selector(colorPickerDoneAction), #selector(colorPickerCancelAction)))
+        pickerView.addSubview(toolbar)
         openPicker(pickerView)
     }
     
@@ -291,18 +276,22 @@ class TaskViewController: UIViewController {
     /// 期限日ボタン
     @IBAction func tapDeadlineDateButton(_ sender: Any) {
         closePicker(pickerView)
-        pickerView = UIView(frame: datePicker.bounds)
+        let toolbar = createToolBar(#selector(datePickerDoneAction), #selector(datePickerCancelAction))
+        pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height + toolbar.bounds.size.height + view.safeAreaInsets.bottom))
+        pickerView.backgroundColor = UIColor.systemGray5
         pickerView.addSubview(datePicker)
-        pickerView.addSubview(createToolBar(#selector(datePickerDoneAction), #selector(datePickerCancelAction)))
+        pickerView.addSubview(toolbar)
         openPicker(pickerView)
     }
     
     /// 緊急度自動引き上げ日ボタン
     @IBAction func tapUpdateUrgencyButton(_ sender: Any) {
         closePicker(pickerView)
-        pickerView = UIView(frame: dayPicker.bounds)
+        let toolbar = createToolBar(#selector(dayPickerDoneAction), #selector(dayPickerCancelAction))
+        pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: dayPicker.bounds.size.height + toolbar.bounds.size.height + view.safeAreaInsets.bottom))
+        pickerView.backgroundColor = UIColor.systemGray5
         pickerView.addSubview(dayPicker)
-        pickerView.addSubview(createToolBar(#selector(dayPickerDoneAction), #selector(dayPickerCancelAction)))
+        pickerView.addSubview(toolbar)
         openPicker(pickerView)
     }
     
@@ -312,7 +301,6 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     private enum PickerType: Int, CaseIterable {
         case color
-        case date
         case day
     }
     
@@ -321,8 +309,6 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         switch PickerType.allCases[pickerView.tag] {
         case .color:
             return 1
-        case .date:
-            return 3
         case .day:
             return 1
         }
@@ -333,8 +319,6 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         switch PickerType.allCases[pickerView.tag] {
         case .color:
             return TaskColor.allCases.count
-        case .date:
-            return 1
         case .day:
             return dayArray.count
         }
@@ -345,8 +329,6 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         switch PickerType.allCases[pickerView.tag] {
         case .color:
             return TaskColor.allCases[row].title
-        case .date:
-            return nil
         case .day:
             return Converter.updateUrgencyString(day: dayArray[row])
         }
@@ -357,13 +339,12 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ja")
-        datePicker.tag = PickerType.date.rawValue
+        datePicker.backgroundColor = UIColor.systemGray5
+        datePicker.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height)
+        datePicker.date = Date()
         if #available(iOS 13.4, *) {
             datePicker.preferredDatePickerStyle = .wheels
         }
-        datePicker.backgroundColor = UIColor.systemGray5
-        datePicker.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height + 44)
-        datePicker.date = Date()
     }
     
     /// DatePicker完了処理
@@ -384,7 +365,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     private func initColorPicker() {
         colorPicker.delegate = self
         colorPicker.dataSource = self
-        colorPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: colorPicker.bounds.size.height + 44)
+        colorPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: colorPicker.bounds.size.height)
         colorPicker.backgroundColor = UIColor.systemGray5
         colorPicker.tag = PickerType.color.rawValue
     }
@@ -408,7 +389,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     private func initDayPicker() {
         dayPicker.delegate = self
         dayPicker.dataSource = self
-        dayPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: dayPicker.bounds.size.height + 44)
+        dayPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: dayPicker.bounds.size.height)
         dayPicker.backgroundColor = UIColor.systemGray5
         dayPicker.tag = PickerType.day.rawValue
     }

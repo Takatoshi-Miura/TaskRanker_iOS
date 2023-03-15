@@ -18,6 +18,7 @@ class MapViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var scatterChartView: ScatterChartView!
+    var mapViewModel = MapViewModel()
     var delegate: MapViewControllerDelegate?
     
     // MARK: - LifeCycle
@@ -65,18 +66,7 @@ class MapViewController: UIViewController {
     
     /// 散布図に描画
     private func displayChart() {
-        let data = ScatterChartData()
-        let taskManager = TaskManager()
-        let taskArray = taskManager.getTask()
-        for task in taskArray {
-            let entry = ChartDataEntry(x: Double(task.urgency), y: Double(task.importance))
-            let dataSet = ScatterChartDataSet(entries: [entry], label: task.taskID)
-            dataSet.setScatterShape(.circle)
-            dataSet.scatterShapeSize = 15.0
-            dataSet.setColor(TaskColor.allCases[task.color].color)
-            data.append(dataSet)
-        }
-        scatterChartView.data = data
+        scatterChartView.data = mapViewModel.loadChartData()
     }
 
 }
@@ -85,13 +75,8 @@ extension MapViewController: ChartViewDelegate {
     
     /// データタップ時の処理
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        if let dataSet = scatterChartView.data?.dataSets[highlight.dataSetIndex] {
-            if let taskID = dataSet.label {
-                // Task詳細へ遷移
-                let taskManager = TaskManager()
-                let task = taskManager.getTask(taskID: taskID)
-                self.delegate?.mapVCTaskDidTap(self, task: task!)
-            }
+        if let task = mapViewModel.getTapedTask(highlight: highlight) {
+            self.delegate?.mapVCTaskDidTap(self, task: task)
         }
     }
     

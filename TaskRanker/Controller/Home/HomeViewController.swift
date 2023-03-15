@@ -72,23 +72,10 @@ class HomeViewController: UIViewController {
     
     /// NavigationController初期化
     private func initNavigation() {
-        // 設定メニュー
-        let menuButton = UIBarButtonItem(image: UIImage(systemName: "gear"),
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(openHumburgerMenu(_:)))
-        // 完了タスク
-        let completeButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"),
-                                             style: .plain,
-                                             target: self,
-                                             action: #selector(openCompletedTaskList(_:)))
-        // フィルタ
+        let menuButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openHumburgerMenu(_:)))
+        let completeButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"), style: .plain, target: self, action: #selector(openCompletedTaskList(_:)))
         let filterImage = isFilter ? UIImage(named: "icon_filter_fill")! : UIImage(named: "icon_filter_empty")!
-        let filterButton = UIBarButtonItem(image: filterImage,
-                                           style: .done,
-                                           target: self,
-                                           action: #selector(openFilterMenu))
-        
+        let filterButton = UIBarButtonItem(image: filterImage, style: .done, target: self, action: #selector(openFilterMenu))
         navigationItem.leftBarButtonItems = [menuButton]
         navigationItem.rightBarButtonItems = [filterButton, completeButton]
     }

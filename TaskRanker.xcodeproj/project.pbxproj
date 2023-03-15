@@ -45,6 +45,8 @@
 		8D60F26728CC76E1003BB724 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D60F26928CC76E1003BB724 /* Localizable.strings */; };
 		8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D60F26B28CC78DB003BB724 /* LocalizableString.swift */; };
 		8D75CDEB29BB6548003C93AD /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDEA29BB6548003C93AD /* Converter.swift */; };
+		8D75CDEF29C1FFC1003C93AD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDEE29C1FFC1003C93AD /* HomeViewModel.swift */; };
+		8D75CDF129C20085003C93AD /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDF029C20085003C93AD /* MapViewModel.swift */; };
 		8D97697C29A722BF0000DD8D /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97697B29A722BF0000DD8D /* FirebaseManager.swift */; };
 		8D97697E29AAC6D90000DD8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */; };
 		8D97698429B2FEFD0000DD8D /* HelpItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97698329B2FEFD0000DD8D /* HelpItem.swift */; };
@@ -108,6 +110,8 @@
 		8D60F26A28CC76E7003BB724 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D60F26B28CC78DB003BB724 /* LocalizableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableString.swift; sourceTree = "<group>"; };
 		8D75CDEA29BB6548003C93AD /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
+		8D75CDEE29C1FFC1003C93AD /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8D75CDF029C20085003C93AD /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		8D97697B29A722BF0000DD8D /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D97698329B2FEFD0000DD8D /* HelpItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HelpItem.swift; path = TaskRanker/Model/Setting/HelpItem.swift; sourceTree = SOURCE_ROOT; };
@@ -230,6 +234,7 @@
 				8D60F24E28CC60C6003BB724 /* Application */,
 				8D1D392528F984B20078F3CB /* Model */,
 				8D60F25028CC6123003BB724 /* View */,
+				8D75CDEC29C1FF7E003C93AD /* ViewModel */,
 				8D60F25228CC6137003BB724 /* Controller */,
 				8D60F25428CC6185003BB724 /* Coordinator */,
 				8D60F25328CC6155003BB724 /* Utils */,
@@ -341,6 +346,23 @@
 			children = (
 				8D60F26128CC67A5003BB724 /* HomeCoordinator.swift */,
 				8DCB72D92949E99D00935972 /* MapCoordinator.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8D75CDEC29C1FF7E003C93AD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D75CDED29C1FF9D003C93AD /* Home */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8D75CDED29C1FF9D003C93AD /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8D75CDEE29C1FFC1003C93AD /* HomeViewModel.swift */,
+				8D75CDF029C20085003C93AD /* MapViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -559,6 +581,7 @@
 				2F2F21C428F51A97005FFCC2 /* SettingViewController.swift in Sources */,
 				8DB633CE28CDD462001F2DB7 /* UIViewController+ToolBar.swift in Sources */,
 				8DCB72DC2949E9A700935972 /* TabCoordinator.swift in Sources */,
+				8D75CDF129C20085003C93AD /* MapViewModel.swift in Sources */,
 				8D55A4A62909EE86005E573A /* Definition+Navigation.swift in Sources */,
 				8D60F26C28CC78DB003BB724 /* LocalizableString.swift in Sources */,
 				2F2F21CA28F5397B005FFCC2 /* LoginViewController.swift in Sources */,
@@ -570,6 +593,7 @@
 				2F2F21D628F53D24005FFCC2 /* TutorialViewController.swift in Sources */,
 				2F2F21C728F51AC5005FFCC2 /* SettingCoordinator.swift in Sources */,
 				8DB633BF28CD9F8B001F2DB7 /* TaskType.swift in Sources */,
+				8D75CDEF29C1FFC1003C93AD /* HomeViewModel.swift in Sources */,
 				8D55A4A429074621005E573A /* ComletedTaskListCoordinator.swift in Sources */,
 				8D60F23B28CC5E61003BB724 /* AppDelegate.swift in Sources */,
 				8D1D392428F84CA80078F3CB /* UserDefaultsKey.swift in Sources */,

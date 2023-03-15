@@ -47,8 +47,8 @@ class TaskViewController: UIViewController {
     private let dayPicker = UIPickerView()
     private var datePicker = UIDatePicker()
     private var selectedColor = 0
-    private var selectedDay = 0
-    private var selectedDate = Date()
+    private var selectedDay = 2
+    private var selectedDate = Converter.getDaysAfterDate(date: Date(), daysAfter: 7)
     private var dayArray = [Int](1...99)
     var task = Task()
     var isViewer = false
@@ -79,11 +79,7 @@ class TaskViewController: UIViewController {
         initDatePicker()
         initColorPicker()
         initDayPicker()
-        if isViewer {
-            inputTask()
-        } else {
-            titleTextField.becomeFirstResponder()
-        }
+        if !isViewer { titleTextField.becomeFirstResponder() }
     }
     
     override func viewDidLayoutSubviews() {
@@ -105,6 +101,7 @@ class TaskViewController: UIViewController {
     
     /// 画面初期化
     private func initView() {
+        // ラベル
         titleLabel.text = TITLE_TITLE
         memoLabel.text = TITLE_MEMO
         colorLabel.text = TITLE_COLOR
@@ -113,15 +110,44 @@ class TaskViewController: UIViewController {
         typeLabel.text = TITLE_TASK_TYPE
         deadlineDateLabel.text = TITLE_DEADLINE_DATE
         updateUrgencyLabel.text = TITLE_UPDATE_URGENCY
-        
+        // テキスト
         initTextField(textField: titleTextField, placeholder: "")
         initTextView(textView: memoTextView)
         titleTextField.delegate = self
         memoTextView.delegate = self
-        
+        // ボタン
         colorButton.backgroundColor = TaskColor.allCases[selectedColor].color
         colorButton.setTitle(TaskColor.allCases[selectedColor].title, for: .normal)
-        if !isViewer {
+        deadlineDateButton.setTitle(Converter.dateToString(date: selectedDate), for: .normal)
+        updateUrgencyButton.setTitle(Converter.updateUrgencyString(day: dayArray[selectedDay]), for: .normal)
+        
+        if isViewer {
+            inputTask()
+        } else {
+            setDeadlineSwitch(isOn: true)
+        }
+    }
+    
+    /// Taskの中身を反映
+    private func inputTask() {
+        titleTextField.text = task.title
+        memoTextView.text = task.memo
+        colorButton.backgroundColor = TaskColor.allCases[task.color].color
+        colorButton.setTitle(TaskColor.allCases[task.color].title, for: .normal)
+        importanceSlider.value = Float(task.importance)
+        importanceValueLabel.text = String(task.importance)
+        urgencySlider.value = Float(task.urgency)
+        urgencyValueLabel.text = String(task.urgency)
+        typeValueLabel.text = task.type.typeTitle
+        selectedDay = task.daysBeforeUpdateUrgency - 1
+        updateUrgencyButton.setTitle(Converter.updateUrgencyString(day: dayArray[selectedDay]), for: .normal)
+        
+        if let date = task.deadlineDate {
+            selectedDate = date
+            datePicker.setDate(selectedDate, animated: false)
+            deadlineDateButton.setTitle(Converter.dateToString(date: selectedDate), for: .normal)
+            setDeadlineSwitch(isOn: true)
+        } else {
             setDeadlineSwitch(isOn: false)
         }
     }
@@ -142,28 +168,6 @@ class TaskViewController: UIViewController {
             navigationItem.rightBarButtonItems = [saveButton]
             navigationItem.leftBarButtonItems = [closeButton]
         }
-    }
-    
-    /// Taskの中身を反映
-    private func inputTask() {
-        titleTextField.text = task.title
-        memoTextView.text = task.memo
-        colorButton.backgroundColor = TaskColor.allCases[task.color].color
-        colorButton.setTitle(TaskColor.allCases[task.color].title, for: .normal)
-        importanceSlider.value = Float(task.importance)
-        importanceValueLabel.text = String(task.importance)
-        urgencySlider.value = Float(task.urgency)
-        urgencyValueLabel.text = String(task.urgency)
-        typeValueLabel.text = task.type.typeTitle
-        if let date = task.deadlineDate {
-            selectedDate = date
-            setDeadlineSwitch(isOn: true)
-        } else {
-            setDeadlineSwitch(isOn: false)
-        }
-        datePicker.setDate(selectedDate, animated: false)
-        deadlineDateButton.setTitle(Converter.dateToString(date: selectedDate), for: .normal)
-        updateUrgencyButton.setTitle(Converter.updateUrgencyString(day: task.daysBeforeUpdateUrgency), for: .normal)
     }
     
     // MARK: - Action
@@ -217,7 +221,7 @@ class TaskViewController: UIViewController {
         task.importance = Int(importanceValueLabel.text!)!
         task.urgency = Int(urgencyValueLabel.text!)!
         task.deadlineDate = deadlineSwitch.isOn ? selectedDate : nil
-        task.daysBeforeUpdateUrgency = deadlineSwitch.isOn ? dayArray[selectedDay] : 0
+        task.daysBeforeUpdateUrgency = dayArray[selectedDay]
         
         let taskManager = TaskManager()
         if !taskManager.saveTask(task: task) {
@@ -232,7 +236,7 @@ class TaskViewController: UIViewController {
     
     /// カラーボタン
     @IBAction func tapColorButton(_ sender: Any) {
-        titleTextField.resignFirstResponder()
+        hideKeyboard()
         closePicker(pickerView)
         let toolbar = createToolBar(#selector(colorPickerDoneAction), #selector(colorPickerCancelAction))
         pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: colorPicker.bounds.size.height + toolbar.bounds.size.height + view.safeAreaInsets.bottom))
@@ -275,6 +279,7 @@ class TaskViewController: UIViewController {
     
     /// 期限日ボタン
     @IBAction func tapDeadlineDateButton(_ sender: Any) {
+        hideKeyboard()
         closePicker(pickerView)
         let toolbar = createToolBar(#selector(datePickerDoneAction), #selector(datePickerCancelAction))
         pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height + toolbar.bounds.size.height + view.safeAreaInsets.bottom))
@@ -286,6 +291,7 @@ class TaskViewController: UIViewController {
     
     /// 緊急度自動引き上げ日ボタン
     @IBAction func tapUpdateUrgencyButton(_ sender: Any) {
+        hideKeyboard()
         closePicker(pickerView)
         let toolbar = createToolBar(#selector(dayPickerDoneAction), #selector(dayPickerCancelAction))
         pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: dayPicker.bounds.size.height + toolbar.bounds.size.height + view.safeAreaInsets.bottom))
@@ -341,7 +347,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         datePicker.locale = Locale(identifier: "ja")
         datePicker.backgroundColor = UIColor.systemGray5
         datePicker.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height)
-        datePicker.date = Date()
+        datePicker.date = selectedDate
         if #available(iOS 13.4, *) {
             datePicker.preferredDatePickerStyle = .wheels
         }
@@ -392,6 +398,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         dayPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: dayPicker.bounds.size.height)
         dayPicker.backgroundColor = UIColor.systemGray5
         dayPicker.tag = PickerType.day.rawValue
+        dayPicker.selectRow(selectedDay, inComponent: 0, animated: false)
     }
     
     /// DayPicker完了処理
@@ -427,6 +434,12 @@ extension TaskViewController: UITextFieldDelegate {
         }
         task.title = textField.text!
         return true
+    }
+    
+    /// キーボードを閉じる
+    private func hideKeyboard() {
+        titleTextField.resignFirstResponder()
+        memoTextView.resignFirstResponder()
     }
     
 }

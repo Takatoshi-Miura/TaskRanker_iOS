@@ -179,6 +179,17 @@ class TaskManager {
         }
     }
     
+    /// 期限日設定のあるTaskを取得
+    /// - Returns: Task
+    func getTaskWithDeadline() -> [Task] {
+        var taskArray = [Task]()
+        let realmTaskArray = realmManager.getTaskWithDeadline()
+        for realmTask in realmTaskArray {
+            taskArray.append(Task(realmTask: realmTask))
+        }
+        return taskArray
+    }
+    
     // MARK: - Insert
     
     /// Taskを保存
@@ -243,6 +254,23 @@ class TaskManager {
         if UserDefaultsKey.useFirebase.bool() && Device.isOnline() {
             firebaseManager.updateTask(task: task)
         }
+    }
+    
+    /// 緊急度自動引き上げ
+    /// - Returns: 緊急度自動引き上げメッセージ
+    func autoUpdateUrgency() -> String {
+        var message = MESSAGE_UPDATE_URGENCY
+        let taskArray = getTaskWithDeadline()
+        for task in taskArray {
+            let updateDate = Converter.updateUrgencyDate(task: task)
+            if updateDate <= Date() && task.urgency < 5 {
+                var updateTask = self.getTask(taskID: task.taskID)!
+                updateTask.urgency = 5
+                self.updateTask(task: updateTask)
+                message += "\(updateTask.title)\n"
+            }
+        }
+        return message
     }
     
 }

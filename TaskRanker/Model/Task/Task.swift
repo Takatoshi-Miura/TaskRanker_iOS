@@ -45,7 +45,7 @@ struct Task {
         self.importance = 4
         self.urgency = 4
         self.deadlineDate = nil
-        self.daysBeforeUpdateUrgency = 0
+        self.daysBeforeUpdateUrgency = 3
         self.completedDate = nil
         self.isComplete = false
         self.isDeleted = false

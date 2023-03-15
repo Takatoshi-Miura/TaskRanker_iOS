@@ -52,6 +52,8 @@
 "CompleteTaskListTitle" = "完了済みタスク";
 "TaskList" = "タスク一覧";
 "UpdateUrgency" = "緊急度自動引き上げ日";
+"AutoUpdateUrgencyTitle" = "緊急度自動更新";
+"AutoUpdateUrgencyMessage" = "期限日が迫っているため、以下のタスクの緊急度を引き上げました。\n\n";
 
 // MARK: - Filter
 "Filter" = "フィルタ";

@@ -53,6 +53,8 @@ let MESSAGE_ZERO_TASK = NSLocalizedString("ZeroTaskMessage", comment: "")
 let TITLE_COMPLETE_TASK_LIST = NSLocalizedString("CompleteTaskListTitle", comment: "")
 let TITLE_TASK_LIST = NSLocalizedString("TaskList", comment: "")
 let TITLE_UPDATE_URGENCY = NSLocalizedString("UpdateUrgency", comment: "")
+let TITLE_AUTO_UPDATE_URGENCY = NSLocalizedString("AutoUpdateUrgencyTitle", comment: "")
+let MESSAGE_UPDATE_URGENCY = NSLocalizedString("AutoUpdateUrgencyMessage", comment: "")
 
 // MARK: - Filter
 let TITLE_FILTER = NSLocalizedString("Filter", comment: "")

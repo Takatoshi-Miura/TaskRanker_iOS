@@ -12,6 +12,8 @@ protocol TaskListViewControllerDelegate: AnyObject {
     func taskListVCTaskDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath)
     /// TaskTypeアップデート時
     func taskListVCTaskTypeUpdate(task: Task)
+    /// 緊急度自動更新時
+    func taskListVCAutoUrgencyUpdate(message: String)
 }
 
 class TaskListViewController: UIViewController {
@@ -22,6 +24,7 @@ class TaskListViewController: UIViewController {
     private var segmentType: TaskType
     private var taskArray = [Task]()
     private var filterArray: [Bool]?
+    private var updateUrgencyMessage = ""
     var delegate: TaskListViewControllerDelegate?
     
     // MARK: - Initializer
@@ -47,6 +50,10 @@ class TaskListViewController: UIViewController {
     
     /// データの同期処理
     @objc func syncData() {
+        // 緊急度自動更新
+        let taskManager = TaskManager()
+        updateUrgencyMessage = taskManager.autoUpdateUrgency()
+        
         if UserDefaultsKey.useFirebase.bool() && Device.isOnline() {
             let taskManager = TaskManager()
             taskManager.syncDatabase(completion: {
@@ -137,6 +144,11 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.refreshControl?.endRefreshing()
         tableView.reloadData()
         updateTableFooterView()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            if (self.updateUrgencyMessage != MESSAGE_UPDATE_URGENCY) {
+                self.delegate?.taskListVCAutoUrgencyUpdate(message: self.updateUrgencyMessage)
+            }
+        }
     }
     
     /// 0件表示切替用

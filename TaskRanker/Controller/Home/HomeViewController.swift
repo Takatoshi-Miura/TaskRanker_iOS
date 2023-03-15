@@ -292,6 +292,14 @@ extension HomeViewController: TaskListViewControllerDelegate {
         insertTask(task: task)
     }
     
+    /// 緊急度自動更新時
+    func taskListVCAutoUrgencyUpdate(message: String) {
+        let alert = Alert.OK(title: TITLE_AUTO_UPDATE_URGENCY, message: message, OKAction: {
+            self.syncTaskList()
+        })
+        present(alert, animated: true)
+    }
+    
     /// タスクを挿入(新規追加,未完了に戻す,タイプ更新)
     /// - Parameter task: 挿入する課題
     func insertTask(task: Task) {

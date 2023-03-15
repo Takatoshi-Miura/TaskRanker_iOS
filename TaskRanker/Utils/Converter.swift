@@ -45,4 +45,22 @@ class Converter {
         return "\(TITLE_DEADLINE_DATE)\(day)日前"
     }
     
+    /// 指定日数前のDateを取得
+    /// - Parameters:
+    ///   - date: 基準の日付
+    ///   - daysAgo: 日数
+    /// - Returns: 指定日数前のDate
+    static func getDaysAfterDate(date: Date, daysAfter: Int) -> Date {
+        let ago = TimeInterval(daysAfter * 24 * 60 * 60)
+        return date.addingTimeInterval(ago)
+    }
+    
+    /// 緊急度自動引き上げ日のDateを取得
+    /// - Parameter day: 引き上げ日
+    /// - Returns: 緊急度自動引き上げ日の文字列
+    static func updateUrgencyDate(task: Task) -> Date {
+        let daysAgo = TimeInterval(task.daysBeforeUpdateUrgency * 24 * 60 * 60)
+        return task.deadlineDate!.addingTimeInterval(-daysAgo)
+    }
+    
 }

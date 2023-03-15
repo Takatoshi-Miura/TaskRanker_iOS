@@ -52,6 +52,8 @@
 "CompleteTaskListTitle" = "Completed tasks";
 "TaskList" = "Task List";
 "UpdateUrgency" = "Urgency automatic raise date";
+"AutoUpdateUrgencyTitle" = "Automatic update of urgency";
+"AutoUpdateUrgencyMessage" = "Due to the approaching deadline, we have increased the urgency of the following tasks.\n\n";
 
 // MARK: - Filter
 "Filter" = "Filter";

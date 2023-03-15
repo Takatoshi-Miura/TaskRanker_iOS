@@ -132,6 +132,19 @@ extension RealmManager {
         return taskArray
     }
     
+    /// 期限日設定のあるRealmTaskを取得
+    /// - Returns: RealmTask配列
+    func getTaskWithDeadline() -> [RealmTask] {
+        var taskArray = [RealmTask]()
+        let realm = try! Realm()
+        let realmArray = realm.objects(RealmTask.self)
+            .filter("(deadlineDate != nil)")
+        for task in realmArray {
+            taskArray.append(task)
+        }
+        return taskArray
+    }
+    
     /// RealmTaskを取得
     /// - Parameter taskID: taskID
     /// - Returns: RealmTaskデータ(存在しなければnil)

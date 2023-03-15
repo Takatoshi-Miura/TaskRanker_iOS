@@ -65,7 +65,7 @@ class TaskListViewController: UIViewController {
     }
     
     /// データを再取得
-    func refreshData() {
+    private func refreshData() {
         if filterArray != nil {
             applyFilter(filterArray: filterArray!)
         } else {

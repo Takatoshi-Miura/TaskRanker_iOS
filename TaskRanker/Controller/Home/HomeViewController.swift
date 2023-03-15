@@ -173,22 +173,9 @@ class HomeViewController: UIViewController {
     /// - Parameter filterArray: チェック配列
     func applyFilter(filterArray: [Bool]) {
         isFilter = (filterArray.firstIndex(of: false) != nil) ? true : false
-        if isFilter {
-            self.filterArray = filterArray
-            applyFilterTaskList()
-        } else {
-            self.filterArray = nil
-            reloadTaskList()
-        }
+        self.filterArray = filterArray
+        applyFilterTaskList()
         initNavigation()
-    }
-    
-    /// TaskListをリロード
-    private func reloadTaskList() {
-        taskListVC_A.refreshData()
-        taskListVC_B.refreshData()
-        taskListVC_C.refreshData()
-        taskListVC_D.refreshData()
     }
     
     /// TaskListにフィルタを適用

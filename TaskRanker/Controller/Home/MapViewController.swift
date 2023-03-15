@@ -18,7 +18,7 @@ class MapViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var scatterChartView: ScatterChartView!
-    var mapViewModel = MapViewModel()
+    private var mapViewModel = MapViewModel()
     var delegate: MapViewControllerDelegate?
     
     // MARK: - LifeCycle

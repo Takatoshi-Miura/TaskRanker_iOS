@@ -31,6 +31,8 @@ class FilterViewModel {
     /// - Returns: Cell
     func configureCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        cell.imageView?.image = UIImage(systemName: "circle.fill")
+        cell.imageView?.tintColor = TaskColor.allCases[indexPath.row].color
         cell.textLabel?.text = TaskColor.allCases[indexPath.row].title
         cell.accessoryType = filterArray[indexPath.row] ? .checkmark : .none
         return cell

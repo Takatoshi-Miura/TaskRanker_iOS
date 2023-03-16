@@ -19,22 +19,15 @@ class CompletedTaskListViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var tableView: UITableView!
-    private var taskArray = [Task]()
+    private var completedTaskViewModel = CompletedTaskViewModel()
     var delegate: CompletedTaskListViewControllerDelegate?
 
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refreshData()
         initNavigation()
         initTableView()
-    }
-    
-    /// データ取得
-    private func refreshData() {
-        let taskManager = TaskManager()
-        taskArray = taskManager.getTask(isComplete: true)
     }
     
     // MARK: - Viewer
@@ -42,12 +35,7 @@ class CompletedTaskListViewController: UIViewController {
     /// NavigationController初期化
     private func initNavigation() {
         self.title = TITLE_COMPLETE_TASK_LIST
-        
-        // 閉じるボタン
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .close,
-                                          target: self,
-                                          action: #selector(tapCloseButton(_:)))
-        
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(tapCloseButton(_:)))
         navigationItem.leftBarButtonItems = [closeButton]
     }
     
@@ -60,26 +48,13 @@ class CompletedTaskListViewController: UIViewController {
     
     /// タスクを未完了にする
     @objc func inCompleteTask(_ sender : UITapGestureRecognizer) {
-        // IndexPathを取得
-        let tappedLocation = sender.location(in: self.tableView)
-        let tappedIndexPath = self.tableView.indexPathForRow(at: tappedLocation)
+        let tappedIndexPath = getTappedIndexPath(sender)
         tableView.selectRow(at: tappedIndexPath, animated: false, scrollPosition: .none)
         
         let alert = Alert.OKCancel(title: TITLE_COMPLETE_TASK, message: MESSAGE_INCOMPLETE_TASK, OKAction: {
-            // チェックを外す
-            let cell = self.tableView.cellForRow(at: tappedIndexPath!)
-            let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
-            cell?.imageView?.image = UIImage(systemName: "circle", withConfiguration: symbolConfiguration)
-            
-            // タスクを未完了にする
-            var task = self.taskArray[tappedIndexPath!.row]
-            task.isComplete = false
-            let taskManager = TaskManager()
-            taskManager.updateTask(task: task)
-            
-            // Home画面に戻る
-            self.taskArray.remove(at: tappedIndexPath!.row)
-            self.tableView.deleteRows(at: [tappedIndexPath!], with: UITableView.RowAnimation.left)
+            // タスクを未完了にしてHome画面に戻る
+            let task = self.completedTaskViewModel.inCompleteTask(indexPath: tappedIndexPath)
+            self.tableView.deleteRows(at: [tappedIndexPath], with: UITableView.RowAnimation.left)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.delegate?.completedTaskListVCTaskInComplete(self, task: task)
             }
@@ -89,23 +64,24 @@ class CompletedTaskListViewController: UIViewController {
     
     /// タスクを削除
     @objc func deleteTask(_ sender : UITapGestureRecognizer) {
-        // IndexPathを取得
-        let tappedLocation = sender.location(in: self.tableView)
-        let tappedIndexPath = self.tableView.indexPathForRow(at: tappedLocation)!
+        let tappedIndexPath = getTappedIndexPath(sender)
         tableView.selectRow(at: tappedIndexPath, animated: false, scrollPosition: .none)
         
-        // タスクを削除
         let alert = Alert.Delete(title: TITLE_DELETE_TASK, message: MESSAGE_DELETE_TASK, OKAction: {
-            var task = self.taskArray[tappedIndexPath.row]
-            task.isComplete = false
-            let taskManager = TaskManager()
-            taskManager.updateTask(task: task)
-            self.taskArray.remove(at: tappedIndexPath.row)
+            // タスクを削除
+            self.completedTaskViewModel.deleteTask(indexPath: tappedIndexPath)
             self.tableView.deleteRows(at: [tappedIndexPath], with: UITableView.RowAnimation.left)
         })
         present(alert, animated: true)
     }
-
+    
+    /// タップした位置からIndexPathを取得
+    private func getTappedIndexPath(_ sender : UITapGestureRecognizer) -> IndexPath {
+        let tappedLocation = sender.location(in: tableView)
+        let tappedIndexPath = tableView.indexPathForRow(at: tappedLocation)!
+        return tappedIndexPath
+    }
+    
 }
 
 extension CompletedTaskListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -125,28 +101,13 @@ extension CompletedTaskListViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count
+        return completedTaskViewModel.getTaskCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let task = taskArray[indexPath.row]
-        let symbolName = task.isComplete ? "checkmark.circle" : "circle"
-        let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
-        cell.imageView?.isUserInteractionEnabled = true
-        cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
-        cell.imageView?.tintColor = TaskColor.allCases[task.color].color
+        let cell = completedTaskViewModel.getTaskCell(indexPath: indexPath)
         cell.imageView!.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(inCompleteTask(_:))))
-        cell.textLabel?.text = task.title
-        cell.detailTextLabel?.text = (task.deadlineDate != nil) ? Converter.deadlineDateString(date: task.deadlineDate!) : ""
-        cell.detailTextLabel?.textColor = UIColor.lightGray
-        
-        let deleteImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        deleteImage.image = UIImage(systemName: "trash")
-        deleteImage.tintColor = UIColor.red
-        deleteImage.isUserInteractionEnabled = true
-        deleteImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteTask(_:))))
-        cell.accessoryView = deleteImage
+        cell.accessoryView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteTask(_:))))
         return cell
     }
     

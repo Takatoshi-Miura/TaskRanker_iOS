@@ -9,7 +9,11 @@ import UIKit
 
 class FilterViewModel {
     
+    // MARK: - Variable
+    
     var filterArray = [Bool]()
+    
+    // MARK: - TableView DataSource
     
     /// フィルタ配列の設定
     /// - Parameter filterArray: フィルタ配列
@@ -47,6 +51,5 @@ class FilterViewModel {
             filterArray[indexPath.row].toggle()
         }
     }
-    
     
 }

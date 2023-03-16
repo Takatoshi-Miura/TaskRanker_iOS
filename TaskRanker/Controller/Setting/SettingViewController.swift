@@ -22,7 +22,7 @@ class SettingViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var tableView: UITableView!
-    private var cells: [[Cell]] = [[Cell.dataTransfer], [Cell.help, Cell.inquiry]]
+    private var settingViewModel = SettingViewModel()
     var delegate: SettingViewControllerDelegate?
     
     // MARK: - LifeCycle
@@ -38,12 +38,7 @@ class SettingViewController: UIViewController {
     /// NavigationController初期化
     private func initNavigation() {
         self.title = TITLE_SETTING
-        
-        // 閉じるボタン
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .close,
-                                          target: self,
-                                          action: #selector(tapCloseButton(_:)))
-        
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(tapCloseButton(_:)))
         navigationItem.leftBarButtonItems = [closeButton]
     }
     
@@ -57,37 +52,6 @@ class SettingViewController: UIViewController {
 }
 
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    private enum Section: Int, CaseIterable {
-        case data
-        case help
-        var title: String {
-            switch self {
-            case .data: return TITLE_DATA
-            case .help: return TITLE_HELP
-            }
-        }
-    }
-    
-    private enum Cell: Int, CaseIterable {
-        case dataTransfer
-        case help
-        case inquiry
-        var title: String {
-            switch self {
-            case .dataTransfer: return TITLE_DATA_TRANSFER
-            case .help: return TITLE_HOW_TO_USE_THIS_APP
-            case .inquiry: return TITLE_INQUIRY
-            }
-        }
-        var image: UIImage {
-            switch self {
-            case .dataTransfer: return UIImage(systemName: "icloud.and.arrow.up")!
-            case .help: return UIImage(systemName: "questionmark.circle")!
-            case .inquiry: return UIImage(systemName: "envelope")!
-            }
-        }
-    }
     
     /// TableView初期化
     private func initTableView() {
@@ -104,28 +68,24 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.allCases.count
+        return settingViewModel.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Section.allCases[section].title
+        return settingViewModel.titleForHeaderInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cells[section].count
+        return settingViewModel.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        cell.imageView?.image = cells[indexPath.section][indexPath.row].image
-        cell.textLabel?.text = cells[indexPath.section][indexPath.row].title
-        cell.accessoryType = .disclosureIndicator
-        return cell
+        return settingViewModel.cellForRowAt(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        switch cells[indexPath.section][indexPath.row] {
+        switch settingViewModel.didSelectRowAt(indexPath: indexPath) {
         case .dataTransfer:
             delegate?.settingVCDataTransferDidTap(self)
             break

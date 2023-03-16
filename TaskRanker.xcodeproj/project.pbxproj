@@ -50,6 +50,7 @@
 		8D75CDF429C28089003C93AD /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDF329C28089003C93AD /* FilterViewModel.swift */; };
 		8D75CDF729C34C6F003C93AD /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDF629C34C6F003C93AD /* SettingViewModel.swift */; };
 		8D75CDF929C34CE3003C93AD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDF829C34CE3003C93AD /* LoginViewModel.swift */; };
+		8D75CDFB29C3550A003C93AD /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDFA29C3550A003C93AD /* PageViewModel.swift */; };
 		8D97697C29A722BF0000DD8D /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97697B29A722BF0000DD8D /* FirebaseManager.swift */; };
 		8D97697E29AAC6D90000DD8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */; };
 		8D97698429B2FEFD0000DD8D /* HelpItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97698329B2FEFD0000DD8D /* HelpItem.swift */; };
@@ -118,6 +119,7 @@
 		8D75CDF329C28089003C93AD /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		8D75CDF629C34C6F003C93AD /* SettingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		8D75CDF829C34CE3003C93AD /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8D75CDFA29C3550A003C93AD /* PageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModel.swift; sourceTree = "<group>"; };
 		8D97697B29A722BF0000DD8D /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D97698329B2FEFD0000DD8D /* HelpItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HelpItem.swift; path = TaskRanker/Model/Setting/HelpItem.swift; sourceTree = SOURCE_ROOT; };
@@ -388,6 +390,7 @@
 			children = (
 				8D75CDF629C34C6F003C93AD /* SettingViewModel.swift */,
 				8D75CDF829C34CE3003C93AD /* LoginViewModel.swift */,
+				8D75CDFA29C3550A003C93AD /* PageViewModel.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				8DB633D028CDD502001F2DB7 /* Alert.swift in Sources */,
 				8D60F25928CC644B003BB724 /* AppCoordinator.swift in Sources */,
 				8DB633C828CDD38A001F2DB7 /* UIViewController+TextField.swift in Sources */,
+				8D75CDFB29C3550A003C93AD /* PageViewModel.swift in Sources */,
 				2F415F4228F7EAFF0082D676 /* UIViewController+PickerView.swift in Sources */,
 				8DB633CA28CDD3D7001F2DB7 /* UIViewController+TextView.swift in Sources */,
 				8D1D392928F984B20078F3CB /* RealmManager.swift in Sources */,

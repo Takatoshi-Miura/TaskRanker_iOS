@@ -14,17 +14,15 @@ protocol PageViewControllerDelegate: AnyObject {
 
 class PageViewController: UIPageViewController {
     
-    // MARK: - UI,Variable
+    // MARK: - Variable
     
-    private var controllers: [UIViewController] = []
-    private var pageControl: UIPageControl!
+    private var pageViewModel = PageViewModel()
     var pageVCDelegate: PageViewControllerDelegate?
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addTutorialView()
         addPageView()
         addPageControl()
         addCancelButton()
@@ -32,18 +30,10 @@ class PageViewController: UIPageViewController {
     
     // MARK: - Viewer
     
-    /// チュートリアル画面を追加
-    private func addTutorialView() {
-        for helpItem in HelpItem.allCases {
-            let tutorialVC = TutorialViewController(helpItem: helpItem)
-            controllers.append(tutorialVC)
-        }
-    }
-    
     /// PageViewControllerを追加
     private func addPageView() {
         let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        pageViewController.setViewControllers([controllers[0]], direction: .forward, animated: true, completion: nil)
+        pageViewController.setViewControllers([pageViewModel.controllers[0]], direction: .forward, animated: true, completion: nil)
         pageViewController.dataSource = self
         pageViewController.delegate = self
         self.addChild(pageViewController)
@@ -52,13 +42,7 @@ class PageViewController: UIPageViewController {
     
     /// PageControlを追加
     private func addPageControl() {
-        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 60, width: UIScreen.main.bounds.width,height: 60))
-        pageControl.numberOfPages = controllers.count
-        pageControl.currentPage = 0
-        pageControl.pageIndicatorTintColor = .gray
-        pageControl.currentPageIndicatorTintColor = .white
-        pageControl.isUserInteractionEnabled = false
-        self.view.addSubview(pageControl)
+        self.view.addSubview(pageViewModel.pageControl)
     }
     
     /// キャンセルボタンを追加
@@ -84,31 +68,22 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
     
     /// ページ数
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return controllers.count
+        return pageViewModel.controllers.count
     }
    
     /// 左にスワイプ（進む）
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let index = controllers.firstIndex(of: viewController), index < controllers.count - 1 {
-            return controllers[index + 1]
-        } else {
-            return nil
-        }
+        pageViewModel.getNextPage(viewController: viewController, isAfter: true)
     }
 
     /// 右にスワイプ （戻る）
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let index = controllers.firstIndex(of: viewController), index > 0 {
-            return controllers[index - 1]
-        } else {
-            return nil
-        }
+        pageViewModel.getNextPage(viewController: viewController, isAfter: false)
     }
     
     /// アニメーション終了後処理
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        let currentPage = pageViewController.viewControllers![0]
-        pageControl.currentPage = controllers.firstIndex(of: currentPage)!
+        pageViewModel.changePage(pageViewController: pageViewController)
     }
     
 }

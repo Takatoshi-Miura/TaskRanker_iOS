@@ -17,16 +17,16 @@ class FilterViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var tableView: UITableView!
-    private var filterViewModel = FilterViewModel()
+    private var filterViewModel: FilterViewModel
     var delegate: FilterViewControllerDelegate?
 
     // MARK: - Initializer
     
     /// イニシャライザ
-    /// - Parameter task: nilの場合は新規作成
+    /// - Parameter filterArray: nilの場合は新規作成
     init(filterArray: [Bool]?) {
+        filterViewModel = FilterViewModel(filterArray: filterArray)
         super.init(nibName: nil, bundle: nil)
-        filterViewModel.setupFilterArray(array: filterArray)
     }
     
     required init?(coder: NSCoder) {
@@ -72,24 +72,17 @@ class FilterViewController: UIViewController {
 
 }
 
-extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
+extension FilterViewController: UITableViewDelegate {
     
     /// TableView初期化
     private func initTableView() {
+        tableView.dataSource = filterViewModel
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterViewModel.filterArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return filterViewModel.configureCell(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

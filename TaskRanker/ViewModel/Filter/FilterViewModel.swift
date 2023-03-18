@@ -7,39 +7,30 @@
 
 import UIKit
 
-class FilterViewModel {
+class FilterViewModel: NSObject {
     
     // MARK: - Variable
     
-    var filterArray = [Bool]()
+    var filterArray: [Bool]
     
-    // MARK: - TableView DataSource
+    // MARK: - Initializer
     
-    /// フィルタ配列の設定
-    /// - Parameter filterArray: フィルタ配列
-    func setupFilterArray(array: [Bool]?) {
-        if let array = array {
-            filterArray = array
+    /// イニシャライザ
+    /// - Parameter filterArray: nilの場合は新規作成
+    init(filterArray: [Bool]?) {
+        if let array = filterArray {
+            self.filterArray = array
         } else {
-            clearArray()
+            self.filterArray = Array(repeating: true, count: TaskColor.allCases.count)
         }
+        super.init()
     }
+    
+    // MARK: - Action
     
     /// フィルタ配列の初期化
     func clearArray() {
         filterArray = Array(repeating: true, count: TaskColor.allCases.count)
-    }
-    
-    /// Cellを返却
-    /// - Parameter indexPath: indexPath
-    /// - Returns: Cell
-    func configureCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.imageView?.image = UIImage(systemName: "circle.fill")
-        cell.imageView?.tintColor = TaskColor.allCases[indexPath.row].color
-        cell.textLabel?.text = TaskColor.allCases[indexPath.row].title
-        cell.accessoryType = filterArray[indexPath.row] ? .checkmark : .none
-        return cell
     }
     
     /// フィルタの値を反転
@@ -50,6 +41,23 @@ class FilterViewModel {
         if filterArray.firstIndex(of: true) == nil {
             filterArray[indexPath.row].toggle()
         }
+    }
+    
+}
+
+extension FilterViewModel: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filterArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        cell.imageView?.image = UIImage(systemName: "circle.fill")
+        cell.imageView?.tintColor = TaskColor.allCases[indexPath.row].color
+        cell.textLabel?.text = TaskColor.allCases[indexPath.row].title
+        cell.accessoryType = filterArray[indexPath.row] ? .checkmark : .none
+        return cell
     }
     
 }

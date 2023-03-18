@@ -21,7 +21,7 @@ class PageCoordinator: Coordinator {
     func startFlow(in viewController: UIViewController) {
         previousViewController = viewController
         let pageViewController = PageViewController()
-        pageViewController.pageVCDelegate = self
+        pageViewController.pageViewDelegate = self
         if #available(iOS 13.0, *) {
             pageViewController.isModalInPresentation = true
             pageViewController.modalPresentationStyle = .fullScreen

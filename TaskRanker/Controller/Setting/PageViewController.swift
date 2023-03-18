@@ -17,7 +17,7 @@ class PageViewController: UIPageViewController {
     // MARK: - Variable
     
     private var pageViewModel = PageViewModel()
-    var pageVCDelegate: PageViewControllerDelegate?
+    var pageViewDelegate: PageViewControllerDelegate?
     
     // MARK: - LifeCycle
     
@@ -34,7 +34,7 @@ class PageViewController: UIPageViewController {
     private func addPageView() {
         let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.setViewControllers([pageViewModel.controllers[0]], direction: .forward, animated: true, completion: nil)
-        pageViewController.dataSource = self
+        pageViewController.dataSource = pageViewModel
         pageViewController.delegate = self
         self.addChild(pageViewController)
         self.view.addSubview(pageViewController.view!)
@@ -59,27 +59,12 @@ class PageViewController: UIPageViewController {
     
     /// キャンセルボタンの処理
     @objc func tapCloseButton(_ sender: UIButton) {
-        pageVCDelegate?.pageVCCancelDidTap(self)
+        pageViewDelegate?.pageVCCancelDidTap(self)
     }
     
 }
 
-extension PageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    
-    /// ページ数
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return pageViewModel.controllers.count
-    }
-   
-    /// 左にスワイプ（進む）
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        pageViewModel.getNextPage(viewController: viewController, isAfter: true)
-    }
-
-    /// 右にスワイプ （戻る）
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        pageViewModel.getNextPage(viewController: viewController, isAfter: false)
-    }
+extension PageViewController: UIPageViewControllerDelegate {
     
     /// アニメーション終了後処理
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {

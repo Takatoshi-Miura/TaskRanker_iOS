@@ -29,14 +29,29 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var taskListView: UIView!
     private var isFilter: Bool = false
-    private var filterArray: [Bool]?
-    private var taskListVC_A = TaskListViewController(segmentType: TaskType.A)
-    private var taskListVC_B = TaskListViewController(segmentType: TaskType.B)
-    private var taskListVC_C = TaskListViewController(segmentType: TaskType.C)
-    private var taskListVC_D = TaskListViewController(segmentType: TaskType.D)
+    private var filterArray: [Bool]
+    private var taskListVC_A: TaskListViewController
+    private var taskListVC_B: TaskListViewController
+    private var taskListVC_C: TaskListViewController
+    private var taskListVC_D: TaskListViewController
     private var selectedTask: Task?
     private var selectedIndex: IndexPath?
     var delegate: HomeViewControllerDelegate?
+    
+    // MARK: - Initializer
+    
+    init() {
+        filterArray = Array(repeating: true, count: TaskColor.allCases.count)
+        taskListVC_A = TaskListViewController(taskType: TaskType.A, filterArray: filterArray)
+        taskListVC_B = TaskListViewController(taskType: TaskType.B, filterArray: filterArray)
+        taskListVC_C = TaskListViewController(taskType: TaskType.C, filterArray: filterArray)
+        taskListVC_D = TaskListViewController(taskType: TaskType.D, filterArray: filterArray)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: - LifeCycle
     
@@ -133,7 +148,7 @@ class HomeViewController: UIViewController {
     /// フィルタメニュー
     @objc func openFilterMenu(_ sender: UIBarButtonItem) {
         if isFilter {
-            delegate?.homeVCFilterButtonDidTap(self, filterArray: filterArray!)
+            delegate?.homeVCFilterButtonDidTap(self, filterArray: filterArray)
         } else {
             delegate?.homeVCFilterButtonDidTap(self)
         }
@@ -180,10 +195,10 @@ class HomeViewController: UIViewController {
     
     /// TaskListにフィルタを適用
     private func applyFilterTaskList() {
-        taskListVC_A.applyFilter(filterArray: filterArray!)
-        taskListVC_B.applyFilter(filterArray: filterArray!)
-        taskListVC_C.applyFilter(filterArray: filterArray!)
-        taskListVC_D.applyFilter(filterArray: filterArray!)
+        taskListVC_A.applyFilter(filterArray: filterArray)
+        taskListVC_B.applyFilter(filterArray: filterArray)
+        taskListVC_C.applyFilter(filterArray: filterArray)
+        taskListVC_D.applyFilter(filterArray: filterArray)
     }
     
     // MARK: - UIGestureRecognizer

@@ -21,18 +21,15 @@ class TaskListViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var tableView: UITableView!
-    private var segmentType: TaskType
-    private var taskArray = [Task]()
-    private var filterArray: [Bool]?
-    private var updateUrgencyMessage = ""
+    private var taskListViewModel: TaskListViewModel
     var delegate: TaskListViewControllerDelegate?
     
     // MARK: - Initializer
     
     /// イニシャライザ
-    /// - Parameter segmentType: タスクタイプ(ABCD)
-    init(segmentType: TaskType) {
-        self.segmentType = segmentType
+    /// - Parameter taskType: タスクタイプ(ABCD)
+    init(taskType: TaskType, filterArray: [Bool]) {
+        taskListViewModel = TaskListViewModel(taskType: taskType, filterArray: filterArray)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,78 +45,44 @@ class TaskListViewController: UIViewController {
         initTableView()
     }
     
+    // MARK: - LifeCycle
+    
     /// データの同期処理
     @objc func syncData() {
-        // 緊急度自動更新
-        let taskManager = TaskManager()
-        updateUrgencyMessage = taskManager.autoUpdateUrgency()
-        
-        if UserDefaultsKey.useFirebase.bool() && Device.isOnline() {
-            let taskManager = TaskManager()
-            taskManager.syncDatabase(completion: {
-                self.refreshData()
-            })
-        } else {
-            refreshData()
-        }
-    }
-    
-    /// データを再取得
-    private func refreshData() {
-        if filterArray != nil {
-            applyFilter(filterArray: filterArray!)
-        } else {
-            let taskManager = TaskManager()
-            taskArray = taskManager.getTask(type: segmentType)
-            reloadTableView()
-        }
+        taskListViewModel.syncTask()
+        reloadTableView()
     }
     
     /// フィルタを適用
     /// - Parameter filterArray: フィルタ配列
     func applyFilter(filterArray: [Bool]) {
-        self.filterArray = filterArray
-        let taskManager = TaskManager()
-        taskArray = taskManager.getTask(type: segmentType, filterArray: filterArray)
+        taskListViewModel.getTaskData(filterArray: filterArray)
         reloadTableView()
     }
     
-    /// タスクを挿入
+    /// Taskを挿入
     /// - Parameter task: 挿入するタスク
     func insertTask(task: Task) {
-        // 重要度が高い順に並び替え
-        taskArray.append(task)
-        taskArray = taskArray.sorted(by: {
-            $0.importance > $1.importance
-        })
-        if let index = taskArray.firstIndex(where: {$0.taskID == task.taskID}) {
-            let indexPath: IndexPath = [0, index]
+        if let indexPath = taskListViewModel.insertTask(task: task) {
             tableView.insertRows(at: [indexPath], with: UITableView.RowAnimation.right)
-            updateTableFooterView()
+            tableView.tableFooterView = taskListViewModel.getTableFooterView()
         }
     }
     
     /// タスクを更新
     /// - Parameter indexPath: 選択したタスクのIndexPath
     func updateTask(indexPath: IndexPath) {
-        // 完了,削除,タスクタイプ変更されたタスクを取り除く
-        let taskManager = TaskManager()
-        if let selectedTask = taskManager.getTask(taskID: taskArray[indexPath.row].taskID) {
-            if selectedTask.isComplete || selectedTask.isDeleted || selectedTask.type != segmentType {
-                taskArray.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
-                updateTableFooterView()
-                // type変更時は当該タイプにTaskを移動
-                if selectedTask.type != segmentType {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.delegate?.taskListVCTaskTypeUpdate(task: selectedTask)
-                    }
+        if let deleteTask = taskListViewModel.updateTask(indexPath: indexPath) {
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
+            tableView.tableFooterView = taskListViewModel.getTableFooterView()
+            // type変更時は当該タイプにTaskを移動
+            if deleteTask.type != taskListViewModel.taskType {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.delegate?.taskListVCTaskTypeUpdate(task: deleteTask)
                 }
-                return
             }
-            taskArray[indexPath.row] = selectedTask
+            return
         }
-        // タスクを更新
         tableView.reloadRows(at: [indexPath], with: .none)
     }
 
@@ -143,34 +106,13 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     private func reloadTableView() {
         tableView.refreshControl?.endRefreshing()
         tableView.reloadData()
-        updateTableFooterView()
+        tableView.tableFooterView = taskListViewModel.getTableFooterView()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            if (self.updateUrgencyMessage != MESSAGE_UPDATE_URGENCY) {
-                self.delegate?.taskListVCAutoUrgencyUpdate(message: self.updateUrgencyMessage)
+            let message = self.taskListViewModel.getUpdateUrgencyMessage()
+            if (message != MESSAGE_UPDATE_URGENCY) {
+                self.delegate?.taskListVCAutoUrgencyUpdate(message: message)
             }
         }
-    }
-    
-    /// 0件表示切替用
-    private func updateTableFooterView() {
-        tableView.tableFooterView = taskArray.count == 0 ? createZeroTaskView() : UIView()
-    }
-    
-    /// タスクの0件表示View作成
-    /// - Returns: 0件表示UIView
-    private func createZeroTaskView() -> UIView {
-        let label = UILabel()
-        label.text = MESSAGE_ZERO_TASK
-        label.textColor = .systemGray
-        label.textAlignment = NSTextAlignment.center
-        label.sizeToFit()
-        label.frame = CGRect(x: UIScreen.main.bounds.size.width/2 - label.frame.width/2,
-                             y: 100,
-                             width: label.frame.width,
-                             height: label.frame.height)
-        let view = UIView()
-        view.addSubview(label)
-        return view
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -178,22 +120,12 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count
+        return taskListViewModel.getTaskCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let task = taskArray[indexPath.row]
-        let symbolName = task.isComplete ? "checkmark.circle" : "circle"
-        let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
-        cell.imageView?.isUserInteractionEnabled = true
-        cell.imageView?.image = UIImage(systemName: symbolName, withConfiguration: symbolConfiguration)
-        cell.imageView?.tintColor = TaskColor.allCases[task.color].color
+        let cell = taskListViewModel.getTaskCell(indexPath: indexPath)
         cell.imageView!.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(completeTask(_:))))
-        cell.textLabel?.text = task.title
-        cell.detailTextLabel?.text = (task.deadlineDate != nil) ? Converter.deadlineDateString(date: task.deadlineDate!) : ""
-        cell.detailTextLabel?.textColor = UIColor.lightGray
-        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
@@ -209,10 +141,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         cell?.imageView?.image = UIImage(systemName: "checkmark.circle", withConfiguration: symbolConfiguration)
         
         // タスクを完了にする
-        var task = taskArray[tappedIndexPath!.row]
-        task.isComplete = true
-        let taskManager = TaskManager()
-        taskManager.updateTask(task: task)
+        taskListViewModel.completeTask(indexPath: tappedIndexPath!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.updateTask(indexPath: tappedIndexPath!)
         }
@@ -220,7 +149,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // タスク編集画面へ遷移
-        let task = taskArray[indexPath.row]
+        let task = taskListViewModel.getTask(indexPath: indexPath)
         delegate?.taskListVCTaskDidTap(self, task: task ,indexPath: indexPath)
     }
     

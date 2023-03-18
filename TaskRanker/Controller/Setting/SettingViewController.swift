@@ -51,36 +51,17 @@ class SettingViewController: UIViewController {
     
 }
 
-extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
+extension SettingViewController: UITableViewDelegate {
     
     /// TableView初期化
     private func initTableView() {
+        tableView.dataSource = settingViewModel
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return settingViewModel.numberOfSections()
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return settingViewModel.titleForHeaderInSection(section: section)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingViewModel.numberOfRowsInSection(section: section)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return settingViewModel.cellForRowAt(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

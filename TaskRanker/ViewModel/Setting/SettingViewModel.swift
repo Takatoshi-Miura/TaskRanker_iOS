@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingViewModel {
+class SettingViewModel: NSObject {
     
     // MARK: - Variable
     
@@ -50,44 +50,39 @@ class SettingViewModel {
         
     }
     
-    // MARK: - TableView DataSource
-    
-    /// セクション数を返却
-    /// - Returns: セクション数
-    func numberOfSections() -> Int {
-        return Section.allCases.count
-    }
-    
-    /// セクションのタイトルを返却
-    /// - Parameter section: セクションのインデックス
-    /// - Returns: タイトル
-    func titleForHeaderInSection(section: Int) -> String {
-        return Section.allCases[section].title
-    }
-    
-    /// セクション内のセル数を返却
-    /// - Parameter section: セクションのインデックス
-    /// - Returns: セル数
-    func numberOfRowsInSection(section: Int) -> Int {
-        return sectionItem[section].count
-    }
-    
-    /// セルを返却
-    /// - Parameter indexPath: IndexPath
-    /// - Returns: セル
-    func cellForRowAt(indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        cell.imageView?.image = sectionItem[indexPath.section][indexPath.row].image
-        cell.textLabel?.text  = sectionItem[indexPath.section][indexPath.row].title
-        cell.accessoryType = .disclosureIndicator
-        return cell
-    }
-    
     /// 選択されたセルを返却
     /// - Parameter indexPath: IndexPath
     /// - Returns: セル
     func didSelectRowAt(indexPath: IndexPath) -> Cell {
         return sectionItem[indexPath.section][indexPath.row]
+    }
+    
+}
+
+extension SettingViewModel: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return Section.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return Section.allCases[section].title
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sectionItem[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        cell.imageView?.image = sectionItem[indexPath.section][indexPath.row].image
+        cell.textLabel?.text  = sectionItem[indexPath.section][indexPath.row].title
+        cell.accessoryType = .disclosureIndicator
+        return cell
     }
     
 }

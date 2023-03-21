@@ -12,6 +12,8 @@ protocol TaskListViewControllerDelegate: AnyObject {
     func taskListVCTaskDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath)
     /// TaskTypeアップデート時
     func taskListVCTaskTypeUpdate(task: Task)
+    /// Taskアップデート時
+    func taskListVCTaskUpdate(task: Task)
     /// 緊急度自動更新時
     func taskListVCAutoUrgencyUpdate(message: String)
 }
@@ -80,6 +82,10 @@ class TaskListViewController: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.delegate?.taskListVCTaskTypeUpdate(task: deleteTask)
                 }
+                return
+            }
+            if deleteTask.isComplete == true {
+                self.delegate?.taskListVCTaskUpdate(task: deleteTask)
             }
             return
         }

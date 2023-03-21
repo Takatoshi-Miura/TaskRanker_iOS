@@ -28,6 +28,8 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var taskListView: UIView!
+    @IBOutlet weak var characterImageView: UIImageView!
+    @IBOutlet weak var characterMessageLabel: UILabel!
     private var isFilter: Bool = false
     private var filterArray: [Bool]
     private var taskListVC_A: TaskListViewController
@@ -61,6 +63,7 @@ class HomeViewController: UIViewController {
         initTaskListView()
         initGestureRecognizer()
         initNotification()
+        initCharacterView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,14 +73,10 @@ class HomeViewController: UIViewController {
             return
         }
         switch selectedTask!.type {
-        case .A:
-            taskListVC_A.updateTask(indexPath: selectedIndex!)
-        case .B:
-            taskListVC_B.updateTask(indexPath: selectedIndex!)
-        case .C:
-            taskListVC_C.updateTask(indexPath: selectedIndex!)
-        case .D:
-            taskListVC_D.updateTask(indexPath: selectedIndex!)
+        case .A: taskListVC_A.updateTask(indexPath: selectedIndex!)
+        case .B: taskListVC_B.updateTask(indexPath: selectedIndex!)
+        case .C: taskListVC_C.updateTask(indexPath: selectedIndex!)
+        case .D: taskListVC_D.updateTask(indexPath: selectedIndex!)
         }
         selectedTask = nil
         selectedIndex = nil
@@ -125,12 +124,26 @@ class HomeViewController: UIViewController {
         taskListVC_C.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
         taskListVC_D.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
         
-        self.taskListView.addSubview(taskListVC_D.view)
-        self.taskListView.addSubview(taskListVC_C.view)
-        self.taskListView.addSubview(taskListVC_B.view)
-        self.taskListView.addSubview(taskListVC_A.view)
+        taskListView.addSubview(taskListVC_D.view)
+        taskListView.addSubview(taskListVC_C.view)
+        taskListView.addSubview(taskListVC_B.view)
+        taskListView.addSubview(taskListVC_A.view)
         
         selectSegment(number: TaskType.A.rawValue)
+    }
+    
+    // MARK: - Character
+    
+    /// キャラクターの初期化
+    private func initCharacterView() {
+        changeMessage(type: Character.okaeri.rawValue)
+    }
+    
+    /// キャラのメッセージを変更
+    /// - Parameter type: タイプ
+    private func changeMessage(type: Int) {
+        characterImageView.image = Character.allCases[type].image
+        characterMessageLabel.text = Character.allCases[type].message
     }
     
     // MARK: - Action
@@ -166,14 +179,10 @@ class HomeViewController: UIViewController {
         setNavigationTitle(segmentType: TaskType.allCases[number])
         
         switch TaskType.allCases[number] {
-        case .A:
-            self.taskListView.bringSubviewToFront(taskListVC_A.view)
-        case .B:
-            self.taskListView.bringSubviewToFront(taskListVC_B.view)
-        case .C:
-            self.taskListView.bringSubviewToFront(taskListVC_C.view)
-        case .D:
-            self.taskListView.bringSubviewToFront(taskListVC_D.view)
+        case .A: taskListView.bringSubviewToFront(taskListVC_A.view)
+        case .B: taskListView.bringSubviewToFront(taskListVC_B.view)
+        case .C: taskListView.bringSubviewToFront(taskListVC_C.view)
+        case .D: taskListView.bringSubviewToFront(taskListVC_D.view)
         }
     }
     
@@ -279,6 +288,12 @@ extension HomeViewController: TaskListViewControllerDelegate {
     /// TaskTypeアップデート時
     func taskListVCTaskTypeUpdate(task: Task) {
         insertTask(task: task)
+        changeMessage(type: Character.update.rawValue)
+    }
+    
+    /// Taskアップデート時
+    func taskListVCTaskUpdate(task: Task) {
+        changeMessage(type: Character.complete.rawValue)
     }
     
     /// 緊急度自動更新時
@@ -298,16 +313,13 @@ extension HomeViewController: TaskListViewControllerDelegate {
         // タスクを挿入
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             switch task.type {
-            case .A:
-                self.taskListVC_A.insertTask(task: task)
-            case .B:
-                self.taskListVC_B.insertTask(task: task)
-            case .C:
-                self.taskListVC_C.insertTask(task: task)
-            case .D:
-                self.taskListVC_D.insertTask(task: task)
+            case .A: self.taskListVC_A.insertTask(task: task)
+            case .B: self.taskListVC_B.insertTask(task: task)
+            case .C: self.taskListVC_C.insertTask(task: task)
+            case .D: self.taskListVC_D.insertTask(task: task)
             }
         }
+        changeMessage(type: Character.addTask.rawValue)
     }
     
 }

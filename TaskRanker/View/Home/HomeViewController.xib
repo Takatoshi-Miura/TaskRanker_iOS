@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="TaskRanker" customModuleProvider="target">
             <connections>
+                <outlet property="characterImageView" destination="0G7-9l-cBA" id="ZLH-0R-CBk"/>
+                <outlet property="characterMessageLabel" destination="wcI-1Y-hfy" id="zZS-GH-tCy"/>
                 <outlet property="segmentedControl" destination="LUb-ZZ-alp" id="161-T1-IIx"/>
                 <outlet property="taskListView" destination="ePC-Lh-GAO" id="9L5-Eq-Tiz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -34,11 +37,11 @@
                     </connections>
                 </segmentedControl>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePC-Lh-GAO">
-                    <rect key="frame" x="0.0" y="71" width="320" height="447"/>
+                    <rect key="frame" x="0.0" y="71" width="320" height="367"/>
                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETg-uT-aBy">
-                    <rect key="frame" x="244" y="442" width="56" height="56"/>
+                    <rect key="frame" x="244.5" y="362.5" width="55.5" height="55.5"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" image="Plus_Button"/>
                     <connections>
@@ -47,10 +50,26 @@
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zBM-CG-B1h">
                     <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                    <color key="backgroundColor" systemColor="labelColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="mVi-s4-kdT"/>
                     </constraints>
                 </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hri-QF-K3i">
+                    <rect key="frame" x="0.0" y="441" width="320" height="74"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0G7-9l-cBA">
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="74"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcI-1Y-hfy">
+                            <rect key="frame" x="52" y="0.0" width="268" height="74"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -58,13 +77,17 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ePC-Lh-GAO" secondAttribute="trailing" id="0wa-fq-o9W"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ETg-uT-aBy" secondAttribute="trailing" constant="20" id="2fr-ZU-bdq"/>
                 <constraint firstItem="ePC-Lh-GAO" firstAttribute="top" secondItem="LUb-ZZ-alp" secondAttribute="bottom" constant="20" id="Cvi-a4-rlw"/>
-                <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="ePC-Lh-GAO" secondAttribute="bottom" id="JGA-xG-UtF"/>
-                <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="ETg-uT-aBy" secondAttribute="bottom" constant="20" id="N4S-zS-WkM"/>
+                <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="Hri-QF-K3i" secondAttribute="bottom" constant="3" id="E1X-5B-pLq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Hri-QF-K3i" secondAttribute="trailing" id="IQv-La-q67"/>
+                <constraint firstItem="zBM-CG-B1h" firstAttribute="top" secondItem="ePC-Lh-GAO" secondAttribute="bottom" constant="80" id="JGA-xG-UtF"/>
                 <constraint firstItem="zBM-CG-B1h" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="ROa-nm-AaA"/>
                 <constraint firstItem="zBM-CG-B1h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="X5o-94-3ww"/>
                 <constraint firstItem="zBM-CG-B1h" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="d4n-LU-MFy"/>
                 <constraint firstItem="LUb-ZZ-alp" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="eI2-ug-ujN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LUb-ZZ-alp" secondAttribute="trailing" constant="16" id="emC-4O-tJN"/>
+                <constraint firstItem="Hri-QF-K3i" firstAttribute="top" secondItem="ePC-Lh-GAO" secondAttribute="bottom" constant="3" id="f0f-HO-Efx"/>
+                <constraint firstItem="Hri-QF-K3i" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hHe-1W-4Aa"/>
+                <constraint firstItem="ePC-Lh-GAO" firstAttribute="bottom" secondItem="ETg-uT-aBy" secondAttribute="bottom" constant="20" id="sga-KH-f0e"/>
                 <constraint firstItem="LUb-ZZ-alp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="vlW-cC-Jo3"/>
                 <constraint firstItem="ePC-Lh-GAO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xPV-kG-Wjn"/>
             </constraints>
@@ -73,6 +96,9 @@
     </objects>
     <resources>
         <image name="Plus_Button" width="55.5" height="55.5"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -24,6 +24,7 @@
 		2F2F21D728F53D24005FFCC2 /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F21D528F53D24005FFCC2 /* TutorialViewController.xib */; };
 		2F415F4228F7EAFF0082D676 /* UIViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F415F4128F7EAFF0082D676 /* UIViewController+PickerView.swift */; };
 		8D09C31029C56CAF000F51F6 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C30F29C56CAF000F51F6 /* TaskListViewModel.swift */; };
+		8D09C31329C9AD36000F51F6 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C31229C9AD36000F51F6 /* Character.swift */; };
 		8D1D392428F84CA80078F3CB /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392328F84CA80078F3CB /* UserDefaultsKey.swift */; };
 		8D1D392928F984B20078F3CB /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392628F984B20078F3CB /* RealmManager.swift */; };
 		8D1D392A28F984B20078F3CB /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392728F984B20078F3CB /* TaskManager.swift */; };
@@ -91,6 +92,7 @@
 		45D5099BC271E62A0AD40BE7 /* Pods-TaskRanker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.debug.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.debug.xcconfig"; sourceTree = "<group>"; };
 		4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskRanker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D09C30F29C56CAF000F51F6 /* TaskListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
+		8D09C31229C9AD36000F51F6 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		8D1D392328F84CA80078F3CB /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		8D1D392628F984B20078F3CB /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		8D1D392728F984B20078F3CB /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
@@ -212,10 +214,19 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		8D09C31129C9AD16000F51F6 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8D09C31229C9AD36000F51F6 /* Character.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		8D1D392528F984B20078F3CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				8D97698629B31E480000DD8D /* Application */,
+				8D09C31129C9AD16000F51F6 /* Home */,
 				8D97698529B31E210000DD8D /* Task */,
 				8D97698729B31F4C0000DD8D /* Setting */,
 			);
@@ -649,6 +660,7 @@
 				8D97698429B2FEFD0000DD8D /* HelpItem.swift in Sources */,
 				8DCB72DA2949E99D00935972 /* MapCoordinator.swift in Sources */,
 				8D55A49B2904A7B4005E573A /* TaskViewController.swift in Sources */,
+				8D09C31329C9AD36000F51F6 /* Character.swift in Sources */,
 				2F2F21BA28F51791005FFCC2 /* FilterViewController.swift in Sources */,
 				8DB633BC28CD7F8B001F2DB7 /* TaskListViewController.swift in Sources */,
 				8D55A4A0290745F7005E573A /* CompletedTaskListViewController.swift in Sources */,

@@ -35,6 +35,13 @@ class SettingViewController: UIViewController {
         initTableView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.reloadRows(at: [selectedIndexPath], with: .none)
+        }
+    }
+    
     // MARK: - Viewer
     
     /// NavigationController初期化
@@ -67,7 +74,6 @@ extension SettingViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         switch settingViewModel.didSelectRowAt(indexPath: indexPath) {
         case .dataTransfer:
             delegate?.settingVCDataTransferDidTap(self)
@@ -79,6 +85,7 @@ extension SettingViewController: UITableViewDelegate {
             delegate?.settingVCTutorialDidTap(self)
             break
         case .inquiry:
+            tableView.deselectRow(at: indexPath, animated: true)
             startMailer()
             break
         }

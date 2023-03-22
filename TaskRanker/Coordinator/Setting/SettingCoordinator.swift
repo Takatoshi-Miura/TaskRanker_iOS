@@ -45,7 +45,7 @@ extension SettingCoordinator: SettingViewControllerDelegate {
     /// SettingVC → CharacterVC
     func settingVCCharacterDidTap(_ viewController: UIViewController) {
         let characterCoordinator = CharacterCoordinator()
-        characterCoordinator.startFlow(in: viewController)
+        characterCoordinator.startFlow(in: navigationController!)
     }
     
     /// SettingVC → TutorialVC

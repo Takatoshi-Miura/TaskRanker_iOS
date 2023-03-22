@@ -67,7 +67,7 @@ class SettingViewModel: NSObject {
 extension SettingViewModel: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 50
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

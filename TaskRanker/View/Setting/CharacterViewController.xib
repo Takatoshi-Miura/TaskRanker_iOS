@@ -1,13 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CharacterViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CharacterViewController" customModule="TaskRanker" customModuleProvider="target">
             <connections>
+                <outlet property="descriptionLabel" destination="mNB-n2-XNu" id="VDr-Ax-8PO"/>
+                <outlet property="messageLabel" destination="Hz4-Eh-XVL" id="Ll8-lV-0Yo"/>
+                <outlet property="settingButton" destination="vwI-G8-9v9" id="FcH-p3-PHh"/>
+                <outlet property="titleLabel" destination="Bxq-2n-s3U" id="PiL-hv-IWo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,8 +22,67 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwI-G8-9v9">
+                    <rect key="frame" x="90" y="557" width="195" height="40"/>
+                    <color key="backgroundColor" systemColor="systemBlueColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="TgK-On-YpZ"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <connections>
+                        <action selector="tapSettingButton:" destination="-1" eventType="touchUpInside" id="wyr-ck-0Tk"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ちいぽよ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bxq-2n-s3U">
+                    <rect key="frame" x="16" y="10" width="343" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="OIt-y1-yGi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="たあぽよのことが大好きなやさしいぽよ。ちょっと面倒くさがり。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNB-n2-XNu">
+                    <rect key="frame" x="16" y="60" width="343" height="43"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ちいぽよだよ。ちいぽよのほうが かわいいもんね。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hz4-Eh-XVL">
+                    <rect key="frame" x="16" y="474" width="343" height="43"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vwI-G8-9v9" secondAttribute="bottom" constant="70" id="5QK-3S-q8D"/>
+                <constraint firstItem="Bxq-2n-s3U" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="IWh-IH-r6v"/>
+                <constraint firstItem="vwI-G8-9v9" firstAttribute="top" secondItem="Hz4-Eh-XVL" secondAttribute="bottom" constant="40" id="JUg-xM-tZS"/>
+                <constraint firstItem="mNB-n2-XNu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="M18-88-7D2"/>
+                <constraint firstItem="Bxq-2n-s3U" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="RNu-6R-wzt"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mNB-n2-XNu" secondAttribute="trailing" constant="16" id="T5h-hU-gfS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vwI-G8-9v9" secondAttribute="trailing" constant="90" id="XOp-Q6-HmD"/>
+                <constraint firstItem="mNB-n2-XNu" firstAttribute="top" secondItem="Bxq-2n-s3U" secondAttribute="bottom" constant="20" id="XUF-lk-kWv"/>
+                <constraint firstItem="Hz4-Eh-XVL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Xee-ER-LCV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Hz4-Eh-XVL" secondAttribute="trailing" constant="16" id="pMs-Be-5vv"/>
+                <constraint firstItem="vwI-G8-9v9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="90" id="r8S-tX-77a"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Bxq-2n-s3U" secondAttribute="trailing" constant="16" id="snW-o3-eGX"/>
+            </constraints>
+            <point key="canvasLocation" x="104.8" y="19.340329835082461"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -16,16 +16,13 @@ class CharacterCoordinator: Coordinator {
     }
     
     func startFlow(in navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        let characterViewController = CharacterViewController()
+        characterViewController.delegate = self
+        self.navigationController?.pushViewController(characterViewController, animated: true)
     }
     
     func startFlow(in viewController: UIViewController) {
-        previousViewController = viewController
-        let characterViewController = CharacterViewController()
-        characterViewController.delegate = self
-        if #available(iOS 13.0, *) {
-            characterViewController.isModalInPresentation = true
-        }
-        previousViewController!.present(characterViewController, animated: true)
     }
     
 }
@@ -33,13 +30,8 @@ class CharacterCoordinator: Coordinator {
 extension CharacterCoordinator: CharacterViewControllerDelegate {
     
     /// SettingVC ← CharacterVC
-    func characterVCSettingDidTap(_ viewController: UIViewController) {
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    /// SettingVC ← CharacterVC
-    func characterVCCancelDidTap(_ viewController: UIViewController) {
-        viewController.dismiss(animated: true, completion: nil)
+    func characterVCSettingDidTap() {
+        navigationController?.popViewController(animated: true)
     }
     
 }

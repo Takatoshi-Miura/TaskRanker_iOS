@@ -9,21 +9,30 @@ import UIKit
 
 protocol CharacterViewControllerDelegate: AnyObject {
     // キャラクター設定時の処理
-    func characterVCSettingDidTap(_ viewController: UIViewController)
-    // キャンセルタップ時の処理
-    func characterVCCancelDidTap(_ viewController: UIViewController)
+    func characterVCSettingDidTap()
 }
 
 class CharacterViewController: UIViewController {
     
     // MARK: - UI,Variable
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var settingButton: UIButton!
     var delegate: CharacterViewControllerDelegate?
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: - Action
+    
+    /// 決定ボタン
+    @IBAction func tapSettingButton(_ sender: Any) {
+        delegate?.characterVCSettingDidTap()
     }
 
 }

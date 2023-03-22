@@ -13,6 +13,8 @@ protocol SettingViewControllerDelegate: AnyObject {
     func settingVCDismiss(_ viewController: UIViewController)
     /// データの引継ぎタップ時の処理
     func settingVCDataTransferDidTap(_ viewController: UIViewController)
+    /// キャラクター設定タップ時の処理
+    func settingVCCharacterDidTap(_ viewController: UIViewController)
     /// アプリの使い方タップ時の処理
     func settingVCTutorialDidTap(_ viewController: UIViewController)
 }
@@ -69,6 +71,9 @@ extension SettingViewController: UITableViewDelegate {
         switch settingViewModel.didSelectRowAt(indexPath: indexPath) {
         case .dataTransfer:
             delegate?.settingVCDataTransferDidTap(self)
+            break
+        case .character:
+            delegate?.settingVCCharacterDidTap(self)
             break
         case .help:
             delegate?.settingVCTutorialDidTap(self)

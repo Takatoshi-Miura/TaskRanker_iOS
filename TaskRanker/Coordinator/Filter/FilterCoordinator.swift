@@ -19,12 +19,6 @@ class FilterCoordinator: Coordinator {
     }
     
     func startFlow(in viewController: UIViewController) {
-        previousViewController = viewController
-        navigationController = createNavigationController()
-        let filterViewController = FilterViewController(filterArray: nil)
-        filterViewController.delegate = self
-        navigationController!.pushViewController(filterViewController, animated: true)
-        previousViewController!.present(navigationController!, animated: true)
     }
     
     func startFlow(in viewController: UIViewController, filterArray: [Bool]) {

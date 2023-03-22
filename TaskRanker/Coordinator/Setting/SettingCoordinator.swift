@@ -36,13 +36,19 @@ extension SettingCoordinator: SettingViewControllerDelegate {
         viewController.dismiss(animated: true, completion: nil)
     }
     
-    /// HomeVC → LoginVC
+    /// SettingVC → LoginVC
     func settingVCDataTransferDidTap(_ viewController: UIViewController) {
         let loginCoordinator = LoginCoordinator()
         loginCoordinator.startFlow(in: viewController)
     }
     
-    /// HomeVC → TutorialVC
+    /// SettingVC → CharacterVC
+    func settingVCCharacterDidTap(_ viewController: UIViewController) {
+        let characterCoordinator = CharacterCoordinator()
+        characterCoordinator.startFlow(in: viewController)
+    }
+    
+    /// SettingVC → TutorialVC
     func settingVCTutorialDidTap(_ viewController: UIViewController) {
         let pageCoordinator = PageCoordinator()
         pageCoordinator.startFlow(in: viewController)

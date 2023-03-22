@@ -30,6 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaultsKey.userID.set(value: NSUUID().uuidString)
         }
         
+        // キャラクターを設定
+        if !(UserDefaultsKey.character.object() is Int) {
+            UserDefaultsKey.character.set(value: CharacterType.chipoyo.rawValue)
+        }
+        
         // Firebaseログイン
         if ((UserDefaultsKey.address.object() is String)) &&
             ((UserDefaultsKey.password.object() is String))

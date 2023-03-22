@@ -15,6 +15,7 @@ enum UserDefaultsKey: String {
     case address     = "address"        // アカウントのメールアドレス
     case password    = "password"       // アカウントのパスワード
     case useFirebase = "useFirebase"    // Firebase利用フラグ
+    case character   = "character"      // キャラクター番号
     
     // メソッド
     func set(value: Int) {

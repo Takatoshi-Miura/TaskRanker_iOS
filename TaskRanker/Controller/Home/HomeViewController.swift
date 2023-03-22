@@ -13,8 +13,6 @@ protocol HomeViewControllerDelegate: AnyObject {
     // 完了タスクボタンタップ時
     func homeVCCompletedTaskListButtonDidTap(_ viewController: UIViewController)
     // フィルタボタンタップ時
-    func homeVCFilterButtonDidTap(_ viewController: UIViewController)
-    // フィルタボタンタップ時(既にフィルタが適用されている場合)
     func homeVCFilterButtonDidTap(_ viewController: UIViewController, filterArray: [Bool])
     // 追加ボタンタップ時
     func homeVCAddButtonDidTap(_ viewController: UIViewController)
@@ -30,24 +28,21 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var taskListView: UIView!
     @IBOutlet weak var characterImageView: UIImageView!
     @IBOutlet weak var characterMessageLabel: UILabel!
-    private var isFilter: Bool = false
-    private var filterArray: [Bool]
+    private var homeViewModel: HomeViewModel
     private var taskListVC_A: TaskListViewController
     private var taskListVC_B: TaskListViewController
     private var taskListVC_C: TaskListViewController
     private var taskListVC_D: TaskListViewController
-    private var selectedTask: Task?
-    private var selectedIndex: IndexPath?
     var delegate: HomeViewControllerDelegate?
     
     // MARK: - Initializer
     
     init() {
-        filterArray = Array(repeating: true, count: TaskColor.allCases.count)
-        taskListVC_A = TaskListViewController(taskType: TaskType.A, filterArray: filterArray)
-        taskListVC_B = TaskListViewController(taskType: TaskType.B, filterArray: filterArray)
-        taskListVC_C = TaskListViewController(taskType: TaskType.C, filterArray: filterArray)
-        taskListVC_D = TaskListViewController(taskType: TaskType.D, filterArray: filterArray)
+        homeViewModel = HomeViewModel()
+        taskListVC_A = TaskListViewController(taskType: TaskType.A, filterArray: homeViewModel.getFilterArray())
+        taskListVC_B = TaskListViewController(taskType: TaskType.B, filterArray: homeViewModel.getFilterArray())
+        taskListVC_C = TaskListViewController(taskType: TaskType.C, filterArray: homeViewModel.getFilterArray())
+        taskListVC_D = TaskListViewController(taskType: TaskType.D, filterArray: homeViewModel.getFilterArray())
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -69,46 +64,24 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if selectedTask == nil || selectedIndex == nil {
-            return
+        if let selectedTask = homeViewModel.getSelectedTask(), let selectedIndex = homeViewModel.getSelectedIndex() {
+            updateTaskListView(task: selectedTask, indexPath: selectedIndex)
+            changeImageAndMessage(type: Character.update)
         }
-        switch selectedTask!.type {
-        case .A: taskListVC_A.updateTask(indexPath: selectedIndex!)
-        case .B: taskListVC_B.updateTask(indexPath: selectedIndex!)
-        case .C: taskListVC_C.updateTask(indexPath: selectedIndex!)
-        case .D: taskListVC_D.updateTask(indexPath: selectedIndex!)
-        }
-        selectedTask = nil
-        selectedIndex = nil
+        homeViewModel.clearTaskIndex()
     }
-    
-    // MARK: - Viewer
     
     /// NavigationController初期化
     private func initNavigation() {
         let menuButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openHumburgerMenu(_:)))
         let completeButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"), style: .plain, target: self, action: #selector(openCompletedTaskList(_:)))
-        let filterImage = isFilter ? UIImage(named: "icon_filter_fill")! : UIImage(named: "icon_filter_empty")!
+        let filterImage = homeViewModel.isFilter() ? UIImage(named: "icon_filter_fill")! : UIImage(named: "icon_filter_empty")!
         let filterButton = UIBarButtonItem(image: filterImage, style: .done, target: self, action: #selector(openFilterMenu))
         navigationItem.leftBarButtonItems = [menuButton]
         navigationItem.rightBarButtonItems = [filterButton, completeButton]
     }
     
-    /// タイトル文字列の設定
-    /// - Parameter segmentType: segmentedControlの選択番号
-    private func setNavigationTitle(segmentType: TaskType) {
-        let titleLabel = UILabel()
-        titleLabel.text = segmentType.naviTitle
-        titleLabel.font = .boldSystemFont(ofSize: 18)
-        titleLabel.textColor = .label
-        
-        let attrText = NSMutableAttributedString(string: titleLabel.text!)
-        attrText.addAttribute(.foregroundColor, value: segmentType.importanceColor, range: NSMakeRange(4, 1))
-        attrText.addAttribute(.foregroundColor, value: segmentType.urgencyColor, range: NSMakeRange(11, 1))
-        titleLabel.attributedText = attrText
-        
-        self.navigationItem.titleView = titleLabel
-    }
+    // MARK: - TaskList
     
     /// TaskListView初期化
     private func initTaskListView() {
@@ -124,26 +97,96 @@ class HomeViewController: UIViewController {
         taskListVC_C.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
         taskListVC_D.view.frame = CGRect(origin: .zero, size: taskListView.bounds.size)
         
-        taskListView.addSubview(taskListVC_D.view)
-        taskListView.addSubview(taskListVC_C.view)
-        taskListView.addSubview(taskListVC_B.view)
         taskListView.addSubview(taskListVC_A.view)
+        taskListView.addSubview(taskListVC_B.view)
+        taskListView.addSubview(taskListVC_C.view)
+        taskListView.addSubview(taskListVC_D.view)
         
         selectSegment(number: TaskType.A.rawValue)
+    }
+    
+    /// 選択したTaskTypeのViewを最前面に移動
+    /// - Parameter type: TaskType
+    private func moveFrontTaskListView(type: TaskType) {
+        switch type {
+        case .A: taskListView.bringSubviewToFront(taskListVC_A.view)
+        case .B: taskListView.bringSubviewToFront(taskListVC_B.view)
+        case .C: taskListView.bringSubviewToFront(taskListVC_C.view)
+        case .D: taskListView.bringSubviewToFront(taskListVC_D.view)
+        }
+    }
+    
+    /// フィルタを適用
+    private func applyFilterTaskListView() {
+        taskListVC_A.applyFilter(filterArray: homeViewModel.getFilterArray())
+        taskListVC_B.applyFilter(filterArray: homeViewModel.getFilterArray())
+        taskListVC_C.applyFilter(filterArray: homeViewModel.getFilterArray())
+        taskListVC_D.applyFilter(filterArray: homeViewModel.getFilterArray())
+    }
+    
+    /// TaskListを同期
+    @objc func syncTaskListView() {
+        taskListVC_A.syncData()
+        taskListVC_B.syncData()
+        taskListVC_C.syncData()
+        taskListVC_D.syncData()
+    }
+    
+    /// Taskを挿入
+    /// - Parameter task: Task
+    private func insertTaskListView(task: Task) {
+        switch task.type {
+        case .A: self.taskListVC_A.insertTask(task: task)
+        case .B: self.taskListVC_B.insertTask(task: task)
+        case .C: self.taskListVC_C.insertTask(task: task)
+        case .D: self.taskListVC_D.insertTask(task: task)
+        }
+    }
+    
+    /// TaskListを更新
+    /// - Parameters:
+    ///   - task: Task
+    ///   - indexPath: IndexPath
+    private func updateTaskListView(task: Task, indexPath: IndexPath) {
+        switch task.type {
+        case .A: taskListVC_A.updateTask(indexPath: indexPath)
+        case .B: taskListVC_B.updateTask(indexPath: indexPath)
+        case .C: taskListVC_C.updateTask(indexPath: indexPath)
+        case .D: taskListVC_D.updateTask(indexPath: indexPath)
+        }
     }
     
     // MARK: - Character
     
     /// キャラクターの初期化
     private func initCharacterView() {
-        changeMessage(type: Character.okaeri.rawValue)
+        changeImageAndMessage(type: Character.okaeri)
     }
     
-    /// キャラのメッセージを変更
+    /// キャラクターの画像とメッセージを変更
     /// - Parameter type: タイプ
-    private func changeMessage(type: Int) {
-        characterImageView.image = Character.allCases[type].image
-        characterMessageLabel.text = Character.allCases[type].message
+    private func changeImageAndMessage(type: Character) {
+        characterImageView.image = type.image
+        animateLabel(label: characterMessageLabel, text: type.message)
+    }
+    
+    /// ラベルに文字列を1文字ずつ表示
+    /// - Parameters:
+    ///   - label: ラベル
+    ///   - text: 文字列
+    func animateLabel(label: UILabel, text: String) {
+        let attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(.foregroundColor, value: UIColor.clear, range: NSRange(location: 0, length: text.count))
+        label.attributedText = attributedText
+        
+        let charCount = text.count
+        for i in 0..<charCount {
+            let range = NSRange(location: i, length: 1)
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.1) {
+                attributedText.addAttribute(.foregroundColor, value: UIColor.label, range: range)
+                label.attributedText = attributedText
+            }
+        }
     }
     
     // MARK: - Action
@@ -160,11 +203,7 @@ class HomeViewController: UIViewController {
     
     /// フィルタメニュー
     @objc func openFilterMenu(_ sender: UIBarButtonItem) {
-        if isFilter {
-            delegate?.homeVCFilterButtonDidTap(self, filterArray: filterArray)
-        } else {
-            delegate?.homeVCFilterButtonDidTap(self)
-        }
+        delegate?.homeVCFilterButtonDidTap(self, filterArray: homeViewModel.getFilterArray())
     }
     
     /// segmentedControl選択
@@ -175,15 +214,8 @@ class HomeViewController: UIViewController {
     /// SegmentControl選択時の処理
     private func selectSegment(number: Int) {
         segmentedControl.selectedSegmentIndex = number
-        
-        setNavigationTitle(segmentType: TaskType.allCases[number])
-        
-        switch TaskType.allCases[number] {
-        case .A: taskListView.bringSubviewToFront(taskListVC_A.view)
-        case .B: taskListView.bringSubviewToFront(taskListVC_B.view)
-        case .C: taskListView.bringSubviewToFront(taskListVC_C.view)
-        case .D: taskListView.bringSubviewToFront(taskListVC_D.view)
-        }
+        moveFrontTaskListView(type: TaskType.allCases[number])
+        self.navigationItem.titleView = homeViewModel.getNavigationLabel(type: TaskType.allCases[number])
     }
     
     /// タスク追加
@@ -191,23 +223,24 @@ class HomeViewController: UIViewController {
         delegate?.homeVCAddButtonDidTap(self)
     }
     
+    /// タスクを挿入(新規追加,未完了に戻す,タイプ更新)
+    /// - Parameter task: 挿入する課題
+    func insertTask(task: Task) {
+        selectSegment(number: task.type.rawValue)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.insertTaskListView(task: task)
+        }
+        changeImageAndMessage(type: Character.addTask)
+    }
+    
     // MARK: - Filter
     
     /// フィルタを適用
     /// - Parameter filterArray: チェック配列
     func applyFilter(filterArray: [Bool]) {
-        isFilter = (filterArray.firstIndex(of: false) != nil) ? true : false
-        self.filterArray = filterArray
-        applyFilterTaskList()
+        homeViewModel.setFilterArray(array: filterArray)
+        applyFilterTaskListView()
         initNavigation()
-    }
-    
-    /// TaskListにフィルタを適用
-    private func applyFilterTaskList() {
-        taskListVC_A.applyFilter(filterArray: filterArray)
-        taskListVC_B.applyFilter(filterArray: filterArray)
-        taskListVC_C.applyFilter(filterArray: filterArray)
-        taskListVC_D.applyFilter(filterArray: filterArray)
     }
     
     // MARK: - UIGestureRecognizer
@@ -222,14 +255,14 @@ class HomeViewController: UIViewController {
     private func addRightSwipeGesture() {
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeTaskList))
         rightSwipe.direction = .right
-        self.taskListView.addGestureRecognizer(rightSwipe)
+        taskListView.addGestureRecognizer(rightSwipe)
     }
     
     /// 左スワイプでABCD切り替え
     private func addLeftSwipeGesture() {
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeTaskList))
         leftSwipe.direction = .left
-        self.taskListView.addGestureRecognizer(leftSwipe)
+        taskListView.addGestureRecognizer(leftSwipe)
     }
     
     /// 右スワイプ
@@ -255,23 +288,9 @@ class HomeViewController: UIViewController {
     /// 通知設定
     private func initNotification() {
         // ログイン時のリロード用
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.syncTaskList),
-                                               name: NSNotification.Name(rawValue: "afterLogin"),
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.syncTaskListView), name: NSNotification.Name(rawValue: "afterLogin"), object: nil)
         // ログアウト時のリロード用
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.syncTaskList),
-                                               name: NSNotification.Name(rawValue: "afterLogout"),
-                                               object: nil)
-    }
-    
-    /// TaskListを初期化
-    @objc func syncTaskList() {
-        self.taskListVC_A.syncData()
-        self.taskListVC_B.syncData()
-        self.taskListVC_C.syncData()
-        self.taskListVC_D.syncData()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.syncTaskListView), name: NSNotification.Name(rawValue: "afterLogout"), object: nil)
     }
     
 }
@@ -280,46 +299,27 @@ extension HomeViewController: TaskListViewControllerDelegate {
     
     /// Taskタップ時
     func taskListVCTaskDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath) {
-        selectedTask = task
-        selectedIndex = indexPath
+        homeViewModel.setTaskIndex(task: task, indexPath: indexPath)
         delegate?.homeVCTaskDidTap(self, task: task)
     }
     
     /// TaskTypeアップデート時
     func taskListVCTaskTypeUpdate(task: Task) {
         insertTask(task: task)
-        changeMessage(type: Character.update.rawValue)
+        changeImageAndMessage(type: Character.update)
     }
     
-    /// Taskアップデート時
-    func taskListVCTaskUpdate(task: Task) {
-        changeMessage(type: Character.complete.rawValue)
+    /// Task完了時
+    func taskListVCTaskComplete(task: Task) {
+        changeImageAndMessage(type: Character.complete)
     }
     
     /// 緊急度自動更新時
     func taskListVCAutoUrgencyUpdate(message: String) {
         let alert = Alert.OK(title: TITLE_AUTO_UPDATE_URGENCY, message: message, OKAction: {
-            self.syncTaskList()
+            self.syncTaskListView()
         })
         present(alert, animated: true)
-    }
-    
-    /// タスクを挿入(新規追加,未完了に戻す,タイプ更新)
-    /// - Parameter task: 挿入する課題
-    func insertTask(task: Task) {
-        // 挿入するタスクのタイプへ移動
-        selectSegment(number: task.type.rawValue)
-        
-        // タスクを挿入
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            switch task.type {
-            case .A: self.taskListVC_A.insertTask(task: task)
-            case .B: self.taskListVC_B.insertTask(task: task)
-            case .C: self.taskListVC_C.insertTask(task: task)
-            case .D: self.taskListVC_D.insertTask(task: task)
-            }
-        }
-        changeMessage(type: Character.addTask.rawValue)
     }
     
 }

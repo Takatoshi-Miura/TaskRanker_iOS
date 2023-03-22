@@ -12,8 +12,8 @@ protocol TaskListViewControllerDelegate: AnyObject {
     func taskListVCTaskDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath)
     /// TaskTypeアップデート時
     func taskListVCTaskTypeUpdate(task: Task)
-    /// Taskアップデート時
-    func taskListVCTaskUpdate(task: Task)
+    /// Task完了時
+    func taskListVCTaskComplete(task: Task)
     /// 緊急度自動更新時
     func taskListVCAutoUrgencyUpdate(message: String)
 }
@@ -85,7 +85,7 @@ class TaskListViewController: UIViewController {
                 return
             }
             if deleteTask.isComplete == true {
-                self.delegate?.taskListVCTaskUpdate(task: deleteTask)
+                self.delegate?.taskListVCTaskComplete(task: deleteTask)
             }
             return
         }

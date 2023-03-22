@@ -24,7 +24,7 @@ class FilterViewController: UIViewController {
     
     /// イニシャライザ
     /// - Parameter filterArray: nilの場合は新規作成
-    init(filterArray: [Bool]?) {
+    init(filterArray: [Bool]) {
         filterViewModel = FilterViewModel(filterArray: filterArray)
         super.init(nibName: nil, bundle: nil)
     }

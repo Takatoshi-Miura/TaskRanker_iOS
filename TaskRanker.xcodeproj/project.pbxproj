@@ -23,8 +23,12 @@
 		2F2F21D628F53D24005FFCC2 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21D428F53D24005FFCC2 /* TutorialViewController.swift */; };
 		2F2F21D728F53D24005FFCC2 /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F21D528F53D24005FFCC2 /* TutorialViewController.xib */; };
 		2F415F4228F7EAFF0082D676 /* UIViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F415F4128F7EAFF0082D676 /* UIViewController+PickerView.swift */; };
+		2FEDBE3629CAED4800F1AEF2 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDBE3429CAED4800F1AEF2 /* CharacterViewController.swift */; };
+		2FEDBE3729CAED4800F1AEF2 /* CharacterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FEDBE3529CAED4800F1AEF2 /* CharacterViewController.xib */; };
+		2FEDBE3929CAED9000F1AEF2 /* CharacterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDBE3829CAED9000F1AEF2 /* CharacterCoordinator.swift */; };
 		8D09C31029C56CAF000F51F6 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C30F29C56CAF000F51F6 /* TaskListViewModel.swift */; };
 		8D09C31329C9AD36000F51F6 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C31229C9AD36000F51F6 /* Character.swift */; };
+		8D09C31529CB16FA000F51F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D09C31429CB16FA000F51F6 /* GoogleService-Info.plist */; };
 		8D1D392428F84CA80078F3CB /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392328F84CA80078F3CB /* UserDefaultsKey.swift */; };
 		8D1D392928F984B20078F3CB /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392628F984B20078F3CB /* RealmManager.swift */; };
 		8D1D392A28F984B20078F3CB /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392728F984B20078F3CB /* TaskManager.swift */; };
@@ -55,7 +59,6 @@
 		8D75CDFB29C3550A003C93AD /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDFA29C3550A003C93AD /* PageViewModel.swift */; };
 		8D75CDFE29C35AF0003C93AD /* CompletedTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75CDFD29C35AF0003C93AD /* CompletedTaskViewModel.swift */; };
 		8D97697C29A722BF0000DD8D /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97697B29A722BF0000DD8D /* FirebaseManager.swift */; };
-		8D97697E29AAC6D90000DD8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */; };
 		8D97698429B2FEFD0000DD8D /* HelpItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97698329B2FEFD0000DD8D /* HelpItem.swift */; };
 		8D97698929B31FF90000DD8D /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D97698829B31FF90000DD8D /* Device.swift */; };
 		8DAA1134294934000083F444 /* TaskColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAA1133294934000083F444 /* TaskColor.swift */; };
@@ -89,10 +92,14 @@
 		2F2F21D428F53D24005FFCC2 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		2F2F21D528F53D24005FFCC2 /* TutorialViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
 		2F415F4128F7EAFF0082D676 /* UIViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PickerView.swift"; sourceTree = "<group>"; };
+		2FEDBE3429CAED4800F1AEF2 /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
+		2FEDBE3529CAED4800F1AEF2 /* CharacterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterViewController.xib; sourceTree = "<group>"; };
+		2FEDBE3829CAED9000F1AEF2 /* CharacterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCoordinator.swift; sourceTree = "<group>"; };
 		45D5099BC271E62A0AD40BE7 /* Pods-TaskRanker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.debug.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.debug.xcconfig"; sourceTree = "<group>"; };
 		4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskRanker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D09C30F29C56CAF000F51F6 /* TaskListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		8D09C31229C9AD36000F51F6 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		8D09C31429CB16FA000F51F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D1D392328F84CA80078F3CB /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		8D1D392628F984B20078F3CB /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		8D1D392728F984B20078F3CB /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
@@ -127,7 +134,6 @@
 		8D75CDFA29C3550A003C93AD /* PageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModel.swift; sourceTree = "<group>"; };
 		8D75CDFD29C35AF0003C93AD /* CompletedTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskViewModel.swift; sourceTree = "<group>"; };
 		8D97697B29A722BF0000DD8D /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D97698329B2FEFD0000DD8D /* HelpItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HelpItem.swift; path = TaskRanker/Model/Setting/HelpItem.swift; sourceTree = SOURCE_ROOT; };
 		8D97698829B31FF90000DD8D /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		8DAA1133294934000083F444 /* TaskColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskColor.swift; sourceTree = "<group>"; };
@@ -187,6 +193,7 @@
 			children = (
 				2F2F21C328F51A97005FFCC2 /* SettingViewController.xib */,
 				2F2F21C928F5397B005FFCC2 /* LoginViewController.xib */,
+				2FEDBE3529CAED4800F1AEF2 /* CharacterViewController.xib */,
 				2F2F21CF28F53C30005FFCC2 /* PageViewController.xib */,
 				2F2F21D528F53D24005FFCC2 /* TutorialViewController.xib */,
 			);
@@ -198,6 +205,7 @@
 			children = (
 				2F2F21C228F51A97005FFCC2 /* SettingViewController.swift */,
 				2F2F21C828F5397B005FFCC2 /* LoginViewController.swift */,
+				2FEDBE3429CAED4800F1AEF2 /* CharacterViewController.swift */,
 				2F2F21CE28F53C30005FFCC2 /* PageViewController.swift */,
 				2F2F21D428F53D24005FFCC2 /* TutorialViewController.swift */,
 			);
@@ -209,6 +217,7 @@
 			children = (
 				2F2F21C628F51AC5005FFCC2 /* SettingCoordinator.swift */,
 				2F2F21CC28F53998005FFCC2 /* LoginCoordinator.swift */,
+				2FEDBE3829CAED9000F1AEF2 /* CharacterCoordinator.swift */,
 				2F2F21D228F53C47005FFCC2 /* PageCoordinator.swift */,
 			);
 			path = Setting;
@@ -281,8 +290,8 @@
 				8D60F24328CC5E64003BB724 /* Assets.xcassets */,
 				8D60F26B28CC78DB003BB724 /* LocalizableString.swift */,
 				8D60F26928CC76E1003BB724 /* Localizable.strings */,
-				8D97697D29AAC6D90000DD8D /* GoogleService-Info.plist */,
 				8D60F24828CC5E64003BB724 /* Info.plist */,
+				8D09C31429CB16FA000F51F6 /* GoogleService-Info.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -559,6 +568,8 @@
 			files = (
 				2F2F21BB28F51791005FFCC2 /* FilterViewController.xib in Resources */,
 				8DCB72E02949E9D600935972 /* MapViewController.xib in Resources */,
+				8D09C31529CB16FA000F51F6 /* GoogleService-Info.plist in Resources */,
+				2FEDBE3729CAED4800F1AEF2 /* CharacterViewController.xib in Resources */,
 				8D55A4A22907460F005E573A /* CompletedTaskListViewController.xib in Resources */,
 				8DB633BD28CD7F8B001F2DB7 /* TaskListViewController.xib in Resources */,
 				8D55A49C2904A7B4005E573A /* TaskViewController.xib in Resources */,
@@ -570,7 +581,6 @@
 				8D60F25E28CC6761003BB724 /* HomeViewController.xib in Resources */,
 				2F2F21C528F51A97005FFCC2 /* SettingViewController.xib in Resources */,
 				2F2F21CB28F5397B005FFCC2 /* LoginViewController.xib in Resources */,
-				8D97697E29AAC6D90000DD8D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,7 +668,9 @@
 				2F2F21D028F53C30005FFCC2 /* PageViewController.swift in Sources */,
 				8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */,
 				8D97698429B2FEFD0000DD8D /* HelpItem.swift in Sources */,
+				2FEDBE3929CAED9000F1AEF2 /* CharacterCoordinator.swift in Sources */,
 				8DCB72DA2949E99D00935972 /* MapCoordinator.swift in Sources */,
+				2FEDBE3629CAED4800F1AEF2 /* CharacterViewController.swift in Sources */,
 				8D55A49B2904A7B4005E573A /* TaskViewController.swift in Sources */,
 				8D09C31329C9AD36000F51F6 /* Character.swift in Sources */,
 				2F2F21BA28F51791005FFCC2 /* FilterViewController.swift in Sources */,

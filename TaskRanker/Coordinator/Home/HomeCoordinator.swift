@@ -41,12 +41,6 @@ extension HomeCoordinator: HomeViewControllerDelegate {
     }
     
     /// HomeVC → FilterVC
-    func homeVCFilterButtonDidTap(_ viewController: UIViewController) {
-        let filterCoordinator = FilterCoordinator()
-        filterCoordinator.startFlow(in: viewController)
-    }
-    
-    /// HomeVC → FilterVC
     func homeVCFilterButtonDidTap(_ viewController: UIViewController, filterArray: [Bool]) {
         let filterCoordinator = FilterCoordinator()
         filterCoordinator.startFlow(in: viewController, filterArray: filterArray)

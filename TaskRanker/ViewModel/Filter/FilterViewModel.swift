@@ -16,13 +16,9 @@ class FilterViewModel: NSObject {
     // MARK: - Initializer
     
     /// イニシャライザ
-    /// - Parameter filterArray: nilの場合は新規作成
-    init(filterArray: [Bool]?) {
-        if let array = filterArray {
-            self.filterArray = array
-        } else {
-            self.filterArray = Array(repeating: true, count: TaskColor.allCases.count)
-        }
+    /// - Parameter filterArray: フィルタ配列
+    init(filterArray: [Bool]) {
+        self.filterArray = filterArray
         super.init()
     }
     

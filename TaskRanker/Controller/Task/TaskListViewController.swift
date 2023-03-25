@@ -14,6 +14,8 @@ protocol TaskListViewControllerDelegate: AnyObject {
     func taskListVCTaskTypeUpdate(task: Task)
     /// Task完了時
     func taskListVCTaskComplete(task: Task)
+    /// Taskアップデート時
+    func taskListVCTaskUpdate()
     /// 緊急度自動更新時
     func taskListVCAutoUrgencyUpdate(message: String)
 }
@@ -90,6 +92,7 @@ class TaskListViewController: UIViewController {
             return
         }
         tableView.reloadRows(at: [indexPath], with: .none)
+        delegate?.taskListVCTaskUpdate()
     }
 
 }

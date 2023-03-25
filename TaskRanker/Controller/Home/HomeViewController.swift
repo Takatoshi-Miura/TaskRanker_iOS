@@ -66,7 +66,6 @@ class HomeViewController: UIViewController {
         
         if let selectedTask = homeViewModel.getSelectedTask(), let selectedIndex = homeViewModel.getSelectedIndex() {
             updateTaskListView(task: selectedTask, indexPath: selectedIndex)
-            changeImageAndMessage(type: CharacterMessageType.update)
         }
         homeViewModel.clearTaskIndex()
     }
@@ -295,6 +294,11 @@ extension HomeViewController: TaskListViewControllerDelegate {
     /// Task完了時
     func taskListVCTaskComplete(task: Task) {
         changeImageAndMessage(type: CharacterMessageType.complete)
+    }
+    
+    /// Taskアップデート時
+    func taskListVCTaskUpdate() {
+        changeImageAndMessage(type: CharacterMessageType.update)
     }
     
     /// 緊急度自動更新時

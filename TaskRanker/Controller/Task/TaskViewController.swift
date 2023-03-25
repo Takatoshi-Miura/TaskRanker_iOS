@@ -239,7 +239,7 @@ class TaskViewController: UIViewController {
         hideKeyboard()
         closePicker(pickerView)
         let toolbar = createToolBar(#selector(colorPickerDoneAction), #selector(colorPickerCancelAction))
-        pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: colorPicker.bounds.size.height + toolbar.bounds.size.height + view.safeAreaInsets.bottom))
+        pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: colorPicker.bounds.size.height + 88 + view.safeAreaInsets.bottom))
         pickerView.backgroundColor = UIColor.systemGray5
         pickerView.addSubview(colorPicker)
         pickerView.addSubview(toolbar)
@@ -282,7 +282,7 @@ class TaskViewController: UIViewController {
         hideKeyboard()
         closePicker(pickerView)
         let toolbar = createToolBar(#selector(datePickerDoneAction), #selector(datePickerCancelAction))
-        pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height + toolbar.bounds.size.height + view.safeAreaInsets.bottom))
+        pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height + 88 + view.safeAreaInsets.bottom))
         pickerView.backgroundColor = UIColor.systemGray5
         pickerView.addSubview(datePicker)
         pickerView.addSubview(toolbar)
@@ -294,7 +294,7 @@ class TaskViewController: UIViewController {
         hideKeyboard()
         closePicker(pickerView)
         let toolbar = createToolBar(#selector(dayPickerDoneAction), #selector(dayPickerCancelAction))
-        pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: dayPicker.bounds.size.height + toolbar.bounds.size.height + view.safeAreaInsets.bottom))
+        pickerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: dayPicker.bounds.size.height + 88 + view.safeAreaInsets.bottom))
         pickerView.backgroundColor = UIColor.systemGray5
         pickerView.addSubview(dayPicker)
         pickerView.addSubview(toolbar)
@@ -346,10 +346,10 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ja")
         datePicker.backgroundColor = UIColor.systemGray5
-        datePicker.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height)
+        datePicker.frame = CGRect(x: 0, y: 44, width: UIScreen.main.bounds.size.width, height: datePicker.bounds.size.height)
         datePicker.date = selectedDate
         if #available(iOS 13.4, *) {
-            datePicker.preferredDatePickerStyle = .wheels
+            datePicker.preferredDatePickerStyle = .inline
         }
     }
     
@@ -371,7 +371,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     private func initColorPicker() {
         colorPicker.delegate = self
         colorPicker.dataSource = self
-        colorPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: colorPicker.bounds.size.height)
+        colorPicker.frame = CGRect(x: 0, y: 44, width: self.view.bounds.size.width, height: colorPicker.bounds.size.height)
         colorPicker.backgroundColor = UIColor.systemGray5
         colorPicker.tag = PickerType.color.rawValue
     }
@@ -395,7 +395,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     private func initDayPicker() {
         dayPicker.delegate = self
         dayPicker.dataSource = self
-        dayPicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: dayPicker.bounds.size.height)
+        dayPicker.frame = CGRect(x: 0, y: 44, width: self.view.bounds.size.width, height: dayPicker.bounds.size.height)
         dayPicker.backgroundColor = UIColor.systemGray5
         dayPicker.tag = PickerType.day.rawValue
         dayPicker.selectRow(selectedDay, inComponent: 0, animated: false)

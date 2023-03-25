@@ -55,14 +55,17 @@
                         <constraint firstAttribute="height" constant="50" id="mVi-s4-kdT"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hri-QF-K3i">
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hri-QF-K3i">
                     <rect key="frame" x="0.0" y="441" width="320" height="74"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0G7-9l-cBA">
-                            <rect key="frame" x="0.0" y="0.0" width="42" height="74"/>
+                            <rect key="frame" x="0.0" y="0.0" width="92.5" height="74"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="0G7-9l-cBA" secondAttribute="height" multiplier="5:4" id="49C-dF-FEd"/>
+                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcI-1Y-hfy">
-                            <rect key="frame" x="52" y="0.0" width="268" height="74"/>
+                            <rect key="frame" x="102.5" y="0.0" width="217.5" height="74"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>

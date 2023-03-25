@@ -58,10 +58,6 @@ class HomeViewController: UIViewController {
         initTaskListView()
         initGestureRecognizer()
         initNotification()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         initCharacterView()
     }
     

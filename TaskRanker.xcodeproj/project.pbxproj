@@ -30,6 +30,7 @@
 		8D09C31529CB16FA000F51F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D09C31429CB16FA000F51F6 /* GoogleService-Info.plist */; };
 		8D09C31729CEB54F000F51F6 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C31629CEB54F000F51F6 /* CharacterViewModel.swift */; };
 		8D09C31929CECE66000F51F6 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C31829CECE66000F51F6 /* Util.swift */; };
+		8D09C31B29CF3CCD000F51F6 /* CharacterMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C31A29CF3CCD000F51F6 /* CharacterMessageType.swift */; };
 		8D1D392428F84CA80078F3CB /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392328F84CA80078F3CB /* UserDefaultsKey.swift */; };
 		8D1D392928F984B20078F3CB /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392628F984B20078F3CB /* RealmManager.swift */; };
 		8D1D392A28F984B20078F3CB /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392728F984B20078F3CB /* TaskManager.swift */; };
@@ -102,6 +103,7 @@
 		8D09C31429CB16FA000F51F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D09C31629CEB54F000F51F6 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		8D09C31829CECE66000F51F6 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		8D09C31A29CF3CCD000F51F6 /* CharacterMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMessageType.swift; sourceTree = "<group>"; };
 		8D1D392328F84CA80078F3CB /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		8D1D392628F984B20078F3CB /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		8D1D392728F984B20078F3CB /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
@@ -224,19 +226,20 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
-		8D09C31129C9AD16000F51F6 /* Home */ = {
+		8D09C31129C9AD16000F51F6 /* Character */ = {
 			isa = PBXGroup;
 			children = (
 				8D09C31229C9AD36000F51F6 /* Character.swift */,
+				8D09C31A29CF3CCD000F51F6 /* CharacterMessageType.swift */,
 			);
-			path = Home;
+			path = Character;
 			sourceTree = "<group>";
 		};
 		8D1D392528F984B20078F3CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				8D97698629B31E480000DD8D /* Application */,
-				8D09C31129C9AD16000F51F6 /* Home */,
+				8D09C31129C9AD16000F51F6 /* Character */,
 				8D97698529B31E210000DD8D /* Task */,
 				8D97698729B31F4C0000DD8D /* Setting */,
 			);
@@ -645,6 +648,7 @@
 				2F415F4228F7EAFF0082D676 /* UIViewController+PickerView.swift in Sources */,
 				8D09C31929CECE66000F51F6 /* Util.swift in Sources */,
 				8DB633CA28CDD3D7001F2DB7 /* UIViewController+TextView.swift in Sources */,
+				8D09C31B29CF3CCD000F51F6 /* CharacterMessageType.swift in Sources */,
 				8D09C31729CEB54F000F51F6 /* CharacterViewModel.swift in Sources */,
 				8D1D392928F984B20078F3CB /* RealmManager.swift in Sources */,
 				8D75CDF929C34CE3003C93AD /* LoginViewModel.swift in Sources */,

@@ -135,10 +135,10 @@ class HomeViewController: UIViewController {
     /// - Parameter task: Task
     private func insertTaskListView(task: Task) {
         switch task.type {
-        case .A: self.taskListVC_A.insertTask(task: task)
-        case .B: self.taskListVC_B.insertTask(task: task)
-        case .C: self.taskListVC_C.insertTask(task: task)
-        case .D: self.taskListVC_D.insertTask(task: task)
+        case .A: taskListVC_A.insertTask(task: task)
+        case .B: taskListVC_B.insertTask(task: task)
+        case .C: taskListVC_C.insertTask(task: task)
+        case .D: taskListVC_D.insertTask(task: task)
         }
     }
     

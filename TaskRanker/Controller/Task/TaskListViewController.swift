@@ -86,9 +86,8 @@ class TaskListViewController: UIViewController {
                 }
                 return
             }
-            if deleteTask.isComplete == true {
-                self.delegate?.taskListVCTaskComplete(task: deleteTask)
-            }
+            // 完了,削除Task
+            self.delegate?.taskListVCTaskComplete(task: deleteTask)
             return
         }
         tableView.reloadRows(at: [indexPath], with: .none)

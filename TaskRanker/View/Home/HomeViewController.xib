@@ -50,7 +50,6 @@
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zBM-CG-B1h">
                     <rect key="frame" x="0.0" y="518" width="320" height="50"/>
-                    <color key="backgroundColor" systemColor="labelColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="mVi-s4-kdT"/>
                     </constraints>
@@ -99,9 +98,6 @@
     </objects>
     <resources>
         <image name="Plus_Button" width="55.5" height="55.5"/>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

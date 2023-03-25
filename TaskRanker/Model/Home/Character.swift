@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum CharacterType: Int, CaseIterable {
+enum Character: Int, CaseIterable {
     
     case chipoyo
     case tapoyo
@@ -61,7 +61,7 @@ enum CharacterType: Int, CaseIterable {
     
 }
 
-enum Character: Int, CaseIterable {
+enum CharacterMessageType: Int, CaseIterable {
     
     case okaeri     // ログイン時
     case addTask    // Task追加時
@@ -71,7 +71,7 @@ enum Character: Int, CaseIterable {
     var image: UIImage {
         switch self {
         case .okaeri:
-            switch CharacterType.allCases[UserDefaultsKey.character.integer()] {
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return UIImage(named: "001_okaeri")!
             case .tapoyo:   return UIImage(named: "001_okaeri")!
             case .togepoyo: return UIImage(named: "001_okaeri")!
@@ -79,7 +79,7 @@ enum Character: Int, CaseIterable {
             case .tencho:   return UIImage(named: "001_okaeri")!
             }
         case .addTask:
-            switch CharacterType.allCases[UserDefaultsKey.character.integer()] {
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return UIImage(named: "002_addTask")!
             case .tapoyo:   return UIImage(named: "002_addTask")!
             case .togepoyo: return UIImage(named: "002_addTask")!
@@ -87,7 +87,7 @@ enum Character: Int, CaseIterable {
             case .tencho:   return UIImage(named: "002_addTask")!
             }
         case .update:
-            switch CharacterType.allCases[UserDefaultsKey.character.integer()] {
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return UIImage(named: "003_update")!
             case .tapoyo:   return UIImage(named: "003_update")!
             case .togepoyo: return UIImage(named: "003_update")!
@@ -95,7 +95,7 @@ enum Character: Int, CaseIterable {
             case .tencho:   return UIImage(named: "003_update")!
             }
         case .complete:
-            switch CharacterType.allCases[UserDefaultsKey.character.integer()] {
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return UIImage(named: "004_complete")!
             case .tapoyo:   return UIImage(named: "004_complete")!
             case .togepoyo: return UIImage(named: "004_complete")!
@@ -108,7 +108,7 @@ enum Character: Int, CaseIterable {
     var message: String {
         switch self {
         case .okaeri:
-            switch CharacterType.allCases[UserDefaultsKey.character.integer()] {
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return "ちいぽよだよ\nすまほのなかに あそびに きちゃったもんね"
             case .tapoyo:   return "たあぽよだよ\nちいぽよが きてたみたいだけど どこかなぁ"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
@@ -116,7 +116,7 @@ enum Character: Int, CaseIterable {
             case .tencho:   return "もうあしたから こなくていいよ。"
             }
         case .addTask:
-            switch CharacterType.allCases[UserDefaultsKey.character.integer()] {
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return "やだやだ！めんどくちゃい！"
             case .tapoyo:   return "やだやだ！めんどくちゃい！"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
@@ -124,7 +124,7 @@ enum Character: Int, CaseIterable {
             case .tencho:   return "もうあしたから こなくていいよ。"
             }
         case .update:
-            switch CharacterType.allCases[UserDefaultsKey.character.integer()] {
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return "やることを みなおした！\nえらい！"
             case .tapoyo:   return "やることを みなおした！\nえらい！"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
@@ -132,7 +132,7 @@ enum Character: Int, CaseIterable {
             case .tencho:   return "もうあしたから こなくていいよ。"
             }
         case .complete:
-            switch CharacterType.allCases[UserDefaultsKey.character.integer()] {
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return "やることできた！\nえらい！"
             case .tapoyo:   return "やることできた！\nえらい！"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"

@@ -88,7 +88,7 @@ extension SettingViewModel: UITableViewDataSource {
         cell.imageView?.image = sectionItem[indexPath.section][indexPath.row].image
         cell.textLabel?.text  = sectionItem[indexPath.section][indexPath.row].title
         if indexPath.section == Section.character.rawValue {
-            cell.detailTextLabel?.text = CharacterType.allCases[UserDefaultsKey.character.integer()].name
+            cell.detailTextLabel?.text = Character.allCases[UserDefaultsKey.character.integer()].name
         }
         return cell
     }

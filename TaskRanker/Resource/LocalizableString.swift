@@ -78,6 +78,7 @@ let TITLE_MAIL_SUBJECT = NSLocalizedString("Mail Subject", comment: "")
 let TITLE_MAIL_MESSAGE = NSLocalizedString("Mail Message", comment: "")
 let MESSAGE_MAIL_SEND_SUCCESS = NSLocalizedString("Mail Send Success", comment: "")
 let MESSAGE_MAIL_SEND_FAILED = NSLocalizedString("Mail Send Failed", comment: "")
+let TITLE_DECISION = NSLocalizedString("Decision", comment: "")
 
 // MARK: - LoginViewController
 let TITLE_LOGIN_HELP = NSLocalizedString("LoginHelp", comment: "")

@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // キャラクターを設定
         if !(UserDefaultsKey.character.object() is Int) {
-            UserDefaultsKey.character.set(value: CharacterType.chipoyo.rawValue)
+            UserDefaultsKey.character.set(value: Character.chipoyo.rawValue)
         }
         
         // Firebaseログイン

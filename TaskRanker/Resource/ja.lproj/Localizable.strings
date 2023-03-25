@@ -77,6 +77,7 @@
 "Mail Message" = "お問い合わせ内容をご記入下さい\n\n■ご利用端末(例:iPhone13):　\n■システムバージョン(例:iOS15.4):　";
 "Mail Send Success" = "メールを送信しました。\n開発者からの返信をお待ち下さい。";
 "Mail Send Failed" = "メールを送信できませんでした。";
+"Decision" = "決定";
 
 // MARK: - LoginViewController
 "LoginHelp" = "アカウントを作成し、別の端末からログインするとデータを引継ぐことができます。";

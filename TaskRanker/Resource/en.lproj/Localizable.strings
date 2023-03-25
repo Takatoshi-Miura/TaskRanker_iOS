@@ -77,6 +77,7 @@
 "Mail Message" = "Please fill in the content of your inquiry.";
 "Mail Send Success" = "The email was sent successfully. Please wait for the reply from the developer.";
 "Mail Send Failed" = "The email could not be sent.";
+"Decision" = "Setting";
 
 // MARK: - LoginViewController
 "LoginHelp" = "You can take over the data by creating an account and logging in from another device.";

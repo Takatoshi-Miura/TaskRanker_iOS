@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CharacterViewController" customModule="TaskRanker" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="mNB-n2-XNu" id="VDr-Ax-8PO"/>
+                <outlet property="imageView" destination="4ds-bZ-SkQ" id="vOY-Mb-UPg"/>
                 <outlet property="messageLabel" destination="Hz4-Eh-XVL" id="Ll8-lV-0Yo"/>
                 <outlet property="settingButton" destination="vwI-G8-9v9" id="FcH-p3-PHh"/>
                 <outlet property="titleLabel" destination="Bxq-2n-s3U" id="PiL-hv-IWo"/>
@@ -37,7 +38,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ちいぽよ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bxq-2n-s3U">
-                    <rect key="frame" x="16" y="10" width="343" height="30"/>
+                    <rect key="frame" x="16" y="60" width="343" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="OIt-y1-yGi"/>
                     </constraints>
@@ -46,25 +47,32 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="たあぽよのことが大好きなやさしいぽよ。ちょっと面倒くさがり。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNB-n2-XNu">
-                    <rect key="frame" x="16" y="60" width="343" height="43"/>
+                    <rect key="frame" x="16" y="110" width="343" height="43"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ちいぽよだよ。ちいぽよのほうが かわいいもんね。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hz4-Eh-XVL">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ちいぽよだよ。ちいぽよのほうが かわいいもんね。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hz4-Eh-XVL">
                     <rect key="frame" x="16" y="474" width="343" height="43"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4ds-bZ-SkQ">
+                    <rect key="frame" x="30" y="183" width="315" height="276"/>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="4ds-bZ-SkQ" firstAttribute="top" secondItem="mNB-n2-XNu" secondAttribute="bottom" constant="30" id="13o-P4-ZSK"/>
+                <constraint firstItem="Hz4-Eh-XVL" firstAttribute="top" secondItem="4ds-bZ-SkQ" secondAttribute="bottom" constant="15" id="26u-pg-4BP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4ds-bZ-SkQ" secondAttribute="trailing" constant="30" id="3Hu-QM-Y1P"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vwI-G8-9v9" secondAttribute="bottom" constant="70" id="5QK-3S-q8D"/>
-                <constraint firstItem="Bxq-2n-s3U" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="IWh-IH-r6v"/>
+                <constraint firstItem="Bxq-2n-s3U" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="IWh-IH-r6v"/>
                 <constraint firstItem="vwI-G8-9v9" firstAttribute="top" secondItem="Hz4-Eh-XVL" secondAttribute="bottom" constant="40" id="JUg-xM-tZS"/>
                 <constraint firstItem="mNB-n2-XNu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="M18-88-7D2"/>
+                <constraint firstItem="4ds-bZ-SkQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="OTI-uT-N2M"/>
                 <constraint firstItem="Bxq-2n-s3U" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="RNu-6R-wzt"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mNB-n2-XNu" secondAttribute="trailing" constant="16" id="T5h-hU-gfS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vwI-G8-9v9" secondAttribute="trailing" constant="90" id="XOp-Q6-HmD"/>

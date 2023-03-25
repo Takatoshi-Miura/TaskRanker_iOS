@@ -25,10 +25,10 @@
 		2F415F4228F7EAFF0082D676 /* UIViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F415F4128F7EAFF0082D676 /* UIViewController+PickerView.swift */; };
 		2FEDBE3629CAED4800F1AEF2 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDBE3429CAED4800F1AEF2 /* CharacterViewController.swift */; };
 		2FEDBE3729CAED4800F1AEF2 /* CharacterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FEDBE3529CAED4800F1AEF2 /* CharacterViewController.xib */; };
-		2FEDBE3929CAED9000F1AEF2 /* CharacterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDBE3829CAED9000F1AEF2 /* CharacterCoordinator.swift */; };
 		8D09C31029C56CAF000F51F6 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C30F29C56CAF000F51F6 /* TaskListViewModel.swift */; };
 		8D09C31329C9AD36000F51F6 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C31229C9AD36000F51F6 /* Character.swift */; };
 		8D09C31529CB16FA000F51F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D09C31429CB16FA000F51F6 /* GoogleService-Info.plist */; };
+		8D09C31729CEB54F000F51F6 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C31629CEB54F000F51F6 /* CharacterViewModel.swift */; };
 		8D1D392428F84CA80078F3CB /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392328F84CA80078F3CB /* UserDefaultsKey.swift */; };
 		8D1D392928F984B20078F3CB /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392628F984B20078F3CB /* RealmManager.swift */; };
 		8D1D392A28F984B20078F3CB /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D392728F984B20078F3CB /* TaskManager.swift */; };
@@ -94,12 +94,12 @@
 		2F415F4128F7EAFF0082D676 /* UIViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PickerView.swift"; sourceTree = "<group>"; };
 		2FEDBE3429CAED4800F1AEF2 /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
 		2FEDBE3529CAED4800F1AEF2 /* CharacterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterViewController.xib; sourceTree = "<group>"; };
-		2FEDBE3829CAED9000F1AEF2 /* CharacterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCoordinator.swift; sourceTree = "<group>"; };
 		45D5099BC271E62A0AD40BE7 /* Pods-TaskRanker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.debug.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.debug.xcconfig"; sourceTree = "<group>"; };
 		4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskRanker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D09C30F29C56CAF000F51F6 /* TaskListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		8D09C31229C9AD36000F51F6 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		8D09C31429CB16FA000F51F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8D09C31629CEB54F000F51F6 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		8D1D392328F84CA80078F3CB /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		8D1D392628F984B20078F3CB /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		8D1D392728F984B20078F3CB /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
@@ -217,7 +217,6 @@
 			children = (
 				2F2F21C628F51AC5005FFCC2 /* SettingCoordinator.swift */,
 				2F2F21CC28F53998005FFCC2 /* LoginCoordinator.swift */,
-				2FEDBE3829CAED9000F1AEF2 /* CharacterCoordinator.swift */,
 				2F2F21D228F53C47005FFCC2 /* PageCoordinator.swift */,
 			);
 			path = Setting;
@@ -416,6 +415,7 @@
 				8D75CDF629C34C6F003C93AD /* SettingViewModel.swift */,
 				8D75CDF829C34CE3003C93AD /* LoginViewModel.swift */,
 				8D75CDFA29C3550A003C93AD /* PageViewModel.swift */,
+				8D09C31629CEB54F000F51F6 /* CharacterViewModel.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -641,6 +641,7 @@
 				8D75CDFB29C3550A003C93AD /* PageViewModel.swift in Sources */,
 				2F415F4228F7EAFF0082D676 /* UIViewController+PickerView.swift in Sources */,
 				8DB633CA28CDD3D7001F2DB7 /* UIViewController+TextView.swift in Sources */,
+				8D09C31729CEB54F000F51F6 /* CharacterViewModel.swift in Sources */,
 				8D1D392928F984B20078F3CB /* RealmManager.swift in Sources */,
 				8D75CDF929C34CE3003C93AD /* LoginViewModel.swift in Sources */,
 				2F2F21C428F51A97005FFCC2 /* SettingViewController.swift in Sources */,
@@ -668,7 +669,6 @@
 				2F2F21D028F53C30005FFCC2 /* PageViewController.swift in Sources */,
 				8D60F26228CC67A5003BB724 /* HomeCoordinator.swift in Sources */,
 				8D97698429B2FEFD0000DD8D /* HelpItem.swift in Sources */,
-				2FEDBE3929CAED9000F1AEF2 /* CharacterCoordinator.swift in Sources */,
 				8DCB72DA2949E99D00935972 /* MapCoordinator.swift in Sources */,
 				2FEDBE3629CAED4800F1AEF2 /* CharacterViewController.swift in Sources */,
 				8D55A49B2904A7B4005E573A /* TaskViewController.swift in Sources */,

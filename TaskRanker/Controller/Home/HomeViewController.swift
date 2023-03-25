@@ -58,6 +58,10 @@ class HomeViewController: UIViewController {
         initTaskListView()
         initGestureRecognizer()
         initNotification()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         initCharacterView()
     }
     
@@ -66,7 +70,7 @@ class HomeViewController: UIViewController {
         
         if let selectedTask = homeViewModel.getSelectedTask(), let selectedIndex = homeViewModel.getSelectedIndex() {
             updateTaskListView(task: selectedTask, indexPath: selectedIndex)
-            changeImageAndMessage(type: Character.update)
+            changeImageAndMessage(type: CharacterMessageType.update)
         }
         homeViewModel.clearTaskIndex()
     }
@@ -159,13 +163,13 @@ class HomeViewController: UIViewController {
     // MARK: - Character
     
     /// キャラクターの初期化
-    private func initCharacterView() {
-        changeImageAndMessage(type: Character.okaeri)
+    @objc private func initCharacterView() {
+        changeImageAndMessage(type: CharacterMessageType.okaeri)
     }
     
     /// キャラクターの画像とメッセージを変更
     /// - Parameter type: タイプ
-    private func changeImageAndMessage(type: Character) {
+    private func changeImageAndMessage(type: CharacterMessageType) {
         characterImageView.image = type.image
         animateLabel(label: characterMessageLabel, text: type.message)
     }
@@ -230,7 +234,7 @@ class HomeViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.insertTaskListView(task: task)
         }
-        changeImageAndMessage(type: Character.addTask)
+        changeImageAndMessage(type: CharacterMessageType.addTask)
     }
     
     // MARK: - Filter
@@ -291,6 +295,8 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.syncTaskListView), name: NSNotification.Name(rawValue: "afterLogin"), object: nil)
         // ログアウト時のリロード用
         NotificationCenter.default.addObserver(self, selector: #selector(self.syncTaskListView), name: NSNotification.Name(rawValue: "afterLogout"), object: nil)
+        // キャラクター変更時
+        NotificationCenter.default.addObserver(self, selector: #selector(self.initCharacterView), name: NSNotification.Name(rawValue: "afterChangeCharacter"), object: nil)
     }
     
 }
@@ -306,12 +312,12 @@ extension HomeViewController: TaskListViewControllerDelegate {
     /// TaskTypeアップデート時
     func taskListVCTaskTypeUpdate(task: Task) {
         insertTask(task: task)
-        changeImageAndMessage(type: Character.update)
+        changeImageAndMessage(type: CharacterMessageType.update)
     }
     
     /// Task完了時
     func taskListVCTaskComplete(task: Task) {
-        changeImageAndMessage(type: Character.complete)
+        changeImageAndMessage(type: CharacterMessageType.complete)
     }
     
     /// 緊急度自動更新時

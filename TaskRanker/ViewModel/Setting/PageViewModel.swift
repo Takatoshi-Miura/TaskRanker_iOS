@@ -39,7 +39,10 @@ class PageViewModel: NSObject {
                 controllers.append(tutorialVC)
             }
         case .Character:
-            controllers = []
+            for character in Character.allCases {
+                let characterVC = CharacterViewController(character: character)
+                controllers.append(characterVC)
+            }
         }
     }
     

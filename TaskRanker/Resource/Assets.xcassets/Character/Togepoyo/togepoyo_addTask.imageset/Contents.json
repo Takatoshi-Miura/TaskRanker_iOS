@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "togepoyo_addTask.JPG",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "togepoyo_addTask 2.JPG",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "togepoyo_addTask 1.JPG",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

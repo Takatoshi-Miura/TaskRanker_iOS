@@ -36,12 +36,16 @@ class CharacterViewController: UIViewController {
         initView()
     }
     
+    override func viewWillAppear(_ animate: Bool) {
+        super.viewWillAppear(animate)
+        Util.animateLabel(label: messageLabel, text: characterViewModel.getMessage())
+    }
+    
     /// Viewの初期化
     func initView() {
         titleLabel.text = characterViewModel.getCharacterName()
         descriptionLabel.text = characterViewModel.getDescription()
         imageView.image = characterViewModel.getImage()
-        messageLabel.text = characterViewModel.getMessage()
         settingButton.setTitle(TITLE_DECISION, for: .normal)
     }
     

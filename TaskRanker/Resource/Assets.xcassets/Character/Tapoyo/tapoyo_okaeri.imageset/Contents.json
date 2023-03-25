@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "tapoyo_okaeri.JPG",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "tapoyo_okaeri 1.JPG",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "tapoyo_okaeri 2.JPG",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

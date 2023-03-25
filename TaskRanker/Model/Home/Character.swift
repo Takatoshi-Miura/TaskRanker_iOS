@@ -18,11 +18,11 @@ enum Character: Int, CaseIterable {
     /// 設定用画像
     var image: UIImage {
         switch self {
-        case .chipoyo:  return UIImage(named: "001_okaeri")!
-        case .tapoyo:   return UIImage(named: "001_okaeri")!
-        case .togepoyo: return UIImage(named: "001_okaeri")!
-        case .warupoyo: return UIImage(named: "001_okaeri")!
-        case .tencho:   return UIImage(named: "001_okaeri")!
+        case .chipoyo:  return UIImage(named: "chipoyo_okaeri")!
+        case .tapoyo:   return UIImage(named: "tapoyo_okaeri")!
+        case .togepoyo: return UIImage(named: "togepoyo_okaeri")!
+        case .warupoyo: return UIImage(named: "warupoyo_okaeri")!
+        case .tencho:   return UIImage(named: "tencho_okaeri")!
         }
     }
     
@@ -41,7 +41,7 @@ enum Character: Int, CaseIterable {
     var message: String {
         switch self {
         case .chipoyo:  return "ちいぽよだよ。ちいぽよのほうが かわいいもんね。"
-        case .tapoyo:   return "たあぽよだよ。"
+        case .tapoyo:   return "たあぽよだよ。いっしょに がんばろうね！"
         case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
         case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
         case .tencho:   return "もうあしたから こなくていいよ。"
@@ -72,35 +72,35 @@ enum CharacterMessageType: Int, CaseIterable {
         switch self {
         case .okaeri:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
-            case .chipoyo:  return UIImage(named: "001_okaeri")!
-            case .tapoyo:   return UIImage(named: "001_okaeri")!
-            case .togepoyo: return UIImage(named: "001_okaeri")!
-            case .warupoyo: return UIImage(named: "001_okaeri")!
-            case .tencho:   return UIImage(named: "001_okaeri")!
+            case .chipoyo:  return UIImage(named: "chipoyo_okaeri")!
+            case .tapoyo:   return UIImage(named: "tapoyo_okaeri")!
+            case .togepoyo: return UIImage(named: "togepoyo_okaeri")!
+            case .warupoyo: return UIImage(named: "warupoyo_okaeri")!
+            case .tencho:   return UIImage(named: "tencho_okaeri")!
             }
         case .addTask:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
-            case .chipoyo:  return UIImage(named: "002_addTask")!
-            case .tapoyo:   return UIImage(named: "002_addTask")!
-            case .togepoyo: return UIImage(named: "002_addTask")!
-            case .warupoyo: return UIImage(named: "002_addTask")!
-            case .tencho:   return UIImage(named: "002_addTask")!
+            case .chipoyo:  return UIImage(named: "chipoyo_addTask")!
+            case .tapoyo:   return UIImage(named: "tapoyo_addTask")!
+            case .togepoyo: return UIImage(named: "togepoyo_addTask")!
+            case .warupoyo: return UIImage(named: "warupoyo_addTask")!
+            case .tencho:   return UIImage(named: "tencho_addTask")!
             }
         case .update:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
-            case .chipoyo:  return UIImage(named: "003_update")!
-            case .tapoyo:   return UIImage(named: "003_update")!
-            case .togepoyo: return UIImage(named: "003_update")!
-            case .warupoyo: return UIImage(named: "003_update")!
-            case .tencho:   return UIImage(named: "003_update")!
+            case .chipoyo:  return UIImage(named: "chipoyo_update")!
+            case .tapoyo:   return UIImage(named: "tapoyo_update")!
+            case .togepoyo: return UIImage(named: "togepoyo_update")!
+            case .warupoyo: return UIImage(named: "warupoyo_update")!
+            case .tencho:   return UIImage(named: "tencho_update")!
             }
         case .complete:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
-            case .chipoyo:  return UIImage(named: "004_complete")!
-            case .tapoyo:   return UIImage(named: "004_complete")!
-            case .togepoyo: return UIImage(named: "004_complete")!
-            case .warupoyo: return UIImage(named: "004_complete")!
-            case .tencho:   return UIImage(named: "004_complete")!
+            case .chipoyo:  return UIImage(named: "chipoyo_complete")!
+            case .tapoyo:   return UIImage(named: "tapoyo_complete")!
+            case .togepoyo: return UIImage(named: "togepoyo_complete")!
+            case .warupoyo: return UIImage(named: "warupoyo_complete")!
+            case .tencho:   return UIImage(named: "tencho_complete")!
             }
         }
     }
@@ -113,23 +113,23 @@ enum CharacterMessageType: Int, CaseIterable {
             case .tapoyo:   return "たあぽよだよ\nちいぽよが きてたみたいだけど どこかなぁ"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
-            case .tencho:   return "もうあしたから こなくていいよ。"
+            case .tencho:   return "おそいじゃないか...もうあしたから こなくていいよ。"
             }
         case .addTask:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return "やだやだ！めんどくちゃい！"
-            case .tapoyo:   return "やだやだ！めんどくちゃい！"
-            case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
-            case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
-            case .tencho:   return "もうあしたから こなくていいよ。"
+            case .tapoyo:   return "やることふえちゃった！ちいぽよ〜泣"
+            case .togepoyo: return "わー！"
+            case .warupoyo: return "わー！"
+            case .tencho:   return "しごと ふやしおって...もうあしたから こなくていいよ。"
             }
         case .update:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .chipoyo:  return "やることを みなおした！\nえらい！"
-            case .tapoyo:   return "やることを みなおした！\nえらい！"
+            case .tapoyo:   return "やることを みなおした！\nよこからえらい！"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
-            case .tencho:   return "もうあしたから こなくていいよ。"
+            case .tencho:   return "おわってないじゃないか...もうあしたから こなくていいよ。"
             }
         case .complete:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
@@ -137,7 +137,7 @@ enum CharacterMessageType: Int, CaseIterable {
             case .tapoyo:   return "やることできた！\nえらい！"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
-            case .tencho:   return "もうあしたから こなくていいよ。"
+            case .tencho:   return "やっとおわったか...そのちょうしで たのむぞ。"
             }
         }
     }

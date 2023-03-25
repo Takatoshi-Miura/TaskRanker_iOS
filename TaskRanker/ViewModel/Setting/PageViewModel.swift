@@ -39,6 +39,7 @@ class PageViewModel: NSObject {
                 controllers.append(tutorialVC)
             }
         case .Character:
+            // TODO: 申請時に設定を変える
             for character in Character.allCases {
                 let characterVC = CharacterViewController(character: character)
                 controllers.append(characterVC)

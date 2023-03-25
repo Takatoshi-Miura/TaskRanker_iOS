@@ -14,8 +14,6 @@ protocol LoginViewControllerDelegate: AnyObject {
     func loginVCUserDidLogin(_ viewController: UIViewController)
     // ログイン時の処理
     func loginVCUserDidLogout(_ viewController: UIViewController)
-    // キャンセルタップ時の処理
-    func loginVCCancelDidTap(_ viewController: UIViewController)
 }
 
 class LoginViewController: UIViewController {
@@ -29,7 +27,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordChangeButton: UIButton!
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet weak var deleteAccountButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
     private var loginViewModel = LoginViewModel()
     var delegate: LoginViewControllerDelegate?
 
@@ -44,6 +41,7 @@ class LoginViewController: UIViewController {
     
     ///画面初期化
     private func initView() {
+        self.title = TITLE_DATA_TRANSFER
         initTextField(textField: loginTextField, placeholder: TITLE_MAIL_ADDRESS)
         initTextField(textField: passwordTextField, placeholder: TITLE_PASSWORD)
         if loginViewModel.isLogin() {
@@ -60,7 +58,6 @@ class LoginViewController: UIViewController {
         passwordChangeButton.setTitle(TITLE_PASSWORD_RESET, for: .normal)
         createAccountButton.setTitle(TITLE_CREATE_ACCOUNT, for: .normal)
         deleteAccountButton.setTitle(TITLE_DELETE_ACCOUNT, for: .normal)
-        cancelButton.setTitle(TITLE_CANCEL, for: .normal)
     }
     
     // MARK: - Action
@@ -116,11 +113,6 @@ class LoginViewController: UIViewController {
             self.deleteAccount()
         })
         present(alert, animated: true)
-    }
-    
-    /// キャンセルボタン
-    @IBAction func tapCancelButton(_ sender: Any) {
-        delegate?.loginVCCancelDidTap(self)
     }
     
     // MARK: - Private
@@ -208,7 +200,7 @@ class LoginViewController: UIViewController {
         loginViewModel.deleteAccount(complete: { (errorMessage) in
             if let errorMessage = errorMessage {
                 HUD.hide()
-                let alert = Alert.Error(message: MESSAGE_DELETE_ACCOUNT_ERROR)
+                let alert = Alert.Error(message: errorMessage)
                 self.present(alert, animated: true)
             } else {
                 self.clearTextField()

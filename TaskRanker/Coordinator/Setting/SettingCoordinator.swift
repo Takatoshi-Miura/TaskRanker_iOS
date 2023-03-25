@@ -39,7 +39,7 @@ extension SettingCoordinator: SettingViewControllerDelegate {
     /// SettingVC → LoginVC
     func settingVCDataTransferDidTap(_ viewController: UIViewController) {
         let loginCoordinator = LoginCoordinator()
-        loginCoordinator.startFlow(in: viewController)
+        loginCoordinator.startFlow(in: navigationController!)
     }
     
     /// SettingVC → CharacterVC

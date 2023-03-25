@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="TaskRanker" customModuleProvider="target">
             <connections>
-                <outlet property="cancelButton" destination="2PI-l9-Im3" id="pki-VF-2wd"/>
                 <outlet property="createAccountButton" destination="jq7-rB-Z4U" id="tSP-El-ODu"/>
                 <outlet property="deleteAccountButton" destination="o9M-i3-Yqs" id="wSX-XW-SEr"/>
                 <outlet property="detailLabel" destination="lqa-RI-cSx" id="Woy-ga-DNB"/>
@@ -28,19 +27,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ews-y3-kH9">
-                    <rect key="frame" x="0.0" y="10" width="320" height="120"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="8om-Tc-AHo"/>
-                    </constraints>
+                    <rect key="frame" x="0.0" y="10" width="320" height="85"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TaskRanker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMM-hn-qtN">
-                    <rect key="frame" x="16" y="130" width="288" height="34"/>
+                    <rect key="frame" x="16" y="95" width="288" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウントを作成し、別の端末からログインするとデータを引継ぐことができます。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqa-RI-cSx">
-                    <rect key="frame" x="16" y="184" width="288" height="61"/>
+                    <rect key="frame" x="16" y="149" width="288" height="61"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="61" id="Wdg-4R-Klq"/>
                     </constraints>
@@ -49,7 +45,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8op-8v-9ur">
-                    <rect key="frame" x="30" y="265" width="260" height="34"/>
+                    <rect key="frame" x="30" y="230" width="260" height="34"/>
                     <string key="placeholder" base64-UTF8="YES">
 44Ot44Kw44Kk44OzH0lEA
 </string>
@@ -57,12 +53,12 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m8u-iZ-LCd">
-                    <rect key="frame" x="30" y="307" width="260" height="34"/>
+                    <rect key="frame" x="30" y="272" width="260" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" secureTextEntry="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTA-3S-EDT">
-                    <rect key="frame" x="30" y="349" width="260" height="35"/>
+                    <rect key="frame" x="30" y="314" width="260" height="35"/>
                     <color key="backgroundColor" systemColor="systemRedColor"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
@@ -72,7 +68,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyf-CS-sUM">
-                    <rect key="frame" x="30" y="392" width="260" height="35"/>
+                    <rect key="frame" x="30" y="357" width="260" height="35"/>
                     <color key="backgroundColor" systemColor="systemBlueColor"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
@@ -82,7 +78,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jq7-rB-Z4U">
-                    <rect key="frame" x="30" y="435" width="260" height="35"/>
+                    <rect key="frame" x="30" y="400" width="260" height="35"/>
                     <color key="backgroundColor" systemColor="systemBlueColor"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
@@ -92,23 +88,13 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9M-i3-Yqs">
-                    <rect key="frame" x="30" y="478" width="260" height="35"/>
-                    <color key="backgroundColor" systemColor="systemBlueColor"/>
+                    <rect key="frame" x="30" y="443" width="260" height="35"/>
+                    <color key="backgroundColor" systemColor="systemRedColor"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                     <connections>
                         <action selector="tapDeleteAccountButton:" destination="-1" eventType="touchUpInside" id="0ec-pZ-TKG"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2PI-l9-Im3">
-                    <rect key="frame" x="30" y="521" width="260" height="35"/>
-                    <color key="backgroundColor" systemColor="systemGrayColor"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                    <connections>
-                        <action selector="tapCancelButton:" destination="-1" eventType="touchUpInside" id="BCf-Zf-apX"/>
                     </connections>
                 </button>
             </subviews>
@@ -118,9 +104,7 @@
                 <constraint firstItem="xMM-hn-qtN" firstAttribute="top" secondItem="ews-y3-kH9" secondAttribute="bottom" id="0uQ-XX-qK7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xMM-hn-qtN" secondAttribute="trailing" constant="16" id="0vS-N5-yOg"/>
                 <constraint firstItem="8op-8v-9ur" firstAttribute="top" secondItem="lqa-RI-cSx" secondAttribute="bottom" constant="20" id="1d8-pr-hrq"/>
-                <constraint firstItem="2PI-l9-Im3" firstAttribute="top" secondItem="o9M-i3-Yqs" secondAttribute="bottom" constant="8" id="3Wu-BI-oIE"/>
                 <constraint firstAttribute="trailing" secondItem="lqa-RI-cSx" secondAttribute="trailing" constant="16" id="8rD-Ah-kKq"/>
-                <constraint firstItem="2PI-l9-Im3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="Evi-df-61b"/>
                 <constraint firstItem="8op-8v-9ur" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="GHw-lo-GEb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RTA-3S-EDT" secondAttribute="trailing" constant="30" id="Hnh-4B-dAU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ews-y3-kH9" secondAttribute="trailing" id="JfB-AM-ZRI"/>
@@ -133,7 +117,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jq7-rB-Z4U" secondAttribute="trailing" constant="30" id="WOL-m6-wbR"/>
                 <constraint firstItem="lqa-RI-cSx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="WwG-lZ-I0P"/>
                 <constraint firstItem="xyf-CS-sUM" firstAttribute="top" secondItem="RTA-3S-EDT" secondAttribute="bottom" constant="8" id="b4g-G5-CF8"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2PI-l9-Im3" secondAttribute="trailing" constant="30" id="cs3-aJ-cMY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="o9M-i3-Yqs" secondAttribute="bottom" constant="90" id="dpN-TA-dWx"/>
                 <constraint firstItem="RTA-3S-EDT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="hwi-1m-MF8"/>
                 <constraint firstItem="o9M-i3-Yqs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="jns-fC-GQf"/>
                 <constraint firstItem="ews-y3-kH9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="l4I-G0-WjB"/>
@@ -155,9 +139,6 @@
         </systemColor>
         <systemColor name="systemCyanColor">
             <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

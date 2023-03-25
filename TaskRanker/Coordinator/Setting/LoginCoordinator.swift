@@ -16,16 +16,13 @@ class LoginCoordinator: Coordinator {
     }
     
     func startFlow(in navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        let loginViewController = LoginViewController()
+        loginViewController.delegate = self
+        self.navigationController?.pushViewController(loginViewController, animated: true)
     }
     
     func startFlow(in viewController: UIViewController) {
-        previousViewController = viewController
-        let loginViewController = LoginViewController()
-        loginViewController.delegate = self
-        if #available(iOS 13.0, *) {
-            loginViewController.isModalInPresentation = true
-        }
-        previousViewController!.present(loginViewController, animated: true)
     }
     
 }
@@ -44,11 +41,6 @@ extension LoginCoordinator: LoginViewControllerDelegate {
         viewController.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "afterLogout"), object: nil)
         })
-    }
-    
-    /// SettingVC ← LoginVC
-    func loginVCCancelDidTap(_ viewController: UIViewController) {
-        viewController.dismiss(animated: true, completion: nil)
     }
     
 }

@@ -139,6 +139,7 @@ extension RealmManager {
         let realm = try! Realm()
         let realmArray = realm.objects(RealmTask.self)
             .filter("(deadlineDate != nil)")
+            .filter("(isDeleted == false)")
         for task in realmArray {
             taskArray.append(task)
         }

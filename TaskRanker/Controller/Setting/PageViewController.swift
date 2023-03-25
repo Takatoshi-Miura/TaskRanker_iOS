@@ -7,17 +7,11 @@
 
 import UIKit
 
-protocol PageViewControllerDelegate: AnyObject {
-    // キャンセルタップ時の処理
-    func pageVCCancelDidTap(_ viewController: UIViewController)
-}
-
 class PageViewController: UIPageViewController {
     
     // MARK: - Variable
     
     private var pageViewModel = PageViewModel()
-    var pageViewDelegate: PageViewControllerDelegate?
     
     // MARK: - LifeCycle
     
@@ -25,7 +19,6 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
         addPageView()
         addPageControl()
-        addCancelButton()
     }
     
     // MARK: - Viewer
@@ -43,23 +36,6 @@ class PageViewController: UIPageViewController {
     /// PageControlを追加
     private func addPageControl() {
         self.view.addSubview(pageViewModel.pageControl)
-    }
-    
-    /// キャンセルボタンを追加
-    private func addCancelButton() {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(tapCloseButton(_:)), for: UIControl.Event.touchUpInside)
-        button.setTitle(TITLE_CANCEL, for: UIControl.State.normal)
-        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
-        button.frame = CGRect(x: UIScreen.main.bounds.maxX - 120, y: UIScreen.main.bounds.maxY - 60, width: 120, height: 60)
-        self.view.addSubview(button)
-    }
-    
-    // MARK: - Action
-    
-    /// キャンセルボタンの処理
-    @objc func tapCloseButton(_ sender: UIButton) {
-        pageViewDelegate?.pageVCCancelDidTap(self)
     }
     
 }

@@ -16,26 +16,12 @@ class PageCoordinator: Coordinator {
     }
     
     func startFlow(in navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        let pageViewController = PageViewController()
+        self.navigationController?.pushViewController(pageViewController, animated: true)
     }
     
     func startFlow(in viewController: UIViewController) {
-        previousViewController = viewController
-        let pageViewController = PageViewController()
-        pageViewController.pageViewDelegate = self
-        if #available(iOS 13.0, *) {
-            pageViewController.isModalInPresentation = true
-            pageViewController.modalPresentationStyle = .fullScreen
-        }
-        previousViewController!.present(pageViewController, animated: true)
-    }
-    
-}
-
-extension PageCoordinator: PageViewControllerDelegate {
-    
-    /// SettingVC ← PageVC
-    func pageVCCancelDidTap(_ viewController: UIViewController) {
-        viewController.dismiss(animated: true, completion: nil)
     }
     
 }

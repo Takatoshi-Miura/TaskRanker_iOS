@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUG-Xw-z9Q">
-                    <rect key="frame" x="16" y="110" width="288" height="60"/>
+                    <rect key="frame" x="16" y="60" width="288" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="XMV-e7-ho8"/>
                     </constraints>
@@ -31,10 +32,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WgH-b2-3Rd">
-                    <rect key="frame" x="16" y="190" width="288" height="328"/>
+                    <rect key="frame" x="16" y="140" width="288" height="378"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a78-NM-cFr">
-                    <rect key="frame" x="0.0" y="60" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="10" width="320" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="9UG-pv-CkL"/>
                     </constraints>
@@ -51,7 +52,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="WgH-b2-3Rd" secondAttribute="bottom" constant="50" id="Nul-o5-VvL"/>
                 <constraint firstItem="a78-NM-cFr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="PDB-AD-TVV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WgH-b2-3Rd" secondAttribute="trailing" constant="16" id="R5a-Xu-fel"/>
-                <constraint firstItem="a78-NM-cFr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="cI5-hq-e2k"/>
+                <constraint firstItem="a78-NM-cFr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="cI5-hq-e2k"/>
                 <constraint firstItem="iUG-Xw-z9Q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="h6P-Hj-1hN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iUG-Xw-z9Q" secondAttribute="trailing" constant="16" id="nk0-o1-TNg"/>
                 <constraint firstItem="iUG-Xw-z9Q" firstAttribute="top" secondItem="a78-NM-cFr" secondAttribute="bottom" constant="20" id="nxM-Tj-EdA"/>

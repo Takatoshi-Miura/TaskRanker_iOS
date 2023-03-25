@@ -331,12 +331,28 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     /// タイトル
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         switch PickerType.allCases[pickerView.tag] {
         case .color:
-            return TaskColor.allCases[row].title
+            let customView = UIView(frame: CGRect(x: 0, y: 0, width: 125, height: 30))
+            let image = UIImage(systemName: "circle.fill")
+            let imageView = UIImageView(image: image)
+            imageView.tintColor = TaskColor.allCases[row].color
+            imageView.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+            customView.addSubview(imageView)
+            let label = UILabel(frame: CGRect(x: 30, y: 0, width: 100, height: 30))
+            label.text = TaskColor.allCases[row].title
+            label.textAlignment = .center
+            customView.addSubview(label)
+            return customView
         case .day:
-            return Converter.updateUrgencyString(day: dayArray[row])
+            let label = UILabel()
+            label.text = Converter.updateUrgencyString(day: dayArray[row])
+            label.textAlignment = .center
+            let stackView = UIStackView(arrangedSubviews: [label])
+            stackView.axis = .horizontal
+            stackView.alignment = .center
+            return stackView
         }
     }
     

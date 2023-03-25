@@ -11,12 +11,24 @@ class PageViewController: UIPageViewController {
     
     // MARK: - Variable
     
-    private var pageViewModel = PageViewModel()
+    private var pageViewModel: PageViewModel
+    
+    // MARK: - Initializer
+    
+    init(pageViewMode: PageViewMode) {
+        pageViewModel = PageViewModel(pageViewMode: pageViewMode)
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = pageViewModel.getTitle()
         addPageView()
         addPageControl()
     }

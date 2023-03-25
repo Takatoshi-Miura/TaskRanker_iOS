@@ -16,8 +16,11 @@ class PageCoordinator: Coordinator {
     }
     
     func startFlow(in navigationController: UINavigationController) {
+    }
+    
+    func startFlow(in navigationController: UINavigationController, pageViewMode: PageViewMode) {
         self.navigationController = navigationController
-        let pageViewController = PageViewController()
+        let pageViewController = PageViewController(pageViewMode: pageViewMode)
         self.navigationController?.pushViewController(pageViewController, animated: true)
     }
     

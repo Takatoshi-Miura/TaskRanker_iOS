@@ -7,37 +7,61 @@
 
 import UIKit
 
+enum PageViewMode: Int {
+    case Help
+    case Character
+}
+
 class PageViewModel: NSObject {
     
     // MARK: - Variable
     
-    var controllers: [UIViewController] = []
+    var controllers: [UIViewController]!
     var pageControl: UIPageControl!
+    private var pageViewMode: PageViewMode
     
     // MARK: - Initializer
     
-    override init() {
+    init(pageViewMode: PageViewMode) {
+        self.pageViewMode = pageViewMode
         super.init()
-        initTutorialView()
+        initControllers()
         initPageControl()
     }
     
-    /// チュートリアル画面の初期化
-    private func initTutorialView() {
-        for helpItem in HelpItem.allCases {
-            let tutorialVC = TutorialViewController(helpItem: helpItem)
-            controllers.append(tutorialVC)
+    /// Controllersの初期化
+    private func initControllers() {
+        controllers = []
+        switch pageViewMode {
+        case .Help:
+            for helpItem in HelpItem.allCases {
+                let tutorialVC = TutorialViewController(helpItem: helpItem)
+                controllers.append(tutorialVC)
+            }
+        case .Character:
+            controllers = []
         }
     }
     
     /// PageControlの初期化
     private func initPageControl() {
-        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 60, width: UIScreen.main.bounds.width,height: 60))
+        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 90, width: UIScreen.main.bounds.width, height: 60))
         pageControl.numberOfPages = controllers.count
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.isUserInteractionEnabled = false
+    }
+    
+    /// タイトルを取得
+    /// - Returns: タイトル文字列
+    func getTitle() -> String {
+        switch pageViewMode {
+        case .Help:
+            return TITLE_HOW_TO_USE_THIS_APP
+        case .Character:
+            return TITLE_CHARACTER_SETTING
+        }
     }
     
 }

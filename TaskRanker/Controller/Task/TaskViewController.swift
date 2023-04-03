@@ -91,7 +91,7 @@ class TaskViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if taskViewModel.isViewer {
-            updateTask()
+            taskViewModel.updateTask(task: applyTask())
             delegate?.taskVCDismiss(task: taskViewModel.task!)
         }
     }
@@ -150,8 +150,9 @@ class TaskViewController: UIViewController {
         }
     }
     
-    /// Taskを更新
-    private func updateTask() {
+    /// 入力内容をTaskに反映
+    /// - Returns: Task
+    private func applyTask() -> Task {
         var task = Task()
         task.title = titleTextField.text!
         task.memo = memoTextView.text!
@@ -160,7 +161,7 @@ class TaskViewController: UIViewController {
         task.urgency = Int(urgencyValueLabel.text!)!
         task.deadlineDate = deadlineSwitch.isOn ? selectedDate : nil
         task.daysBeforeUpdateUrgency = dayArray[selectedDay]
-        taskViewModel.updateTask(task: task)
+        return task
     }
     
     /// NavigationBar初期化
@@ -225,16 +226,8 @@ class TaskViewController: UIViewController {
         }
         
         // Taskを作成
-        var task = Task()
-        task.title = titleTextField.text!
-        task.memo = memoTextView.text!
-        task.color = TaskColor.allCases[selectedColor].rawValue
-        task.importance = Int(importanceValueLabel.text!)!
-        task.urgency = Int(urgencyValueLabel.text!)!
-        task.deadlineDate = deadlineSwitch.isOn ? selectedDate : nil
-        task.daysBeforeUpdateUrgency = dayArray[selectedDay]
+        let task = applyTask()
         let result = taskViewModel.saveTask(task: task)
-        
         if !result {
             let alert = Alert.Error(message: ERROR_MESSAGE_SAVE_FAILED)
             present(alert, animated: true)
@@ -311,7 +304,7 @@ class TaskViewController: UIViewController {
     
 }
 
-extension TaskViewController: UIPickerViewDelegate {
+extension TaskViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
     /// DatePicker初期化
     private func initDatePicker() {
@@ -342,7 +335,7 @@ extension TaskViewController: UIPickerViewDelegate {
     /// ColorPicker初期化
     private func initColorPicker() {
         colorPicker.delegate = self
-        colorPicker.dataSource = taskViewModel
+        colorPicker.dataSource = self
         colorPicker.frame = CGRect(x: 0, y: 44, width: self.view.bounds.size.width, height: colorPicker.bounds.size.height)
         colorPicker.backgroundColor = UIColor.systemGray5
         colorPicker.tag = PickerType.color.rawValue
@@ -365,7 +358,7 @@ extension TaskViewController: UIPickerViewDelegate {
     /// DayPicker初期化
     private func initDayPicker() {
         dayPicker.delegate = self
-        dayPicker.dataSource = taskViewModel
+        dayPicker.dataSource = self
         dayPicker.frame = CGRect(x: 0, y: 44, width: self.view.bounds.size.width, height: dayPicker.bounds.size.height)
         dayPicker.backgroundColor = UIColor.systemGray5
         dayPicker.tag = PickerType.day.rawValue
@@ -383,6 +376,54 @@ extension TaskViewController: UIPickerViewDelegate {
     @objc func dayPickerCancelAction() {
         dayPicker.selectRow(selectedDay, inComponent: 0, animated: false)
         closePicker(pickerView)
+    }
+    
+    /// 列数
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        switch PickerType.allCases[pickerView.tag] {
+        case .color:
+            return 1
+        case .day:
+            return 1
+        }
+    }
+    
+    /// 項目数
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch PickerType.allCases[pickerView.tag] {
+        case .color:
+            return TaskColor.allCases.count
+        case .day:
+            return dayArray.count
+        }
+    }
+    
+    /// タイトル
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        switch PickerType.allCases[pickerView.tag] {
+        case .color:
+            let customView = UIView(frame: CGRect(x: 0, y: 0, width: 125, height: 30))
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+            imageView.image = UIImage(systemName: "circle.fill")
+            imageView.contentMode = .scaleAspectFit
+            imageView.tintColor = TaskColor.allCases[row].color
+            customView.addSubview(imageView)
+            let label = UILabel(frame: CGRect(x: 30, y: 0, width: 100, height: 30))
+            label.font = UIFont(name: "HiraKakuProN-W3", size: 18)
+            label.text = TaskColor.allCases[row].title
+            label.textAlignment = .center
+            customView.addSubview(label)
+            return customView
+        case .day:
+            let label = UILabel()
+            label.font = UIFont(name: "HiraKakuProN-W3", size: 18)
+            label.text = Converter.updateUrgencyString(day: dayArray[row])
+            label.textAlignment = .center
+            let stackView = UIStackView(arrangedSubviews: [label])
+            stackView.axis = .horizontal
+            stackView.alignment = .center
+            return stackView
+        }
     }
     
 }

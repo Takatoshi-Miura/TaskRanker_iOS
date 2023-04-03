@@ -70,7 +70,7 @@ class TaskViewModel: NSObject {
     /// - Returns: 結果
     func saveTask(task: Task) -> Bool {
         let taskManager = TaskManager()
-        return !taskManager.saveTask(task: task)
+        return taskManager.saveTask(task: task)
     }
     
     /// Taskを更新
@@ -84,58 +84,6 @@ class TaskViewModel: NSObject {
             self.task!.urgency = task.urgency
             self.task!.deadlineDate = task.deadlineDate
             self.task!.daysBeforeUpdateUrgency = task.daysBeforeUpdateUrgency
-        }
-    }
-    
-    
-    
-}
-
-extension TaskViewModel: UIPickerViewDataSource {
-    
-    /// 列数
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        switch PickerType.allCases[pickerView.tag] {
-        case .color:
-            return 1
-        case .day:
-            return 1
-        }
-    }
-    
-    /// 項目数
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch PickerType.allCases[pickerView.tag] {
-        case .color:
-            return TaskColor.allCases.count
-        case .day:
-            return dayArray.count
-        }
-    }
-    
-    /// タイトル
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        switch PickerType.allCases[pickerView.tag] {
-        case .color:
-            let customView = UIView(frame: CGRect(x: 0, y: 0, width: 125, height: 30))
-            let image = UIImage(systemName: "circle.fill")
-            let imageView = UIImageView(image: image)
-            imageView.tintColor = TaskColor.allCases[row].color
-            imageView.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-            customView.addSubview(imageView)
-            let label = UILabel(frame: CGRect(x: 30, y: 0, width: 100, height: 30))
-            label.text = TaskColor.allCases[row].title
-            label.textAlignment = .center
-            customView.addSubview(label)
-            return customView
-        case .day:
-            let label = UILabel()
-            label.text = Converter.updateUrgencyString(day: dayArray[row])
-            label.textAlignment = .center
-            let stackView = UIStackView(arrangedSubviews: [label])
-            stackView.axis = .horizontal
-            stackView.alignment = .center
-            return stackView
         }
     }
     

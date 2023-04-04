@@ -130,8 +130,9 @@ class TaskViewController: UIViewController {
     private func inputTask() {
         titleTextField.text = taskViewModel.task!.title
         memoTextView.text = taskViewModel.task!.memo
-        colorButton.backgroundColor = TaskColor.allCases[taskViewModel.task!.color].color
-        colorButton.setTitle(TaskColor.allCases[taskViewModel.task!.color].title, for: .normal)
+        selectedColor = taskViewModel.task!.color
+        colorButton.backgroundColor = TaskColor.allCases[selectedColor].color
+        colorButton.setTitle(TaskColor.allCases[selectedColor].title, for: .normal)
         importanceSlider.value = Float(taskViewModel.task!.importance)
         importanceValueLabel.text = String(taskViewModel.task!.importance)
         urgencySlider.value = Float(taskViewModel.task!.urgency)

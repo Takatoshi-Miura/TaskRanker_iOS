@@ -213,8 +213,6 @@ class HomeViewController: UIViewController {
         changeImageAndMessage(type: CharacterMessageType.addTask)
     }
     
-    // MARK: - Filter
-    
     /// フィルタを適用
     /// - Parameter filterArray: チェック配列
     func applyFilter(filterArray: [Bool]) {

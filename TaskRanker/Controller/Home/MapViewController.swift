@@ -55,13 +55,34 @@ class MapViewController: UIViewController {
         scatterChartView.xAxis.labelFont = UIFont.systemFont(ofSize: 0)
         scatterChartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 0)
         // X軸
-        scatterChartView.xAxis.axisMaximum = 10
+        scatterChartView.xAxis.axisMaximum = 9
         scatterChartView.xAxis.axisMinimum = 0
         scatterChartView.xAxis.labelCount = 1
         // Y軸
-        scatterChartView.leftAxis.axisMaximum = 10
+        scatterChartView.leftAxis.axisMaximum = 9
         scatterChartView.leftAxis.axisMinimum = 0
         scatterChartView.leftAxis.labelCount = 1
+        // デフォルト軸線を非表示
+        scatterChartView.xAxis.drawGridLinesEnabled = false
+        scatterChartView.leftAxis.drawGridLinesEnabled = false
+        // 軸線
+        var limitLine = ChartLimitLine(limit: 4.5, label: "")
+        limitLine.lineWidth = 1.0
+        limitLine.lineColor = .systemGray
+        scatterChartView.xAxis.addLimitLine(limitLine)
+        scatterChartView.leftAxis.addLimitLine(limitLine)
+        
+        limitLine = ChartLimitLine(limit: 9.0, label: "")
+        limitLine.lineWidth = 1.0
+        limitLine.lineColor = .systemGray
+        scatterChartView.xAxis.addLimitLine(limitLine)
+        scatterChartView.leftAxis.addLimitLine(limitLine)
+        
+        limitLine = ChartLimitLine(limit: 0, label: "")
+        limitLine.lineWidth = 1.0
+        limitLine.lineColor = .systemGray
+        scatterChartView.xAxis.addLimitLine(limitLine)
+        scatterChartView.leftAxis.addLimitLine(limitLine)
     }
     
     /// 散布図に描画

@@ -416,7 +416,7 @@ extension TaskViewController: UIPickerViewDelegate,UIPickerViewDataSource {
             customView.addSubview(label)
             return customView
         case .day:
-            let label = UILabel()
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
             label.font = UIFont(name: "HiraKakuProN-W3", size: 18)
             label.text = Converter.updateUrgencyString(day: dayArray[row])
             label.textAlignment = .center

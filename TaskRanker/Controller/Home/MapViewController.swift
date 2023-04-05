@@ -18,6 +18,9 @@ class MapViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var scatterChartView: ScatterChartView!
+    @IBOutlet weak var characterImageView: UIImageView!
+    @IBOutlet weak var characterMessageLabel: UILabel!
+    @IBOutlet weak var adView: UIView!
     private var mapViewModel = MapViewModel()
     var delegate: MapViewControllerDelegate?
     
@@ -26,11 +29,22 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
+        initCharacterView()
         configureChartView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // メッセージ更新
+        if let selectedTask = mapViewModel.getSelectedTask() {
+            if mapViewModel.isDeletedTask() {
+                scatterChartView.highlightValue(nil)
+                changeImageAndMessage(type: CharacterMessageType.complete)
+            } else {
+                changeImageAndMessage(type: CharacterMessageType.update)
+            }
+        }
         displayChart()
     }
     
@@ -89,6 +103,20 @@ class MapViewController: UIViewController {
     private func displayChart() {
         scatterChartView.data = mapViewModel.loadChartData()
     }
+    
+    // MARK: - Character
+    
+    /// キャラクターの初期化
+    @objc private func initCharacterView() {
+        changeImageAndMessage(type: CharacterMessageType.okaeri)
+    }
+    
+    /// キャラクターの画像とメッセージを変更
+    /// - Parameter type: タイプ
+    private func changeImageAndMessage(type: CharacterMessageType) {
+        characterImageView.image = type.image
+        Util.animateLabel(label: characterMessageLabel, text: type.message)
+    }
 
 }
 
@@ -97,6 +125,7 @@ extension MapViewController: ChartViewDelegate {
     /// データタップ時の処理
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         if let task = mapViewModel.getTapedTask(highlight: highlight) {
+            self.mapViewModel.setSelectedTask(task: task)
             self.delegate?.mapVCTaskDidTap(self, task: task)
         }
     }

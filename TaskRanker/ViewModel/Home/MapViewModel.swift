@@ -12,6 +12,7 @@ class MapViewModel {
     // MARK: - Variable
     
     private var taskArray = [Task]()
+    private var selectedTask: Task?
     private var scatterChartData = ScatterChartData()
     
     // MARK: - DataSource
@@ -20,6 +21,32 @@ class MapViewModel {
     private func getTaskData() {
         let taskManager = TaskManager()
         taskArray = taskManager.getTask()
+    }
+    
+    /// 完了済み、削除済みTaskの判定
+    /// - Returns: 判定結果
+    func isDeletedTask() -> Bool {
+        let taskManager = TaskManager()
+        if let selectedTask = selectedTask {
+            let updatedTask = taskManager.getTask(taskID: selectedTask.taskID)
+            if updatedTask!.isDeleted || updatedTask!.isComplete {
+                self.selectedTask = nil
+                return true
+            }
+        }
+        return false
+    }
+    
+    /// 選択されたTaskを保存
+    /// - Parameter task: Task
+    func setSelectedTask(task: Task) {
+        selectedTask = task
+    }
+    
+    /// 選択されたTaskを保存
+    /// - Parameter task: Task
+    func getSelectedTask() -> Task? {
+        return selectedTask
     }
     
     /// 散布図のデータを返す

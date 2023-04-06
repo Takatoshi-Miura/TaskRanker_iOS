@@ -59,6 +59,7 @@ class HomeViewController: UIViewController {
         initGestureRecognizer()
         initNotification()
         initCharacterView()
+        initTimer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -167,6 +168,19 @@ class HomeViewController: UIViewController {
     private func changeImageAndMessage(type: CharacterMessageType) {
         characterImageView.image = type.image
         Util.animateLabel(label: characterMessageLabel, text: type.message)
+    }
+    
+    // MARK: - Timer
+    
+    /// タイマーの初期化
+    private func initTimer() {
+        let timer = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCharacterMessage), userInfo: nil, repeats: true)
+    }
+
+    /// キャラクターのコメントを更新
+    @objc private func updateCharacterMessage() {
+        let messageType = CharacterMessageType.allCases.randomElement()
+        changeImageAndMessage(type: messageType!)
     }
     
     // MARK: - Action

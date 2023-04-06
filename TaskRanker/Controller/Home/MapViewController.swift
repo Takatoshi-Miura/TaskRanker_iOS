@@ -30,6 +30,7 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         initNavigationBar()
         initCharacterView()
+        initTimer()
         configureChartView()
     }
     
@@ -37,7 +38,7 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // メッセージ更新
-        if let selectedTask = mapViewModel.getSelectedTask() {
+        if mapViewModel.getSelectedTask() != nil {
             if mapViewModel.isDeletedTask() {
                 scatterChartView.highlightValue(nil)
                 changeImageAndMessage(type: CharacterMessageType.complete)
@@ -116,6 +117,19 @@ class MapViewController: UIViewController {
     private func changeImageAndMessage(type: CharacterMessageType) {
         characterImageView.image = type.image
         Util.animateLabel(label: characterMessageLabel, text: type.message)
+    }
+    
+    // MARK: - Timer
+    
+    /// タイマーの初期化
+    private func initTimer() {
+        let timer = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCharacterMessage), userInfo: nil, repeats: true)
+    }
+
+    /// キャラクターのコメントを更新
+    @objc private func updateCharacterMessage() {
+        let messageType = CharacterMessageType.allCases.randomElement()
+        changeImageAndMessage(type: messageType!)
     }
 
 }

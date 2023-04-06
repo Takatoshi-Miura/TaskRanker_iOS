@@ -26,6 +26,7 @@
 		2FEDBE3629CAED4800F1AEF2 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDBE3429CAED4800F1AEF2 /* CharacterViewController.swift */; };
 		2FEDBE3729CAED4800F1AEF2 /* CharacterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FEDBE3529CAED4800F1AEF2 /* CharacterViewController.xib */; };
 		8D04277329DA3B9400816F3A /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D04277229DA3B9400816F3A /* TaskViewModel.swift */; };
+		8D04277529DF8B4500816F3A /* RandomMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D04277429DF8B4500816F3A /* RandomMessage.swift */; };
 		8D09C31029C56CAF000F51F6 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C30F29C56CAF000F51F6 /* TaskListViewModel.swift */; };
 		8D09C31329C9AD36000F51F6 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09C31229C9AD36000F51F6 /* Character.swift */; };
 		8D09C31529CB16FA000F51F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D09C31429CB16FA000F51F6 /* GoogleService-Info.plist */; };
@@ -100,6 +101,7 @@
 		45D5099BC271E62A0AD40BE7 /* Pods-TaskRanker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.debug.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.debug.xcconfig"; sourceTree = "<group>"; };
 		4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskRanker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D04277229DA3B9400816F3A /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		8D04277429DF8B4500816F3A /* RandomMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMessage.swift; sourceTree = "<group>"; };
 		8D09C30F29C56CAF000F51F6 /* TaskListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		8D09C31229C9AD36000F51F6 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		8D09C31429CB16FA000F51F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			children = (
 				8D09C31229C9AD36000F51F6 /* Character.swift */,
 				8D09C31A29CF3CCD000F51F6 /* EventMessage.swift */,
+				8D04277429DF8B4500816F3A /* RandomMessage.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				8D1D392928F984B20078F3CB /* RealmManager.swift in Sources */,
 				8D75CDF929C34CE3003C93AD /* LoginViewModel.swift in Sources */,
 				2F2F21C428F51A97005FFCC2 /* SettingViewController.swift in Sources */,
+				8D04277529DF8B4500816F3A /* RandomMessage.swift in Sources */,
 				8DB633CE28CDD462001F2DB7 /* UIViewController+ToolBar.swift in Sources */,
 				8DCB72DC2949E9A700935972 /* TabCoordinator.swift in Sources */,
 				8D75CDF129C20085003C93AD /* MapViewModel.swift in Sources */,

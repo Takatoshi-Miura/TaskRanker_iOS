@@ -41,9 +41,9 @@ class MapViewController: UIViewController {
         if mapViewModel.getSelectedTask() != nil {
             if mapViewModel.isDeletedTask() {
                 scatterChartView.highlightValue(nil)
-                changeImageAndMessage(type: EventMessage.complete)
+                changeEventMessage(type: EventMessage.complete)
             } else {
-                changeImageAndMessage(type: EventMessage.update)
+                changeEventMessage(type: EventMessage.update)
             }
         }
         displayChart()
@@ -109,12 +109,19 @@ class MapViewController: UIViewController {
     
     /// キャラクターの初期化
     @objc private func initCharacterView() {
-        changeImageAndMessage(type: EventMessage.okaeri)
+        changeEventMessage(type: EventMessage.okaeri)
     }
     
     /// キャラクターの画像とメッセージを変更
     /// - Parameter type: タイプ
-    private func changeImageAndMessage(type: EventMessage) {
+    private func changeEventMessage(type: EventMessage) {
+        characterImageView.image = type.image
+        Util.animateLabel(label: characterMessageLabel, text: type.message)
+    }
+    
+    /// キャラクターの画像とメッセージを変更
+    /// - Parameter type: タイプ
+    private func changeRandomMessage(type: RandomMessage) {
         characterImageView.image = type.image
         Util.animateLabel(label: characterMessageLabel, text: type.message)
     }
@@ -123,13 +130,13 @@ class MapViewController: UIViewController {
     
     /// タイマーの初期化
     private func initTimer() {
-        let timer = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCharacterMessage), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCharacterMessage), userInfo: nil, repeats: true)
     }
 
     /// キャラクターのコメントを更新
     @objc private func updateCharacterMessage() {
-        let messageType = EventMessage.allCases.randomElement()
-        changeImageAndMessage(type: messageType!)
+        let messageType = RandomMessage.allCases.randomElement()
+        changeRandomMessage(type: messageType!)
     }
 
 }

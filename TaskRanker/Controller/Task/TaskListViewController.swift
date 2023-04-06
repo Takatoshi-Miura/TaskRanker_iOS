@@ -18,6 +18,8 @@ protocol TaskListViewControllerDelegate: AnyObject {
     func taskListVCTaskUpdate()
     /// 緊急度自動更新時
     func taskListVCAutoUrgencyUpdate(message: String)
+    /// 同期時
+    func taskListVCSyncTask()
 }
 
 class TaskListViewController: UIViewController {
@@ -49,12 +51,17 @@ class TaskListViewController: UIViewController {
         initTableView()
     }
     
-    // MARK: - LifeCycle
+    // MARK: - Task
     
     /// データの同期処理
-    @objc func syncData() {
+    func syncData() {
         taskListViewModel.syncTask()
         reloadTableView()
+    }
+    
+    /// データの同期を通知
+    @objc func syncNotification() {
+        delegate?.taskListVCSyncTask()
     }
     
     /// フィルタを適用
@@ -101,7 +108,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     /// TableView初期化
     private func initTableView() {
         tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(syncData), for: .valueChanged)
+        tableView.refreshControl?.addTarget(self, action: #selector(syncNotification), for: .valueChanged)
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         if #available(iOS 15.0, *) {

@@ -62,6 +62,11 @@ class HomeViewController: UIViewController {
         initTimer()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        syncTaskListView()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -319,6 +324,11 @@ extension HomeViewController: TaskListViewControllerDelegate {
             self.syncTaskListView()
         })
         present(alert, animated: true)
+    }
+    
+    /// Task同期時
+    func taskListVCSyncTask() {
+        syncTaskListView()
     }
     
 }

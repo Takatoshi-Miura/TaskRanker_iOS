@@ -41,9 +41,9 @@ class MapViewController: UIViewController {
         if mapViewModel.getSelectedTask() != nil {
             if mapViewModel.isDeletedTask() {
                 scatterChartView.highlightValue(nil)
-                changeImageAndMessage(type: CharacterMessageType.complete)
+                changeImageAndMessage(type: EventMessage.complete)
             } else {
-                changeImageAndMessage(type: CharacterMessageType.update)
+                changeImageAndMessage(type: EventMessage.update)
             }
         }
         displayChart()
@@ -109,12 +109,12 @@ class MapViewController: UIViewController {
     
     /// キャラクターの初期化
     @objc private func initCharacterView() {
-        changeImageAndMessage(type: CharacterMessageType.okaeri)
+        changeImageAndMessage(type: EventMessage.okaeri)
     }
     
     /// キャラクターの画像とメッセージを変更
     /// - Parameter type: タイプ
-    private func changeImageAndMessage(type: CharacterMessageType) {
+    private func changeImageAndMessage(type: EventMessage) {
         characterImageView.image = type.image
         Util.animateLabel(label: characterMessageLabel, text: type.message)
     }
@@ -128,7 +128,7 @@ class MapViewController: UIViewController {
 
     /// キャラクターのコメントを更新
     @objc private func updateCharacterMessage() {
-        let messageType = CharacterMessageType.allCases.randomElement()
+        let messageType = EventMessage.allCases.randomElement()
         changeImageAndMessage(type: messageType!)
     }
 

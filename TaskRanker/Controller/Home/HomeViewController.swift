@@ -165,12 +165,12 @@ class HomeViewController: UIViewController {
     
     /// キャラクターの初期化
     @objc private func initCharacterView() {
-        changeImageAndMessage(type: CharacterMessageType.okaeri)
+        changeImageAndMessage(type: EventMessage.okaeri)
     }
     
     /// キャラクターの画像とメッセージを変更
     /// - Parameter type: タイプ
-    private func changeImageAndMessage(type: CharacterMessageType) {
+    private func changeImageAndMessage(type: EventMessage) {
         characterImageView.image = type.image
         Util.animateLabel(label: characterMessageLabel, text: type.message)
     }
@@ -184,7 +184,7 @@ class HomeViewController: UIViewController {
 
     /// キャラクターのコメントを更新
     @objc private func updateCharacterMessage() {
-        let messageType = CharacterMessageType.allCases.randomElement()
+        let messageType = EventMessage.allCases.randomElement()
         changeImageAndMessage(type: messageType!)
     }
     
@@ -229,7 +229,7 @@ class HomeViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.insertTaskListView(task: task)
         }
-        changeImageAndMessage(type: CharacterMessageType.addTask)
+        changeImageAndMessage(type: EventMessage.addTask)
     }
     
     /// フィルタを適用
@@ -305,17 +305,17 @@ extension HomeViewController: TaskListViewControllerDelegate {
     /// TaskTypeアップデート時
     func taskListVCTaskTypeUpdate(task: Task) {
         insertTask(task: task)
-        changeImageAndMessage(type: CharacterMessageType.update)
+        changeImageAndMessage(type: EventMessage.update)
     }
     
     /// Task完了時
     func taskListVCTaskComplete(task: Task) {
-        changeImageAndMessage(type: CharacterMessageType.complete)
+        changeImageAndMessage(type: EventMessage.complete)
     }
     
     /// Taskアップデート時
     func taskListVCTaskUpdate() {
-        changeImageAndMessage(type: CharacterMessageType.update)
+        changeImageAndMessage(type: EventMessage.update)
     }
     
     /// 緊急度自動更新時

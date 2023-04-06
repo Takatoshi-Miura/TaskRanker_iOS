@@ -1,5 +1,5 @@
 //
-//  CharacterMessageType.swift
+//  EventMessage.swift
 //  TaskRanker
 //
 //  Created by Takatoshi Miura on 2023/03/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum CharacterMessageType: Int, CaseIterable {
+enum EventMessage: Int, CaseIterable {
     
     case okaeri     // ログイン時
     case addTask    // Task追加時

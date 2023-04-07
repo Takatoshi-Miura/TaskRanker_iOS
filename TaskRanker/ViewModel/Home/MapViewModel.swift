@@ -15,7 +15,7 @@ class MapViewModel {
     private var selectedTask: Task?
     private var scatterChartData = ScatterChartData()
     
-    // MARK: - DataSource
+    // MARK: - Task
     
     /// Taskを取得
     private func getTaskData() {
@@ -47,6 +47,18 @@ class MapViewModel {
     /// - Parameter task: Task
     func getSelectedTask() -> Task? {
         return selectedTask
+    }
+    
+    // MARK: - ScatterChartData
+    
+    /// ChartLimitLineを取得
+    /// - Parameter limit: 座標
+    /// - Returns: ChartLimitLine
+    func getLimitLine(limit: Double) -> ChartLimitLine {
+        var limitLine = ChartLimitLine(limit: limit, label: "")
+        limitLine.lineWidth = 1.0
+        limitLine.lineColor = .systemGray
+        return limitLine
     }
     
     /// 散布図のデータを返す

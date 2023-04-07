@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     private var taskListVC_B: TaskListViewController
     private var taskListVC_C: TaskListViewController
     private var taskListVC_D: TaskListViewController
+    private var timer: Timer?
     var delegate: HomeViewControllerDelegate?
     
     // MARK: - Initializer
@@ -59,12 +60,7 @@ class HomeViewController: UIViewController {
         initGestureRecognizer()
         initNotification()
         initCharacterView()
-        initTimer()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        syncTaskListView()
+        startTimer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,6 +68,9 @@ class HomeViewController: UIViewController {
         
         if let selectedTask = homeViewModel.getSelectedTask(), let selectedIndex = homeViewModel.getSelectedIndex() {
             updateTaskListView(task: selectedTask, indexPath: selectedIndex)
+            startTimer()
+        } else {
+            syncTaskListView()
         }
         homeViewModel.clearTaskIndex()
     }
@@ -165,7 +164,7 @@ class HomeViewController: UIViewController {
     
     /// キャラクターの初期化
     @objc private func initCharacterView() {
-        changeEventMessage(type: EventMessage.okaeri)
+        changeEventMessage(type: EventMessage.list)
     }
     
     /// キャラクターの画像とメッセージを変更
@@ -184,9 +183,15 @@ class HomeViewController: UIViewController {
     
     // MARK: - Timer
     
-    /// タイマーの初期化
-    private func initTimer() {
-        _ = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCharacterMessage), userInfo: nil, repeats: true)
+    /// タイマー開始
+    private func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(updateCharacterMessage), userInfo: nil, repeats: true)
+    }
+    
+    /// タイマー停止
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
     }
 
     /// キャラクターのコメントを更新
@@ -305,6 +310,7 @@ extension HomeViewController: TaskListViewControllerDelegate {
     
     /// Taskタップ時
     func taskListVCTaskDidTap(_ viewController: UIViewController, task: Task, indexPath: IndexPath) {
+        stopTimer()
         homeViewModel.setTaskIndex(task: task, indexPath: indexPath)
         delegate?.homeVCTaskDidTap(self, task: task)
     }

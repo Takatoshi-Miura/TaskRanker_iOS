@@ -22,6 +22,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var characterMessageLabel: UILabel!
     @IBOutlet weak var adView: UIView!
     private var mapViewModel = MapViewModel()
+    private var timer: Timer?
     var delegate: MapViewControllerDelegate?
     
     // MARK: - LifeCycle
@@ -30,8 +31,8 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         initNavigationBar()
         initCharacterView()
-        initTimer()
-        configureChartView()
+        initChartView()
+        startTimer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +46,7 @@ class MapViewController: UIViewController {
             } else {
                 changeEventMessage(type: EventMessage.update)
             }
+            startTimer()
         }
         displayChart()
     }
@@ -58,8 +60,8 @@ class MapViewController: UIViewController {
     
     // MARK: - ScatterChartView
     
-    /// ChartViewの設定
-    private func configureChartView () {
+    /// ChartView初期化
+    private func initChartView () {
         scatterChartView.delegate = self
         // ズーム禁止
         scatterChartView.pinchZoomEnabled = false
@@ -77,27 +79,16 @@ class MapViewController: UIViewController {
         scatterChartView.leftAxis.axisMaximum = 9
         scatterChartView.leftAxis.axisMinimum = 0
         scatterChartView.leftAxis.labelCount = 1
-        // デフォルト軸線を非表示
+        // デフォルトの枠線を非表示
         scatterChartView.xAxis.drawGridLinesEnabled = false
         scatterChartView.leftAxis.drawGridLinesEnabled = false
-        // 軸線
-        var limitLine = ChartLimitLine(limit: 4.5, label: "")
-        limitLine.lineWidth = 1.0
-        limitLine.lineColor = .systemGray
-        scatterChartView.xAxis.addLimitLine(limitLine)
-        scatterChartView.leftAxis.addLimitLine(limitLine)
-        
-        limitLine = ChartLimitLine(limit: 9.0, label: "")
-        limitLine.lineWidth = 1.0
-        limitLine.lineColor = .systemGray
-        scatterChartView.xAxis.addLimitLine(limitLine)
-        scatterChartView.leftAxis.addLimitLine(limitLine)
-        
-        limitLine = ChartLimitLine(limit: 0, label: "")
-        limitLine.lineWidth = 1.0
-        limitLine.lineColor = .systemGray
-        scatterChartView.xAxis.addLimitLine(limitLine)
-        scatterChartView.leftAxis.addLimitLine(limitLine)
+        // 枠線追加
+        scatterChartView.xAxis.addLimitLine(mapViewModel.getLimitLine(limit: 0.0))
+        scatterChartView.xAxis.addLimitLine(mapViewModel.getLimitLine(limit: 4.5))
+        scatterChartView.xAxis.addLimitLine(mapViewModel.getLimitLine(limit: 9.0))
+        scatterChartView.leftAxis.addLimitLine(mapViewModel.getLimitLine(limit: 0.0))
+        scatterChartView.leftAxis.addLimitLine(mapViewModel.getLimitLine(limit: 4.5))
+        scatterChartView.leftAxis.addLimitLine(mapViewModel.getLimitLine(limit: 9.0))
     }
     
     /// 散布図に描画
@@ -109,7 +100,7 @@ class MapViewController: UIViewController {
     
     /// キャラクターの初期化
     @objc private func initCharacterView() {
-        changeEventMessage(type: EventMessage.okaeri)
+        changeEventMessage(type: EventMessage.map)
     }
     
     /// キャラクターの画像とメッセージを変更
@@ -128,9 +119,15 @@ class MapViewController: UIViewController {
     
     // MARK: - Timer
     
-    /// タイマーの初期化
-    private func initTimer() {
-        _ = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(updateCharacterMessage), userInfo: nil, repeats: true)
+    /// タイマー開始
+    private func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(updateCharacterMessage), userInfo: nil, repeats: true)
+    }
+    
+    /// タイマー停止
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
     }
 
     /// キャラクターのコメントを更新
@@ -146,6 +143,7 @@ extension MapViewController: ChartViewDelegate {
     /// データタップ時の処理
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         if let task = mapViewModel.getTapedTask(highlight: highlight) {
+            self.stopTimer()
             self.mapViewModel.setSelectedTask(task: task)
             self.delegate?.mapVCTaskDidTap(self, task: task)
         }

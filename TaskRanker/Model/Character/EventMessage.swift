@@ -9,15 +9,28 @@ import UIKit
 
 enum EventMessage: Int, CaseIterable {
     
-    case okaeri     // ログイン時
+    case list       // ログイン時
+    case map        // Map初期表示時
     case addTask    // Task追加時
     case update     // Task更新時
     case complete   // Task完了時
     
     var image: UIImage {
         switch self {
-        case .okaeri:
+        case .list:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return UIImage(named: "chipoyo_okaeri")!
+            case .sub:      return UIImage(named: "tapoyo_okaeri")!
+            case .chipoyo:  return UIImage(named: "chipoyo_okaeri")!
+            case .tapoyo:   return UIImage(named: "tapoyo_okaeri")!
+            case .togepoyo: return UIImage(named: "togepoyo_okaeri")!
+            case .warupoyo: return UIImage(named: "warupoyo_okaeri")!
+            case .tencho:   return UIImage(named: "tencho_okaeri")!
+            }
+        case .map:
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return UIImage(named: "chipoyo_okaeri")!
+            case .sub:      return UIImage(named: "tapoyo_okaeri")!
             case .chipoyo:  return UIImage(named: "chipoyo_okaeri")!
             case .tapoyo:   return UIImage(named: "tapoyo_okaeri")!
             case .togepoyo: return UIImage(named: "togepoyo_okaeri")!
@@ -26,6 +39,8 @@ enum EventMessage: Int, CaseIterable {
             }
         case .addTask:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return UIImage(named: "chipoyo_okaeri")!
+            case .sub:      return UIImage(named: "tapoyo_okaeri")!
             case .chipoyo:  return UIImage(named: "chipoyo_addTask")!
             case .tapoyo:   return UIImage(named: "tapoyo_addTask")!
             case .togepoyo: return UIImage(named: "togepoyo_addTask")!
@@ -34,6 +49,8 @@ enum EventMessage: Int, CaseIterable {
             }
         case .update:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return UIImage(named: "chipoyo_okaeri")!
+            case .sub:      return UIImage(named: "tapoyo_okaeri")!
             case .chipoyo:  return UIImage(named: "chipoyo_update")!
             case .tapoyo:   return UIImage(named: "tapoyo_update")!
             case .togepoyo: return UIImage(named: "togepoyo_update")!
@@ -42,6 +59,8 @@ enum EventMessage: Int, CaseIterable {
             }
         case .complete:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return UIImage(named: "chipoyo_okaeri")!
+            case .sub:      return UIImage(named: "tapoyo_okaeri")!
             case .chipoyo:  return UIImage(named: "chipoyo_complete")!
             case .tapoyo:   return UIImage(named: "tapoyo_complete")!
             case .togepoyo: return UIImage(named: "togepoyo_complete")!
@@ -53,37 +72,55 @@ enum EventMessage: Int, CaseIterable {
     
     var message: String {
         switch self {
-        case .okaeri:
+        case .list:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return "メインキャラクター"
+            case .sub:      return "サブキャラクター"
             case .chipoyo:  return "ちいぽよだよ\nすまほのなかに あそびに きちゃったもんね"
             case .tapoyo:   return "たあぽよだよ\nちいぽよが きてたみたいだけど どこかなぁ"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
-            case .tencho:   return "おそいじゃないか...もうあしたから こなくていいよ。"
+            case .tencho:   return "おそいじゃないか...もうあしたから こなくていいよ"
+            }
+        case .map:
+            switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return "メインキャラクター"
+            case .sub:      return "サブキャラクター"
+            case .chipoyo:  return "めんどくちゃいけど、みぎうえのやつから やるもんね"
+            case .tapoyo:   return "みぎうえのタスクから かたづけよう！"
+            case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
+            case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
+            case .tencho:   return "みぎうえにタスクがのこっているじゃないか...もうあしたから こなくていいよ"
             }
         case .addTask:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return "メインキャラクター"
+            case .sub:      return "サブキャラクター"
             case .chipoyo:  return "やだやだ！めんどくちゃい！"
             case .tapoyo:   return "やることふえちゃった！ちいぽよ〜泣"
             case .togepoyo: return "わー！"
             case .warupoyo: return "わー！"
-            case .tencho:   return "しごと ふやしおって...もうあしたから こなくていいよ。"
+            case .tencho:   return "しごと ふやしおって...もうあしたから こなくていいよ"
             }
         case .update:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return "メインキャラクター"
+            case .sub:      return "サブキャラクター"
             case .chipoyo:  return "やることを みなおした！\nえらい！"
             case .tapoyo:   return "やることを みなおした！\nよこからえらい！"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
-            case .tencho:   return "おわってないじゃないか...もうあしたから こなくていいよ。"
+            case .tencho:   return "おわってないじゃないか...もうあしたから こなくていいよ"
             }
         case .complete:
             switch Character.allCases[UserDefaultsKey.character.integer()] {
+            case .main:     return "メインキャラクター"
+            case .sub:      return "サブキャラクター"
             case .chipoyo:  return "やることできた！\nえらい！"
             case .tapoyo:   return "やることできた！\nえらい！"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
-            case .tencho:   return "やっとおわったか...そのちょうしで たのむぞ。"
+            case .tencho:   return "やっとおわったか...そのちょうしで たのむぞ"
             }
         }
     }

@@ -33,6 +33,7 @@ class MapViewModel {
                 self.selectedTask = nil
                 return true
             }
+            self.selectedTask = nil
         }
         return false
     }
@@ -55,7 +56,7 @@ class MapViewModel {
     /// - Parameter limit: 座標
     /// - Returns: ChartLimitLine
     func getLimitLine(limit: Double) -> ChartLimitLine {
-        var limitLine = ChartLimitLine(limit: limit, label: "")
+        let limitLine = ChartLimitLine(limit: limit, label: "")
         limitLine.lineWidth = 1.0
         limitLine.lineColor = .systemGray
         return limitLine
@@ -74,6 +75,7 @@ class MapViewModel {
             dataSet.setColor(TaskColor.allCases[task.color].color)
             scatterChartData.append(dataSet)
         }
+        scatterChartData.setDrawValues(false)
         return scatterChartData
     }
     

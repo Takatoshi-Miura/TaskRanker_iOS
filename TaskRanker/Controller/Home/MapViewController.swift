@@ -18,6 +18,8 @@ class MapViewController: UIViewController {
     // MARK: - UI,Variable
     
     @IBOutlet weak var scatterChartView: ScatterChartView!
+    @IBOutlet weak var urgencyLabel: UILabel!
+    @IBOutlet weak var importanceLabel: UILabel!
     @IBOutlet weak var characterImageView: UIImageView!
     @IBOutlet weak var characterMessageLabel: UILabel!
     @IBOutlet weak var adView: UIView!
@@ -30,6 +32,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
+        initView()
         initCharacterView()
         initChartView()
         startTimer()
@@ -58,6 +61,14 @@ class MapViewController: UIViewController {
         self.navigationItem.title = TITLE_TASK_LIST
     }
     
+    /// 画面初期化
+    private func initView() {
+        urgencyLabel.text = TITLE_URGENCY
+        importanceLabel.text = TITLE_IMPORTANCE
+        importanceLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+        importanceLabel.adjustsFontSizeToFitWidth = true
+    }
+    
     // MARK: - ScatterChartView
     
     /// ChartView初期化
@@ -66,29 +77,28 @@ class MapViewController: UIViewController {
         // ズーム禁止
         scatterChartView.pinchZoomEnabled = false
         scatterChartView.doubleTapToZoomEnabled = false
-        // ラベル非表示
-        scatterChartView.rightAxis.enabled = false
+        // 凡例非表示
         scatterChartView.legend.enabled = false
-        scatterChartView.xAxis.labelFont = UIFont.systemFont(ofSize: 0)
-        scatterChartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 0)
-        // X軸
+        // X軸表示
+        scatterChartView.xAxis.enabled = true
         scatterChartView.xAxis.axisMaximum = 9
         scatterChartView.xAxis.axisMinimum = 0
-        scatterChartView.xAxis.labelCount = 1
-        // Y軸
-        scatterChartView.leftAxis.axisMaximum = 9
-        scatterChartView.leftAxis.axisMinimum = 0
-        scatterChartView.leftAxis.labelCount = 1
-        // デフォルトの枠線を非表示
-        scatterChartView.xAxis.drawGridLinesEnabled = false
-        scatterChartView.leftAxis.drawGridLinesEnabled = false
-        // 枠線追加
+        scatterChartView.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
+        scatterChartView.xAxis.setLabelCount(10, force: true)
         scatterChartView.xAxis.addLimitLine(mapViewModel.getLimitLine(limit: 0.0))
         scatterChartView.xAxis.addLimitLine(mapViewModel.getLimitLine(limit: 4.5))
         scatterChartView.xAxis.addLimitLine(mapViewModel.getLimitLine(limit: 9.0))
+        // Y軸表示
+        scatterChartView.leftAxis.enabled = true
+        scatterChartView.leftAxis.axisMaximum = 9
+        scatterChartView.leftAxis.axisMinimum = 0
+        scatterChartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 15)
+        scatterChartView.leftAxis.setLabelCount(10, force: true)
         scatterChartView.leftAxis.addLimitLine(mapViewModel.getLimitLine(limit: 0.0))
         scatterChartView.leftAxis.addLimitLine(mapViewModel.getLimitLine(limit: 4.5))
         scatterChartView.leftAxis.addLimitLine(mapViewModel.getLimitLine(limit: 9.0))
+        scatterChartView.rightAxis.enabled = false
+        scatterChartView.rightAxis.labelFont = UIFont.systemFont(ofSize: 0)
     }
     
     /// 散布図に描画

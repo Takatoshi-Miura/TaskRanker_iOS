@@ -57,7 +57,7 @@ class MapViewModel {
     /// - Returns: ChartLimitLine
     func getLimitLine(limit: Double) -> ChartLimitLine {
         let limitLine = ChartLimitLine(limit: limit, label: "")
-        limitLine.lineWidth = 1.0
+        limitLine.lineWidth = 1.5
         limitLine.lineColor = .systemGray
         return limitLine
     }

@@ -157,6 +157,7 @@
 		8DCB72DB2949E9A700935972 /* TabCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		8DCB72DD2949E9C400935972 /* TabBarPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		8DCB72DF2949E9D600935972 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		8DD0FA3029E14AB000B143AB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FE9C64CC0C4EAF044EF1C0C6 /* Pods-TaskRanker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.release.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -503,6 +504,7 @@
 		BCA445DD93A8F23D3ABDB940 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8DD0FA3029E14AB000B143AB /* MessageUI.framework */,
 				4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */,
 			);
 			name = Frameworks;
@@ -851,6 +853,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 9YB68MR5FL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TaskRanker/Info.plist;
@@ -880,6 +883,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 9YB68MR5FL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TaskRanker/Info.plist;

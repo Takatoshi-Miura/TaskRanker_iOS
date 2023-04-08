@@ -7,6 +7,7 @@
 
 import UIKit
 import Charts
+import GoogleMobileAds
 
 protocol MapViewControllerDelegate: AnyObject {
     /// Taskタップ時
@@ -25,6 +26,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var characterImageView: UIImageView!
     @IBOutlet weak var characterMessageLabel: UILabel!
     @IBOutlet weak var adView: UIView!
+    private var adMobView: GADBannerView?
     private var mapViewModel = MapViewModel()
     private var timer: Timer?
     var delegate: MapViewControllerDelegate?
@@ -39,6 +41,11 @@ class MapViewController: UIViewController {
         initGestureRecognizer()
         initNotification()
         initChartView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        showAdMob()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +77,23 @@ class MapViewController: UIViewController {
         importanceLabel.text = TITLE_IMPORTANCE
         importanceLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
         importanceLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    /// バナー広告を表示
+    private func showAdMob() {
+        if let adMobView = adMobView {
+            adMobView.frame.size = CGSize(width: self.view.frame.width, height: adMobView.frame.height)
+            return
+        }
+        adMobView = GADBannerView()
+        adMobView = GADBannerView(adSize: GADAdSizeBanner)
+//        adMobView!.adUnitID = "ca-app-pub-9630417275930781/6787558566" // 本番用
+        adMobView!.adUnitID = "ca-app-pub-3940256099942544/2934735716" // テスト用
+        adMobView!.rootViewController = self
+        adMobView!.load(GADRequest())
+        adMobView!.frame.origin = CGPoint(x: 0, y: 0)
+        adMobView!.frame.size = CGSize(width: self.view.frame.width, height: adMobView!.frame.height)
+        adView.addSubview(adMobView!)
     }
     
     // MARK: - ScatterChartView

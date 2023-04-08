@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 protocol HomeViewControllerDelegate: AnyObject {
     /// 設定ボタンタップ時
@@ -30,6 +31,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var taskListView: UIView!
     @IBOutlet weak var characterImageView: UIImageView!
     @IBOutlet weak var characterMessageLabel: UILabel!
+    @IBOutlet weak var adView: UIView!
+    private var adMobView: GADBannerView?
     private var homeViewModel: HomeViewModel
     private var taskListVC_A: TaskListViewController
     private var taskListVC_B: TaskListViewController
@@ -64,6 +67,11 @@ class HomeViewController: UIViewController {
         initNotification()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        showAdMob()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -82,6 +90,23 @@ class HomeViewController: UIViewController {
         let filterButton = UIBarButtonItem(image: filterImage, style: .done, target: self, action: #selector(openFilterMenu))
         navigationItem.leftBarButtonItems = [menuButton]
         navigationItem.rightBarButtonItems = [filterButton, completeButton]
+    }
+    
+    /// バナー広告を表示
+    private func showAdMob() {
+        if let adMobView = adMobView {
+            adMobView.frame.size = CGSize(width: self.view.frame.width, height: adMobView.frame.height)
+            return
+        }
+        adMobView = GADBannerView()
+        adMobView = GADBannerView(adSize: GADAdSizeBanner)
+//        adMobView!.adUnitID = "ca-app-pub-9630417275930781/6787558566"
+        adMobView!.adUnitID = "ca-app-pub-3940256099942544/2934735716" // テスト用
+        adMobView!.rootViewController = self
+        adMobView!.load(GADRequest())
+        adMobView!.frame.origin = CGPoint(x: 0, y: 0)
+        adMobView!.frame.size = CGSize(width: self.view.frame.width, height: 50)
+        adView.addSubview(adMobView!)
     }
     
     // MARK: - TaskList

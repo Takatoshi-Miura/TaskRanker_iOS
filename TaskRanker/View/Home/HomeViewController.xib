@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="TaskRanker" customModuleProvider="target">
             <connections>
+                <outlet property="adView" destination="zBM-CG-B1h" id="IMn-5A-rT0"/>
                 <outlet property="characterImageView" destination="0G7-9l-cBA" id="ZLH-0R-CBk"/>
                 <outlet property="characterMessageLabel" destination="wcI-1Y-hfy" id="zZS-GH-tCy"/>
                 <outlet property="segmentedControl" destination="LUb-ZZ-alp" id="161-T1-IIx"/>

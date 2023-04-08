@@ -11,6 +11,8 @@ import Charts
 protocol MapViewControllerDelegate: AnyObject {
     /// Taskタップ時
     func mapVCTaskDidTap(_ viewController: UIViewController, task: Task)
+    /// キャラクタータップ時
+    func mapVCCharacterDidTap(_ viewController: UIViewController)
 }
 
 class MapViewController: UIViewController {
@@ -34,8 +36,9 @@ class MapViewController: UIViewController {
         initNavigationBar()
         initView()
         initCharacterView()
+        initGestureRecognizer()
+        initNotification()
         initChartView()
-        startTimer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,6 +114,8 @@ class MapViewController: UIViewController {
     /// キャラクターの初期化
     @objc private func initCharacterView() {
         changeEventMessage(type: EventMessage.map)
+        stopTimer()
+        startTimer()
     }
     
     /// キャラクターの画像とメッセージを変更
@@ -144,6 +149,33 @@ class MapViewController: UIViewController {
     @objc private func updateCharacterMessage() {
         let messageType = RandomMessage.allCases.randomElement()
         changeRandomMessage(type: messageType!)
+    }
+    
+    // MARK: - UIGestureRecognizer
+    
+    /// ジャスチャ設定
+    private func initGestureRecognizer() {
+        addTapGesture()
+    }
+    
+    /// キャラクタータップでキャラクター設定へ遷移
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCharacterView))
+        characterImageView.addGestureRecognizer(tapGesture)
+        characterImageView.isUserInteractionEnabled = true
+    }
+    
+    /// タップ
+    @objc private func tapCharacterView() {
+        delegate?.mapVCCharacterDidTap(self)
+    }
+    
+    // MARK: - Notification
+    
+    /// 通知設定
+    private func initNotification() {
+        // キャラクター変更時
+        NotificationCenter.default.addObserver(self, selector: #selector(initCharacterView), name: NSNotification.Name(rawValue: "afterChangeCharacter"), object: nil)
     }
 
 }

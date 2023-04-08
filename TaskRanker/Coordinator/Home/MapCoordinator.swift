@@ -34,4 +34,10 @@ extension MapCoordinator: MapViewControllerDelegate {
         taskDetailCoordinator.startFlow(in: navigationController!, task: task)
     }
     
+    /// MapVC → CharacterVC
+    func mapVCCharacterDidTap(_ viewController: UIViewController) {
+        let pageCoordinator = PageCoordinator()
+        pageCoordinator.startFlow(in: viewController, pageViewMode: PageViewMode.Character)
+    }
+    
 }

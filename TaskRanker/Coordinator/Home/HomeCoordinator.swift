@@ -58,4 +58,10 @@ extension HomeCoordinator: HomeViewControllerDelegate {
         taskDetailCoordinator.startFlow(in: navigationController!, task: task)
     }
     
+    /// HomeVC → CharacterVC
+    func homeVCCharacterDidTap(_ viewController: UIViewController) {
+        let pageCoordinator = PageCoordinator()
+        pageCoordinator.startFlow(in: viewController, pageViewMode: PageViewMode.Character)
+    }
+    
 }

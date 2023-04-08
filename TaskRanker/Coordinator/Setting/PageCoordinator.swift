@@ -27,4 +27,12 @@ class PageCoordinator: Coordinator {
     func startFlow(in viewController: UIViewController) {
     }
     
+    func startFlow(in viewController: UIViewController, pageViewMode: PageViewMode) {
+        previousViewController = viewController
+        navigationController = createNavigationController()
+        let pageViewController = PageViewController(pageViewMode: pageViewMode)
+        navigationController!.pushViewController(pageViewController, animated: true)
+        previousViewController!.present(navigationController!, animated: true)
+    }
+    
 }

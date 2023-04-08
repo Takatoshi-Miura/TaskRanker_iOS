@@ -50,7 +50,7 @@ class PageViewModel: NSObject {
     
     /// PageControlの初期化
     private func initPageControl() {
-        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 90, width: UIScreen.main.bounds.width, height: 60))
+        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 120, width: UIScreen.main.bounds.width, height: 60))
         pageControl.numberOfPages = controllers.count
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .gray

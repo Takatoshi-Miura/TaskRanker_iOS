@@ -18,6 +18,8 @@ protocol HomeViewControllerDelegate: AnyObject {
     func homeVCAddButtonDidTap(_ viewController: UIViewController)
     // Taskタップ時
     func homeVCTaskDidTap(_ viewController: UIViewController, task: Task)
+    // キャラクタータップ時
+    func homeVCCharacterDidTap(_ viewController: UIViewController)
 }
 
 class HomeViewController: UIViewController {
@@ -57,10 +59,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         initNavigation()
         initTaskListView()
+        initCharacterView()
         initGestureRecognizer()
         initNotification()
-        initCharacterView()
-        startTimer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -165,6 +166,8 @@ class HomeViewController: UIViewController {
     /// キャラクターの初期化
     @objc private func initCharacterView() {
         changeEventMessage(type: EventMessage.list)
+        stopTimer()
+        startTimer()
     }
     
     /// キャラクターの画像とメッセージを変更
@@ -258,6 +261,7 @@ class HomeViewController: UIViewController {
     private func initGestureRecognizer() {
         addRightSwipeGesture()
         addLeftSwipeGesture()
+        addTapGesture()
     }
     
     /// 右スワイプでABCD切り替え
@@ -274,8 +278,15 @@ class HomeViewController: UIViewController {
         taskListView.addGestureRecognizer(leftSwipe)
     }
     
+    /// キャラクタータップでキャラクター設定へ遷移
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCharacterView))
+        characterImageView.addGestureRecognizer(tapGesture)
+        characterImageView.isUserInteractionEnabled = true
+    }
+    
     /// 右スワイプ
-    @objc func rightSwipeTaskList() {
+    @objc private func rightSwipeTaskList() {
         var selectNo = segmentedControl.selectedSegmentIndex - 1
         if selectNo < TaskType.A.rawValue {
             selectNo = TaskType.A.rawValue
@@ -284,12 +295,17 @@ class HomeViewController: UIViewController {
     }
     
     /// 左スワイプ
-    @objc func leftSwipeTaskList() {
+    @objc private func leftSwipeTaskList() {
         var selectNo = segmentedControl.selectedSegmentIndex + 1
         if selectNo > TaskType.D.rawValue {
             selectNo = TaskType.D.rawValue
         }
         selectSegment(number: selectNo)
+    }
+    
+    /// タップ
+    @objc private func tapCharacterView() {
+        delegate?.homeVCCharacterDidTap(self)
     }
     
     // MARK: - Notification

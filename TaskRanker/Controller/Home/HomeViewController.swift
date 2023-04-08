@@ -8,17 +8,17 @@
 import UIKit
 
 protocol HomeViewControllerDelegate: AnyObject {
-    // 設定ボタンタップ時
+    /// 設定ボタンタップ時
     func homeVCSettingButtonDidTap(_ viewController: UIViewController)
-    // 完了タスクボタンタップ時
+    /// 完了タスクボタンタップ時
     func homeVCCompletedTaskListButtonDidTap(_ viewController: UIViewController)
-    // フィルタボタンタップ時
+    /// フィルタボタンタップ時
     func homeVCFilterButtonDidTap(_ viewController: UIViewController, filterArray: [Bool])
-    // 追加ボタンタップ時
+    /// 追加ボタンタップ時
     func homeVCAddButtonDidTap(_ viewController: UIViewController)
-    // Taskタップ時
+    /// Taskタップ時
     func homeVCTaskDidTap(_ viewController: UIViewController, task: Task)
-    // キャラクタータップ時
+    /// キャラクタータップ時
     func homeVCCharacterDidTap(_ viewController: UIViewController)
 }
 
@@ -70,8 +70,6 @@ class HomeViewController: UIViewController {
         if let selectedTask = homeViewModel.getSelectedTask(), let selectedIndex = homeViewModel.getSelectedIndex() {
             updateTaskListView(task: selectedTask, indexPath: selectedIndex)
             startTimer()
-        } else {
-            syncTaskListView()
         }
         homeViewModel.clearTaskIndex()
     }
@@ -313,11 +311,11 @@ class HomeViewController: UIViewController {
     /// 通知設定
     private func initNotification() {
         // ログイン時のリロード用
-        NotificationCenter.default.addObserver(self, selector: #selector(self.syncTaskListView), name: NSNotification.Name(rawValue: "afterLogin"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(syncTaskListView), name: NSNotification.Name(rawValue: "afterLogin"), object: nil)
         // ログアウト時のリロード用
-        NotificationCenter.default.addObserver(self, selector: #selector(self.syncTaskListView), name: NSNotification.Name(rawValue: "afterLogout"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(syncTaskListView), name: NSNotification.Name(rawValue: "afterLogout"), object: nil)
         // キャラクター変更時
-        NotificationCenter.default.addObserver(self, selector: #selector(self.initCharacterView), name: NSNotification.Name(rawValue: "afterChangeCharacter"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(initCharacterView), name: NSNotification.Name(rawValue: "afterChangeCharacter"), object: nil)
     }
     
 }

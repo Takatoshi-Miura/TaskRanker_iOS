@@ -78,7 +78,6 @@
 		8DCB72DE2949E9C400935972 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72DD2949E9C400935972 /* TabBarPage.swift */; };
 		8DCB72E02949E9D600935972 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DCB72DF2949E9D600935972 /* MapViewController.xib */; };
 		8DF5E55B29E1A91F00F6E94C /* Pods_TaskRanker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF5E55A29E1A91F00F6E94C /* Pods_TaskRanker.framework */; };
-		8DF5E55F29E1B04200F6E94C /* openssl_grpc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF5E55E29E1B04200F6E94C /* openssl_grpc.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,7 +158,6 @@
 		8DCB72DF2949E9D600935972 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		8DD0FA3029E14AB000B143AB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8DF5E55A29E1A91F00F6E94C /* Pods_TaskRanker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_TaskRanker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8DF5E55E29E1B04200F6E94C /* openssl_grpc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = openssl_grpc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9C64CC0C4EAF044EF1C0C6 /* Pods-TaskRanker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.release.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,7 +166,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DF5E55F29E1B04200F6E94C /* openssl_grpc.framework in Frameworks */,
 				8DF5E55B29E1A91F00F6E94C /* Pods_TaskRanker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,7 +504,6 @@
 		BCA445DD93A8F23D3ABDB940 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8DF5E55E29E1B04200F6E94C /* openssl_grpc.framework */,
 				8DF5E55A29E1A91F00F6E94C /* Pods_TaskRanker.framework */,
 				8DD0FA3029E14AB000B143AB /* MessageUI.framework */,
 			);
@@ -862,6 +858,7 @@
 				DEVELOPMENT_TEAM = 9YB68MR5FL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TaskRanker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ちいぽよ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -894,6 +891,7 @@
 				DEVELOPMENT_TEAM = 9YB68MR5FL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TaskRanker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ちいぽよ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

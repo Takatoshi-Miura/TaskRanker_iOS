@@ -100,9 +100,11 @@ class HomeViewController: UIViewController {
         }
         adMobView = GADBannerView()
         adMobView = GADBannerView(adSize: GADAdSizeBanner)
-        // TODO: miura 申請時に切り替える
-//        adMobView!.adUnitID = "ca-app-pub-9630417275930781/6787558566" // 本番用
-        adMobView!.adUnitID = "ca-app-pub-3940256099942544/2934735716" // テスト用
+        #if DEBUG
+        adMobView!.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        #else
+        adMobView!.adUnitID = "ca-app-pub-9630417275930781/6787558566"
+        #endif
         adMobView!.rootViewController = self
         adMobView!.load(GADRequest())
         adMobView!.frame.origin = CGPoint(x: 0, y: 0)

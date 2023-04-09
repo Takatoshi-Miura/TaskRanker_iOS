@@ -17,17 +17,51 @@ enum Character: Int, CaseIterable {
     case warupoyo   // わるぽよ
     case tencho     // てんちょう
     
-    /// 有効化（有効なキャラクターのみアプリで設定可能）
-    // TODO: miura 申請時に切り替える
+    /// 有効化
     var isEnable: Bool {
         switch self {
-        case .main:     return false
-        case .sub:      return false
-        case .chipoyo:  return true
-        case .tapoyo:   return true
-        case .togepoyo: return true
-        case .warupoyo: return true
-        case .tencho:   return true
+        case .main:
+            #if DEBUG
+                return false
+            #else
+                return true
+            #endif
+        case .sub:
+            #if DEBUG
+                return false
+            #else
+                return true
+            #endif
+        case .chipoyo:
+            #if DEBUG
+                return true
+            #else
+                return false
+            #endif
+        case .tapoyo:
+            #if DEBUG
+                return true
+            #else
+                return false
+            #endif
+        case .togepoyo:
+            #if DEBUG
+                return true
+            #else
+                return false
+            #endif
+        case .warupoyo:
+            #if DEBUG
+                return true
+            #else
+                return false
+            #endif
+        case .tencho:
+            #if DEBUG
+                return true
+            #else
+                return false
+            #endif
         }
     }
     

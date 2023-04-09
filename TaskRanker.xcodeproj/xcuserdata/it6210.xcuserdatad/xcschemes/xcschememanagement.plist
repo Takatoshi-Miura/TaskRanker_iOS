@@ -3,11 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
+	<dict/>
+	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>TaskRanker.xcscheme_^#shared#^_</key>
+		<key>8D60F23628CC5E61003BB724</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>29</integer>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

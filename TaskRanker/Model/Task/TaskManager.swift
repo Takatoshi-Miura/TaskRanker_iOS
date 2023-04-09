@@ -303,6 +303,39 @@ class TaskManager {
         return message
     }
     
+    // MARK: - Util
+    
+    /// 期限日が近いTask判定
+    /// - Parameter task: Task
+    /// - Returns: 判定結果
+    func isQuicklyTask(task: Task) -> Bool {
+        if task.deadlineDate == nil {
+            return false
+        }
+        let today = Date()
+        let daysAfterNow = Calendar.current.date(byAdding: .day, value: 3, to: today)!
+        if task.deadlineDate! > today && task.deadlineDate! < daysAfterNow {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    /// 期限日切れTask判定
+    /// - Parameter task: Task
+    /// - Returns: 判定結果
+    func isExpiredTask(task: Task) -> Bool {
+        if task.deadlineDate == nil {
+            return false
+        }
+        let today = Date()
+        if task.deadlineDate! < today {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }
 
 extension Array where Element: Equatable {

@@ -52,6 +52,9 @@ class TaskListViewModel {
     func getTaskCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         let task = taskArray[indexPath.row]
+        let taskManager = TaskManager()
+        let isQuicklyTask = taskManager.isQuicklyTask(task: task)
+        let isExpiredTask = taskManager.isExpiredTask(task: task)
         let symbolName = task.isComplete ? "checkmark.circle" : "circle"
         let symbolConfiguration = UIImage.SymbolConfiguration(textStyle: .title1)
         cell.imageView?.isUserInteractionEnabled = true
@@ -59,7 +62,13 @@ class TaskListViewModel {
         cell.imageView?.tintColor = TaskColor.allCases[task.color].color
         cell.textLabel?.text = task.title
         cell.detailTextLabel?.text = (task.deadlineDate != nil) ? Converter.deadlineDateString(date: task.deadlineDate!) : ""
-        cell.detailTextLabel?.textColor = UIColor.lightGray
+        if isQuicklyTask {
+            cell.detailTextLabel?.textColor = UIColor.systemOrange
+        } else if isExpiredTask {
+            cell.detailTextLabel?.textColor = UIColor.systemRed
+        } else {
+            cell.detailTextLabel?.textColor = UIColor.lightGray
+        }
         cell.accessoryType = .disclosureIndicator
         return cell
     }

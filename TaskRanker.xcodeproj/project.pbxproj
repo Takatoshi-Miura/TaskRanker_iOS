@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07150DD4D372518BCFECB26A /* Pods_TaskRanker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */; };
 		2F2F21BA28F51791005FFCC2 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21B828F51791005FFCC2 /* FilterViewController.swift */; };
 		2F2F21BB28F51791005FFCC2 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F21B928F51791005FFCC2 /* FilterViewController.xib */; };
 		2F2F21BE28F517F9005FFCC2 /* FilterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F21BD28F517F9005FFCC2 /* FilterCoordinator.swift */; };
@@ -78,6 +77,8 @@
 		8DCB72DC2949E9A700935972 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72DB2949E9A700935972 /* TabCoordinator.swift */; };
 		8DCB72DE2949E9C400935972 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB72DD2949E9C400935972 /* TabBarPage.swift */; };
 		8DCB72E02949E9D600935972 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DCB72DF2949E9D600935972 /* MapViewController.xib */; };
+		8DF5E55B29E1A91F00F6E94C /* Pods_TaskRanker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF5E55A29E1A91F00F6E94C /* Pods_TaskRanker.framework */; };
+		8DF5E55F29E1B04200F6E94C /* openssl_grpc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF5E55E29E1B04200F6E94C /* openssl_grpc.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,7 +100,6 @@
 		2FEDBE3429CAED4800F1AEF2 /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
 		2FEDBE3529CAED4800F1AEF2 /* CharacterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterViewController.xib; sourceTree = "<group>"; };
 		45D5099BC271E62A0AD40BE7 /* Pods-TaskRanker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.debug.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.debug.xcconfig"; sourceTree = "<group>"; };
-		4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskRanker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D04277229DA3B9400816F3A /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		8D04277429DF8B4500816F3A /* RandomMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMessage.swift; sourceTree = "<group>"; };
 		8D09C30F29C56CAF000F51F6 /* TaskListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
@@ -158,6 +158,8 @@
 		8DCB72DD2949E9C400935972 /* TabBarPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		8DCB72DF2949E9D600935972 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		8DD0FA3029E14AB000B143AB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		8DF5E55A29E1A91F00F6E94C /* Pods_TaskRanker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_TaskRanker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DF5E55E29E1B04200F6E94C /* openssl_grpc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = openssl_grpc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9C64CC0C4EAF044EF1C0C6 /* Pods-TaskRanker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskRanker.release.xcconfig"; path = "Target Support Files/Pods-TaskRanker/Pods-TaskRanker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,7 +168,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07150DD4D372518BCFECB26A /* Pods_TaskRanker.framework in Frameworks */,
+				8DF5E55F29E1B04200F6E94C /* openssl_grpc.framework in Frameworks */,
+				8DF5E55B29E1A91F00F6E94C /* Pods_TaskRanker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,8 +507,9 @@
 		BCA445DD93A8F23D3ABDB940 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8DF5E55E29E1B04200F6E94C /* openssl_grpc.framework */,
+				8DF5E55A29E1A91F00F6E94C /* Pods_TaskRanker.framework */,
 				8DD0FA3029E14AB000B143AB /* MessageUI.framework */,
-				4C5F29BEAC979259A2EB108F /* Pods_TaskRanker.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -851,6 +855,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -869,6 +874,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Takatoshi-Miura.TaskRanker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -881,6 +887,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -899,6 +906,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Takatoshi-Miura.TaskRanker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

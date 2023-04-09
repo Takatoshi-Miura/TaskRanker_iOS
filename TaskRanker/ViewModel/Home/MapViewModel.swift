@@ -14,6 +14,7 @@ class MapViewModel {
     private var taskArray = [Task]()
     private var selectedTask: Task?
     private var scatterChartData = ScatterChartData()
+    private var preRandomMessage = RandomMessage.advice
     
     // MARK: - Task
     
@@ -90,6 +91,75 @@ class MapViewModel {
             return task
         }
         return nil
+    }
+    
+    // MARK: - Character
+    
+    /// キャラクターのランダムメッセージを取得(重複しない)
+    /// - Returns: RandomMessage
+    func getRandomMessage() -> RandomMessage {
+        var message = preRandomMessage
+        while message == preRandomMessage {
+            message = RandomMessage.allCases.randomElement()!
+            switch message {
+            case .quickly:
+                // 期限日3日以内のTaskが存在しない場合は別のメッセージにする
+                let taskManager = TaskManager()
+                if taskManager.getQuicklyTask() == nil {
+                    message = preRandomMessage
+                }
+                break
+            case .expired:
+                // 期限切れのTaskが存在しない場合は別のメッセージにする
+                let taskManager = TaskManager()
+                if taskManager.getExpiredTask() == nil {
+                    message = preRandomMessage
+                }
+                break
+            case .praise:
+                break
+            case .advice:
+                break
+            case .color:
+                break
+            case .change:
+                break
+            }
+        }
+        preRandomMessage = message
+        return message
+    }
+    
+    /// メッセージにTask名を追加
+    /// - Parameter type: RandomMessage
+    /// - Returns: メッセージ
+    func addTaskTitleMessage(type: RandomMessage) -> String {
+        var message = type.message
+        switch type {
+        case .quickly:
+            let taskManager = TaskManager()
+            if let taskArray = taskManager.getQuicklyTask() {
+                let task = taskArray.randomElement()!
+                message = "「\(task.title)」\(message)"
+            }
+            break
+        case .expired:
+            let taskManager = TaskManager()
+            if let taskArray = taskManager.getExpiredTask() {
+                let task = taskArray.randomElement()!
+                message = "「\(task.title)」\(message)"
+            }
+            break
+        case .praise:
+            break
+        case .advice:
+            break
+        case .color:
+            break
+        case .change:
+            break
+        }
+        return message
     }
     
 }

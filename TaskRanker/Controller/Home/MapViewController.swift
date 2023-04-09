@@ -156,7 +156,8 @@ class MapViewController: UIViewController {
     /// - Parameter type: タイプ
     private func changeRandomMessage(type: RandomMessage) {
         characterImageView.image = type.image
-        Util.animateLabel(label: characterMessageLabel, text: type.message)
+        let message = mapViewModel.addTaskTitleMessage(type: type)
+        Util.animateLabel(label: characterMessageLabel, text: message)
     }
     
     // MARK: - Timer
@@ -174,8 +175,8 @@ class MapViewController: UIViewController {
 
     /// キャラクターのコメントを更新
     @objc private func updateCharacterMessage() {
-        let messageType = RandomMessage.allCases.randomElement()
-        changeRandomMessage(type: messageType!)
+        let randomMessage = mapViewModel.getRandomMessage()
+        changeRandomMessage(type: randomMessage)
     }
     
     // MARK: - UIGestureRecognizer

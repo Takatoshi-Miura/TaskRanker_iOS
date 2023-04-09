@@ -87,8 +87,8 @@ enum RandomMessage: Int, CaseIterable {
             switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .main:     return "メインキャラクター"
             case .sub:      return "サブキャラクター"
-            case .chipoyo:  return "\nがもうすぐ きげんび！やだやだ！"
-            case .tapoyo:   return "\nがもうすぐ きげんびだ！ゆうせんして とりくもう！"
+            case .chipoyo:  return "がもうすぐ きげんび！やだやだ！"
+            case .tapoyo:   return "がもうすぐ きげんびだ！ゆうせんして とりくもう！"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .tencho:   return "\nがもうすぐ きげんびじゃないか...もうあしたから こなくていいよ"
@@ -97,8 +97,8 @@ enum RandomMessage: Int, CaseIterable {
             switch Character.allCases[UserDefaultsKey.character.integer()] {
             case .main:     return "メインキャラクター"
             case .sub:      return "サブキャラクター"
-            case .chipoyo:  return "\nが きげんびすぎちゃった...めんどくちゃいから やらないもんね。"
-            case .tapoyo:   return "\nが きげんびすぎちゃってるよ...ちいぽよ〜(泣)"
+            case .chipoyo:  return "が きげんびすぎちゃった...めんどくちゃいから やらないもんね。"
+            case .tapoyo:   return "が きげんびすぎちゃってるよ...ちいぽよ〜(泣)"
             case .togepoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .warupoyo: return "やーい！うんちいぽよ！うんちいぽよ！"
             case .tencho:   return "\nが きげんびすぎてるじゃないか...もうあしたから こなくていいよ"

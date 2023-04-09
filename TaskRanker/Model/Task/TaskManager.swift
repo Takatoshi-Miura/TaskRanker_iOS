@@ -190,6 +190,36 @@ class TaskManager {
         return taskArray
     }
     
+    /// 期限日まで3日以内のTaskを取得
+    /// - Returns: Task(存在しない場合はnil)
+    func getQuicklyTask() -> [Task]? {
+        var taskArray = [Task]()
+        let realmTaskArray = realmManager.getTask(afterDays: 3)
+        if realmTaskArray.count > 0 {
+            for realmTask in realmTaskArray {
+                taskArray.append(Task(realmTask: realmTask))
+            }
+            return taskArray
+        } else {
+            return nil
+        }
+    }
+    
+    /// 期限切れのTaskを取得
+    /// - Returns: Task(存在しない場合はnil)
+    func getExpiredTask() -> [Task]? {
+        var taskArray = [Task]()
+        let realmTaskArray = realmManager.getExpiredTask()
+        if realmTaskArray.count > 0 {
+            for realmTask in realmTaskArray {
+                taskArray.append(Task(realmTask: realmTask))
+            }
+            return taskArray
+        } else {
+            return nil
+        }
+    }
+    
     // MARK: - Insert
     
     /// Taskを保存

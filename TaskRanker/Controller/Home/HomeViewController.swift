@@ -207,7 +207,8 @@ class HomeViewController: UIViewController {
     /// - Parameter type: タイプ
     private func changeRandomMessage(type: RandomMessage) {
         characterImageView.image = type.image
-        Util.animateLabel(label: characterMessageLabel, text: type.message)
+        let message = homeViewModel.addTaskTitleMessage(type: type)
+        Util.animateLabel(label: characterMessageLabel, text: message)
     }
     
     // MARK: - Timer
@@ -225,8 +226,8 @@ class HomeViewController: UIViewController {
 
     /// キャラクターのコメントを更新
     @objc private func updateCharacterMessage() {
-        let messageType = RandomMessage.allCases.randomElement()
-        changeRandomMessage(type: messageType!)
+        let randomMessage = homeViewModel.getRandomMessage()
+        changeRandomMessage(type: randomMessage)
     }
     
     // MARK: - Action

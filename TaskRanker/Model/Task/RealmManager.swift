@@ -58,6 +58,8 @@ class RealmManager {
 
 extension RealmManager {
     
+    // MARK: - Select
+    
     /// RealmTaskを全取得
     /// - Returns: 全RealmTaskデータ
     func getAllTask() -> [RealmTask] {
@@ -140,6 +142,7 @@ extension RealmManager {
         let realmArray = realm.objects(RealmTask.self)
             .filter("(deadlineDate != nil)")
             .filter("(isDeleted == false)")
+            .filter("(isComplete == false)")
         for task in realmArray {
             taskArray.append(task)
         }
@@ -156,6 +159,43 @@ extension RealmManager {
             .first
         return result
     }
+    
+    /// 指定日まで期限日のRealmTaskを取得
+    /// - Parameter afterDays: 何日後か
+    /// - Returns: RealmTask
+    func getTask(afterDays: Int) -> [RealmTask] {
+        var taskArray = [RealmTask]()
+        let today = Date()
+        let daysAfterNow = Calendar.current.date(byAdding: .day, value: afterDays, to: today)!
+        let realm = try! Realm()
+        let realmArray = realm.objects(RealmTask.self)
+            .filter("deadlineDate > %@", today)
+            .filter("deadlineDate < %@", daysAfterNow)
+            .filter("(isDeleted == false)")
+            .filter("(isComplete == false)")
+        for task in realmArray {
+            taskArray.append(task)
+        }
+        return taskArray
+    }
+    
+    /// 期限切れのRealmTaskを取得
+    /// - Returns: RealmTask
+    func getExpiredTask() -> [RealmTask] {
+        var taskArray = [RealmTask]()
+        let today = Date()
+        let realm = try! Realm()
+        let realmArray = realm.objects(RealmTask.self)
+            .filter("deadlineDate < %@", today)
+            .filter("(isDeleted == false)")
+            .filter("(isComplete == false)")
+        for task in realmArray {
+            taskArray.append(task)
+        }
+        return taskArray
+    }
+    
+    // MARK: - Update
     
     /// 全RealmTaskのユーザーIDを更新
     /// - Parameter userID: ユーザーID
@@ -309,6 +349,8 @@ extension RealmManager {
             result?.updated_at = Date()
         }
     }
+    
+    // MARK: - Delete
     
     /// RealmTaskを全削除
     func deleteAllTask() {

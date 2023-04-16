@@ -241,6 +241,20 @@ class TaskManager {
         if UserDefaultsKey.useFirebase.bool() && Device.isOnline() {
             firebaseManager.saveTask(task: task, completion: {})
         }
+        
+        // キャラクター解放
+        if realmTask.memo == Character.chipoyo.command {
+            UserDefaultsKey.character.set(value: Character.chipoyo.rawValue)
+        } else if realmTask.memo == Character.tapoyo.command {
+            UserDefaultsKey.character.set(value: Character.tapoyo.rawValue)
+        } else if realmTask.memo == Character.togepoyo.command {
+            UserDefaultsKey.character.set(value: Character.togepoyo.rawValue)
+        } else if realmTask.memo == Character.warupoyo.command {
+            UserDefaultsKey.character.set(value: Character.warupoyo.rawValue)
+        } else if realmTask.memo == Character.tencho.command {
+            UserDefaultsKey.character.set(value: Character.tencho.rawValue)
+        }
+        
         return result
     }
     

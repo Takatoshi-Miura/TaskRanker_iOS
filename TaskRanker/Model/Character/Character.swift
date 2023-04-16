@@ -20,48 +20,26 @@ enum Character: Int, CaseIterable {
     /// 有効化
     var isEnable: Bool {
         switch self {
-        case .main:
-            #if DEBUG
-                return false
-            #else
-                return true
-            #endif
-        case .sub:
-            #if DEBUG
-                return false
-            #else
-                return true
-            #endif
-        case .chipoyo:
-            #if DEBUG
-                return true
-            #else
-                return false
-            #endif
-        case .tapoyo:
-            #if DEBUG
-                return true
-            #else
-                return false
-            #endif
-        case .togepoyo:
-            #if DEBUG
-                return true
-            #else
-                return false
-            #endif
-        case .warupoyo:
-            #if DEBUG
-                return true
-            #else
-                return false
-            #endif
-        case .tencho:
-            #if DEBUG
-                return true
-            #else
-                return false
-            #endif
+        case .main:     return true
+        case .sub:      return true
+        case .chipoyo:  return false
+        case .tapoyo:   return false
+        case .togepoyo: return false
+        case .warupoyo: return false
+        case .tencho:   return false
+        }
+    }
+    
+    /// コマンド（メモに入力してTask作成でキャラクター解放）
+    var command: String {
+        switch self {
+        case .main:     return ""
+        case .sub:      return ""
+        case .chipoyo:  return "まむずいか　かるたとみぐじ\nぞなのへみ　まよれ"
+        case .tapoyo:   return "ぶぶちまこ　すぼとるてすた\nてめこそつ　すろた"
+        case .togepoyo: return "おけすちな　のへむゆるがご\nぜづびあお　けすち"
+        case .warupoyo: return "くわたやま　くらしのずかな\nかはたはら　くろま"
+        case .tencho:   return "くわたきよ　はらしのずかな\nかはたはら　いしい"
         }
     }
     
